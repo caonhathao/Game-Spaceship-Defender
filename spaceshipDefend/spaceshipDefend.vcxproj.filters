@@ -22,15 +22,27 @@
     <Filter Include="Source Files\stage_chapter_2">
       <UniqueIdentifier>{e31538d5-f959-411e-b9c4-25baa7352e5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\login_and_choice">
+      <UniqueIdentifier>{1f4aef7b-f585-4e18-b1b9-e1c61ce15c8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\effects">
+      <UniqueIdentifier>{2ee4b354-5989-47fd-bfd7-4560f947421e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\stage_chapter_game">
+      <UniqueIdentifier>{a1fc8507-f4de-4e10-937a-7e7da41c832b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\data_users">
+      <UniqueIdentifier>{1c723070-22ff-468b-93bb-9dbd1cf9ce0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\testing_files">
+      <UniqueIdentifier>{c6dc3d04-b062-4d44-9edb-539f5bf09a03}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="stickyNote.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="effectText_char.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="stage_chapter_1.cpp">
@@ -48,9 +60,6 @@
     <ClCompile Include="random.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stage_chapter_game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Class</Filter>
     </ClCompile>
@@ -60,11 +69,56 @@
     <ClCompile Include="functions_control_console.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="loginScreen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="story_chapter_2.cpp">
       <Filter>Source Files\stage_chapter_2</Filter>
+    </ClCompile>
+    <ClCompile Include="struct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="welcomeScreen.cpp">
+      <Filter>Source Files\login_and_choice</Filter>
+    </ClCompile>
+    <ClCompile Include="info_about_game.cpp">
+      <Filter>Source Files\login_and_choice</Filter>
+    </ClCompile>
+    <ClCompile Include="effects_text.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="about_me.cpp">
+      <Filter>Source Files\login_and_choice</Filter>
+    </ClCompile>
+    <ClCompile Include="stage_chapter_2.cpp">
+      <Filter>Source Files\stage_chapter_2</Filter>
+    </ClCompile>
+    <ClCompile Include="variable.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="variable.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="loadingScreen.cpp">
+      <Filter>Source Files\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="loadingPlot.cpp">
+      <Filter>Source Files\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="stage_chapter_game.cpp">
+      <Filter>Source Files\stage_chapter_game</Filter>
+    </ClCompile>
+    <ClCompile Include="listPlayers.cpp">
+      <Filter>Source Files\data_users</Filter>
+    </ClCompile>
+    <ClCompile Include="infoPlayer.cpp">
+      <Filter>Source Files\data_users</Filter>
+    </ClCompile>
+    <ClCompile Include="testing_files.cpp">
+      <Filter>Source Files\testing_files</Filter>
+    </ClCompile>
+    <ClCompile Include="functions_control_cursor_game.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="loginScreen.cpp">
+      <Filter>Source Files\login_and_choice</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +130,12 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Source Files\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="effects_text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="functions_control_cursor_game.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

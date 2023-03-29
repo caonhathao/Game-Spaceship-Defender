@@ -5,10 +5,14 @@
 #include<conio.h>
 #include<stdio.h>
 #include<fstream>
+#include<vector>
+
+#include"struct.cpp"
 #include"functions_control_console.h"
 #include"Enemy.h"
 #include"Player.h"
-#include"Activities.cpp""
+#include"Activities.cpp"
+#include"variable.h"
 
 using namespace std;
 
@@ -20,16 +24,12 @@ constexpr auto heightPlayArea = 45;
 #define _WIN32_WINNT 0x0502
 
 //struct
-struct Position {
-	int prevPosX = 0;
-	int prevPosY = 0;
-	int nextPosX = 0;
-	int nextPosY = 0;
-};
+struct Postion;
+struct result;
 
 #pragma region gameClass
-PLAYER playerWeak(5, 100, ".-A-.", '.');
-ENEMY enemyWeak(70, 1, 1, "|-o-|");
+PLAYER playerWeak(5, 100, "|-[O]-|", '.');
+ENEMY enemyWeak(70, 1, 1, "|-x-|");
 #pragma endregion
 
 //general values;
@@ -39,18 +39,23 @@ int* g_bulletSpeed = new int(30); //toc do dan
 int* g_score = new int(0);
 int* g_destroyed = new int(0);
 int* g_life = new int(playerWeak.getLife());
-char c = ' ';
+int* E_th = new int(0);
+int* B_th = new int(0);
+int fire_sign = 0;
 
 Activities activities = Activities::stop;
 Position player;
-Position enemy;
-Position bullet;
+Position enemy = { 0,0,0,0 };
+Position bullet = { 0,0,0,0 };
+
+vector<Position>teamE = {};
+vector<Position>teamB = {};
 #pragma endregion
 
 #pragma region fileDataTest
-//ofstream fileDataEven("logEven.txt");
-//ofstream fileDataP("logP.txt");
-//ofstream fileDataE("logE.txt");
+ofstream fileDataEven("./logEven.txt");
+ofstream fileDataP("./logP.txt");
+ofstream fileDataE("./logE.txt");
 #pragma endregion
 
 #pragma region generalFunctions
@@ -61,7 +66,7 @@ void drawTurtorial();
 void story_chapter_1(int speed);
 
 void stage_chapter_1(int speed);
-void stage_chapter_game();
+result stage_chapter_game();
 
 void drawSpaceship(string object);
 void drawEnemy(string object);
@@ -86,6 +91,8 @@ bool isBulletHitWall(int prevPosY);
 bool calDistanceBetweenPE(int prevPosYP, int prevPosYE);
 
 int random(int minN, int maxN);
+
+int main();
 #pragma endregion
 
 #pragma region UI
@@ -202,62 +209,126 @@ void drawTurtorial() {
 	gotoXY(widthPlayArea + 53, 2);
 	cout << "Press WASD to control your spaceship.";
 	gotoXY(widthPlayArea + 53, 4);
-	cout << "Press 'f' to fire the enemy.";
+	cout << "Press 'j' to fire the enemy.";
 	gotoXY(widthPlayArea + 53, 6);
 	cout << "Press 'space' to stop your spaceship.";
 	gotoXY(widthPlayArea + 53, 8);
 	cout << "Press 'p' to pause game.";
+	gotoXY(widthPlayArea + 53, 10);
+	cout << "Press 'r' to back the menu";
 }
 #pragma endregion
 
 #pragma region main
-void stage_chapter_game(){
+result stage_chapter_game(){
 	srand(time(NULL));
 
-	stage_chapter_1(*g_speed);
+	result A;
+	cout << "[ Dang khoi dong man choi chinh ]";
+	Sleep(2000);
+	system("cls");
 	drawPlayArea(widthPlayArea, heightPlayArea);
 	drawScoreBoard();
 	drawTurtorial();
 	drawSpaceship(playerWeak.getObjectP());
-	drawEnemy(enemyWeak.getObjectE());
+	for (int i = 0; i < 3; i++)
+	{
+		drawEnemy(enemyWeak.getObjectE());
+		teamE.push_back(
+			enemy
+		);
+	};
 
 	while (true)
 	{
-
-		if (_kbhit())
+		if (*g_life != 0)
 		{
-			c = _getch();
-			c = tolower(c);
-			if (c == 'w')
+			if (_kbhit())
 			{
-				activities = Activities::top;
+				c = _getch();
+				c = tolower(c);
+				if (c == 'w')
+				{
+					activities = Activities::top;
+				}
+				else if (c == 's')
+				{
+					activities = Activities::bottom;
+				}
+				else if (c == 'd') {
+					activities = Activities::right;
+				}
+				else if (c == 'a')
+				{
+					activities = Activities::left;
+				}
+				else if (c == 'j')
+				{
+					activities = Activities::fire;
+					fire_sign++;
+				}
+				else if (c == ' ') {
+					activities = Activities::stop;
+				}
 			}
-			else if (c == 's')
+			if (c == 'p')
 			{
-				activities = Activities::bottom;
+				while (c == 'p')
+				{
+					if (_kbhit()) {
+						c = _getch();
+					}
+				}
 			}
-			else if (c == 'd') {
-				activities = Activities::right;
-			}
-			else if (c == 'a')
+			else if (c == 'r')
 			{
-				activities = Activities::left;
+				break;
 			}
-			else if (c == 'f')
-			{
-				activities = Activities::fire;
-			}
-			else if (c == ' ') {
-				activities = Activities::stop;
+			else {
+				controlSpaceship();
+				for (int i = 0; i < teamE.size(); i++)
+				{
+					enemy = teamE[i];
+					*E_th = i;
+					controlEnemy();
+					teamE[i] = enemy;
+				}
+				if (c == 'j')
+				{
+					drawBullet();
+					teamB.push_back(bullet);
+					c = ' ';
+				};
+				if (teamB.size() > 0)
+				{
+					replay:
+					int length = teamB.size();
+					for (int j = 0; j < length; j++)
+					{
+						bullet = teamB[j];
+						*B_th = j;
+						controlBullet();
+						if (length != teamB.size())
+						{
+							goto replay;
+						};
+						teamB[j] = bullet;
+					};
+				};
+				showScore();
+				Sleep(*g_speed);
 			}
 		}
-		if (c != 'p')
-		{
-			controlSpaceship();
-			controlEnemy();
-			showScore();
-		};
-		Sleep(*g_speed);
+		else {
+			A.destroyed = *g_destroyed;
+			A.score = *g_score;
+			delete g_life;
+			delete g_score;
+			delete g_destroyed;
+			delete g_bulletSpeed;
+			delete g_speed;
+			return A;
+		}
 	}
 }
 #pragma endregion
@@ -266,6 +337,8 @@ void stage_chapter_game(){
 void drawSpaceship(string object) {
 	player.prevPosX = random(10, 30);
 	player.prevPosY = random(35, 39);
+	player.nextPosX = 0;
+	player.nextPosY = 0;
 	gotoXY(player.prevPosX, player.prevPosY);
 	cout << object;
 }
@@ -303,15 +376,15 @@ void controlSpaceship() {
 	moveSpaceship(playerWeak.getObjectP());
 }
 void moveSpaceship(string object) {
-	if (c == 'f')
-	{
-		drawBullet();
-		controlBullet();
-		moveBullet();
-		c = ' ';
-		//fileDataEven << c << ' ' << "yes" << endl;
-	}
-	else if (!isPlayerHitWall(player.nextPosX, player.nextPosY, playerWeak.getObjectP()))
+	//if (c == 'f')
+	//{
+	//	drawBullet();
+	//	controlBullet();
+	//	moveBullet();
+	//	c = ' ';
+	//	//fileDataEven << c << ' ' << "yes" << endl;
+	//}
+	if (!isPlayerHitWall(player.nextPosX, player.nextPosY, playerWeak.getObjectP()))
 	{
 		gotoXY(player.prevPosX, player.prevPosY);
 		cout << setfill(' ');
@@ -350,18 +423,22 @@ void controlEnemy() {
 		*g_life = *g_life - enemyWeak.getMinusPoint();
 		destroyObject(enemyWeak.getObjectE(), enemy.prevPosX, enemy.prevPosY);
 	}
+	else if (isEnemyHitWall(enemy.nextPosY))
+	{
+		*g_life = *g_life - 1;
+		destroyObject(enemyWeak.getObjectE(), enemy.prevPosX, enemy.prevPosY);
+	}
 	else //false
 	{
 		moveEnemy(enemyWeak.getObjectE());
 	};
 }
 void moveEnemy(string object) {
-	gotoXY(enemy.prevPosX, enemy.prevPosY);
-	cout << setfill(' ');
-	cout << setw(object.size()) << right << ' ';
-
 	if (!isEnemyHitWall(enemy.nextPosY))
 	{
+		gotoXY(enemy.prevPosX, enemy.prevPosY);
+		cout << setfill(' ');
+		cout << setw(object.size()) << right << ' ';
 		gotoXY(enemy.nextPosX, enemy.nextPosY);
 		enemy.prevPosX = enemy.nextPosX;
 		enemy.prevPosY = enemy.nextPosY;
@@ -371,15 +448,18 @@ void moveEnemy(string object) {
 		//fileDataE << "enemy.prevPosY: " << enemy.prevPosY << endl;
 		//fileDataE << "enemy.nextPosX: " << enemy.nextPosX << endl;
 		//fileDataE << "enemy.nextPosY: " << enemy.nextPosY << endl;
-		//fileDataE << " " << endl;
-
-	};
+		//fileDataE << " " << endl;	
+	}
+	else {
+		*g_life = *g_life - enemyWeak.getMinusPoint();
+	}
 }
 void destroyObject(string object, int prevX, int prevY) { //done
 	gotoXY(prevX, prevY);
 	cout << setfill(' ');
 	cout << setw(object.size()) << right << ' ';
 	drawEnemy(enemyWeak.getObjectE());
+	teamE[*E_th] = enemy;
 }
 #pragma endregion
 
@@ -393,42 +473,52 @@ void drawBullet() {
 void controlBullet() {
 	bullet.nextPosX = bullet.prevPosX;
 	bullet.nextPosY = bullet.prevPosY - 1;
+	teamB[*B_th] = bullet;
+	moveBullet();
 }
 void moveBullet() {
-	int be = bullet.prevPosY;
-	for (int i = be; i >= 1; i--)
+	bullet = teamB[*B_th];
+	if (!isBulletHitEnemy(enemyWeak.getObjectE()) && !isBulletHitWall(bullet.nextPosY))
 	{
-		if (!isBulletHitEnemy(enemyWeak.getObjectE()) && !isBulletHitWall(bullet.nextPosY))
-		{
-			gotoXY(bullet.prevPosX, bullet.prevPosY);
-			cout << ' ';
+		gotoXY(bullet.prevPosX, bullet.prevPosY);
+		cout << ' ';
 
-			controlBullet();
+		gotoXY(bullet.nextPosX, bullet.nextPosY);
+		cout << playerWeak.getBullet();
 
-			gotoXY(bullet.nextPosX, bullet.nextPosY);
-			cout << playerWeak.getBullet();
+		bullet.prevPosX = bullet.nextPosX;
+		bullet.prevPosY = bullet.nextPosY;
 
-			bullet.prevPosX = bullet.nextPosX;
-			bullet.prevPosY = bullet.nextPosY;
+		fileDataE << "bullet.prevPosX: " << bullet.prevPosX << endl;
+		fileDataE << "bullet.prevPosY: " << bullet.prevPosY << endl;
+		fileDataE << "bullet.nextPosX: " << bullet.nextPosX << endl;
+		fileDataE << "bullet.nextPosY: " << bullet.nextPosY << endl;
+		fileDataE << " " << endl;
 
-			Sleep(*g_bulletSpeed);
-		}
-		else if (isBulletHitWall(bullet.nextPosY))
-		{
-			gotoXY(bullet.prevPosX, bullet.prevPosY);
-			cout << ' ';
-			break;
-		}
-		else {
-			*g_score = *g_score + enemyWeak.getRewardPoint();
-			*g_destroyed = *g_destroyed + enemyWeak.getMinusPoint();
-			destroyObject(enemyWeak.getObjectE(), enemy.prevPosX, enemy.prevPosY);
-			gotoXY(bullet.prevPosX, bullet.prevPosY);
-			cout << ' ';
-			break;
-		};
+	}
+	else if (isBulletHitWall(bullet.nextPosY))
+	{
+		gotoXY(bullet.prevPosX, bullet.prevPosY);
+		cout << ' ';
+		//bullet.nextPosX = 0;
+		//bullet.prevPosX = 0;
+		//bullet.nextPosY = 0;
+		//bullet.prevPosY = 0;
+		teamB.erase(teamB.begin() + *B_th);
+	}
+	else {
+		*g_score = *g_score + enemyWeak.getRewardPoint();
+		*g_destroyed = *g_destroyed + enemyWeak.getMinusPoint();
+		destroyObject(enemyWeak.getObjectE(), enemy.prevPosX, enemy.prevPosY);
+		gotoXY(bullet.prevPosX, bullet.prevPosY);
+		cout << ' ';
+		//bullet.nextPosX = 0;
+		//bullet.prevPosX = 0;
+		//bullet.nextPosY = 0;
+		//bullet.prevPosY = 0;
+		teamB.erase(teamB.begin() + *B_th);
 	};
-}
+};
 #pragma endregion
 
 #pragma region checkingEvents
@@ -477,19 +567,29 @@ bool isPlayerHitEnemy(string objectP, string objectE) { //done
 	return false;
 }
 bool isBulletHitEnemy(string objectE) {
-	if (bullet.nextPosY == enemy.prevPosY)
+
+	bullet = teamB[*B_th];
+	for (int j = 0; j < teamE.size(); j++)
 	{
-		if (bullet.nextPosX >= enemy.prevPosX && bullet.nextPosX <= enemy.prevPosX + enemyWeak.getObjectE().size())
+		enemy = teamE[j];
+		*E_th = j;
+		if (bullet.nextPosY == enemy.prevPosY || bullet.nextPosY == enemy.prevPosY - 1 || bullet.prevPosY == enemy.prevPosY)
 		{
-			return true;
+			if (bullet.nextPosX >= enemy.prevPosX && bullet.nextPosX <= enemy.prevPosX + enemyWeak.getObjectE().size())
+			{
+				return true;
+			};
 		};
-	}return false;
-}
+	}
+	return false;
+};
 bool isBulletHitWall(int nextPosY) {
+	bullet = teamB[*B_th];
 	if (nextPosY == 1)
 	{
 		return true;
-	}return false;
+	}
+	return false;
 };
 #pragma endregion
 
@@ -520,3 +620,8 @@ bool calDistanceBetweenPE(int prevPosYP, int prevPosYE) { //done
 //	return minN + rand() % (maxN + 1 - minN);
 //}
 #pragma endregion
+//int main() {
+//	showCursor(false);
+//	stage_chapter_game();
+//	return 0;
+//}

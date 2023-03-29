@@ -4,41 +4,42 @@
 #include<iomanip>
 #include<cstring>
 #include<string>
-#include"Player.h"
+
+#include"struct.cpp"
 #include"Activities.cpp"
+
 #include"functions_control_console.h"
+#include"effects_text.h"
+#include"Player.h"
+#include"variable.h"
 
 using namespace std;
 
-struct Pos {
-	int prevPosX=0;
-	int prevPosY = 0;
-	int nextPosX = 0;
-	int nextPosY = 0; 
-};
+struct Position;
 
 #pragma region generalVariable
-const int lengthLine = 45;
-const int widthLine = 20;
-int* info_sign = new int(0);
-int* task_sign = new int(0);
-char *c = new char(' ');
+int info_sign = 0;
+int task_completed = 0;
 int power = 0;
+int r = 0;
+
 Activities ac = Activities::stop;
-PLAYER player(5, 100, ".-A-.", '.');
-Pos p;
+
+PLAYER P(5, 100, ".-A-.", '.');
+
+Position p;
 #pragma endregion
 
 #pragma region functions
-void noticePlayer();
-void airPort();
+void noticePlayer(int widthLine);
+void airPort(int lengthLine, int widthLine);
 void stage_chapter_1(int speed);
 
 void draw(string object);
 void control();
 void move(string object);
 
-void drawInfoBoard();
+void drawInfoBoard(int widthLine);
 void drawTaskBoard();
 void task();
 
@@ -47,12 +48,14 @@ bool isPlayerTouchGarage();
 bool isPlayerTouchTask();
 
 int random(int minN, int maxN);
-void endGame();
 #pragma endregion
 
 #pragma region funcsDecoration
-void noticePlayer() {
+void noticePlayer(int widthLine) {
 	//notice
+	//int lengthLine = 45;
+	//int widthLine = 20;
+	setColor(0, 7);
 	for (int i = 1; i <= 5; i++)
 	{
 		gotoXY(widthLine * 2 + 5 + 15 + 15, 10 + i);
@@ -74,6 +77,7 @@ void noticePlayer() {
 		cout << '-';
 	};
 
+	setColor(0, 3);
 	gotoXY(widthLine * 2 + 5 + 15 + 15 + 1, 10 + 1);
 	cout << "25/08/2506";
 	gotoXY(widthLine * 2 + 5 + 15 + 15 + 1, 10 + 3);
@@ -81,8 +85,9 @@ void noticePlayer() {
 	gotoXY(widthLine * 2 + 5 + 15 + 15 + 1, 10 + 5);
 	cout << "CRF - 8U";
 }
-void airPort() {
+void airPort(int lengthLine, int widthLine) {
 	//line1
+	setColor(0, 6);
 	for (int i = 6; i < widthLine + 5; i++)
 	{
 		gotoXY(i, 0);
@@ -102,6 +107,7 @@ void airPort() {
 		cout << '|';
 	}
 
+	setColor(0, 4);
 	for (int i = 1; i <= 10; i++)
 	{
 		if (i % 2 == 0)
@@ -112,6 +118,7 @@ void airPort() {
 	};
 
 	//line2
+	setColor(0, 6);
 	for (int i = widthLine + 5 + 15 + 1; i < widthLine * 2 + 5 + 15; i++)
 	{
 		gotoXY(i, 0);
@@ -131,6 +138,7 @@ void airPort() {
 	}
 
 	//garage
+	setColor(0, 2);
 	for (int i = 2; i <= 10; i++)
 	{
 		if (i % 2 == 0)
@@ -139,13 +147,13 @@ void airPort() {
 			cout << "[-----=====-----]";
 		};
 	}
-	noticePlayer();
 
 }
-void drawInfoBoard() {
+void drawInfoBoard(int widthLine) {
 	//area: 36x25
 	//posX: 96
 	//posY: 10
+	setColor(0, 2);
 	for (int i = 0; i <= 35; i++)
 	{
 		gotoXY(widthLine * 2 + 5 + 15 + 15 + 16 + 5 + i, 10);
@@ -167,6 +175,7 @@ void drawInfoBoard() {
 		cout << '-';
 	}
 
+	setColor(0, 1);
 	gotoXY(97, 11);
 	cout << "Thong so ki thuat VN - 34U25 - 8A:";
 	gotoXY(97, 13);
@@ -187,14 +196,14 @@ void drawInfoBoard() {
 	cout << "> Tam hoat dong: 4 thang";
 	gotoXY(97, 27);
 	cout << "> Nang luong hien tai: ";
-	int r = random(0, 35) + power;
-	if (r < 10)
+	power = power + r;
+	if (power < 10)
 	{
 		cout << '0' + r << '%';
 	}
-	else cout << r << '%';
+	else cout << power << '%';
 	gotoXY(97, 29);
-	cout << "> Vu khi:phao Lazer 40 mm";
+	cout << "> Vu khi: phao Lazer 40 mm";
 	/*
 	gotoXY(97, 31); //tinh nang chua phat trien
 	cout << "> Vu khi: 4x6 ten lua SDK - 2U";
@@ -202,6 +211,7 @@ void drawInfoBoard() {
 }
 void drawTaskBoard() {
 	//size: 40*25
+	setColor(0, 7);
 	for (int i = 0; i <= 40 ; i++)
 	{
 		gotoXY(136 + i, 10); cout << '-';
@@ -224,43 +234,80 @@ void drawTaskBoard() {
 
 void stage_chapter_1(int speed) {
 	system("cls");
-	airPort();
-	noticePlayer();
-	//drawInfoBoard();
+	airPort(45, 20);
+	noticePlayer(20);
 	drawTaskBoard();
-	draw(player.getObjectP());
+	draw(P.getObjectP());
+
 	while (true)
 	{
 		if (_kbhit())
 		{
-			*c = _getch();
-			*c = tolower(*c);
-			if (*c == 'w')
+			c = _getch();
+			c = tolower(c);
+			if (c == 'w')
 			{
 				ac = Activities::top;
 			}
-			else if (*c == 's')
+			else if (c == 's')
 			{
 				ac = Activities::bottom;
 			}
-			else if (*c == 'd') {
+			else if (c == 'd') {
 				ac = Activities::right;
 			}
-			else if (*c == 'a')
+			else if (c == 'a')
 			{
 				ac = Activities::left;
 			}
-			else if (*c == ' ') {
+			else if (c == ' ') {
 				ac = Activities::stop;
 			}
 		}
-		if (*info_sign == 1)
+		if (c == 'p')
 		{
-			drawInfoBoard();
+			while (c == 'p')
+			{
+				if (_kbhit()) {
+					c = _getch();
+					c = tolower(c);
+				}
+			};
+		};
+		if (info_sign == 1)
+		{
+			drawInfoBoard(20);
 		}
+		if (p.prevPosY == 5)
+		{
+			if (task_completed >= 4)
+			{
+				system("cls");
+				string para = "[ The Spaceship took off successful. ]";
+				effectText_char(para, 20);
+				cout << endl;
+				cout << "You completed " << task_point << " task(s)." << endl;
+				cout << endl;
+				gotoXY(0, 5);
+
+				cout << "[ Press 'r' to continue ! ]";
+				c = ' ';
+				while (c != 'r')
+				{
+					if (_kbhit()) {
+						c = _getch();
+						c = tolower(c);
+					}
+				};
+				break;
+			};
+		};
 		control();
 		Sleep(speed);
 	}
+	system("cls");
+	cout << "Waiting for next chapter...";
+	Sleep(1500);
 }
 
 #pragma region control
@@ -268,6 +315,7 @@ void draw(string object) {
 	p.prevPosX = 75;
 	p.prevPosY = 45;
 	gotoXY(p.prevPosX, p.prevPosY);
+	setColor(0, 2);
 	cout << object;
 }
 void control() {
@@ -302,22 +350,22 @@ void control() {
 		p.nextPosX = p.prevPosX;
 		p.nextPosY = p.prevPosY;
 	}
-	else if (*info_sign == 0)
+	else if (info_sign == 0)
 	{
 		if (isPlayerTouchGarage())
 		{
-			*info_sign = 1;
+			info_sign = 1;
 			p.nextPosX = p.prevPosX;
 			p.nextPosY = p.prevPosY;
 		}
 	}
 	else if (isPlayerTouchGarage())
 	{
-		*info_sign = -1;
+		info_sign = -1;
 		p.nextPosX = p.prevPosX;
 		p.nextPosY = p.prevPosY;
 	};
-	move(player.getObjectP());
+	move(P.getObjectP());
 }
 void move(string object) {
 	if (!isPlayerTouchTask() && !isPlayerTouchGarage())
@@ -328,6 +376,7 @@ void move(string object) {
 		gotoXY(p.nextPosX, p.nextPosY);
 		p.prevPosX = p.nextPosX;
 		p.prevPosY = p.nextPosY;
+		setColor(0, 2);
 		cout << object;
 	}
 	else
@@ -353,14 +402,19 @@ void task() {
 		gotoXY(137, 11);
 		cout << "Yeu cau lap phao co nong:";
 		gotoXY(137, 12);
+		cin.ignore();
 		getline(cin, str);
 		if (str == "Lazer 40 mm" || str == "40 mm" || str == "lazer 40mm" || str == "40mm")
 		{
 			gotoXY(148, 12);
 			cout << " - DA LAP!";
+			task_point = task_point + 1;
+			task_completed = task_completed + 1;
 		}
 		else {
-
+			gotoXY(148, 12);
+			cout << " - KHONG THE LAP!";
+			task_completed = task_completed + 1;
 		}
 	};
 	if (p.prevPosY == 33)
@@ -373,7 +427,15 @@ void task() {
 		{
 			gotoXY(148, 15);
 			cout << " - XAC NHAN!";
-		};
+			task_point = task_point + 1;
+			task_completed = task_completed + 1;
+		}
+		else
+		{
+			gotoXY(148, 15);
+			cout << " - KHONG PHU HOP!";
+			task_completed = task_completed + 1;
+		}
 	};
 	if (p.prevPosY == 31)
 	{
@@ -384,18 +446,30 @@ void task() {
 		if (str == "8")
 		{
 			gotoXY(148, 18);
-			cout << " - DA LAP";
-		};
+			cout << " - DA LAP!";
+			task_point = task_point + 1;
+			task_completed = task_completed + 1;
+		}
+		else
+		{
+			gotoXY(148, 18);
+			cout << " - KHONG THE LAP";
+			task_completed = task_completed + 1;
+		}
 	};
-	if (p.prevPosY==29)
+	if (p.prevPosY == 29)
 	{
 		gotoXY(137, 20);
 		cout << "Muc nang luong can nap:";
 		gotoXY(137, 21);
 		getline(cin, str);
 		power = stoi(str);
-		drawInfoBoard();
-	}
+		gotoXY(148, 21);
+		cout << "HOAN THANH ! CAT CANH !";
+		r = random(0, 35);
+		drawInfoBoard(20);
+		task_completed = task_completed + 1;
+	};
 }
 
 #pragma region checkEvents
@@ -477,8 +551,8 @@ bool isPlayerTouchTask() {
 	return false;
 };
 #pragma endregion
-int main() {
-	showCursor(false);
-	stage_chapter_1(200);
-	return 0;
-}
+//int main() {
+//	showCursor(false);
+//	stage_chapter_1(200);
+//	return 0;
+//}

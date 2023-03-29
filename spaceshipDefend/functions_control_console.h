@@ -42,5 +42,6 @@ void showCursor(bool cursorVisibility);
 	//ConCurInf.dwSize = 10;
 	//ConCurInf.bVisible = cursorVisibility;
 	//SetConsoleCursorInfo(handle, &ConCurInf);
-
+void setColor(int background_color, int text_color);
+void disableSelection();
 #endif

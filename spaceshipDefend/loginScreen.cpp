@@ -1,76 +1,87 @@
 #include<iostream>
+#include<vector>
 #include<conio.h>
+
 #include"functions_control_console.h"
+#include"functions_control_cursor_game.h"
+#include"variable.h"
 
-string* str = new string();
-
-void effectText_char(int printSpeed, string str);
-void drawScreen() {
-	for (int i = 0; i < 100; i++)
+using namespace std;
+struct isLogSuccess {
+	bool isSucess = false;
+	int posUsers = -1;
+};
+isLogSuccess checkAccountExist(vector<infoPlayer>dataUsers, string name) {
+	isLogSuccess A;
+	for (int i = 0; i < dataUsers.size(); i++)
 	{
-		gotoXY(15 + i, 5);
-		cout << '-';
+		if (name==dataUsers[i].name)
+		{
+			A.isSucess = true;
+			A.posUsers = i;
+			return A;
+		}
 	}
-	for (int i = 1; i <= 15; i++)
-	{
-		gotoXY(15, 5 + i);
-		cout << '|';
-	}
-	for (int i = 0; i < 100; i++)
-	{
-		gotoXY(15 + i, 20);
-		cout << '-';
-	}
-	for (size_t i = 1; i < 15; i++)
-	{
-		gotoXY(114, 5 + i);
-		cout << '|';
-	}
+	return A;
 }
-int loginScreen(int printSpeed) {
+void drawLoginScreen() {
 	system("cls");
-
-	gotoXY(50, 2);
-	*str = "WELCOME TO SPACESHIP_DEFENDER GAME!";
-	effectText_char(printSpeed, *str);
-
-	gotoXY(15, 3);
-	*str = "[ NOTE: Game nay duoc lam ra chi co muc dich duy nhat la vui ve ma thoi, ngoai ra thi cha co gi khac! ]";
-	effectText_char(printSpeed, *str);
-
-	drawScreen();
-	gotoXY(18, 6);
-	*str = "Chuc ban co trai nghiem vui ve :)";
-	effectText_char(printSpeed, *str);
-
-	gotoXY(28, 8);
-	cout << "< --- > MOI CHON < --- >";
-
-	Sleep(500);
-	gotoXY(28, 10);
-	cout << "1. Choi ngay va luon.";
-
-	Sleep(500);
-	gotoXY(28, 12);
-	cout << "2. Dang nhap";
-
-	Sleep(500);
-	gotoXY(28, 14);
-	cout << "3. Thong tin ve game.";
-
-	Sleep(500);
-	gotoXY(28, 16);
-	cout << "4. About me?";
-
-	Sleep(500);
-	gotoXY(28, 18);
-	cout << ">> ";
-
-	int res = 0;
-	cin >> res;
-	return res;
+	gotoXY(105, 1);
+	cout << "LOGIN";
+	for (int i = 0; i < 50; i++)
+	{
+		gotoXY(83 + i, 3);
+		cout << '-';
+		gotoXY(83 + i, 9);
+		cout << '-';
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		gotoXY(83, 4 + i);
+		cout << '|';
+		gotoXY(83 + 49, 4 + i);
+		cout << '|';
+	};
 }
-//int main() {
-//	loginScreen(20);
-//	return 0;
-//}
+int loginScreen(vector<infoPlayer>dataUsers) {
+	isLogSuccess A;
+	while (true)
+	{
+		drawLoginScreen();
+
+		gotoXY(85, 5);
+		cout << "1. Ten dang nhap:";
+		string name;
+		cin >> name;
+
+		if (_kbhit())
+		{
+			c = _getch();
+			if (GetAsyncKeyState(VK_RETURN))
+			{
+				A = checkAccountExist(dataUsers, name);
+				if (A.isSucess)
+				{
+					gotoXY(85, 7);
+					cout << "Login Success! Turning to the home after 3s";
+					Sleep(3000);
+					return A.posUsers;
+				}
+				else
+				{
+					gotoXY(85, 7);
+					cout << "Login FAIL! Please check name or register";
+				}
+			}
+			else if (c == 'r')
+			{
+				return -1;
+			}
+			c = ' ';
+		};
+	}
+}
+int main() {
+	drawLoginScreen();
+	return 0;
+}

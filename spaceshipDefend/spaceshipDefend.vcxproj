@@ -127,24 +127,39 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="about_me.cpp" />
     <ClCompile Include="Activities.cpp" />
-    <ClCompile Include="effectText_char.cpp" />
+    <ClCompile Include="effects_text.cpp" />
     <ClCompile Include="endGame.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="functions_control_console.cpp" />
+    <ClCompile Include="functions_control_cursor_game.cpp" />
+    <ClCompile Include="infoPlayer.cpp" />
+    <ClCompile Include="info_about_game.cpp" />
+    <ClCompile Include="listPlayers.cpp" />
+    <ClCompile Include="loadingPlot.cpp" />
+    <ClCompile Include="loadingScreen.cpp" />
     <ClCompile Include="loginScreen.cpp" />
+    <ClCompile Include="testing_files.cpp" />
+    <ClCompile Include="welcomeScreen.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="random.cpp" />
     <ClCompile Include="stage_chapter_1.cpp" />
+    <ClCompile Include="stage_chapter_2.cpp" />
     <ClCompile Include="stage_chapter_game.cpp" />
     <ClCompile Include="stickyNote.cpp" />
     <ClCompile Include="story_chapter_1.cpp" />
     <ClCompile Include="story_chapter_2.cpp" />
+    <ClCompile Include="struct.cpp" />
+    <ClCompile Include="variable.cpp" />
+    <ClCompile Include="variable.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="effects_text.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="functions_control_console.h" />
+    <ClInclude Include="functions_control_cursor_game.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

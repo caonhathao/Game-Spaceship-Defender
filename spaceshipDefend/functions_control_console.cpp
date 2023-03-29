@@ -16,12 +16,10 @@ void setScreenBufferSize(SHORT width, SHORT height) { //inactive
 	newSize.Y = height;
 	SetConsoleScreenBufferSize(hStdout, newSize);
 }
-
 void disableResizeWindow() {
 	HWND hWnd = GetConsoleWindow();
 	SetWindowLong(hWnd, GWL_STYLE, GetWindowLong(hWnd, GWL_STYLE) & ~WS_SIZEBOX);
 }
-
 void gotoXY(SHORT posX, SHORT posY) {
 	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD Position;
@@ -35,4 +33,13 @@ void showCursor(bool cursorVisibility) {
 	ConCurInf.dwSize = 10;
 	ConCurInf.bVisible = cursorVisibility;
 	SetConsoleCursorInfo(handle, &ConCurInf);
+}
+void setColor(int background_color, int text_color) {
+	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+	int color_code = background_color * 16 + text_color;
+	SetConsoleTextAttribute(hStdout, color_code);
+}
+void disableSelection() {
+	HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
+	SetConsoleMode(hStdin, ~ENABLE_QUICK_EDIT_MODE);
 }
