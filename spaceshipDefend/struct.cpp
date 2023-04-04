@@ -10,6 +10,8 @@ struct Position {
 struct result {
 	int score = 0;
 	int destroyed = 0;
+	int process = 0;
+	int contact = 0;
 };
 struct infoPlayer{
 	int serial = 0;
