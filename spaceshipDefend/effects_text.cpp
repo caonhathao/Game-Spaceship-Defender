@@ -26,3 +26,14 @@ void effectText_word(string str, int printSpeed) {
 	delete word;
 	cout << endl;
 }
+string uppercaseLetter(string name) {
+	char temp[32] = {};
+	string res = "";
+	for (int i = 0; i < name.size(); i++)
+	{
+		temp [i]= name[i];
+		res.push_back(temp[i] - 32);
+	}
+	
+	return res;
+}
