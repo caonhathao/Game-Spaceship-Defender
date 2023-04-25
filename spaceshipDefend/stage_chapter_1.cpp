@@ -9,6 +9,7 @@
 #include"Activities.cpp"
 
 #include"functions_control_console.h"
+#include"functions_control_object.h"
 #include"effects_text.h"
 #include"Player.h"
 #include"variable.h"
@@ -17,25 +18,23 @@ using namespace std;
 
 struct Position;
 
-#pragma region generalVariable
-int info_sign = 0;
-int task_completed = 0;
-int power = 0;
-int r = 0;
+#pragma region generalVariableAndSetting
+int *info_sign = new int(0);
+int *task_completed = new int(0);
+int* task_point = new int(0);
+int *powerAdd = new int(0);
+int *powerCurrent = new int(0);
 
-Activities ac = Activities::stop;
+//PLAYER P(5, 100, ".-A-.", '.');
 
-PLAYER P(5, 100, ".-A-.", '.');
-
-Position p;
 #pragma endregion
 
 #pragma region functions
 void noticePlayer(int widthLine);
 void airPort(int lengthLine, int widthLine);
-void stage_chapter_1(int speed);
+int stage_chapter_1(int speed);
 
-void draw(string object);
+//void draw(string object);
 void control();
 void move(string object);
 
@@ -196,12 +195,16 @@ void drawInfoBoard(int widthLine) {
 	cout << "> Tam hoat dong: 4 thang";
 	gotoXY(97, 27);
 	cout << "> Nang luong hien tai: ";
-	power = power + r;
-	if (power < 10)
+
+	int* powerNow = new int(0);
+	*powerNow = *powerAdd + *powerCurrent;
+	if (*powerNow < 10)
 	{
-		cout << '0' + r << '%';
+		cout << '0' << *powerNow << '%';
 	}
-	else cout << power << '%';
+	else cout << *powerNow << '%';
+	delete powerNow;
+
 	gotoXY(97, 29);
 	cout << "> Vu khi: phao Lazer 40 mm";
 	/*
@@ -232,71 +235,74 @@ void drawTaskBoard() {
 }
 #pragma endregion
 
-void stage_chapter_1(int speed) {
+#pragma region main
+int stage_chapter_1(int speed) {
 	system("cls");
 	airPort(45, 20);
 	noticePlayer(20);
 	drawTaskBoard();
-	draw(P.getObjectP());
+	//draw(P.getObjectP());
+
+	drawObject(playerWeak.getObjectP(), playerPos, 75, 75, 45, 45, 2);
+	*powerCurrent = random(0, 35);
 
 	while (true)
 	{
 		if (_kbhit())
 		{
-			c = _getch();
-			c = tolower(c);
-			if (c == 'w')
+			*c = _getch();
+			*c = tolower(*c);
+			if (*c == 'w')
 			{
-				ac = Activities::top;
+				activities = Activities::top;
 			}
-			else if (c == 's')
+			else if (*c == 's')
 			{
-				ac = Activities::bottom;
+				activities = Activities::bottom;
 			}
-			else if (c == 'd') {
-				ac = Activities::right;
+			else if (*c == 'd') {
+				activities = Activities::right;
 			}
-			else if (c == 'a')
+			else if (*c == 'a')
 			{
-				ac = Activities::left;
+				activities = Activities::left;
 			}
-			else if (c == ' ') {
-				ac = Activities::stop;
+			else if (*c == ' ') {
+				activities = Activities::stop;
 			}
 		}
-		if (c == 'p')
+		if (*c == 'p')
 		{
-			while (c == 'p')
+			while (*c == 'p')
 			{
 				if (_kbhit()) {
-					c = _getch();
-					c = tolower(c);
+					*c = _getch();
+					*c = tolower(*c);
 				}
 			};
 		};
-		if (info_sign == 1)
+		if (*info_sign == 1)
 		{
 			drawInfoBoard(20);
 		}
-		if (p.prevPosY == 5)
+		if (playerPos.prevPosY == 5)
 		{
-			if (task_completed >= 4)
+			if (*task_completed >= 4)
 			{
 				system("cls");
 				string para = "[ The Spaceship took off successful. ]";
 				effectText_char(para, 20);
 				cout << endl;
-				cout << "You completed " << task_point << " task(s)." << endl;
+				cout << "You completed " << *task_point << " task(s)." << endl;
 				cout << endl;
 				gotoXY(0, 5);
-
 				cout << "[ Press 'r' to continue ! ]";
-				c = ' ';
-				while (c != 'r')
+				*c = ' ';
+				while (*c != 'r')
 				{
 					if (_kbhit()) {
-						c = _getch();
-						c = tolower(c);
+						*c = _getch();
+						*c = tolower(*c);
 					}
 				};
 				break;
@@ -308,86 +314,88 @@ void stage_chapter_1(int speed) {
 	system("cls");
 	cout << "Waiting for next chapter...";
 	Sleep(1500);
+	return *task_point;
 }
+#pragma endregion
 
 #pragma region control
-void draw(string object) {
-	p.prevPosX = 75;
-	p.prevPosY = 45;
-	gotoXY(p.prevPosX, p.prevPosY);
-	setColor(0, 2);
-	cout << object;
-}
+//void draw(string object) {
+//	playerPos.prevPosX = 75;
+//	playerPos.prevPosY = 45;
+//	gotoXY(playerPos.prevPosX, playerPos.prevPosY);
+//	setColor(0, 2);
+//	cout << object;
+//}
 void control() {
-	if (ac == Activities::top)
+	if (activities == Activities::top)
 	{
-		p.nextPosX = p.prevPosX;
-		p.nextPosY = p.prevPosY - 1;
+		playerPos.nextPosX = playerPos.prevPosX;
+		playerPos.nextPosY = playerPos.prevPosY - 1;
 	}
-	else if (ac == Activities::bottom)
+	else if (activities == Activities::bottom)
 	{
-		p.nextPosX = p.prevPosX;
-		p.nextPosY = p.prevPosY + 1;
+		playerPos.nextPosX = playerPos.prevPosX;
+		playerPos.nextPosY = playerPos.prevPosY + 1;
 	}
-	else if (ac == Activities::left)
+	else if (activities == Activities::left)
 	{
-		p.nextPosX = p.prevPosX - 1;
-		p.nextPosY = p.prevPosY;
+		playerPos.nextPosX = playerPos.prevPosX - 1;
+		playerPos.nextPosY = playerPos.prevPosY;
 	}
-	else if (ac == Activities::right)
+	else if (activities == Activities::right)
 	{
-		p.nextPosX = p.prevPosX + 1;
-		p.nextPosY = p.prevPosY;
+		playerPos.nextPosX = playerPos.prevPosX + 1;
+		playerPos.nextPosY = playerPos.prevPosY;
 	}
-	else if (ac == Activities::stop)
+	else if (activities == Activities::stop)
 	{
-		p.nextPosX = p.prevPosX;
-		p.nextPosY = p.prevPosY;
+		playerPos.nextPosX = playerPos.prevPosX;
+		playerPos.nextPosY = playerPos.prevPosY;
 	}
 
 	if (isPlayerTouchWall())
 	{
-		p.nextPosX = p.prevPosX;
-		p.nextPosY = p.prevPosY;
+		playerPos.nextPosX = playerPos.prevPosX;
+		playerPos.nextPosY = playerPos.prevPosY;
 	}
-	else if (info_sign == 0)
+	else if (*info_sign == 0)
 	{
 		if (isPlayerTouchGarage())
 		{
-			info_sign = 1;
-			p.nextPosX = p.prevPosX;
-			p.nextPosY = p.prevPosY;
+			*info_sign = 1;
+			playerPos.nextPosX = playerPos.prevPosX;
+			playerPos.nextPosY = playerPos.prevPosY;
 		}
 	}
 	else if (isPlayerTouchGarage())
 	{
-		info_sign = -1;
-		p.nextPosX = p.prevPosX;
-		p.nextPosY = p.prevPosY;
+		*info_sign = -1;
+		playerPos.nextPosX = playerPos.prevPosX;
+		playerPos.nextPosY = playerPos.prevPosY;
 	};
-	move(P.getObjectP());
+	move(playerWeak.getObjectP());
 }
 void move(string object) {
 	if (!isPlayerTouchTask() && !isPlayerTouchGarage())
 	{
-		gotoXY(p.prevPosX, p.prevPosY);
+		gotoXY(playerPos.prevPosX, playerPos.prevPosY);
 		cout << setfill(' ');
 		cout << setw(object.size()) << right << ' ';
-		gotoXY(p.nextPosX, p.nextPosY);
-		p.prevPosX = p.nextPosX;
-		p.prevPosY = p.nextPosY;
+		gotoXY(playerPos.nextPosX, playerPos.nextPosY);
+		playerPos.prevPosX = playerPos.nextPosX;
+		playerPos.prevPosY = playerPos.nextPosY;
 		setColor(0, 2);
 		cout << object;
 	}
 	else
 	{
 		task();
-		gotoXY(p.prevPosX, p.prevPosY);
+		gotoXY(playerPos.prevPosX, playerPos.prevPosY);
 		cout << setfill(' ');
 		cout << setw(object.size()) << right << ' ';
-		gotoXY(p.nextPosX, p.nextPosY);
-		p.prevPosX = p.nextPosX;
-		p.prevPosY = p.nextPosY;
+		gotoXY(playerPos.nextPosX, playerPos.nextPosY);
+		playerPos.prevPosX = playerPos.nextPosX;
+		playerPos.prevPosY = playerPos.nextPosY;
 		cout << object;
 	}
 
@@ -395,9 +403,18 @@ void move(string object) {
 #pragma endregion
 
 void task() {
-	//fill the fuel tank
+	/*
+	* we have 4 tasks in this:
+	*	get type of canon (install)
+	*	get type of engine (install)
+	*	get amount of engine
+	*	get power
+	* two variables:
+	*	task_point: will be recieved if set up success
+	*	task_completed: will increated with every task (4 task -> task_completed = 4)
+	*/
 	string str;
-	if (p.prevPosY == 35)
+	if (playerPos.prevPosY == 35)
 	{
 		gotoXY(137, 11);
 		cout << "Yeu cau lap phao co nong:";
@@ -408,16 +425,16 @@ void task() {
 		{
 			gotoXY(148, 12);
 			cout << " - DA LAP!";
-			task_point = task_point + 1;
-			task_completed = task_completed + 1;
+			(*task_point)++;
+			(*task_completed)++; 
 		}
 		else {
 			gotoXY(148, 12);
 			cout << " - KHONG THE LAP!";
-			task_completed = task_completed + 1;
+			(*task_completed)++;
 		}
 	};
-	if (p.prevPosY == 33)
+	if (playerPos.prevPosY == 33)
 	{
 		gotoXY(137, 14);
 		cout << "Yeu cau dong co:";
@@ -427,17 +444,17 @@ void task() {
 		{
 			gotoXY(148, 15);
 			cout << " - XAC NHAN!";
-			task_point = task_point + 1;
-			task_completed = task_completed + 1;
+			(*task_point)++;
+			(*task_completed)++;
 		}
 		else
 		{
 			gotoXY(148, 15);
 			cout << " - KHONG PHU HOP!";
-			task_completed = task_completed + 1;
+			(*task_completed)++;
 		}
 	};
-	if (p.prevPosY == 31)
+	if (playerPos.prevPosY == 31)
 	{
 		gotoXY(137, 17);
 		cout << "Yeu cau so dong co:";
@@ -447,77 +464,77 @@ void task() {
 		{
 			gotoXY(148, 18);
 			cout << " - DA LAP!";
-			task_point = task_point + 1;
-			task_completed = task_completed + 1;
+			(*task_point)++;
+			(*task_completed)++;
 		}
 		else
 		{
 			gotoXY(148, 18);
 			cout << " - KHONG THE LAP";
-			task_completed = task_completed + 1;
+			(*task_completed)++;
 		}
 	};
-	if (p.prevPosY == 29)
+	if (playerPos.prevPosY == 29)
 	{
 		gotoXY(137, 20);
 		cout << "Muc nang luong can nap:";
 		gotoXY(137, 21);
 		getline(cin, str);
-		power = stoi(str);
+		*powerAdd = stoi(str);
 		gotoXY(148, 21);
 		cout << "HOAN THANH ! CAT CANH !";
-		r = random(0, 35);
 		drawInfoBoard(20);
-		task_completed = task_completed + 1;
+		(*task_point)++;
+		(*task_completed)++;
 	};
 }
 
 #pragma region checkEvents
 bool isPlayerTouchGarage() {
-	if (p.nextPosX >= 70 && p.nextPosX <= 99)
+	if (playerPos.nextPosX >= 70 && playerPos.nextPosX <= 99)
 	{
-		if ( p.nextPosY == 35)
+		if ( playerPos.nextPosY == 35)
 		{
 			return true;
 		}
 	}return false;
 };
 bool isPlayerTouchWall() {
-	if (p.nextPosX <= 0)
+	if (playerPos.nextPosX <= 0)
 	{
 		return true;
 	}
-	else if (p.nextPosY <= 1)
+	else if (playerPos.nextPosY <= 1)
 	{
 		return true;
 	};
 	//for line 1
-	if ((p.nextPosX >= 0 && p.nextPosX <= 5) || (p.nextPosX >= 21 && p.nextPosX <= 25))
+	if ((playerPos.nextPosX >= 0 && playerPos.nextPosX <= 5) || (playerPos.nextPosX >= 21 && playerPos.nextPosX <= 25))
 	{
-		if (p.nextPosY == 39)
+		if (playerPos.nextPosY == 39)
 		{
 			return true;
 		}
 	}
-	if (p.nextPosX == 5 || p.nextPosX == 21 || p.nextPosX == 25)
+	if (playerPos.nextPosX == 5 || playerPos.nextPosX == 21 || playerPos.nextPosX == 25)
 	{
-		if (p.nextPosY <= 39)
+		if (playerPos.nextPosY <= 39)
 		{
 			return true;
 		}
 	};
 
 	//for line 2
-	if ((p.nextPosX >= 36 && p.nextPosX <= 40) || (p.nextPosX >= 56 && p.nextPosX <= 60))
+	if ((playerPos.nextPosX >= 36 && playerPos.nextPosX <= 40) || (playerPos.nextPosX >= 56 && playerPos.nextPosX <= 60))
 	{
-		if (p.nextPosY == 39)
+		if (playerPos.nextPosY == 39)
 		{
 			return true;
 		}
 	};
-	if (p.nextPosX == 36 || p.nextPosX == 40 || p.nextPosX == 56 || p.nextPosX == 60)
+	if (playerPos.nextPosX == 36 || playerPos.nextPosX == 40 || playerPos.nextPosX == 56 || playerPos.nextPosX == 60)
 	{
-		if (p.nextPosY <= 39)
+		if (playerPos.nextPosY <= 39)
 		{
 			return true;
 		}
@@ -525,25 +542,25 @@ bool isPlayerTouchWall() {
 	return false;
 }
 bool isPlayerTouchTask() {
-	if (p.prevPosX >= 40 && p.prevPosX <= 56)
+	if (playerPos.prevPosX >= 40 && playerPos.prevPosX <= 56)
 	{
-		if (p.prevPosY == 35)
+		if (playerPos.prevPosY == 35)
 		{
 			return true;
 		}
-		else if (p.prevPosY == 33)
+		else if (playerPos.prevPosY == 33)
 		{
 			return true;
 		}
-		else if (p.prevPosY == 31)
+		else if (playerPos.prevPosY == 31)
 		{
 			return true;
 		}
-		else if (p.prevPosY == 29)
+		else if (playerPos.prevPosY == 29)
 		{
 			return true;
 		}
-		else if (p.prevPosY == 27)
+		else if (playerPos.prevPosY == 27)
 		{
 			return true;
 		}
@@ -551,8 +568,3 @@ bool isPlayerTouchTask() {
 	return false;
 };
 #pragma endregion
-//int main() {
-//	showCursor(false);
-//	stage_chapter_1(200);
-//	return 0;
-//}

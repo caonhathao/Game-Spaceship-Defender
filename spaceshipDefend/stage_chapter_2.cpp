@@ -8,7 +8,7 @@
 #include<fstream>
 
 #include"struct.cpp"
-#include"Player.h"
+#include"player.h"
 #include"Activities.cpp"
 #include"functions_control_console.h"
 #include"variable.h"
@@ -17,6 +17,7 @@
 using namespace std;
 
 struct Position;
+struct result;
 struct PosAndLength {
 	int prevPosX = 0 ;
 	int prevPosY = 0;
@@ -34,7 +35,7 @@ struct PosAndLength {
 //ofstream fileDataE("./logE.txt");
 //#pragma endregion
 
-#pragma region generalValue
+#pragma region generalVariableAndSetting
 int lengthLine = 45;
 int widthLine = 60;
 
@@ -43,10 +44,6 @@ int* pos = new int(0);
 int* amount = new int(0);
 int* impact = new int(0);
 bool* sign = new bool(false);
-
-Activities active = Activities::stop;
-
-PLAYER player(5, 100, ".-A-.", '.');
 
 Position P;
 PosAndLength BARRIER;
@@ -64,7 +61,7 @@ void drawPlayArea();
 void drawNoticePlayer();
 void drawInfoNotice();;
 
-void stage_chapter_2(int speed);
+result stage_chapter_2(int speed);
 
 void drawPlayer(string object);
 void controlPlayer();
@@ -90,12 +87,12 @@ void noticeStart() {
 	cout << endl;
 	setColor(0, 2);
 	cout << "/* Press 'r' to continue ! */";
-	c = ' ';
-	while (c != 'r')
+	*c = ' ';
+	while (*c != 'r')
 	{
 		if (_kbhit()) {
-			c = _getch();
-			c = tolower(c);
+			*c = _getch();
+			*c = tolower(*c);
 		}
 	};
 	system("cls");
@@ -108,12 +105,12 @@ void noticeFinish() {
 	cout << endl;
 	setColor(0, 2);
 	cout << "/* Press 'r' to continue ! */";
-	c = ' ';
-	while (c != 'r')
+	*c = ' ';
+	while (*c != 'r')
 	{
 		if (_kbhit()) {
-			c = _getch();
-			c = tolower(c);
+			*c = _getch();
+			*c = tolower(*c);
 		}
 	};
 	system("cls");
@@ -179,48 +176,50 @@ void drawInfoNotice() {
 #pragma endregion
 
 #pragma region main
-void stage_chapter_2(int speed) {
+result stage_chapter_2(int speed) {
 	noticeStart();
 
 	drawPlayArea();
 	drawNoticePlayer();
 	drawInfoNotice();
 
-	drawPlayer(player.getObjectP());
+	drawPlayer(playerWeak.getObjectP());
+
+	*g_count_down = 2000;
 
 	while (true)
 	{
 		if (_kbhit())
 		{
-			c = _getch();
-			c = tolower(c);
-			if (c == 'w')
+			*c = _getch();
+			*c = tolower(*c);
+			if (*c == 'w')
 			{
-				active = Activities::top;
+				activities = Activities::top;
 			}
-			else if (c == 's')
+			else if (*c == 's')
 			{
-				active = Activities::bottom;
+				activities = Activities::bottom;
 			}
-			else if (c == 'a')
+			else if (*c == 'a')
 			{
-				active = Activities::left;
+				activities = Activities::left;
 			}
-			else if (c == 'd') {
-				active = Activities::right;
+			else if (*c == 'd') {
+				activities = Activities::right;
 			}
-			else if (c == ' ')
+			else if (*c == ' ')
 			{
-				active = Activities::stop;
+				activities = Activities::stop;
 			};
 		}
-		if (c == 'p')
+		if (*c == 'p')
 		{
-			while (c == 'p')
+			while (*c == 'p')
 			{
 				if (_kbhit()) {
-					c = _getch();
-					c = tolower(c);
+					*c = _getch();
+					*c = tolower(*c);
 				}
 			}
 		};
@@ -268,14 +267,26 @@ void stage_chapter_2(int speed) {
 			break;
 		};
 		controlPlayer();
+		if (*g_count_down == 0)
+		{
+			speed -= 10;
+			*g_count_down = 2000;
+		}
+		else {
+			(*g_count_down)--;
+		};
 		Sleep(speed);
 	}
+	result A;
+	A.process = *amount;
+	A.contact = *impact;
 	delete Ba_th;
 	delete pos;
 	delete amount;
 	delete sign;
 	delete impact;
 	noticeFinish();
+	return A;
 }
 #pragma endregion
 
@@ -285,35 +296,35 @@ void drawPlayer(string object) {
 	P.prevPosY = random(40, 49);
 	gotoXY(P.prevPosX,P.prevPosY);
 	setColor(0, 2);
-	cout << player.getObjectP();
+	cout << playerWeak.getObjectP();
 }
 void controlPlayer() {
-	if (active == Activities::top)
+	if (activities == Activities::top)
 	{
 		P.nextPosX = P.prevPosX;
 		P.nextPosY = P.prevPosY - 1;
 	}
-	else if (active == Activities::bottom)
+	else if (activities == Activities::bottom)
 	{
 		P.nextPosX = P.prevPosX;
 		P.nextPosY = P.prevPosY + 1;
 	}
-	else if (active == Activities::left)
+	else if (activities == Activities::left)
 	{
 		P.nextPosX = P.prevPosX - 1;
 		P.prevPosY = P.prevPosY;
 	}
-	else if (active == Activities::right)
+	else if (activities == Activities::right)
 	{
 		P.nextPosX = P.prevPosX + 1;
 		P.nextPosY = P.prevPosY;
 	}
-	else if (active == Activities::stop || isPlayerHitWall())
+	else if (activities == Activities::stop || isPlayerHitWall())
 	{
 		P.nextPosX = P.prevPosX;
 		P.nextPosY = P.prevPosY;
 	};
-	movePlayer(player.getObjectP());
+	movePlayer(playerWeak.getObjectP());
 }
 void movePlayer(string object) {
 	bool isHitWall = isPlayerHitWall();
@@ -329,15 +340,15 @@ void movePlayer(string object) {
 		P.prevPosX = P.nextPosX;
 		P.prevPosY = P.nextPosY;
 
-		//fileDataP << "player.prevPosX: " << P.prevPosX << endl;
-		//fileDataP << "player.prevPosY: " << P.prevPosY << endl;
-		//fileDataP << "player.nextPosX: " << P.nextPosX << endl;
-		//fileDataP << "player.nextPosY: " << P.nextPosY << endl;
+		//fileDataP << "playerWeak.prevPosX: " << P.prevPosX << endl;
+		//fileDataP << "playerWeak.prevPosY: " << P.prevPosY << endl;
+		//fileDataP << "playerWeak.nextPosX: " << P.nextPosX << endl;
+		//fileDataP << "playerWeak.nextPosY: " << P.nextPosY << endl;
 		//fileDataP << " " << endl;
 	}
 	else
 	{
-		c = ' ';
+		*c = ' ';
 	};
 };
 #pragma endregion
@@ -435,9 +446,3 @@ bool isPlayerImpactBarrier() {
 	return false;
 }
 #pragma endregion
-
-//int main() {
-//	showCursor(false);
-//	stage_chapter_2(200);
-//	return 0;
-//}

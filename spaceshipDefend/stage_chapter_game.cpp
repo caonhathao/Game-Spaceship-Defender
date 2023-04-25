@@ -9,9 +9,9 @@
 
 #include"struct.cpp"
 #include"functions_control_console.h"
+#include"functions_control_object.h"
 #include"Enemy.h"
 #include"Player.h"
-#include"Activities.cpp"
 #include"variable.h"
 
 using namespace std;
@@ -28,34 +28,35 @@ struct Postion;
 struct result;
 
 #pragma region gameClass
-PLAYER playerWeak(5, 100, "|-[O]-|", '.');
-ENEMY enemyWeak(70, 1, 1, "|-x-|");
+//PLAYER playerWeak(5, 100, "|-[O]-|", '.');
+//ENEMY enemyWeak(70, 1, 1, "|-x-|");
 #pragma endregion
 
 //general values;
 #pragma region generalVariablesAndSetting
 int* g_speed = new int(200); //toc do lam moi
 int* g_bulletSpeed = new int(30); //toc do dan
+
 int* g_score = new int(0);
 int* g_destroyed = new int(0);
 int* g_life = new int(playerWeak.getLife());
+
 int* E_th = new int(0);
 int* B_th = new int(0);
+
 int fire_sign = 0;
 
-Activities activities = Activities::stop;
-Position player;
-Position enemy = { 0,0,0,0 };
-Position bullet = { 0,0,0,0 };
+int* tempPosBulletX = 0;
+int* tempPosBulletY = 0;
 
 vector<Position>teamE = {};
 vector<Position>teamB = {};
 #pragma endregion
 
 #pragma region fileDataTest
-ofstream fileDataEven("./logEven.txt");
-ofstream fileDataP("./logP.txt");
-ofstream fileDataE("./logE.txt");
+//ofstream fileDataEven("./logEven.txt");
+//ofstream fileDataP("./logP.txt");
+//ofstream fileDataE("./logE.txt");
 #pragma endregion
 
 #pragma region generalFunctions
@@ -68,9 +69,9 @@ void story_chapter_1(int speed);
 void stage_chapter_1(int speed);
 result stage_chapter_game();
 
-void drawSpaceship(string object);
-void drawEnemy(string object);
-void drawBullet();
+//void drawSpaceship(string object);
+//void drawEnemy(string object);
+//void drawBullet();
 
 void controlSpaceship();
 void controlEnemy();
@@ -179,6 +180,10 @@ void showScore() {
 	cout << *g_destroyed;
 	gotoXY(widthPlayArea + 13 + 7, 6);
 	cout << *g_score;
+
+
+	gotoXY(widthPlayArea + 13 + 8, 10);
+	cout << *g_speed + (200 - *g_speed);
 }
 void drawTurtorial() {
 	gotoXY(widthPlayArea + 58, 0);
@@ -224,63 +229,66 @@ result stage_chapter_game(){
 	srand(time(NULL));
 
 	result A;
-	cout << "[ Dang khoi dong man choi chinh ]";
-	Sleep(2000);
-	system("cls");
+
 	drawPlayArea(widthPlayArea, heightPlayArea);
 	drawScoreBoard();
 	drawTurtorial();
-	drawSpaceship(playerWeak.getObjectP());
+	//drawSpaceship(playerWeak.getObjectP());
+	drawObject(playerWeak.getObjectP(), playerPos, 10, 30, 35, 39, 3);
 	for (int i = 0; i < 3; i++)
 	{
-		drawEnemy(enemyWeak.getObjectE());
-		teamE.push_back(
-			enemy
-		);
+		//drawEnemy(enemyWeak.getObjectE());
+		drawObject(enemyWeak.getObjectE(), enemyPos, 11, 31, 1, 5, 2);
+		teamE.push_back(enemyPos);
 	};
-
+	*g_count_down = 3000;
+	*playerSize = playerWeak.getObjectP().size();
+	system("pause");
 	while (true)
 	{
+		*tempPosBulletX = playerPos.prevPosX + *playerSize / 2;
+		*tempPosBulletY = playerPos.prevPosY - 1;
+
 		if (*g_life != 0)
 		{
 			if (_kbhit())
 			{
-				c = _getch();
-				c = tolower(c);
-				if (c == 'w')
+				*c = _getch();
+				*c = tolower(*c);
+				if (*c == 'w')
 				{
 					activities = Activities::top;
 				}
-				else if (c == 's')
+				else if (*c == 's')
 				{
 					activities = Activities::bottom;
 				}
-				else if (c == 'd') {
+				else if (*c == 'd') {
 					activities = Activities::right;
 				}
-				else if (c == 'a')
+				else if (*c == 'a')
 				{
 					activities = Activities::left;
 				}
-				else if (c == 'j')
+				else if (*c == 'j')
 				{
 					activities = Activities::fire;
 					fire_sign++;
 				}
-				else if (c == ' ') {
+				else if (*c == ' ') {
 					activities = Activities::stop;
 				}
 			}
-			if (c == 'p')
+			if (*c == 'p')
 			{
-				while (c == 'p')
+				while (*c == 'p')
 				{
 					if (_kbhit()) {
-						c = _getch();
+						*c = _getch();
 					}
 				}
 			}
-			else if (c == 'r')
+			else if (*c == 'r')
 			{
 				break;
 			}
@@ -288,36 +296,51 @@ result stage_chapter_game(){
 				controlSpaceship();
 				for (int i = 0; i < teamE.size(); i++)
 				{
-					enemy = teamE[i];
+					enemyPos = teamE[i];
 					*E_th = i;
 					controlEnemy();
-					teamE[i] = enemy;
+					teamE[i] = enemyPos;
 				}
-				if (c == 'j')
+				if (*c == 'j')
 				{
-					drawBullet();
-					teamB.push_back(bullet);
-					c = ' ';
+					drawObject(playerWeak.getBullet(), bulletPos, *tempPosBulletX, *tempPosBulletX, *tempPosBulletY, *tempPosBulletY, 3);
+					teamB.push_back(bulletPos);
+					*c = ' ';
 				};
 				if (teamB.size() > 0)
 				{
-					replay:
+				replay: 
+
+					/* DESCRIPTION: attention on this
+					* - doan code nay giup kiem tra xem lieu co bullet[i] nao danh trung enemy[j] khong.
+					* - neu co, tien hanh pha huy bullet[i], luu vi tri bi xoa (xem them o ham controlBullet(), moveBullet()).
+					* - khi dieu kien (kich thuoc bi thay doi) dung, thi tien hanh reset lai length, dong thoi tiep tuc kiem tra 
+					* nhung bullet[i] con lai.
+					* - neu dieu kien bi sai, tien hanh cap nhat toa do cua moi bullet[i]
+					*/
+
 					int length = teamB.size();
 					for (int j = 0; j < length; j++)
 					{
-						bullet = teamB[j];
+						bulletPos = teamB[j];
 						*B_th = j;
 						controlBullet();
 						if (length != teamB.size())
 						{
 							goto replay;
 						};
-						teamB[j] = bullet;
+						teamB[j] = bulletPos;
 					};
 				};
 				showScore();
+				if (*g_count_down == 0)
+				{
+					(*g_speed)--;
+					*g_count_down = 3000;
+				}
+				(*g_count_down)-=200;
 				Sleep(*g_speed);
-			}
+			};
 		}
 		else {
 			A.destroyed = *g_destroyed;
@@ -327,6 +350,8 @@ result stage_chapter_game(){
 			delete g_destroyed;
 			delete g_bulletSpeed;
 			delete g_speed;
+			delete B_th;
+			delete E_th;
 			return A;
 		}
 	}
@@ -334,99 +359,100 @@ result stage_chapter_game(){
 #pragma endregion
 
 #pragma region player
-void drawSpaceship(string object) {
-	player.prevPosX = random(10, 30);
-	player.prevPosY = random(35, 39);
-	player.nextPosX = 0;
-	player.nextPosY = 0;
-	gotoXY(player.prevPosX, player.prevPosY);
-	cout << object;
-}
+//void drawSpaceship(string object) {
+//	playerPos.prevPosX = random(10, 30);
+//	playerPos.prevPosY = random(35, 39);
+//	playerPos.nextPosX = 0;
+//	playerPos.nextPosY = 0;
+//	gotoXY(playerPos.prevPosX, playerPos.prevPosY);
+//	cout << object;
+//}
 void controlSpaceship() {
 	if (activities == Activities::top)
 	{
-		player.nextPosX = player.prevPosX;
-		player.nextPosY = player.prevPosY - 1;
+		playerPos.nextPosX = playerPos.prevPosX;
+		playerPos.nextPosY = playerPos.prevPosY - 1;
 	}
 	else if (activities == Activities::bottom)
 	{
-		player.nextPosX = player.prevPosX;
-		player.nextPosY = player.prevPosY + 1;
+		playerPos.nextPosX = playerPos.prevPosX;
+		playerPos.nextPosY = playerPos.prevPosY + 1;
 	}
 	else if (activities == Activities::left)
 	{
-		player.nextPosX = player.prevPosX - 1;
-		player.nextPosY = player.prevPosY;
+		playerPos.nextPosX = playerPos.prevPosX - 1;
+		playerPos.nextPosY = playerPos.prevPosY;
 	}
 	else if (activities == Activities::right)
 	{
-		player.nextPosX = player.prevPosX + 1;
-		player.nextPosY = player.prevPosY;
+		playerPos.nextPosX = playerPos.prevPosX + 1;
+		playerPos.nextPosY = playerPos.prevPosY;
 	}
 	else if (activities == Activities::stop)
 	{
-		player.nextPosX = player.prevPosX;
-		player.nextPosY = player.prevPosY;
+		playerPos.nextPosX = playerPos.prevPosX;
+		playerPos.nextPosY = playerPos.prevPosY;
 	}
 	else if (activities == Activities::fire)
 	{
-		player.nextPosX = player.prevPosX;
-		player.nextPosY = player.prevPosY;
+		playerPos.nextPosX = playerPos.prevPosX;
+		playerPos.nextPosY = playerPos.prevPosY;
 	}
 	moveSpaceship(playerWeak.getObjectP());
 }
 void moveSpaceship(string object) {
-	//if (c == 'f')
+	//if (*c == 'j')
 	//{
-	//	drawBullet();
+	//	//drawBullet();
 	//	controlBullet();
 	//	moveBullet();
-	//	c = ' ';
+	//	*c = ' ';
 	//	//fileDataEven << c << ' ' << "yes" << endl;
 	//}
-	if (!isPlayerHitWall(player.nextPosX, player.nextPosY, playerWeak.getObjectP()))
+	if (!isPlayerHitWall(playerPos.nextPosX, playerPos.nextPosY, playerWeak.getObjectP()))
 	{
-		gotoXY(player.prevPosX, player.prevPosY);
+		gotoXY(playerPos.prevPosX, playerPos.prevPosY);
 		cout << setfill(' ');
 		cout << setw(object.size()) << right << ' ';
-		gotoXY(player.nextPosX, player.nextPosY);
-		player.prevPosX = player.nextPosX;
-		player.prevPosY = player.nextPosY;
+		gotoXY(playerPos.nextPosX, playerPos.nextPosY);
+		playerPos.prevPosX = playerPos.nextPosX;
+		playerPos.prevPosY = playerPos.nextPosY;
 		cout << object;
 
-		//fileDataP << "player.prevPosX: " << player.prevPosX << endl;
-		//fileDataP << "player.prevPosY: " << player.prevPosY << endl;
-		//fileDataP << "player.nextPosX: " << player.nextPosX << endl;
-		//fileDataP << "player.nextPosY: " << player.nextPosY << endl;
+		//fileDataP << "playerPos.prevPosX: " << playerPos.prevPosX << endl;
+		//fileDataP << "playerPos.prevPosY: " << playerPos.prevPosY << endl;
+		//fileDataP << "playerPos.nextPosX: " << playerPos.nextPosX << endl;
+		//fileDataP << "playerPos.nextPosY: " << playerPos.nextPosY << endl;
 		//fileDataP << " " << endl;
 
 	};
 }
 #pragma endregion
 
-#pragma region enemy
-void drawEnemy(string object) {
-	enemy.nextPosX = 0;
-	enemy.nextPosY = 0;
-	enemy.prevPosX = random(11, 31);
-	enemy.prevPosY = random(1, 5);
-	gotoXY(enemy.prevPosX, enemy.prevPosY);
-	cout << object;
-}
+#pragma region enemyControl
+//void drawEnemy(string object) {
+//	enemyPos.nextPosX = 0;
+//	enemyPos.nextPosY = 0;
+//	enemyPos.prevPosX = random(11, 31);
+//	enemyPos.prevPosY = random(1, 5);
+//	gotoXY(enemyPos.prevPosX, enemyPos.prevPosY);
+//	cout << object;
+//}
+
 void controlEnemy() {
-	enemy.nextPosX = enemy.prevPosX;
-	enemy.nextPosY = enemy.prevPosY + 1;
+	enemyPos.nextPosX = enemyPos.prevPosX;
+	enemyPos.nextPosY = enemyPos.prevPosY + 1;
 	if (isPlayerHitEnemy(playerWeak.getObjectP(), enemyWeak.getObjectE())) //true
 	{
 		*g_score = *g_score + enemyWeak.getRewardPoint();
 		*g_destroyed = *g_destroyed + enemyWeak.getRewardPoint();
 		*g_life = *g_life - enemyWeak.getMinusPoint();
-		destroyObject(enemyWeak.getObjectE(), enemy.prevPosX, enemy.prevPosY);
+		destroyObject(enemyWeak.getObjectE(), enemyPos.prevPosX, enemyPos.prevPosY);
 	}
-	else if (isEnemyHitWall(enemy.nextPosY))
+	else if (isEnemyHitWall(enemyPos.nextPosY))
 	{
 		*g_life = *g_life - 1;
-		destroyObject(enemyWeak.getObjectE(), enemy.prevPosX, enemy.prevPosY);
+		destroyObject(enemyWeak.getObjectE(), enemyPos.prevPosX, enemyPos.prevPosY);
 	}
 	else //false
 	{
@@ -434,20 +460,20 @@ void controlEnemy() {
 	};
 }
 void moveEnemy(string object) {
-	if (!isEnemyHitWall(enemy.nextPosY))
+	if (!isEnemyHitWall(enemyPos.nextPosY))
 	{
-		gotoXY(enemy.prevPosX, enemy.prevPosY);
+		gotoXY(enemyPos.prevPosX, enemyPos.prevPosY);
 		cout << setfill(' ');
 		cout << setw(object.size()) << right << ' ';
-		gotoXY(enemy.nextPosX, enemy.nextPosY);
-		enemy.prevPosX = enemy.nextPosX;
-		enemy.prevPosY = enemy.nextPosY;
+		gotoXY(enemyPos.nextPosX, enemyPos.nextPosY);
+		enemyPos.prevPosX = enemyPos.nextPosX;
+		enemyPos.prevPosY = enemyPos.nextPosY;
 		cout << object;
 
-		//fileDataE << "enemy.prevPosX: " << enemy.prevPosX << endl;
-		//fileDataE << "enemy.prevPosY: " << enemy.prevPosY << endl;
-		//fileDataE << "enemy.nextPosX: " << enemy.nextPosX << endl;
-		//fileDataE << "enemy.nextPosY: " << enemy.nextPosY << endl;
+		//fileDataE << "enemyPos.prevPosX: " << enemyPos.prevPosX << endl;
+		//fileDataE << "enemyPos.prevPosY: " << enemyPos.prevPosY << endl;
+		//fileDataE << "enemyPos.nextPosX: " << enemyPos.nextPosX << endl;
+		//fileDataE << "enemyPos.nextPosY: " << enemy.nextPosY << endl;
 		//fileDataE << " " << endl;	
 	}
 	else {
@@ -458,64 +484,65 @@ void destroyObject(string object, int prevX, int prevY) { //done
 	gotoXY(prevX, prevY);
 	cout << setfill(' ');
 	cout << setw(object.size()) << right << ' ';
-	drawEnemy(enemyWeak.getObjectE());
-	teamE[*E_th] = enemy;
+	//drawEnemy(enemyWeak.getObjectE());
+	drawObject(enemyWeak.getObjectE(), enemyPos, 11, 31, 1, 5, 2);
+	teamE[*E_th] = enemyPos;
 }
 #pragma endregion
 
 #pragma region bullet
-void drawBullet() {
-	bullet.prevPosX = (player.prevPosX + playerWeak.getObjectP().size() / 2); //vi tri trung tam
-	bullet.prevPosY = player.prevPosY - 1;
-	gotoXY(bullet.prevPosX, bullet.prevPosY);
-	cout << playerWeak.getBullet();
-}
+//void drawBullet() {
+//	bulletPos.prevPosX = (playerPos.prevPosX + *playerSize / 2); //vi tri trung tam
+//	bulletPos.prevPosY = playerPos.prevPosY - 1;
+//	gotoXY(bulletPos.prevPosX, bulletPos.prevPosY);
+//	cout << playerWeak.getBullet();
+//}
 void controlBullet() {
-	bullet.nextPosX = bullet.prevPosX;
-	bullet.nextPosY = bullet.prevPosY - 1;
-	teamB[*B_th] = bullet;
+	bulletPos.nextPosX = bulletPos.prevPosX;
+	bulletPos.nextPosY = bulletPos.prevPosY - 1;
+	teamB[*B_th] = bulletPos;
 	moveBullet();
 }
 void moveBullet() {
-	bullet = teamB[*B_th];
-	if (!isBulletHitEnemy(enemyWeak.getObjectE()) && !isBulletHitWall(bullet.nextPosY))
+	bulletPos = teamB[*B_th];
+	if (!isBulletHitEnemy(enemyWeak.getObjectE()) && !isBulletHitWall(bulletPos.nextPosY))
 	{
-		gotoXY(bullet.prevPosX, bullet.prevPosY);
+		gotoXY(bulletPos.prevPosX, bulletPos.prevPosY);
 		cout << ' ';
 
-		gotoXY(bullet.nextPosX, bullet.nextPosY);
+		gotoXY(bulletPos.nextPosX, bulletPos.nextPosY);
 		cout << playerWeak.getBullet();
 
-		bullet.prevPosX = bullet.nextPosX;
-		bullet.prevPosY = bullet.nextPosY;
+		bulletPos.prevPosX = bulletPos.nextPosX;
+		bulletPos.prevPosY = bulletPos.nextPosY;
 
-		fileDataE << "bullet.prevPosX: " << bullet.prevPosX << endl;
-		fileDataE << "bullet.prevPosY: " << bullet.prevPosY << endl;
-		fileDataE << "bullet.nextPosX: " << bullet.nextPosX << endl;
-		fileDataE << "bullet.nextPosY: " << bullet.nextPosY << endl;
-		fileDataE << " " << endl;
+		//fileDataE << "bulletPos.prevPosX: " << bulletPos.prevPosX << endl;
+		//fileDataE << "bulletPos.prevPosY: " << bulletPos.prevPosY << endl;
+		//fileDataE << "bulletPos.nextPosX: " << bulletPos.nextPosX << endl;
+		//fileDataE << "bulletPos.nextPosY: " << bulletPos.nextPosY << endl;
+		//fileDataE << " " << endl;
 
 	}
-	else if (isBulletHitWall(bullet.nextPosY))
+	else if (isBulletHitWall(bulletPos.nextPosY))
 	{
-		gotoXY(bullet.prevPosX, bullet.prevPosY);
+		gotoXY(bulletPos.prevPosX, bulletPos.prevPosY);
 		cout << ' ';
-		//bullet.nextPosX = 0;
-		//bullet.prevPosX = 0;
-		//bullet.nextPosY = 0;
-		//bullet.prevPosY = 0;
+		//bulletPos.nextPosX = 0;
+		//bulletPos.prevPosX = 0;
+		//bulletPos.nextPosY = 0;
+		//bulletPos.prevPosY = 0;
 		teamB.erase(teamB.begin() + *B_th);
 	}
 	else {
 		*g_score = *g_score + enemyWeak.getRewardPoint();
 		*g_destroyed = *g_destroyed + enemyWeak.getMinusPoint();
-		destroyObject(enemyWeak.getObjectE(), enemy.prevPosX, enemy.prevPosY);
-		gotoXY(bullet.prevPosX, bullet.prevPosY);
+		destroyObject(enemyWeak.getObjectE(), enemyPos.prevPosX, enemyPos.prevPosY);
+		gotoXY(bulletPos.prevPosX, bulletPos.prevPosY);
 		cout << ' ';
 		//bullet.nextPosX = 0;
-		//bullet.prevPosX = 0;
-		//bullet.nextPosY = 0;
-		//bullet.prevPosY = 0;
+		//bulletPos.prevPosX = 0;
+		//bulletPos.nextPosY = 0;
+		//bulletPos.prevPosY = 0;
 		teamB.erase(teamB.begin() + *B_th);
 	};
 };
@@ -536,31 +563,31 @@ bool isPlayerHitWall(int nextPosX, int nextPosY, string object) {
 bool isEnemyHitWall(int nextPosY) {
 	if (nextPosY == heightPlayArea)
 	{
-		enemy.nextPosX = 0;
-		enemy.nextPosY = 0;
+		enemyPos.nextPosX = 0;
+		enemyPos.nextPosY = 0;
 		return true;
 	}return false;
 };
 bool isPlayerHitEnemy(string objectP, string objectE) { //done
 	//objectP: playerWeak.getObjectP()
 	//objectE: enemyWeak.getObject()
-	int openLimitX = player.prevPosX - objectE.size() + 1;
-	int endLimitX = player.prevPosX + objectP.size();
-	bool isEven = calDistanceBetweenPE(player.prevPosY, enemy.prevPosY);
+	int openLimitX = playerPos.prevPosX - objectE.size() + 1;
+	int endLimitX = playerPos.prevPosX + objectP.size();
+	bool isEven = calDistanceBetweenPE(playerPos.prevPosY, enemyPos.prevPosY);
 	if (isEven == true) //number is even
 	{
 
-		{if (enemy.prevPosX >= openLimitX && enemy.prevPosX <= endLimitX)
+		{if (enemyPos.prevPosX >= openLimitX && enemyPos.prevPosX <= endLimitX)
 
-			if (enemy.nextPosY == player.prevPosY || enemy.prevPosY == player.nextPosY)
+			if (enemyPos.nextPosY == playerPos.prevPosY || enemyPos.prevPosY == playerPos.nextPosY)
 				return true;
 		}
 	}
 	else if (isEven == false)
 	{
-		if (enemy.prevPosX >= openLimitX && enemy.prevPosX <= endLimitX)
+		if (enemyPos.prevPosX >= openLimitX && enemyPos.prevPosX <= endLimitX)
 		{
-			if (player.nextPosY == enemy.nextPosY || player.prevPosY == enemy.prevPosY)
+			if (playerPos.nextPosY == enemyPos.nextPosY || playerPos.prevPosY == enemyPos.prevPosY)
 				return true;
 		};
 	};
@@ -568,14 +595,14 @@ bool isPlayerHitEnemy(string objectP, string objectE) { //done
 }
 bool isBulletHitEnemy(string objectE) {
 
-	bullet = teamB[*B_th];
+	bulletPos = teamB[*B_th];
 	for (int j = 0; j < teamE.size(); j++)
 	{
-		enemy = teamE[j];
+		enemyPos = teamE[j];
 		*E_th = j;
-		if (bullet.nextPosY == enemy.prevPosY || bullet.nextPosY == enemy.prevPosY - 1 || bullet.prevPosY == enemy.prevPosY)
+		if (bulletPos.nextPosY == enemyPos.prevPosY || bulletPos.nextPosY == enemyPos.prevPosY - 1 || bulletPos.prevPosY == enemyPos.prevPosY)
 		{
-			if (bullet.nextPosX >= enemy.prevPosX && bullet.nextPosX <= enemy.prevPosX + enemyWeak.getObjectE().size())
+			if (bulletPos.nextPosX >= enemyPos.prevPosX && bulletPos.nextPosX <= enemyPos.prevPosX + enemyWeak.getObjectE().size())
 			{
 				return true;
 			};
@@ -584,7 +611,7 @@ bool isBulletHitEnemy(string objectE) {
 	return false;
 };
 bool isBulletHitWall(int nextPosY) {
-	bullet = teamB[*B_th];
+	bulletPos = teamB[*B_th];
 	if (nextPosY == 1)
 	{
 		return true;
@@ -595,7 +622,8 @@ bool isBulletHitWall(int nextPosY) {
 
 #pragma region calculaor
 bool calDistanceBetweenPE(int prevPosYP, int prevPosYE) { //done
-	if ((prevPosYP - prevPosYE) % 2 == 0)
+	int temp = (prevPosYP - prevPosYE) % 2;
+	if (temp == 0)
 	{
 		/*
 		fileDataE << "distanceBetweenPE: even number" << endl;
@@ -620,8 +648,3 @@ bool calDistanceBetweenPE(int prevPosYP, int prevPosYE) { //done
 //	return minN + rand() % (maxN + 1 - minN);
 //}
 #pragma endregion
-//int main() {
-//	showCursor(false);
-//	stage_chapter_game();
-//	return 0;
-//}
