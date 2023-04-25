@@ -37,12 +37,12 @@ void story_chapter_2(int printSpeed) {
 	Sleep(1000);
 	setColor(0, 4);
 	cout << "[ Press 'r' to continue ! ]";
-	c = ' ';
-	while (c != 'r')
+	*c = ' ';
+	while (*c != 'r')
 	{
 		if (_kbhit()) {
-			c = _getch();
-			c = tolower(c);
+			*c = _getch();
+			*c = tolower(*c);
 		}
 	};
 	system("cls");

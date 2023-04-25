@@ -31,13 +31,14 @@ void endGame(int score, int destroyed, int printSpeed) {
 	cout << " ke dich.";
 	cout << endl;
 	cout << "/* Press 'r' to back the menu */";
-	c = ' ';
-	while (c== ' ')
+
+	*c = ' ';
+	while (*c == ' ')
 	{
 		if (_kbhit())
 		{
-			c = _getch();
-			c = tolower(c);
+			*c = _getch();
+			*c = tolower(*c);
 		}
-	}
+	};
 }

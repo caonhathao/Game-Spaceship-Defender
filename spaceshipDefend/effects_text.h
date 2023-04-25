@@ -10,4 +10,5 @@
 using namespace std;
 void effectText_char(string str, int printSpeed);
 void effectText_word(string str, int printSpeed);
+string uppercaseLetter(string name);
 #endif

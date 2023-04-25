@@ -1,6 +1,8 @@
 #include<iostream>
 #include<conio.h>
 #include<vector>
+#include<fstream>
+#include<string>
 
 #include"struct.cpp"
 #include"functions_control_console.h"
@@ -8,18 +10,24 @@
 
 using namespace std;
 
-int g_printSpeed = 20;
-char c = ' ';
-int task_point = 0;
-int g_count_down = 0;
+int *g_printSpeed = new int(20);
+char *c = new char(' ');
+int* g_count_down = new int(0);
 int* choice = new int(0);
-
+int* playerSize = new int(0);
 
 struct result;
 struct infoPlayer;
-Position cursorPos = { 0,0,0,0 };
 
-vector<infoPlayer>data;
+Position cursorPos = { 0,0,0,0 };
+Position playerPos = { 0,0,0,0 };
+Position enemyPos = { 0,0,0,0 };
+Position bulletPos = { 0,0,0,0 };
+
+Activities activities = Activities::stop;
+
+PLAYER playerWeak(5, 100, "|-[O]-|", ".");
+ENEMY enemyWeak(70, 1, 1, "|-x-|");
 
 #pragma region functions
 std::vector<infoPlayer>inputDataAccount();
@@ -28,14 +36,17 @@ void loadingScreen();
 void loadingPlot();
 
 int welcomeScreen(int printSpeed, string name);
-int loginScreen(vector<infoPlayer>dataUsers);
-void drawListPlayers(vector<infoPlayer>Data);
+int login_register(vector<infoPlayer>dataUsers);
+
+void saveDataUsers(vector<infoPlayer>Data);
+void drawListPlayers();
+void drawLog_ResScreen(string title);
 
 void story_chapter_1(int printSpeed);
-void stage_chapter_1(int speed);
+int stage_chapter_1(int speed);
 
 void story_chapter_2(int printSpeed);
-void stage_chapter_2(int speed);
+result stage_chapter_2(int speed);
 
 result stage_chapter_game();
 
@@ -57,18 +68,27 @@ int main() {
 	int posUser = -1;
 	string nameUser = "";
 
+	infoPlayer Player;
+
+	vector<infoPlayer>data;
 	data = inputDataAccount();
 
 	while (true)
 	{
 		system("cls");
-		if (posUser!=-1)
+		if (posUser >= 0) //login
 		{
 			nameUser = data[posUser].name;
+			Player = data[posUser];
 		}
-		int res = 0;
+		else if (posUser == -2) // new register
+		{
+			posUser = data.size() - 1;
+			nameUser = data[posUser].name;
+		}
 
-		res = welcomeScreen(g_printSpeed, nameUser);
+		int res = 0;
+		res = welcomeScreen(*g_printSpeed, nameUser);
 
 		if (res == 1) //data need export: serial, name, scoreChapter1, process/contact, scoreChapter2,scoreChapterGame
 		{
@@ -79,36 +99,71 @@ int main() {
 			c = tolower(c);
 			if (c == 'y')
 			{
+				result A;
 				loadingPlot();
-				story_chapter_1(g_printSpeed);
-				stage_chapter_1(200);//export scoreChapter1
+				story_chapter_1(*g_printSpeed);
+				Player.scoreChapter1 = stage_chapter_1(200);//export scoreChapter1
+
 				loadingPlot();
-				story_chapter_2(g_printSpeed);
+				story_chapter_2(*g_printSpeed);
 				loadingScreen();
-				stage_chapter_2(200);
-				result A = stage_chapter_game();
-				endGame(A.score, A.destroyed, g_printSpeed);
+				A = stage_chapter_2(100);
+				Player.process = A.process;
+				Player.contact = A.contact;
+
+				cout << "[ Dang khoi dong man choi chinh ]";
+				Sleep(2000);
+
+				loadingPlot();
+				system("cls");
+
+				A = stage_chapter_game();
+				Player.scoreChapterGame = A.score;
+
+				endGame(A.score, A.destroyed, *g_printSpeed);
 			}
 			else {
 				result A = stage_chapter_game();
-				endGame(A.score, A.destroyed, g_printSpeed);
+				Player.scoreChapterGame = A.score;
+
+				endGame(A.score, A.destroyed, *g_printSpeed);
 				//main();
 			}
+			if (data.size() > 0 && posUser != -1)
+			{
+				data[posUser] = Player;
+			};
 		}
 		else if (res == 2) {
-			posUser = loginScreen(data);
+			posUser = login_register(data);
+			if (posUser == -2)
+			{
+				drawLog_ResScreen("REGISTER");
+				gotoXY(85, 5);
+
+				cout << "Please tell me your name:";
+				cin >> nameUser;
+
+				Player = { 0,"",0,0,0,0 };
+				Player.name = nameUser;
+				Player.serial = data.size() + 1;
+				data.push_back(Player);
+
+				saveDataUsers(data);
+			};
 		}
 		else if (res == 3) {
 			drawListPlayers();
 		}
 		else if (res == 4) {
 
-			info_about_game(g_printSpeed);
+			info_about_game(*g_printSpeed);
 		}
 		else if (res == 5)
 		{
-			about_me(g_printSpeed);//error: second loop will make the program died
+			about_me(*g_printSpeed);//error: second loop will make the program died
 		}
+		saveDataUsers(data);
 	}
 	return 0;
 }

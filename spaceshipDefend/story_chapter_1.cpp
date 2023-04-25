@@ -44,21 +44,25 @@ void story_chapter_1(int printSpeed) {
 	gotoXY(0, 20);
 	setColor(0, 3);
 	cout << "[ Press 'r' to continue ]";
-	g_count_down = 5;
-	c = ' ';
-	while (c == ' ')
+
+	*g_count_down = 3000;
+	*c = ' ';
+	while (*c == ' ')
 	{
 		if (_kbhit()) {
-			c = _getch();
-			c = tolower(c);
+			*c = _getch();
+			*c = tolower(*c);
 		}
-		if (g_count_down == 0)
+		if (*g_count_down == 0 || *g_count_down == 3000)
 		{
 			gotoXY(0, 20);
 			setColor(0, 2);
 			cout << "[ Press 'r' to continue ]";
-			g_count_down = 5;
+			if (*g_count_down == 0)
+			{
+				*g_count_down = 3000;
+			};
 		}
-		g_count_down--;
+		(*g_count_down)--;
 	};
 }

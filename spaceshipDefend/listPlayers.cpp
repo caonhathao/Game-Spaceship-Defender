@@ -16,7 +16,7 @@ infoPlayer dataInput;
 std::vector<infoPlayer> inputDataAccount();
 //void startPlot();
 
-void drawListPlayers(vector<infoPlayer>Data) {
+void drawListPlayers() {
 	system("cls");
 
 	gotoXY(91, 3);
@@ -57,6 +57,8 @@ void drawListPlayers(vector<infoPlayer>Data) {
 
 	cout << setfill(' ');
 
+	vector<infoPlayer>Data = inputDataAccount();
+
 	if (Data.size() != 0)
 	{
 		for (int i = 0; i < Data.size(); i++)
@@ -75,7 +77,7 @@ void drawListPlayers(vector<infoPlayer>Data) {
 
 			cout << setw(10) << left << dataInput.name;
 			cout << setw(14) << left << dataInput.scoreChapter1;
-			cout << setw(13) << left << to_string(dataInput.process) + "/" + to_string(dataInput.contact);
+			cout << setw(14) << left << to_string(dataInput.process) + "/" + to_string(dataInput.contact);
 			cout << setw(13) << left << dataInput.scoreChapterGame << endl;
 		}
 	}
@@ -87,20 +89,20 @@ void drawListPlayers(vector<infoPlayer>Data) {
 
 	gotoXY(55, 7 + Data.size() + 1);
 	setColor(0, 3);
-	cout << "Press 'b' back the menu";
-	char* b = new char(' ');
+
+	cout << "Press 'r' back the menu";
+	*c = ' ';
 	while (true)
 	{
 		if (_kbhit()) {
-			*b = _getch();
-			*b = tolower(*b);
-			if (*b == 'b')
+			*c = _getch();
+			*c = tolower(*c);
+			if (*c == 'r')
 			{
 				break;
 			}
 		}
 	}
-	delete b;
 }
 //int main() {
 //	vector<infoPlayer>Data = inputDataAccount();

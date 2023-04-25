@@ -20,13 +20,13 @@ void about_me(int printSpeed) {
 		gotoXY(15, 5 + i);
 		effectText_word(para[i], printSpeed);
 	}
-	char* c = new char(' ');
-	gotoXY(15, 12);
 
+	gotoXY(15, 12);
 	setColor(0, 2);
 	cout << "[ Press 'r' to back the menu. ]";
 
-	g_count_down = 100;
+	*c = ' ';
+	*g_count_down = 3000;
 
 	while (true)
 	{
@@ -38,23 +38,24 @@ void about_me(int printSpeed) {
 				break;
 			}
 		}
-		if (g_count_down <= 50 && g_count_down > 0)
+		if (*g_count_down == 0 || *g_count_down == 3000)
 		{
 			gotoXY(15, 12);
 			setColor(0, 12);
 			cout << "[ Press 'r' to back the menu. ]";
-		}
-		else if (g_count_down == 0)
+			if (*g_count_down == 0)
+			{
+				*g_count_down = 3000;
+			}
+		};
+
+		if (*g_count_down == 1500)
 		{
-			g_count_down = 100;
-		}
-		else
-		{
-			g_count_down--;
+
 			setColor(0, 2);
 			gotoXY(15, 12);
 			cout << "[ Press 'r' to back the menu. ]";
 		};
+		(*g_count_down)--;
 	}
-	delete c;
 }

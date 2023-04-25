@@ -45,10 +45,10 @@
 //};
 #include"Player.h"
 
-PLAYER::PLAYER(int life, int power, string objectP, char bullet) {
+PLAYER::PLAYER(int life, int power, string objectP, string bullet) {
 	setPlayer(life, power, objectP, bullet);
 }
-void PLAYER::setPlayer(int life, int power, string objectP, char bullet) {
+void PLAYER::setPlayer(int life, int power, string objectP, string bullet) {
 	m_life = life;
 	m_power = power;
 	m_objectP = objectP;

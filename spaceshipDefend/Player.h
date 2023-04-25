@@ -8,10 +8,10 @@ private:
 	int m_life;
 	int m_power;
 	string m_objectP;
-	char m_bullet;
+	string m_bullet;
 public:
-	PLAYER(int life, int power, string objectP, char bullet);
-	void setPlayer(int life, int power, string objectP, char bullet);
+	PLAYER(int life, int power, string objectP, string bullet);
+	void setPlayer(int life, int power, string objectP, string bullet);
 
 	int getLife() {
 		return m_life;
@@ -22,7 +22,7 @@ public:
 	string getObjectP() {
 		return m_objectP;
 	}
-	char getBullet() {
+	string getBullet() {
 		return m_bullet;
 	}
 };

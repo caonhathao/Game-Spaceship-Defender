@@ -28,7 +28,7 @@ void loadingPlot() {
 	gotoXY(156, 16);
 	cout << '|';
 	gotoXY(158, 16);
-	cout << '>>>';
+	cout << ">>>";
 
 	setColor(0, 14);
 	for (int i = 1; i <= 100; i++)
@@ -46,7 +46,10 @@ void loadingPlot() {
 	gotoXY(95, 19);
 	setColor(0, 2);
 	cout << "Press 'r' to continue!";
-	char* c = new char(' ');
+
+	*c = ' ';
+	*g_count_down = 3000;
+
 	while (*c != 'r')
 	{
 		if (_kbhit())
@@ -54,12 +57,27 @@ void loadingPlot() {
 			*c = _getch();
 			*c = tolower(*c);
 		}
-		if (g_count_down == 0)
+		if (*c == 'r')
+		{
+			break;
+		};
+
+		if (*g_count_down == 0 || *g_count_down == 3000)
 		{
 			gotoXY(95, 19);
 			setColor(0, 3);
 			cout << "Press 'r' to continue!";
-			g_count_down = 5;
-		}g_count_down--;
+			if (*g_count_down == 0)
+			{
+				*g_count_down = 3000;
+			}
+		}
+		else if (*g_count_down == 1500)
+		{
+			gotoXY(95, 19);
+			setColor(0, 2);
+			cout << "Press 'r' to continue!";
+		};
+		(*g_count_down)--;
 	};
 }

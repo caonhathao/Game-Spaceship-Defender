@@ -43,3 +43,6 @@ void disableSelection() {
 	HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
 	SetConsoleMode(hStdin, ~ENABLE_QUICK_EDIT_MODE);
 }
+int random(int minN, int maxN) {
+	return minN + rand() % (maxN + 1 - minN);
+}

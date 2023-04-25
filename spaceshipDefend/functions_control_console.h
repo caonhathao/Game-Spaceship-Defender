@@ -44,4 +44,5 @@ void showCursor(bool cursorVisibility);
 	//SetConsoleCursorInfo(handle, &ConCurInf);
 void setColor(int background_color, int text_color);
 void disableSelection();
+int random(int minN, int maxN);
 #endif

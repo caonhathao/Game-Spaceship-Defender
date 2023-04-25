@@ -15,8 +15,8 @@ string str = "";
 void effectText_char(string str, int printSpeed);
 
 void drawScreen();
-void screenInfo(int printSpeed);
-int welcomeScreen(int printSpeed);
+void screenInfo(int printSpeed, string name);
+int welcomeScreen(int printSpeed, string name);
 
 #pragma endregion
 
@@ -59,9 +59,11 @@ void screenInfo(int printSpeed, string name) {
 
 	drawScreen();
 
-	gotoXY(85, 6);
+	gotoXY(90 - name.size(), 6);
 	setColor(0, 8);
-	str = "Chuc ban co trai nghiem vui ve :)" + name;
+	string* temp = new string("");
+	*temp = uppercaseLetter(name);
+	str = "Chuc ban co trai nghiem vui ve :) " + *temp;
 	effectText_char(str, printSpeed);
 
 	gotoXY(94, 8); 
@@ -74,7 +76,7 @@ void screenInfo(int printSpeed, string name) {
 
 	Sleep(500);
 	gotoXY(95, 12);
-	cout << "2. Dang nhap. (chua co)";
+	cout << "2. Dang nhap hoac dang ky";
 
 	Sleep(500);
 	gotoXY(95, 14);
@@ -87,12 +89,13 @@ void screenInfo(int printSpeed, string name) {
 	Sleep(500);
 	gotoXY(95, 18);
 	cout << "5. About me?";
+	delete temp;
 }
 #pragma endregion
 
 #pragma region mainFuncs
-int welcomeScreen(int printSpeed,int posUser) {
-	screenInfo(printSpeed);
+int welcomeScreen(int printSpeed,string name) {
+	screenInfo(printSpeed, name);
 
 	cursorPos.prevPosX = 92;
 	cursorPos.prevPosY = 10;
@@ -104,8 +107,8 @@ int welcomeScreen(int printSpeed,int posUser) {
 	while (true){		
 		if (_kbhit())
 		{
-			c = _getch();
-			if (c != ' ')
+			*c = _getch();
+			if (*c != ' ')
 			{
 				if (GetAsyncKeyState(VK_UP) || GetAsyncKeyState(VK_DOWN))
 				{
@@ -141,7 +144,7 @@ int welcomeScreen(int printSpeed,int posUser) {
 					};
 				};
 			}
-			c = ' ';
+			*c = ' ';
 		};
 	}
 	int ans = *choice;

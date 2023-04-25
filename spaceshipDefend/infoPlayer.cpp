@@ -37,17 +37,21 @@ std::vector<string>splitString(string str) {
 	return res;
 }
 std::vector<infoPlayer> inputDataAccount() {
+	vector<infoPlayer>res = {};
+
 	status = _chdir(".\\Data-Account");
-	if (status!=0)
+
+	if (status != 0) //if status = -1
 	{
-		status = _mkdir(".\\Data-Account");
-		status = _chdir(".\\Data-Accont");
+		fstream fileDataInput("data_Users.txt", ios::in);
+		if (fileDataInput.fail())
+		{
+			status = _mkdir(".\\Data-Account");
+			status = _chdir(".\\Data-Account");
+		}
+		fileDataInput.close();
 	}
 
-	//char buf[256];
-	//cout << _getcwd(buf, 256) << endl;
-
-	vector<infoPlayer>res = {};
 	int serial = 0;
 	string name = "";
 	int scoreChapter1 = 0;
@@ -55,11 +59,10 @@ std::vector<infoPlayer> inputDataAccount() {
 	int impact = 0;
 	int scoreChapterGame = 0;
 
-
 	fstream fileDataInput("data_Users.txt", ios::in);
 	fileDataInput.seekg(0, ios::beg);
 
-	if (fileDataInput.fail())
+	if (fileDataInput.fail())//error
 	{
 		cout << "ERROR: Cannot open file data!";
 		system("pause");
@@ -108,6 +111,6 @@ std::vector<infoPlayer> inputDataAccount() {
 	};
 
 	fileDataInput.close();
-	
+
 	return res;
-}
+};

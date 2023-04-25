@@ -39,14 +39,14 @@ void guide() {
 	cout << "Press 'p' to pause game.";
 	gotoXY(28, 13);
 	cout << "Press 'r' to exit game and return the menu.";
-	c = ' ';
+	*c = ' ';
 	while (true)
 	{
 		if (_kbhit())
 		{
-			c = _getch();
-			c = tolower(c);
-			if (c == 'r')
+			*c = _getch();
+			*c = tolower(*c);
+			if (*c == 'r')
 			{
 				break;
 			}
@@ -69,13 +69,13 @@ void aboutGame(int printSpeed) {
 	gotoXY(15, 8);
 
 	cout << "Press 'r' to back the menu";
-	c = ' ';
+	*c = ' ';
 	while (true)
 	{
 		if (_kbhit()) {
-			c = _getch();
-			c = tolower(c);
-			if (c == 'r')
+			*c = _getch();
+			*c = tolower(*c);
+			if (*c == 'r')
 			{
 				break;
 			}
@@ -94,7 +94,7 @@ void drawInfo() {
 	gotoXY(17, 9);
 	cout << "2. Ve tro choi";
 	gotoXY(17, 13);
-	cout << "Press 'b' to back the menu";
+	cout << "Press 'r' to back the menu";
 
 	cursorPos.prevPosX = 14;
 	cursorPos.prevPosY = 7;
@@ -108,8 +108,8 @@ void info_about_game(int printSpeed) {
 	while (true)
 	{
 		if (_kbhit()) {
-			c = _getch();
-			if (c != ' ')
+			*c = _getch();
+			if (*c != ' ')
 			{
 				if (GetAsyncKeyState(VK_UP) || GetAsyncKeyState(VK_DOWN))
 				{
@@ -131,12 +131,12 @@ void info_about_game(int printSpeed) {
 						drawInfo();
 					}
 				}
-				else if (c == 'b')
+				else if (*c == 'r')
 				{
 					break;
 				}
 			}
-			c = ' ';
+			*c = ' ';
 		};
 	};
 }

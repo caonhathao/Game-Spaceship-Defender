@@ -117,8 +117,14 @@
     <ClCompile Include="functions_control_cursor_game.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="loginScreen.cpp">
+    <ClCompile Include="login_register.cpp">
       <Filter>Source Files\login_and_choice</Filter>
+    </ClCompile>
+    <ClCompile Include="saveDataUsers.cpp">
+      <Filter>Source Files\login_and_choice</Filter>
+    </ClCompile>
+    <ClCompile Include="functions_control_object.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +141,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="functions_control_cursor_game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="functions_control_object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

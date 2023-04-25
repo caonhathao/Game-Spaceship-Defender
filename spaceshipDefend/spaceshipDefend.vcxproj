@@ -134,12 +134,14 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="functions_control_console.cpp" />
     <ClCompile Include="functions_control_cursor_game.cpp" />
+    <ClCompile Include="functions_control_object.cpp" />
     <ClCompile Include="infoPlayer.cpp" />
     <ClCompile Include="info_about_game.cpp" />
     <ClCompile Include="listPlayers.cpp" />
     <ClCompile Include="loadingPlot.cpp" />
     <ClCompile Include="loadingScreen.cpp" />
-    <ClCompile Include="loginScreen.cpp" />
+    <ClCompile Include="login_register.cpp" />
+    <ClCompile Include="saveDataUsers.cpp" />
     <ClCompile Include="testing_files.cpp" />
     <ClCompile Include="welcomeScreen.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -160,6 +162,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="functions_control_console.h" />
     <ClInclude Include="functions_control_cursor_game.h" />
+    <ClInclude Include="functions_control_object.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
