@@ -176,7 +176,7 @@ void drawInfoNotice() {
 #pragma endregion
 
 #pragma region main
-result stage_chapter_2(int speed) {
+void stage_chapter_2(int speed, int& process, int& contact) {
 	noticeStart();
 
 	drawPlayArea();
@@ -278,15 +278,14 @@ result stage_chapter_2(int speed) {
 		Sleep(speed);
 	}
 	result A;
-	A.process = *amount;
-	A.contact = *impact;
+	process = *amount;
+	contact = *impact;
 	delete Ba_th;
 	delete pos;
 	delete amount;
 	delete sign;
 	delete impact;
 	noticeFinish();
-	return A;
 }
 #pragma endregion
 

@@ -11,28 +11,34 @@ void drawObject(string object, Position& objectPos, int beginX, int endX, int be
 	objectPos.nextPosX = 0;
 	objectPos.nextPosY = 0;
 	gotoXY(objectPos.prevPosX, objectPos.prevPosY);
+	setColor(0, idColor);
 	cout << object;
 };
 
-void controlWithoutEvent(Activities activities,Position& objectPos) {
-	if (activities==Activities::top)
+void controlWithoutEvent(Activities activities, Position& objectPos) {
+	if (activities == Activities::top)
 	{
 		objectPos.nextPosX = objectPos.prevPosX;
 		objectPos.nextPosY = objectPos.prevPosY - 1;
 	}
-	else if (activities==Activities::bottom)
+	else if (activities == Activities::bottom)
 	{
 		objectPos.nextPosX = objectPos.prevPosX;
 		objectPos.prevPosX = objectPos.prevPosY - 1;
 	}
-	else if(activities==Activities::left)
+	else if (activities == Activities::left)
 	{
 		objectPos.nextPosX = objectPos.prevPosX - 1;
 		objectPos.nextPosY = objectPos.prevPosY;
 	}
-	else if (activities==Activities::right)
+	else if (activities == Activities::right)
 	{
 		objectPos.nextPosX = objectPos.prevPosX + 1;
 		objectPos.nextPosY = objectPos.prevPosY;
 	}
-}
+	else if (activities == Activities::fire)
+	{
+		objectPos.nextPosX = objectPos.prevPosX;
+		objectPos.nextPosY = objectPos.prevPosY;
+	};
+};

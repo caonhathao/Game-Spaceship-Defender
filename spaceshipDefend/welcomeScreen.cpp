@@ -119,27 +119,27 @@ int welcomeScreen(int printSpeed,string name) {
 				{
 					if (cursorPos.prevPosY == 10)
 					{
-						*choice = 1;
+						*g_choice = 1;
 						break;
 					}
 					else if (cursorPos.prevPosY == 12)
 					{
-						*choice = 2;
+						*g_choice = 2;
 						break;
 					}
 					else if (cursorPos.prevPosY == 14)
 					{
-						*choice = 3;
+						*g_choice = 3;
 						break;
 					}
 					else if (cursorPos.prevPosY == 16)
 					{
-						*choice = 4;
+						*g_choice = 4;
 						break;
 					}
 					else if (cursorPos.prevPosY == 18)
 					{
-						*choice = 5;
+						*g_choice = 5;
 						break;
 					};
 				};
@@ -147,7 +147,7 @@ int welcomeScreen(int printSpeed,string name) {
 			*c = ' ';
 		};
 	}
-	int ans = *choice;
+	int ans = *g_choice;
 	return ans;
 };
 #pragma endregion

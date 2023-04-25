@@ -85,7 +85,7 @@ void aboutGame(int printSpeed) {
 void drawInfo() {
 	system("cls");
 
-	*choice = 0;
+	*g_choice = 0;
 
 	gotoXY(15, 5);
 	cout << "Ban muon thong tin nao ?";
@@ -120,13 +120,13 @@ void info_about_game(int printSpeed) {
 				{
 					if (cursorPos.prevPosY == 7)
 					{
-						*choice = 1;
+						*g_choice = 1;
 						guide();
 						drawInfo();
 					}
 					else if (cursorPos.prevPosY = 9)
 					{
-						*choice = 2;
+						*g_choice = 2;
 						aboutGame(printSpeed);
 						drawInfo();
 					}

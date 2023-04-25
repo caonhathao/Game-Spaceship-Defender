@@ -49,16 +49,16 @@ int isLogin() {
 			{
 				if (cursorPos.prevPosY == 5)
 				{
-					*choice = 1; break;
+					*g_choice = 1; break;
 				}
 				else if (cursorPos.prevPosY == 7)
 				{
-					*choice = 2; break;
+					*g_choice = 2; break;
 				}
 			}
 		}
 	}
-	return *choice;
+	return *g_choice;
 };
 void drawLog_ResScreen(string title) {
 	system("cls");
@@ -85,11 +85,11 @@ int login_register(vector<infoPlayer>dataUsers) {
 	register_again:
 	drawLog_ResScreen("[<<<--->>>]");
 
-	*choice = isLogin();
+	*g_choice = isLogin();
 
 	string name;
 
-	if (*choice == 1) // choice login
+	if (*g_choice == 1) // choice login
 	{
 		drawLog_ResScreen("LOGIN");
 		gotoXY(85, 5);
@@ -98,7 +98,7 @@ int login_register(vector<infoPlayer>dataUsers) {
 		gotoXY(85, 7);
 		cout << "Press ENTER again";
 	}
-	else if (*choice == 2) //choice resgister
+	else if (*g_choice == 2) //choice resgister
 	{
 		return -2;
 	};

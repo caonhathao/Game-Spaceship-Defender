@@ -46,8 +46,8 @@ int* B_th = new int(0);
 
 int fire_sign = 0;
 
-int* tempPosBulletX = 0;
-int* tempPosBulletY = 0;
+int* tempPosBulletX = new int(0);
+int* tempPosBulletY = new int(0);
 
 vector<Position>teamE = {};
 vector<Position>teamB = {};
@@ -67,7 +67,7 @@ void drawTurtorial();
 void story_chapter_1(int speed);
 
 void stage_chapter_1(int speed);
-result stage_chapter_game();
+void stage_chapter_game(int& score, int& destroyed);
 
 //void drawSpaceship(string object);
 //void drawEnemy(string object);
@@ -225,28 +225,30 @@ void drawTurtorial() {
 #pragma endregion
 
 #pragma region main
-result stage_chapter_game(){
+void stage_chapter_game(int&score,int&destroyed){
 	srand(time(NULL));
 
-	result A;
+	system("cls");
 
 	drawPlayArea(widthPlayArea, heightPlayArea);
 	drawScoreBoard();
 	drawTurtorial();
 	//drawSpaceship(playerWeak.getObjectP());
 	drawObject(playerWeak.getObjectP(), playerPos, 10, 30, 35, 39, 3);
+
 	for (int i = 0; i < 3; i++)
 	{
 		//drawEnemy(enemyWeak.getObjectE());
 		drawObject(enemyWeak.getObjectE(), enemyPos, 11, 31, 1, 5, 2);
 		teamE.push_back(enemyPos);
 	};
+
 	*g_count_down = 3000;
-	*playerSize = playerWeak.getObjectP().size();
-	system("pause");
+	*g_playerSize = playerWeak.getObjectP().size();
+
 	while (true)
 	{
-		*tempPosBulletX = playerPos.prevPosX + *playerSize / 2;
+		*tempPosBulletX = playerPos.prevPosX + *g_playerSize / 2;
 		*tempPosBulletY = playerPos.prevPosY - 1;
 
 		if (*g_life != 0)
@@ -293,7 +295,9 @@ result stage_chapter_game(){
 				break;
 			}
 			else {
-				controlSpaceship();
+				//controlSpaceship();
+				controlWithoutEvent(activities, playerPos);
+				moveSpaceship(playerWeak.getObjectP());
 				for (int i = 0; i < teamE.size(); i++)
 				{
 					enemyPos = teamE[i];
@@ -343,19 +347,24 @@ result stage_chapter_game(){
 			};
 		}
 		else {
-			A.destroyed = *g_destroyed;
-			A.score = *g_score;
+			destroyed = *g_destroyed;
+			score = *g_score;
 			delete g_life;
 			delete g_score;
 			delete g_destroyed;
 			delete g_bulletSpeed;
 			delete g_speed;
+
 			delete B_th;
 			delete E_th;
-			return A;
+
+			delete g_playerSize;
+
+			delete tempPosBulletX;
+			delete tempPosBulletY;
 		}
 	}
-}
+};
 #pragma endregion
 
 #pragma region player
@@ -398,7 +407,7 @@ void controlSpaceship() {
 		playerPos.nextPosX = playerPos.prevPosX;
 		playerPos.nextPosY = playerPos.prevPosY;
 	}
-	moveSpaceship(playerWeak.getObjectP());
+
 }
 void moveSpaceship(string object) {
 	//if (*c == 'j')

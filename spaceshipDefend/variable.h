@@ -11,8 +11,8 @@ using namespace std;
 
 extern int *g_printSpeed;
 extern int *g_count_down;
-extern int *choice;
-extern int *playerSize;
+extern int *g_choice;
+extern int *g_playerSize;
 
 extern char *c;
 

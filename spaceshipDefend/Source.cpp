@@ -13,10 +13,14 @@ using namespace std;
 int *g_printSpeed = new int(20);
 char *c = new char(' ');
 int* g_count_down = new int(0);
-int* choice = new int(0);
-int* playerSize = new int(0);
+int* g_choice = new int(0);
+int* g_playerSize = new int(0);
 
-struct result;
+int* score = new int(0);
+int* destroyed = new int(0);
+int* process = new int(0);
+int* contact = new int(0);
+
 struct infoPlayer;
 
 Position cursorPos = { 0,0,0,0 };
@@ -46,9 +50,9 @@ void story_chapter_1(int printSpeed);
 int stage_chapter_1(int speed);
 
 void story_chapter_2(int printSpeed);
-result stage_chapter_2(int speed);
+void stage_chapter_2(int speed, int& process, int& contact);
 
-result stage_chapter_game();
+void stage_chapter_game(int &score, int &destroyed);
 
 void info_about_game(int printSpeed);
 void about_me(int printSpeed);
@@ -107,9 +111,9 @@ int main() {
 				loadingPlot();
 				story_chapter_2(*g_printSpeed);
 				loadingScreen();
-				A = stage_chapter_2(100);
-				Player.process = A.process;
-				Player.contact = A.contact;
+				stage_chapter_2(*g_printSpeed, *process, *contact);
+				Player.process = *process;
+				Player.contact = *contact;
 
 				cout << "[ Dang khoi dong man choi chinh ]";
 				Sleep(2000);
@@ -117,16 +121,17 @@ int main() {
 				loadingPlot();
 				system("cls");
 
-				A = stage_chapter_game();
-				Player.scoreChapterGame = A.score;
+				stage_chapter_game(*score, *destroyed);
+				Player.scoreChapterGame = *score;
 
-				endGame(A.score, A.destroyed, *g_printSpeed);
+				endGame(*score, *destroyed, *g_printSpeed);
 			}
 			else {
-				result A = stage_chapter_game();
-				Player.scoreChapterGame = A.score;
+				loadingPlot();
+				stage_chapter_game(*score,*destroyed);
+				Player.scoreChapterGame = *score;
 
-				endGame(A.score, A.destroyed, *g_printSpeed);
+				endGame(*score, *destroyed, *g_printSpeed);
 				//main();
 			}
 			if (data.size() > 0 && posUser != -1)
