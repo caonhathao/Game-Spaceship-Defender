@@ -10,7 +10,7 @@ void stringFlicker(string str,int posX,int posY, int colorCode_1, int colorCode_
 	cout << str;
 
 	*c = ' ';
-	*g_count_down = 4000;
+	*g_count_down = 8000;
 
 	while (*c != 'r')
 	{
@@ -24,17 +24,17 @@ void stringFlicker(string str,int posX,int posY, int colorCode_1, int colorCode_
 			break;
 		};
 
-		if (*g_count_down == 0 || *g_count_down == 4000)
+		if (*g_count_down == 0 || *g_count_down == 8000)
 		{
 			gotoXY(posX, posY);
 			setColor(0, colorCode_2);
 			cout << str;
 			if (*g_count_down == 0)
 			{
-				*g_count_down = 4000;
+				*g_count_down = 8000;
 			}
 		}
-		else if (*g_count_down == 2000)
+		else if (*g_count_down == 4000)
 		{
 			gotoXY(posX, posY);
 			setColor(0, colorCode_1);

@@ -48,7 +48,7 @@ void drawListPlayers();
 void drawLog_ResScreen(string title);
 
 void story_chapter_1(int printSpeed);
-void stage_chapter_1(int speed, int& task_point);
+void stage_chapter_1(int speed, int& res);
 
 void story_chapter_2(int printSpeed);
 void stage_chapter_2(int speed, int& process, int& contact);

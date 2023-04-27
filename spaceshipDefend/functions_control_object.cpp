@@ -14,7 +14,31 @@ void drawObject(string object, Position& objectPos, int beginX, int endX, int be
 	setColor(0, idColor);
 	cout << object;
 };
-
+void controlSignal(Activities& activities, char& c, int& speed,int defaultSpeed) {
+	if (c == 'w')
+	{
+		activities = Activities::top;
+		speed = defaultSpeed;
+	}
+	else if (c == 's')
+	{
+		activities = Activities::bottom;
+		speed = defaultSpeed;
+	}
+	else if (c == 'd')
+	{
+		activities = Activities::right;
+		speed = defaultSpeed - 50;
+	}
+	else if (c == 'a')
+	{
+		activities = Activities::left;
+		speed = defaultSpeed - 50;
+	}
+	else if (c == ' ') {
+		activities = Activities::stop;
+	}
+};
 void controlWithoutEvent(Activities activities, Position& objectPos) {
 	if (activities == Activities::top)
 	{

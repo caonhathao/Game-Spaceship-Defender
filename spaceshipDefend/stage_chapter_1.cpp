@@ -32,7 +32,7 @@ int *powerCurrent = new int(0);
 #pragma region functions
 void noticePlayer(int widthLine);
 void airPort(int lengthLine, int widthLine);
-void stage_chapter_1(int speed, int& result);
+void stage_chapter_1(int speed, int& res);
 
 //void draw(string object);
 void control();
@@ -236,7 +236,7 @@ void drawTaskBoard() {
 #pragma endregion
 
 #pragma region main
-void stage_chapter_1(int speed, int& result) {
+void stage_chapter_1(int speed, int& res) {
 	system("cls");
 	airPort(45, 20);
 	noticePlayer(20);
@@ -252,26 +252,28 @@ void stage_chapter_1(int speed, int& result) {
 		{
 			*c = _getch();
 			*c = tolower(*c);
-			if (*c == 'w')
-			{
-				activities = Activities::top;
-			}
-			else if (*c == 's')
-			{
-				activities = Activities::bottom;
-			}
-			else if (*c == 'd') 
-			{
-				activities = Activities::right;
-			}
-			else if (*c == 'a')
-			{
-				activities = Activities::left;
-			}
-			else if (*c == ' ') {
-				activities = Activities::stop;
-			}
-		}
+			//	if (*c == 'w')
+			//	{
+			//		activities = Activities::top;
+			//	}
+			//	else if (*c == 's')
+			//	{
+			//		activities = Activities::bottom;
+			//	}
+			//	else if (*c == 'd') 
+			//	{
+			//		activities = Activities::right;
+			//	}
+			//	else if (*c == 'a')
+			//	{
+			//		activities = Activities::left;
+			//	}
+			//	else if (*c == ' ') {
+			//		activities = Activities::stop;
+			//	}
+			//}
+			controlSignal(activities, *c, speed, 200);
+		};
 		if (*c == 'p')
 		{
 			while (*c == 'p')
@@ -312,7 +314,7 @@ void stage_chapter_1(int speed, int& result) {
 		control();
 		Sleep(speed);
 	}
-	result = *task_point;
+	res = *task_point;
 }
 #pragma endregion
 
