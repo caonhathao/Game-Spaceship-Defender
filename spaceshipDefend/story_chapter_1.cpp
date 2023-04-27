@@ -7,6 +7,8 @@
 #include"functions_control_console.h"
 #include"variable.h"
 using namespace std;
+
+void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2);
 void story_chapter_1(int printSpeed) {
 	system("cls");
 	setColor(0, 14);
@@ -41,28 +43,6 @@ void story_chapter_1(int printSpeed) {
 	};
 	cout << endl;
 	Sleep(1000);
-	gotoXY(0, 20);
-	setColor(0, 3);
-	cout << "[ Press 'r' to continue ]";
 
-	*g_count_down = 3000;
-	*c = ' ';
-	while (*c == ' ')
-	{
-		if (_kbhit()) {
-			*c = _getch();
-			*c = tolower(*c);
-		}
-		if (*g_count_down == 0 || *g_count_down == 3000)
-		{
-			gotoXY(0, 20);
-			setColor(0, 2);
-			cout << "[ Press 'r' to continue ]";
-			if (*g_count_down == 0)
-			{
-				*g_count_down = 3000;
-			};
-		}
-		(*g_count_down)--;
-	};
+	stringFlicker("[ Press 'r' to continue ]", 0, 20, 2, 3);
 }

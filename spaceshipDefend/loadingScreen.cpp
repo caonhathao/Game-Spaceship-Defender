@@ -3,6 +3,7 @@
 
 #include"functions_control_console.h"
 using namespace std;
+void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2);
 void loadingScreen() {
 	system("cls");
 	gotoXY(91, 13);
@@ -21,6 +22,7 @@ void loadingScreen() {
 		cout << '-';
 		Sleep(10);
 	}
+
 	gotoXY(156, 16);
 	cout << '|';
 	gotoXY(158, 16);
@@ -39,17 +41,5 @@ void loadingScreen() {
 		cout << i << '%';
 	}
 
-	gotoXY(95, 19);
-	setColor(0, 2);
-	cout << "Press 'r' to continue!";
-	char* c = new char(' ');
-
-	while (*c != 'r')
-	{
-		if (_kbhit())
-		{
-			*c = _getch();
-			*c = tolower(*c);
-		}
-	}
+	stringFlicker("Press 'r' to continue", 95, 19, 2, 3);
 }

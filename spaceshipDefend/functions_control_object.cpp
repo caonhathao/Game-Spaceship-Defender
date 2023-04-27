@@ -24,7 +24,7 @@ void controlWithoutEvent(Activities activities, Position& objectPos) {
 	else if (activities == Activities::bottom)
 	{
 		objectPos.nextPosX = objectPos.prevPosX;
-		objectPos.prevPosX = objectPos.prevPosY - 1;
+		objectPos.prevPosX = objectPos.prevPosY + 1;
 	}
 	else if (activities == Activities::left)
 	{

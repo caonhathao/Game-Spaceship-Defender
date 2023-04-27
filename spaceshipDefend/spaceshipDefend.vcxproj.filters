@@ -37,6 +37,9 @@
     <Filter Include="Source Files\testing_files">
       <UniqueIdentifier>{c6dc3d04-b062-4d44-9edb-539f5bf09a03}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\dictionary">
+      <UniqueIdentifier>{dd8c7c29-4cd1-4b0e-8337-d86e5a3f5d45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -125,6 +128,12 @@
     </ClCompile>
     <ClCompile Include="functions_control_object.cpp">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dictionary.cpp">
+      <Filter>Source Files\dictionary</Filter>
+    </ClCompile>
+    <ClCompile Include="stringFlicker.cpp">
+      <Filter>Source Files\effects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

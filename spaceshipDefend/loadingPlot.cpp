@@ -5,6 +5,7 @@
 #include"variable.h"
 
 using namespace std;
+void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2);
 void loadingPlot() {
 	system("cls");
 
@@ -42,42 +43,5 @@ void loadingPlot() {
 		gotoXY(162, 16);
 		cout << i << '%';
 	}
-
-	gotoXY(95, 19);
-	setColor(0, 2);
-	cout << "Press 'r' to continue!";
-
-	*c = ' ';
-	*g_count_down = 3000;
-
-	while (*c != 'r')
-	{
-		if (_kbhit())
-		{
-			*c = _getch();
-			*c = tolower(*c);
-		}
-		if (*c == 'r')
-		{
-			break;
-		};
-
-		if (*g_count_down == 0 || *g_count_down == 3000)
-		{
-			gotoXY(95, 19);
-			setColor(0, 3);
-			cout << "Press 'r' to continue!";
-			if (*g_count_down == 0)
-			{
-				*g_count_down = 3000;
-			}
-		}
-		else if (*g_count_down == 1500)
-		{
-			gotoXY(95, 19);
-			setColor(0, 2);
-			cout << "Press 'r' to continue!";
-		};
-		(*g_count_down)--;
-	};
+	stringFlicker("Press 'r' to continue", 95, 19, 2, 3);
 }

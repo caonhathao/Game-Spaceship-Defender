@@ -32,7 +32,7 @@ int *powerCurrent = new int(0);
 #pragma region functions
 void noticePlayer(int widthLine);
 void airPort(int lengthLine, int widthLine);
-int stage_chapter_1(int speed);
+void stage_chapter_1(int speed, int& result);
 
 //void draw(string object);
 void control();
@@ -236,7 +236,7 @@ void drawTaskBoard() {
 #pragma endregion
 
 #pragma region main
-int stage_chapter_1(int speed) {
+void stage_chapter_1(int speed, int& result) {
 	system("cls");
 	airPort(45, 20);
 	noticePlayer(20);
@@ -260,7 +260,8 @@ int stage_chapter_1(int speed) {
 			{
 				activities = Activities::bottom;
 			}
-			else if (*c == 'd') {
+			else if (*c == 'd') 
+			{
 				activities = Activities::right;
 			}
 			else if (*c == 'a')
@@ -311,10 +312,7 @@ int stage_chapter_1(int speed) {
 		control();
 		Sleep(speed);
 	}
-	system("cls");
-	cout << "Waiting for next chapter...";
-	Sleep(1500);
-	return *task_point;
+	result = *task_point;
 }
 #pragma endregion
 
@@ -358,11 +356,12 @@ void control() {
 		playerPos.nextPosX = playerPos.prevPosX;
 		playerPos.nextPosY = playerPos.prevPosY;
 	}
-	else if (*info_sign == 0)
+	else if (*info_sign == 0) // lan dau chua cham vao garage
 	{
 		if (isPlayerTouchGarage())
 		{
-			*info_sign = 1;
+			*info_sign = 1;// cham mot lan duy nhat
+			(*task_point)++;
 			playerPos.nextPosX = playerPos.prevPosX;
 			playerPos.nextPosY = playerPos.prevPosY;
 		}

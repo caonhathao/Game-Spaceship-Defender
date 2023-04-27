@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="about_me.cpp" />
     <ClCompile Include="Activities.cpp" />
+    <ClCompile Include="dictionary.cpp" />
     <ClCompile Include="effects_text.cpp" />
     <ClCompile Include="endGame.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="loadingScreen.cpp" />
     <ClCompile Include="login_register.cpp" />
     <ClCompile Include="saveDataUsers.cpp" />
+    <ClCompile Include="stringFlicker.cpp" />
     <ClCompile Include="testing_files.cpp" />
     <ClCompile Include="welcomeScreen.cpp" />
     <ClCompile Include="Source.cpp" />

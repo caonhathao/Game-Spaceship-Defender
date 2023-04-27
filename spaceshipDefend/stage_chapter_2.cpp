@@ -8,9 +8,11 @@
 #include<fstream>
 
 #include"struct.cpp"
-#include"player.h"
 #include"Activities.cpp"
+
 #include"functions_control_console.h"
+#include"functions_control_object.h"
+#include"player.h"
 #include"variable.h"
 #include"effects_text.h"
 
@@ -45,7 +47,6 @@ int* amount = new int(0);
 int* impact = new int(0);
 bool* sign = new bool(false);
 
-Position P;
 PosAndLength BARRIER;
 
 vector<PosAndLength>barrier = {};
@@ -61,10 +62,10 @@ void drawPlayArea();
 void drawNoticePlayer();
 void drawInfoNotice();;
 
-result stage_chapter_2(int speed);
+void stage_chapter_2(int speed, int& process, int& contact);
 
-void drawPlayer(string object);
-void controlPlayer();
+//void drawPlayer(string object);
+//void controlPlayer();
 void movePlayer(string object);
 
 void drawBarrier();
@@ -183,9 +184,12 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 	drawNoticePlayer();
 	drawInfoNotice();
 
-	drawPlayer(playerWeak.getObjectP());
+	//drawPlayer(playerWeak.getObjectP());
+	drawObject(playerWeak.getObjectP(), playerPos, 50, 90, 40, 49, 2);
 
 	*g_count_down = 2000;
+
+	*c = ' ';
 
 	while (true)
 	{
@@ -266,7 +270,17 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 		{
 			break;
 		};
-		controlPlayer();
+		//controlPlayer();
+		if (isPlayerHitWall())
+		{
+			playerPos.nextPosX = playerPos.prevPosX;
+			playerPos.nextPosY = playerPos.prevPosY;
+		}
+		else
+		{
+			controlWithoutEvent(activities, playerPos);
+			movePlayer(playerWeak.getObjectP());
+		};
 		if (*g_count_down == 0)
 		{
 			speed -= 10;
@@ -277,7 +291,6 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 		};
 		Sleep(speed);
 	}
-	result A;
 	process = *amount;
 	contact = *impact;
 	delete Ba_th;
@@ -290,59 +303,58 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 #pragma endregion
 
 #pragma region player
-void drawPlayer(string object) {
-	P.prevPosX = random(50,90);
-	P.prevPosY = random(40, 49);
-	gotoXY(P.prevPosX,P.prevPosY);
-	setColor(0, 2);
-	cout << playerWeak.getObjectP();
-}
-void controlPlayer() {
-	if (activities == Activities::top)
-	{
-		P.nextPosX = P.prevPosX;
-		P.nextPosY = P.prevPosY - 1;
-	}
-	else if (activities == Activities::bottom)
-	{
-		P.nextPosX = P.prevPosX;
-		P.nextPosY = P.prevPosY + 1;
-	}
-	else if (activities == Activities::left)
-	{
-		P.nextPosX = P.prevPosX - 1;
-		P.prevPosY = P.prevPosY;
-	}
-	else if (activities == Activities::right)
-	{
-		P.nextPosX = P.prevPosX + 1;
-		P.nextPosY = P.prevPosY;
-	}
-	else if (activities == Activities::stop || isPlayerHitWall())
-	{
-		P.nextPosX = P.prevPosX;
-		P.nextPosY = P.prevPosY;
-	};
-	movePlayer(playerWeak.getObjectP());
-}
+//void drawPlayer(string object) {
+//	playerPos.prevPosX = random(50, 90);
+//	playerPos.prevPosY = random(40, 49);
+//	gotoXY(playerPos.prevPosX,playerPos.prevPosY);
+//	setColor(0, 2);
+//	cout << playerWeak.getObjectP();
+//}
+//void controlPlayer() {
+//	if (activities == Activities::top)
+//	{
+//		playerPos.nextPosX = playerPos.prevPosX;
+//		playerPos.nextPosY = playerPos.prevPosY - 1;
+//	}
+//	else if (activities == Activities::bottom)
+//	{
+//		playerPos.nextPosX = playerPos.prevPosX;
+//		playerPos.nextPosY = playerPos.prevPosY + 1;
+//	}
+//	else if (activities == Activities::left)
+//	{
+//		playerPos.nextPosX = playerPos.prevPosX - 1;
+//		playerPos.prevPosY = playerPos.prevPosY;
+//	}
+//	else if (activities == Activities::right)
+//	{
+//		playerPos.nextPosX = playerPos.prevPosX + 1;
+//		playerPos.nextPosY = playerPos.prevPosY;
+//	}
+//	else if (activities == Activities::stop || isPlayerHitWall())
+//	{
+//		playerPos.nextPosX = playerPos.prevPosX;
+//		playerPos.nextPosY = playerPos.prevPosY;
+//	};
+//}
 void movePlayer(string object) {
 	bool isHitWall = isPlayerHitWall();
 
 	if (!isPlayerHitWall() && !isPlayerImpactBarrier())
 	{
-		gotoXY(P.prevPosX, P.prevPosY);
+		gotoXY(playerPos.prevPosX, playerPos.prevPosY);
 		cout << setfill(' ');
 		cout << setw(object.size()) << right << ' ';
-		gotoXY(P.nextPosX, P.nextPosY);
+		gotoXY(playerPos.nextPosX, playerPos.nextPosY);
 		setColor(0, 2);
 		cout << object;
-		P.prevPosX = P.nextPosX;
-		P.prevPosY = P.nextPosY;
+		playerPos.prevPosX = playerPos.nextPosX;
+		playerPos.prevPosY = playerPos.nextPosY;
 
-		//fileDataP << "playerWeak.prevPosX: " << P.prevPosX << endl;
-		//fileDataP << "playerWeak.prevPosY: " << P.prevPosY << endl;
-		//fileDataP << "playerWeak.nextPosX: " << P.nextPosX << endl;
-		//fileDataP << "playerWeak.nextPosY: " << P.nextPosY << endl;
+		//fileDataP << "playerWeak.prevPosX: " << playerPos.prevPosX << endl;
+		//fileDataP << "playerWeak.prevPosY: " << playerPos.prevPosY << endl;
+		//fileDataP << "playerWeak.nextPosX: " << playerPos.nextPosX << endl;
+		//fileDataP << "playerWeak.nextPosY: " << playerPos.nextPosY << endl;
 		//fileDataP << " " << endl;
 	}
 	else
@@ -404,16 +416,16 @@ void moveBarrier() {
 
 #pragma region checkingEvents
 bool isPlayerHitWall() {
-	if (P.nextPosX <= 45 || P.nextPosX >= 101)
+	if (playerPos.nextPosX <= 45 || playerPos.nextPosX >= 101)
 	{
-		if (P.nextPosY >= 5 && P.nextPosY <= 50)
+		if (playerPos.nextPosY >= 5 && playerPos.nextPosY <= 50)
 		{
 			return true;
 		}
 	};
-	if (P.nextPosX >= 45 && P.nextPosX <= 101)
+	if (playerPos.nextPosX >= 45 && playerPos.nextPosX <= 101)
 	{
-		if (P.nextPosY >= 50 || P.nextPosY <= 5)
+		if (playerPos.nextPosY >= 50 || playerPos.nextPosY <= 5)
 		{
 			return true;
 		}
@@ -428,16 +440,16 @@ bool isBarrierHitWall() {
 	return false;
 }
 bool isPlayerPassBarrier() {
-	if (BARRIER.nextPosY == P.nextPosY || BARRIER.nextPosY == P.prevPosY)
+	if (BARRIER.nextPosY == playerPos.nextPosY || BARRIER.nextPosY == playerPos.prevPosY)
 	{
 		return true;
 	};
 	return false;
 }
 bool isPlayerImpactBarrier() {
-	if (BARRIER.nextPosX >= P.nextPosX && BARRIER.nextPosX <= P.nextPosX + BARRIER.length)
+	if (BARRIER.nextPosX >= playerPos.nextPosX && BARRIER.nextPosX <= playerPos.nextPosX + BARRIER.length)
 	{
-		if (BARRIER.nextPosY == P.nextPosY || BARRIER.nextPosX == P.prevPosY)
+		if (BARRIER.nextPosY == playerPos.nextPosY || BARRIER.nextPosX == playerPos.prevPosY)
 		{
 			return true;
 		}

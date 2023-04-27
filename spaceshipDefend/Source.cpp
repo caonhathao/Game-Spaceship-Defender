@@ -38,6 +38,7 @@ std::vector<infoPlayer>inputDataAccount();
 
 void loadingScreen();
 void loadingPlot();
+void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2);
 
 int welcomeScreen(int printSpeed, string name);
 int login_register(vector<infoPlayer>dataUsers);
@@ -47,7 +48,7 @@ void drawListPlayers();
 void drawLog_ResScreen(string title);
 
 void story_chapter_1(int printSpeed);
-int stage_chapter_1(int speed);
+void stage_chapter_1(int speed, int& task_point);
 
 void story_chapter_2(int printSpeed);
 void stage_chapter_2(int speed, int& process, int& contact);
@@ -60,6 +61,15 @@ void endGame(int score, int destroyed, int printSpeed);
 
 int main();
 #pragma endregion
+
+/*
+	- speed: toc do di chuyen hay toc do lam moi khung hinh
+	- voi di chuyen len xuong thi toc do nhanh hon rat nhieu
+	- Tuy nhien, lai kha cham neu di chyen theo chieu ngang
+	- Test toc do moi:
+		+ Neu di chuyen len, xuong thi toc do speed khong doi
+		+ Nguoc lai, giam speed di 20 - 50 don vi
+*/
 
 int main() {
 	SetConsoleTitle(L"Spaceship Defender");
@@ -103,17 +113,21 @@ int main() {
 			c = tolower(c);
 			if (c == 'y')
 			{
-				result A;
 				loadingPlot();
 				story_chapter_1(*g_printSpeed);
-				Player.scoreChapter1 = stage_chapter_1(200);//export scoreChapter1
+				stage_chapter_1(150, Player.scoreChapter1);//export scoreChapter1
+
+				system("cls");
+				cout << "Waiting for next chapter...";
+				Sleep(1500);
 
 				loadingPlot();
 				story_chapter_2(*g_printSpeed);
 				loadingScreen();
-				stage_chapter_2(*g_printSpeed, *process, *contact);
+				stage_chapter_2(100, *process, *contact);
 				Player.process = *process;
 				Player.contact = *contact;
+				//cin.ignore();//chay duoc stage_chapter_game
 
 				cout << "[ Dang khoi dong man choi chinh ]";
 				Sleep(2000);

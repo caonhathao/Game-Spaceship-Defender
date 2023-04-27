@@ -64,9 +64,6 @@ void drawPlayArea(int width, int height);
 void drawScoreBoard();
 void drawTurtorial();
 
-void story_chapter_1(int speed);
-
-void stage_chapter_1(int speed);
 void stage_chapter_game(int& score, int& destroyed);
 
 //void drawSpaceship(string object);
@@ -225,7 +222,7 @@ void drawTurtorial() {
 #pragma endregion
 
 #pragma region main
-void stage_chapter_game(int&score,int&destroyed){
+void stage_chapter_game(int& score, int& destroyed){
 	srand(time(NULL));
 
 	system("cls");
@@ -246,9 +243,10 @@ void stage_chapter_game(int&score,int&destroyed){
 	*g_count_down = 3000;
 	*g_playerSize = playerWeak.getObjectP().size();
 
+	*c = ' ';
 	while (true)
 	{
-		*tempPosBulletX = playerPos.prevPosX + *g_playerSize / 2;
+		*tempPosBulletX = playerPos.prevPosX + int(*g_playerSize / 2);
 		*tempPosBulletY = playerPos.prevPosY - 1;
 
 		if (*g_life != 0)
@@ -349,6 +347,7 @@ void stage_chapter_game(int&score,int&destroyed){
 		else {
 			destroyed = *g_destroyed;
 			score = *g_score;
+
 			delete g_life;
 			delete g_score;
 			delete g_destroyed;
@@ -362,6 +361,7 @@ void stage_chapter_game(int&score,int&destroyed){
 
 			delete tempPosBulletX;
 			delete tempPosBulletY;
+			break;
 		}
 	}
 };
@@ -376,39 +376,39 @@ void stage_chapter_game(int&score,int&destroyed){
 //	gotoXY(playerPos.prevPosX, playerPos.prevPosY);
 //	cout << object;
 //}
-void controlSpaceship() {
-	if (activities == Activities::top)
-	{
-		playerPos.nextPosX = playerPos.prevPosX;
-		playerPos.nextPosY = playerPos.prevPosY - 1;
-	}
-	else if (activities == Activities::bottom)
-	{
-		playerPos.nextPosX = playerPos.prevPosX;
-		playerPos.nextPosY = playerPos.prevPosY + 1;
-	}
-	else if (activities == Activities::left)
-	{
-		playerPos.nextPosX = playerPos.prevPosX - 1;
-		playerPos.nextPosY = playerPos.prevPosY;
-	}
-	else if (activities == Activities::right)
-	{
-		playerPos.nextPosX = playerPos.prevPosX + 1;
-		playerPos.nextPosY = playerPos.prevPosY;
-	}
-	else if (activities == Activities::stop)
-	{
-		playerPos.nextPosX = playerPos.prevPosX;
-		playerPos.nextPosY = playerPos.prevPosY;
-	}
-	else if (activities == Activities::fire)
-	{
-		playerPos.nextPosX = playerPos.prevPosX;
-		playerPos.nextPosY = playerPos.prevPosY;
-	}
-
-}
+//void controlSpaceship() {
+//	if (activities == Activities::top)
+//	{
+//		playerPos.nextPosX = playerPos.prevPosX;
+//		playerPos.nextPosY = playerPos.prevPosY - 1;
+//	}
+//	else if (activities == Activities::bottom)
+//	{
+//		playerPos.nextPosX = playerPos.prevPosX;
+//		playerPos.nextPosY = playerPos.prevPosY + 1;
+//	}
+//	else if (activities == Activities::left)
+//	{
+//		playerPos.nextPosX = playerPos.prevPosX - 1;
+//		playerPos.nextPosY = playerPos.prevPosY;
+//	}
+//	else if (activities == Activities::right)
+//	{
+//		playerPos.nextPosX = playerPos.prevPosX + 1;
+//		playerPos.nextPosY = playerPos.prevPosY;
+//	}
+//	else if (activities == Activities::stop)
+//	{
+//		playerPos.nextPosX = playerPos.prevPosX;
+//		playerPos.nextPosY = playerPos.prevPosY;
+//	}
+//	else if (activities == Activities::fire)
+//	{
+//		playerPos.nextPosX = playerPos.prevPosX;
+//		playerPos.nextPosY = playerPos.prevPosY;
+//	}
+//
+//}
 void moveSpaceship(string object) {
 	//if (*c == 'j')
 	//{
