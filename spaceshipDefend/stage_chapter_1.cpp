@@ -298,16 +298,18 @@ void stage_chapter_1(int speed, int& res) {
 				cout << endl;
 				cout << "You completed " << *task_point << " task(s)." << endl;
 				cout << endl;
+
+				stringFlicker("[ Press 'r' to continue ]", 0, 5, 2, 3);
 				gotoXY(0, 5);
-				cout << "[ Press 'r' to continue ! ]";
-				*c = ' ';
-				while (*c != 'r')
-				{
-					if (_kbhit()) {
-						*c = _getch();
-						*c = tolower(*c);
-					}
-				};
+				//cout << "[ Press 'r' to continue ! ]";
+				//*c = ' ';
+				//while (*c != 'r')
+				//{
+				//	if (_kbhit()) {
+				//		*c = _getch();
+				//		*c = tolower(*c);
+				//	}
+				//};
 				break;
 			};
 		};

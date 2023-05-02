@@ -34,7 +34,6 @@ struct result;
 
 //general values;
 #pragma region generalVariablesAndSetting
-int* g_speed = new int(200); //toc do lam moi
 int* g_bulletSpeed = new int(30); //toc do dan
 
 int* g_score = new int(0);
@@ -64,13 +63,13 @@ void drawPlayArea(int width, int height);
 void drawScoreBoard();
 void drawTurtorial();
 
-void stage_chapter_game(int& score, int& destroyed);
+void stage_chapter_game(int& speed, int& score, int& destroyed);
 
 //void drawSpaceship(string object);
 //void drawEnemy(string object);
 //void drawBullet();
 
-void controlSpaceship();
+//void controlSpaceship();
 void controlEnemy();
 void controlBullet();
 
@@ -222,7 +221,7 @@ void drawTurtorial() {
 #pragma endregion
 
 #pragma region main
-void stage_chapter_game(int& score, int& destroyed){
+void stage_chapter_game(int& speed, int& score, int& destroyed){
 	srand(time(NULL));
 
 	system("cls");
@@ -255,29 +254,31 @@ void stage_chapter_game(int& score, int& destroyed){
 			{
 				*c = _getch();
 				*c = tolower(*c);
-				if (*c == 'w')
-				{
-					activities = Activities::top;
-				}
-				else if (*c == 's')
-				{
-					activities = Activities::bottom;
-				}
-				else if (*c == 'd') {
-					activities = Activities::right;
-				}
-				else if (*c == 'a')
-				{
-					activities = Activities::left;
-				}
-				else if (*c == 'j')
+				//if (*c == 'w')
+				//{
+				//	activities = Activities::top;
+				//}
+				//else if (*c == 's')
+				//{
+				//	activities = Activities::bottom;
+				//}
+				//else if (*c == 'd') {
+				//	activities = Activities::right;
+				//}
+				//else if (*c == 'a')
+				//{
+				//	activities = Activities::left;
+				//}
+				//else if (*c == ' ') {
+				//	activities = Activities::stop;
+				//}
+				controlSignal(activities, *c, *g_speed, 200);
+				if (*c == 'j')
 				{
 					activities = Activities::fire;
 					fire_sign++;
 				}
-				else if (*c == ' ') {
-					activities = Activities::stop;
-				}
+
 			}
 			if (*c == 'p')
 			{

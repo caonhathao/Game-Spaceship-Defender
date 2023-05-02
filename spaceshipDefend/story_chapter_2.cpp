@@ -35,16 +35,18 @@ void story_chapter_2(int printSpeed) {
 	};
 	cout << endl;
 	Sleep(1000);
-	setColor(0, 4);
-	cout << "[ Press 'r' to continue ! ]";
-	*c = ' ';
-	while (*c != 'r')
-	{
-		if (_kbhit()) {
-			*c = _getch();
-			*c = tolower(*c);
-		}
-	};
+
+	stringFlicker("[ Press 'r' to continue ]", 95, 11, 2, 4);
+	//setColor(0, 4);
+	//cout << "[ Press 'r' to continue ! ]";
+	//*c = ' ';
+	//while (*c != 'r')
+	//{
+	//	if (_kbhit()) {
+	//		*c = _getch();
+	//		*c = tolower(*c);
+	//	}
+	//};
 	system("cls");
 
 }

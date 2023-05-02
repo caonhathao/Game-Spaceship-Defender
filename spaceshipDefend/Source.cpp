@@ -11,6 +11,8 @@
 using namespace std;
 
 int *g_printSpeed = new int(20);
+int* g_speed = new int(200); //toc do lam moi
+
 char *c = new char(' ');
 int* g_count_down = new int(0);
 int* g_choice = new int(0);
@@ -53,7 +55,7 @@ void stage_chapter_1(int speed, int& res);
 void story_chapter_2(int printSpeed);
 void stage_chapter_2(int speed, int& process, int& contact);
 
-void stage_chapter_game(int &score, int &destroyed);
+void stage_chapter_game(int& speed, int &score, int &destroyed);
 
 void info_about_game(int printSpeed);
 void about_me(int printSpeed);
@@ -115,7 +117,7 @@ int main() {
 			{
 				loadingPlot();
 				story_chapter_1(*g_printSpeed);
-				stage_chapter_1(150, Player.scoreChapter1);//export scoreChapter1
+				stage_chapter_1(*g_speed, Player.scoreChapter1);//export scoreChapter1
 
 				system("cls");
 				cout << "Waiting for next chapter...";
@@ -124,7 +126,7 @@ int main() {
 				loadingPlot();
 				story_chapter_2(*g_printSpeed);
 				loadingScreen();
-				stage_chapter_2(100, *process, *contact);
+				stage_chapter_2(*g_speed, *process, *contact);
 				Player.process = *process;
 				Player.contact = *contact;
 				//cin.ignore();//chay duoc stage_chapter_game
@@ -135,14 +137,14 @@ int main() {
 				loadingPlot();
 				system("cls");
 
-				stage_chapter_game(*score, *destroyed);
+				stage_chapter_game(*g_speed, *score, *destroyed);
 				Player.scoreChapterGame = *score;
 
 				endGame(*score, *destroyed, *g_printSpeed);
 			}
 			else {
 				loadingPlot();
-				stage_chapter_game(*score,*destroyed);
+				stage_chapter_game(*g_speed, *score,*destroyed);
 				Player.scoreChapterGame = *score;
 
 				endGame(*score, *destroyed, *g_printSpeed);

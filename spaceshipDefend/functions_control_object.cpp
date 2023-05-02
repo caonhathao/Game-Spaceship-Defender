@@ -28,12 +28,12 @@ void controlSignal(Activities& activities, char& c, int& speed,int defaultSpeed)
 	else if (c == 'd')
 	{
 		activities = Activities::right;
-		speed = defaultSpeed - 50;
+		speed = defaultSpeed - 60;
 	}
 	else if (c == 'a')
 	{
 		activities = Activities::left;
-		speed = defaultSpeed - 50;
+		speed = defaultSpeed - 60;
 	}
 	else if (c == ' ') {
 		activities = Activities::stop;

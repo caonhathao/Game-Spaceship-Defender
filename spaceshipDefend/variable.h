@@ -13,6 +13,7 @@ extern int *g_printSpeed;
 extern int *g_count_down;
 extern int *g_choice;
 extern int *g_playerSize;
+extern int* g_speed;
 
 extern char *c;
 

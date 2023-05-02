@@ -75,7 +75,6 @@ void moveBarrier();
 bool isPlayerHitWall();
 bool isPlayerImpactBarrier();
 bool isBarrierHitWall();
-bool isPlayerPassBarrier();
 
 int random(int minN, int maxN);
 #pragma endregion
@@ -86,16 +85,19 @@ void noticeStart() {
 	string para = "[ Nhiem vu: tranh cac chuong ngai vat ]";
 	effectText_char(para, 20);
 	cout << endl;
-	setColor(0, 2);
-	cout << "/* Press 'r' to continue ! */";
-	*c = ' ';
-	while (*c != 'r')
-	{
-		if (_kbhit()) {
-			*c = _getch();
-			*c = tolower(*c);
-		}
-	};
+
+	stringFlicker("/* Press 'r' to continue ! */", 0, 3, 2, 3);
+
+	//setColor(0, 2);
+	//cout << ;
+	//*c = ' ';
+	//while (*c != 'r')
+	//{
+	//	if (_kbhit()) {
+	//		*c = _getch();
+	//		*c = tolower(*c);
+	//	}
+	//};
 	system("cls");
 }
 void noticeFinish() {
@@ -104,16 +106,6 @@ void noticeFinish() {
 	string para = "[ Chuc mung ban da hoan thanh thu thach ! ]";
 	effectText_char(para, 20);
 	cout << endl;
-	setColor(0, 2);
-	cout << "/* Press 'r' to continue ! */";
-	*c = ' ';
-	while (*c != 'r')
-	{
-		if (_kbhit()) {
-			*c = _getch();
-			*c = tolower(*c);
-		}
-	};
 	system("cls");
 }
 void drawPlayArea() {
@@ -197,25 +189,26 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 		{
 			*c = _getch();
 			*c = tolower(*c);
-			if (*c == 'w')
-			{
-				activities = Activities::top;
-			}
-			else if (*c == 's')
-			{
-				activities = Activities::bottom;
-			}
-			else if (*c == 'a')
-			{
-				activities = Activities::left;
-			}
-			else if (*c == 'd') {
-				activities = Activities::right;
-			}
-			else if (*c == ' ')
-			{
-				activities = Activities::stop;
-			};
+			//if (*c == 'w')
+			//{
+			//	activities = Activities::top;
+			//}
+			//else if (*c == 's')
+			//{
+			//	activities = Activities::bottom;
+			//}
+			//else if (*c == 'a')
+			//{
+			//	activities = Activities::left;
+			//}
+			//else if (*c == 'd') {
+			//	activities = Activities::right;
+			//}
+			//else if (*c == ' ')
+			//{
+			//	activities = Activities::stop;
+			//};
+			controlSignal(activities, *c, speed, 200);
 		}
 		if (*c == 'p')
 		{
@@ -253,7 +246,7 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 				else {;
 					goto replay;
 				}
-				if (isPlayerPassBarrier())
+				if (isBarrierHitWall())
 				{
 					*amount = *amount + 1;
 					gotoXY(139, 12);
@@ -299,6 +292,8 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 	delete sign;
 	delete impact;
 	noticeFinish();
+
+	stringFlicker("/* Press 'r' to continue ! */", 0, 3, 2, 4);
 }
 #pragma endregion
 
@@ -439,21 +434,14 @@ bool isBarrierHitWall() {
 	};
 	return false;
 }
-bool isPlayerPassBarrier() {
-	if (BARRIER.nextPosY == playerPos.nextPosY || BARRIER.nextPosY == playerPos.prevPosY)
-	{
-		return true;
-	};
-	return false;
-}
 bool isPlayerImpactBarrier() {
-	if (BARRIER.nextPosX >= playerPos.nextPosX && BARRIER.nextPosX <= playerPos.nextPosX + BARRIER.length)
+	if (BARRIER.nextPosX >= playerPos.nextPosX && BARRIER.nextPosX + BARRIER.line.length() <= playerPos.nextPosX + playerWeak.getObjectP().length())
 	{
-		if (BARRIER.nextPosY == playerPos.nextPosY || BARRIER.nextPosX == playerPos.prevPosY)
+		if (BARRIER.nextPosY == playerPos.nextPosY || BARRIER.prevPosY == playerPos.nextPosY || BARRIER.nextPosY == playerPos.prevPosY)
 		{
 			return true;
 		}
 	};
 	return false;
-}
+};
 #pragma endregion
