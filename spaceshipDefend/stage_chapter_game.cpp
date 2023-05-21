@@ -272,7 +272,7 @@ void stage_chapter_game(int& speed, int& score, int& destroyed){
 				//else if (*c == ' ') {
 				//	activities = Activities::stop;
 				//}
-				controlSignal(activities, *c, *g_speed, 200);
+				controlSignal(activities, *c, *g_speed, *g_step);
 				if (*c == 'j')
 				{
 					activities = Activities::fire;
@@ -295,7 +295,7 @@ void stage_chapter_game(int& speed, int& score, int& destroyed){
 			}
 			else {
 				//controlSpaceship();
-				controlWithoutEvent(activities, playerPos);
+				controlWithoutEvent(activities, playerPos, *g_step);
 				moveSpaceship(playerWeak.getObjectP());
 				for (int i = 0; i < teamE.size(); i++)
 				{

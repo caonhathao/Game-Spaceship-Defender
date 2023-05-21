@@ -14,6 +14,7 @@ extern int *g_count_down;
 extern int *g_choice;
 extern int *g_playerSize;
 extern int* g_speed;
+extern int* g_step;
 
 extern char *c;
 

@@ -272,7 +272,7 @@ void stage_chapter_1(int speed, int& res) {
 			//		activities = Activities::stop;
 			//	}
 			//}
-			controlSignal(activities, *c, speed, 200);
+			controlSignal(activities, *c, speed, *g_step);
 		};
 		if (*c == 'p')
 		{

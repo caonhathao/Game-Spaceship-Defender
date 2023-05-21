@@ -31,25 +31,29 @@ struct PosAndLength {
 	string line = "";
 };
 
-//#pragma region fileDataTest
-//ofstream fileDataEven("./logEven.txt");
-//ofstream fileDataP("./logP.txt");
-//ofstream fileDataE("./logE.txt");
-//#pragma endregion
+#pragma region fileDataTest
+ofstream fileDataEven("./logEven.txt");
+ofstream fileDataP("./logP.txt");
+ofstream fileDataE("./logE.txt");
+#pragma endregion
 
 #pragma region generalVariableAndSetting
 int lengthLine = 45;
 int widthLine = 60;
 
-int* Ba_th = new int(0);
+int* Ba_th = new int(0); //serial of barrier
+
 int* pos = new int(0);
+
 int* amount = new int(0);
 int* impact = new int(0);
-bool* sign = new bool(false);
+
+bool* sign = new bool(false); //signal to break the loop
+bool* isProduct = new bool(true);
 
 PosAndLength BARRIER;
 
-vector<PosAndLength>barrier = {};
+vector<PosAndLength>barriers= {};
 #pragma endregion
 
 #pragma region functions
@@ -68,7 +72,7 @@ void stage_chapter_2(int speed, int& process, int& contact);
 //void controlPlayer();
 void movePlayer(string object);
 
-void drawBarrier();
+void drawBarrier(bool& isProduct);
 void controlBarrier();
 void moveBarrier();
 
@@ -106,7 +110,6 @@ void noticeFinish() {
 	string para = "[ Chuc mung ban da hoan thanh thu thach ! ]";
 	effectText_char(para, 20);
 	cout << endl;
-	system("cls");
 }
 void drawPlayArea() {
 	setColor(0, 7);
@@ -170,6 +173,8 @@ void drawInfoNotice() {
 
 #pragma region main
 void stage_chapter_2(int speed, int& process, int& contact) {
+	int countDown = 10;
+	playerPos = { 0,0,0,0 };
 	noticeStart();
 
 	drawPlayArea();
@@ -177,7 +182,7 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 	drawInfoNotice();
 
 	//drawPlayer(playerWeak.getObjectP());
-	drawObject(playerWeak.getObjectP(), playerPos, 50, 90, 40, 49, 2);
+	drawObject(playerWeak.getObjectP(), playerPos, 50, 51, 40, 41, 2);
 
 	*g_count_down = 2000;
 
@@ -208,7 +213,8 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 			//{
 			//	activities = Activities::stop;
 			//};
-			controlSignal(activities, *c, speed, 200);
+
+			controlSignal(activities, *c, speed, *g_step);
 		}
 		if (*c == 'p')
 		{
@@ -220,49 +226,57 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 				}
 			}
 		};
-		if (*pos % 4 == 0)
+
+		if (*pos % countDown == 0 && *isProduct == true)
 		{
-			drawBarrier();
-			barrier.push_back(BARRIER);
+			drawBarrier(*isProduct);
+			barriers.push_back(BARRIER);
+			*pos = 1;
+
+			if (countDown != 4) countDown--;
+
+			(*amount)++;
+
+			//testing event [error here]
+			//fileDataE << "True" << endl;
+
+			gotoXY(139, 12);
+			cout << *amount;
 		};
 		*pos = *pos + 1;
 
 		replay:
-		int length = barrier.size();
+		int length = barriers.size();
 		if (length > 0)
 		{
-			for (int i = 0; i < barrier.size(); i++)
+			for (int i = 0; i < barriers.size(); i++)
 			{
 				*Ba_th = i;
-				BARRIER = barrier[i];
+				BARRIER = barriers[i];
 				controlBarrier();
 				setColor(0, 2);
 				gotoXY(139, 13);
 				cout << *impact;
-				if (length == barrier.size())
+				if (length == barriers.size())
 				{
-					barrier[i] = BARRIER;
+					barriers[i] = BARRIER;
 				}
-				else {;
-					goto replay;
-				}
-				if (isBarrierHitWall())
+				else goto replay;
+
+				if (*amount == 120)
 				{
-					*amount = *amount + 1;
-					gotoXY(139, 12);
-					cout << *amount;
-					if (*amount >= 120)
-					{
+					*isProduct = false;
+					if (barriers.size() == 0) {
 						*sign = true;
 						break;
 					};
-				}
+				};
+
 			}
 		};
-		if (*sign == true)
-		{
-			break;
-		};
+
+		if (*sign == true) break;
+
 		//controlPlayer();
 		if (isPlayerHitWall())
 		{
@@ -271,9 +285,17 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 		}
 		else
 		{
-			controlWithoutEvent(activities, playerPos);
+			//player was showed, but its place is not right
+			//fileDataP << "playerPos.prevPosX: " << playerPos.prevPosX << endl;
+			//fileDataP << "playerPos.prevPosY: " << playerPos.prevPosY << endl;
+			//fileDataP << "playerPos.nextPosX: " << playerPos.nextPosX << endl;
+			//fileDataP << "playerPos.nextPosY: " << playerPos.nextPosY << endl;
+			//fileDataP << " " << endl;
+
+			controlWithoutEvent(activities, playerPos, *g_step);
 			movePlayer(playerWeak.getObjectP());
 		};
+
 		if (*g_count_down == 0)
 		{
 			speed -= 10;
@@ -291,10 +313,12 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 	delete amount;
 	delete sign;
 	delete impact;
+	delete isProduct;
+
 	noticeFinish();
 
 	stringFlicker("/* Press 'r' to continue ! */", 0, 3, 2, 4);
-}
+};
 #pragma endregion
 
 #pragma region player
@@ -333,8 +357,6 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 //	};
 //}
 void movePlayer(string object) {
-	bool isHitWall = isPlayerHitWall();
-
 	if (!isPlayerHitWall() && !isPlayerImpactBarrier())
 	{
 		gotoXY(playerPos.prevPosX, playerPos.prevPosY);
@@ -360,18 +382,21 @@ void movePlayer(string object) {
 #pragma endregion
 
 #pragma region barrier
-void drawBarrier() {
-	BARRIER.line = "";
-	BARRIER.length = random(2, 4);
-	for (int i = 0; i < BARRIER.length; i++)
+void drawBarrier(bool& isProduct) {
+	if (isProduct)
 	{
-		BARRIER.line = BARRIER.line + 'O';
+		BARRIER.line = "";
+		BARRIER.length = random(3, 4);
+		for (int i = 0; i < BARRIER.length; i++)
+		{
+			BARRIER.line = BARRIER.line + 'O';
+		}
+		BARRIER.prevPosX = random(46, 101);
+		BARRIER.prevPosY = random(6, 10);
+		gotoXY(BARRIER.prevPosX, BARRIER.prevPosY);
+		setColor(0, 5);
+		cout << BARRIER.line;
 	}
-	BARRIER.prevPosX = random(46, 101);
-	BARRIER.prevPosY = random(6, 10);
-	gotoXY(BARRIER.prevPosX, BARRIER.prevPosY);
-	setColor(0, 5);
-	cout << BARRIER.line;
 };
 void controlBarrier() {
 	BARRIER.nextPosX = BARRIER.prevPosX;
@@ -379,8 +404,8 @@ void controlBarrier() {
 	moveBarrier();
 }
 void moveBarrier() {
-	bool isImpactBarrier = isPlayerImpactBarrier();
-	if (!isBarrierHitWall() && !isPlayerImpactBarrier())
+	bool isP_Impact_B = isPlayerImpactBarrier();
+	if (!isBarrierHitWall() && !isP_Impact_B)
 	{
 		gotoXY(BARRIER.prevPosX, BARRIER.prevPosY);
 		cout << setfill(' ');
@@ -392,33 +417,39 @@ void moveBarrier() {
 		BARRIER.prevPosX = BARRIER.nextPosX;
 		BARRIER.prevPosY = BARRIER.nextPosY;
 	}
-	else if (isImpactBarrier)
+	else if (isP_Impact_B)
 	{
 		*impact = *impact + 1;
-		gotoXY(BARRIER.prevPosX, BARRIER.prevPosY);
+
 		cout << setfill(' ');
+
+		gotoXY(BARRIER.prevPosX, BARRIER.prevPosY);
 		cout << setw(BARRIER.length) << right << ' ';
-		barrier.erase(barrier.begin() + *Ba_th);
+
+		gotoXY(BARRIER.nextPosX, BARRIER.nextPosY);
+		cout << setw(BARRIER.length) << right << ' ';
+
+		barriers.erase(barriers.begin() + *Ba_th);
 	}
 	else {
 		gotoXY(BARRIER.prevPosX, BARRIER.prevPosY);
 		cout << setfill(' ');
 		cout << setw(BARRIER.length) << right << ' ';
-		barrier.erase(barrier.begin() + *Ba_th);
+		barriers.erase(barriers.begin() + *Ba_th);
 	};
 }
 #pragma endregion
 
 #pragma region checkingEvents
 bool isPlayerHitWall() {
-	if (playerPos.nextPosX <= 45 || playerPos.nextPosX >= 101)
+	if (playerPos.nextPosX <= 45 || playerPos.nextPosX >= 99) //left - right
 	{
 		if (playerPos.nextPosY >= 5 && playerPos.nextPosY <= 50)
 		{
 			return true;
 		}
 	};
-	if (playerPos.nextPosX >= 45 && playerPos.nextPosX <= 101)
+	if (playerPos.nextPosX >= 45 && playerPos.nextPosX <= 99) //up - down
 	{
 		if (playerPos.nextPosY >= 50 || playerPos.nextPosY <= 5)
 		{
@@ -428,19 +459,29 @@ bool isPlayerHitWall() {
 	return false;
 }
 bool isBarrierHitWall() {
-	if (BARRIER.nextPosY == 50)
+	if (BARRIER.nextPosY == 49)
 	{
 		return true;
 	};
 	return false;
 }
 bool isPlayerImpactBarrier() {
-	if (BARRIER.nextPosX >= playerPos.nextPosX && BARRIER.nextPosX + BARRIER.line.length() <= playerPos.nextPosX + playerWeak.getObjectP().length())
+	int endPosX_P = playerPos.nextPosX + playerWeak.getObjectP().size();
+	int endPosX_B = BARRIER.nextPosX + BARRIER.length;
+	if (BARRIER.nextPosX >= playerPos.nextPosX && BARRIER.nextPosX <= endPosX_P || endPosX_B >= playerPos.nextPosX && endPosX_B <= endPosX_P)
 	{
-		if (BARRIER.nextPosY == playerPos.nextPosY || BARRIER.prevPosY == playerPos.nextPosY || BARRIER.nextPosY == playerPos.prevPosY)
+		if (BARRIER.nextPosY == playerPos.nextPosY)
 		{
 			return true;
 		}
+		else if (BARRIER.nextPosY == playerPos.prevPosY)
+		{
+			return true;
+		}
+		else if (BARRIER.prevPosY == playerPos.nextPosY)
+		{
+			return true;
+		};
 	};
 	return false;
 };

@@ -11,12 +11,13 @@
 using namespace std;
 
 int *g_printSpeed = new int(20);
-int* g_speed = new int(200); //toc do lam moi
+int* g_speed = new int(150); //toc do lam moi
 
 char *c = new char(' ');
 int* g_count_down = new int(0);
 int* g_choice = new int(0);
 int* g_playerSize = new int(0);
+int* g_step = new int(1);
 
 int* score = new int(0);
 int* destroyed = new int(0);
@@ -69,8 +70,8 @@ int main();
 	- voi di chuyen len xuong thi toc do nhanh hon rat nhieu
 	- Tuy nhien, lai kha cham neu di chyen theo chieu ngang
 	- Test toc do moi:
-		+ Neu di chuyen len, xuong thi toc do speed khong doi
-		+ Nguoc lai, giam speed di 20 - 50 don vi
+		+ Neu di chuyen len, xuong thi tang (giam) 1 don vi truc Y
+		+ Nguoc lai, tang (giam) 2 don vi truc X
 */
 
 int main() {
@@ -80,7 +81,7 @@ int main() {
 	setWindowSize(209, 55);
 
 	setScreenBufferSize(209, 55);
-	//loadingScreen();
+	loadingScreen();
 	int posUser = -1;
 	string nameUser = "";
 
@@ -129,7 +130,7 @@ int main() {
 				stage_chapter_2(*g_speed, *process, *contact);
 				Player.process = *process;
 				Player.contact = *contact;
-				//cin.ignore();//chay duoc stage_chapter_game
+				cin.ignore();//chay duoc stage_chapter_game
 
 				cout << "[ Dang khoi dong man choi chinh ]";
 				Sleep(2000);
@@ -148,7 +149,7 @@ int main() {
 				Player.scoreChapterGame = *score;
 
 				endGame(*score, *destroyed, *g_printSpeed);
-				//main();
+				main();
 			}
 			if (data.size() > 0 && posUser != -1)
 			{
@@ -188,3 +189,4 @@ int main() {
 	}
 	return 0;
 }
+
