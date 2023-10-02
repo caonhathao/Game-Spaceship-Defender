@@ -9,14 +9,23 @@
 using namespace std;
 void endGame(int score, int destroyed, int printSpeed) {
 	system("cls");
-	string para1 = "[ Cam on vi ban da danh thoi gian de trai nghiem game ]";
-	string para2 = "[ Tong ket game: ]";
+	string para1 = "<<=>> [ TONG KET THANH TICH NGUOI CHOI ] <<==>>";
+	string para2 = "[ Cam on vi ban da danh thoi gian de trai nghiem game ]";
+	string para3 = "[ Tong ket game: ]";
 
+	gotoXY(10, 0);
 	effectText_word(para1, printSpeed);
 	Sleep(20);
+
+	gotoXY(5, 2);
 	effectText_word(para2, printSpeed);
 	Sleep(20);
 
+	gotoXY(5,4);
+	effectText_word(para3, printSpeed);
+	Sleep(20);
+
+	gotoXY(5, 6);
 	setColor(0, 2);
 	cout << "Ban da dat duoc: ";
 	setColor(0, 4);
@@ -24,7 +33,7 @@ void endGame(int score, int destroyed, int printSpeed) {
 	setColor(0, 2);
 	cout << " diem, chuc mung!" << endl;
 
-
+	gotoXY(5, 8);
 	cout << "Tieu diet tong cong ";
 	setColor(0, 4);
 	cout << destroyed;
@@ -39,6 +48,8 @@ void endGame(int score, int destroyed, int printSpeed) {
 		end = clock();
 	} while ((end - start) / CLOCKS_PER_SEC < 3);
 
+	gotoXY(10, 10);
+	setColor(0, 3);
 	cout << "/* Press 'r' to back the menu */";
 
 	*c = ' ';
