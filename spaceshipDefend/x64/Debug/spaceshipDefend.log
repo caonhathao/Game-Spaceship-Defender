@@ -1,0 +1,10 @@
+﻿  Enemy.cpp
+  endGame.cpp
+  stage_chapter_game.cpp
+D:\Develop\DevC++ by VS\spaceshipDefend\spaceshipDefend\stage_chapter_game.cpp(256,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\Develop\DevC++ by VS\spaceshipDefend\spaceshipDefend\stage_chapter_game.cpp(274,47): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\Develop\DevC++ by VS\spaceshipDefend\spaceshipDefend\stage_chapter_game.cpp(356,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  stickyNote.cpp
+  Generating Code...
+x64\Debug\variable.obj : warning LNK4042: object specified more than once; extras ignored
+  spaceshipDefend.vcxproj -> D:\Develop\DevC++ by VS\spaceshipDefend\x64\Debug\spaceshipDefend.exe

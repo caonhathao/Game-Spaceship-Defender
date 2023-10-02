@@ -13,23 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\stage_chapter_1">
-      <UniqueIdentifier>{968ccdc8-c52f-4c4d-a8fd-9ba92592c07c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Class">
       <UniqueIdentifier>{00e2070e-dbbf-4b6e-bd17-41dceeb38691}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\stage_chapter_2">
-      <UniqueIdentifier>{e31538d5-f959-411e-b9c4-25baa7352e5f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\login_and_choice">
-      <UniqueIdentifier>{1f4aef7b-f585-4e18-b1b9-e1c61ce15c8f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\effects">
       <UniqueIdentifier>{2ee4b354-5989-47fd-bfd7-4560f947421e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\stage_chapter_game">
-      <UniqueIdentifier>{a1fc8507-f4de-4e10-937a-7e7da41c832b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\data_users">
       <UniqueIdentifier>{1c723070-22ff-468b-93bb-9dbd1cf9ce0e}</UniqueIdentifier>
@@ -37,31 +25,37 @@
     <Filter Include="Source Files\testing_files">
       <UniqueIdentifier>{c6dc3d04-b062-4d44-9edb-539f5bf09a03}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\dictionary">
+    <Filter Include="Source Files\struct_and_enum _class">
+      <UniqueIdentifier>{a6beddaa-3518-4b21-8894-ba4865a13713}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dictionary_stickyNote">
       <UniqueIdentifier>{dd8c7c29-4cd1-4b0e-8337-d86e5a3f5d45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\STAGE_CHAPTER_2">
+      <UniqueIdentifier>{e31538d5-f959-411e-b9c4-25baa7352e5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\STAGE_CHAPTER_GAME">
+      <UniqueIdentifier>{a1fc8507-f4de-4e10-937a-7e7da41c832b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\STAGE_END_GAME">
+      <UniqueIdentifier>{3334767a-c684-4fde-81d1-5b1a14b078ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\STAGE_CHAPTER_1">
+      <UniqueIdentifier>{968ccdc8-c52f-4c4d-a8fd-9ba92592c07c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LOGIN_-AND_CHOICE">
+      <UniqueIdentifier>{1f4aef7b-f585-4e18-b1b9-e1c61ce15c8f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stickyNote.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="stage_chapter_1.cpp">
-      <Filter>Source Files\stage_chapter_1</Filter>
+      <Filter>Source Files\STAGE_CHAPTER_1</Filter>
     </ClCompile>
     <ClCompile Include="story_chapter_1.cpp">
-      <Filter>Source Files\stage_chapter_1</Filter>
-    </ClCompile>
-    <ClCompile Include="Activities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="endGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="random.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\STAGE_CHAPTER_1</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Class</Filter>
@@ -73,25 +67,22 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="story_chapter_2.cpp">
-      <Filter>Source Files\stage_chapter_2</Filter>
-    </ClCompile>
-    <ClCompile Include="struct.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\STAGE_CHAPTER_2</Filter>
     </ClCompile>
     <ClCompile Include="welcomeScreen.cpp">
-      <Filter>Source Files\login_and_choice</Filter>
+      <Filter>Source Files\LOGIN_-AND_CHOICE</Filter>
     </ClCompile>
     <ClCompile Include="info_about_game.cpp">
-      <Filter>Source Files\login_and_choice</Filter>
+      <Filter>Source Files\LOGIN_-AND_CHOICE</Filter>
     </ClCompile>
     <ClCompile Include="effects_text.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="about_me.cpp">
-      <Filter>Source Files\login_and_choice</Filter>
+      <Filter>Source Files\LOGIN_-AND_CHOICE</Filter>
     </ClCompile>
     <ClCompile Include="stage_chapter_2.cpp">
-      <Filter>Source Files\stage_chapter_2</Filter>
+      <Filter>Source Files\STAGE_CHAPTER_2</Filter>
     </ClCompile>
     <ClCompile Include="variable.h">
       <Filter>Header Files</Filter>
@@ -106,7 +97,7 @@
       <Filter>Source Files\effects</Filter>
     </ClCompile>
     <ClCompile Include="stage_chapter_game.cpp">
-      <Filter>Source Files\stage_chapter_game</Filter>
+      <Filter>Source Files\STAGE_CHAPTER_GAME</Filter>
     </ClCompile>
     <ClCompile Include="listPlayers.cpp">
       <Filter>Source Files\data_users</Filter>
@@ -121,19 +112,31 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="login_register.cpp">
-      <Filter>Source Files\login_and_choice</Filter>
+      <Filter>Source Files\LOGIN_-AND_CHOICE</Filter>
     </ClCompile>
     <ClCompile Include="saveDataUsers.cpp">
-      <Filter>Source Files\login_and_choice</Filter>
+      <Filter>Source Files\LOGIN_-AND_CHOICE</Filter>
     </ClCompile>
     <ClCompile Include="functions_control_object.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="dictionary.cpp">
-      <Filter>Source Files\dictionary</Filter>
+      <Filter>Source Files\dictionary_stickyNote</Filter>
     </ClCompile>
     <ClCompile Include="stringFlicker.cpp">
       <Filter>Source Files\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Activities.cpp">
+      <Filter>Source Files\struct_and_enum _class</Filter>
+    </ClCompile>
+    <ClCompile Include="struct.cpp">
+      <Filter>Source Files\struct_and_enum _class</Filter>
+    </ClCompile>
+    <ClCompile Include="stickyNote.cpp">
+      <Filter>Source Files\dictionary_stickyNote</Filter>
+    </ClCompile>
+    <ClCompile Include="endGame.cpp">
+      <Filter>Source Files\STAGE_END_GAME</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

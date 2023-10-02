@@ -1,5 +1,5 @@
 #include<iostream>
-using namespace std;
+using std::string;
 #pragma once
 struct Position {
 	int prevPosX = 0;

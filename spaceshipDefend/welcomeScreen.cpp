@@ -15,12 +15,16 @@ string str = "";
 void effectText_char(string str, int printSpeed);
 
 void drawScreen();
+void drawTitle();
 void screenInfo(int printSpeed, string name);
 int welcomeScreen(int printSpeed, string name);
 
 #pragma endregion
 
 #pragma region decorationFuncs
+void drawTitle() {
+	//Y>=25;
+};
 void drawScreen() {
 	setColor(0, 2);
 	for (SHORT i = 0; i < 100; i++)
@@ -151,50 +155,3 @@ int welcomeScreen(int printSpeed,string name) {
 	return ans;
 };
 #pragma endregion
-
-/*
-* #pragma region controlCursorFuncs
-void controlCursor() {
-	if (GetAsyncKeyState(VK_UP))
-	{
-		cursorPos.nextPosX = cursorPos.prevPosX;
-		cursorPos.nextPosY = cursorPos.prevPosY - 1;
-	}
-	else if (GetAsyncKeyState(VK_DOWN)){
-
-		cursorPos.nextPosX = cursorPos.prevPosX;
-		cursorPos.nextPosY = cursorPos.prevPosY + 1;
-	}
-	moveCursor();
-}
-void moveCursor() {
-	if (!isCursorTouchLimit())
-	{
-		gotoXY(cursorPos.prevPosX, cursorPos.prevPosY);
-		cout << "  ";
-		gotoXY(cursorPos.nextPosX, cursorPos.nextPosY);
-		setColor(0, 6);
-		cout << ">>";
-
-		cursorPos.prevPosX = cursorPos.nextPosX;
-		cursorPos.prevPosY = cursorPos.nextPosY;
-	}
-	else
-	{
-		setColor(0, 6);
-		cursorPos.nextPosX = cursorPos.prevPosX;
-		cursorPos.nextPosY = cursorPos.prevPosY;
-	}
-}
-bool isCursorTouchLimit() {
-	if (cursorPos.nextPosY < 10 || cursorPos.nextPosY > 18)
-	{
-		return true;
-	}; return false;
-};
-#pragma endregion
-*/
-//int main() {
-//	loginScreen(20);
-//	return 0;
-//}

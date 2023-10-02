@@ -182,12 +182,12 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 	drawInfoNotice();
 
 	//drawPlayer(playerWeak.getObjectP());
-	drawObject(playerWeak.getObjectP(), playerPos, 50, 51, 40, 41, 2);
+	drawObject(playerWeak->getObjectP(), playerPos, 50, 51, 40, 41, 2);
 
 	*g_count_down = 2000;
 
 	*c = ' ';
-
+	cin.ignore();
 	while (true)
 	{
 		if (_kbhit())
@@ -266,7 +266,7 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 				if (*amount == 120)
 				{
 					*isProduct = false;
-					if (barriers.size() == 0) {
+					if (!barriers.empty()) {
 						*sign = true;
 						break;
 					};
@@ -275,7 +275,9 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 			}
 		};
 
-		if (*sign == true) break;
+		if (*sign == true) {
+			break;
+		};
 
 		//controlPlayer();
 		if (isPlayerHitWall())
@@ -293,7 +295,7 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 			//fileDataP << " " << endl;
 
 			controlWithoutEvent(activities, playerPos, *g_step);
-			movePlayer(playerWeak.getObjectP());
+			movePlayer(playerWeak->getObjectP());
 		};
 
 		if (*g_count_down == 0)
@@ -316,8 +318,7 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 	delete isProduct;
 
 	noticeFinish();
-
-	stringFlicker("/* Press 'r' to continue ! */", 0, 3, 2, 4);
+	stringFlicker("/* Press 'r' to continue */", 0, 3, 2, 4);
 };
 #pragma endregion
 
@@ -466,7 +467,7 @@ bool isBarrierHitWall() {
 	return false;
 }
 bool isPlayerImpactBarrier() {
-	int endPosX_P = playerPos.nextPosX + playerWeak.getObjectP().size();
+	int endPosX_P = playerPos.nextPosX + playerWeak->getObjectP().size();
 	int endPosX_B = BARRIER.nextPosX + BARRIER.length;
 	if (BARRIER.nextPosX >= playerPos.nextPosX && BARRIER.nextPosX <= endPosX_P || endPosX_B >= playerPos.nextPosX && endPosX_B <= endPosX_P)
 	{

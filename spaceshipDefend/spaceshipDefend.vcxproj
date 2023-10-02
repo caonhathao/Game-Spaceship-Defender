@@ -148,7 +148,6 @@
     <ClCompile Include="welcomeScreen.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="random.cpp" />
     <ClCompile Include="stage_chapter_1.cpp" />
     <ClCompile Include="stage_chapter_2.cpp" />
     <ClCompile Include="stage_chapter_game.cpp" />

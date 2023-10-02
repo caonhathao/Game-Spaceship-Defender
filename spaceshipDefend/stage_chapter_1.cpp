@@ -25,8 +25,6 @@ int* task_point = new int(0);
 int *powerAdd = new int(0);
 int *powerCurrent = new int(0);
 
-//PLAYER P(5, 100, ".-A-.", '.');
-
 #pragma endregion
 
 #pragma region functions
@@ -34,7 +32,6 @@ void noticePlayer(int widthLine);
 void airPort(int lengthLine, int widthLine);
 void stage_chapter_1(int speed, int& res);
 
-//void draw(string object);
 void control();
 void move(string object);
 
@@ -60,7 +57,7 @@ void noticePlayer(int widthLine) {
 		gotoXY(widthLine * 2 + 5 + 15 + 15, 10 + i);
 		cout << '|';
 	};
-	for (size_t i = 0; i <= 16; i++)
+	for (int i = 0; i <= 16; i++)
 	{
 		gotoXY(widthLine * 2 + 5 + 15 + 15 + i, 10);
 		cout << '-';
@@ -70,7 +67,7 @@ void noticePlayer(int widthLine) {
 		gotoXY(widthLine * 2 + 5 + 15 + 31, 10 + i);
 		cout << '|';
 	};
-	for (size_t i = 0; i <= 16; i++)
+	for (int i = 0; i <= 16; i++)
 	{
 		gotoXY(widthLine * 2 + 5 + 15 + 15 + i, 16);
 		cout << '-';
@@ -241,9 +238,8 @@ void stage_chapter_1(int speed, int& res) {
 	airPort(45, 20);
 	noticePlayer(20);
 	drawTaskBoard();
-	//draw(P.getObjectP());
 
-	drawObject(playerWeak.getObjectP(), playerPos, 75, 75, 45, 45, 2);
+	drawObject(playerWeak->getObjectP(), playerPos, 75, 75, 45, 45, 2);
 	*powerCurrent = random(0, 35);
 
 	while (true)
@@ -252,26 +248,6 @@ void stage_chapter_1(int speed, int& res) {
 		{
 			*c = _getch();
 			*c = tolower(*c);
-			//	if (*c == 'w')
-			//	{
-			//		activities = Activities::top;
-			//	}
-			//	else if (*c == 's')
-			//	{
-			//		activities = Activities::bottom;
-			//	}
-			//	else if (*c == 'd') 
-			//	{
-			//		activities = Activities::right;
-			//	}
-			//	else if (*c == 'a')
-			//	{
-			//		activities = Activities::left;
-			//	}
-			//	else if (*c == ' ') {
-			//		activities = Activities::stop;
-			//	}
-			//}
 			controlSignal(activities, *c, speed, *g_step);
 		};
 		if (*c == 'p')
@@ -301,15 +277,6 @@ void stage_chapter_1(int speed, int& res) {
 
 				stringFlicker("[ Press 'r' to continue ]", 0, 5, 2, 3);
 				gotoXY(0, 5);
-				//cout << "[ Press 'r' to continue ! ]";
-				//*c = ' ';
-				//while (*c != 'r')
-				//{
-				//	if (_kbhit()) {
-				//		*c = _getch();
-				//		*c = tolower(*c);
-				//	}
-				//};
 				break;
 			};
 		};
@@ -321,13 +288,6 @@ void stage_chapter_1(int speed, int& res) {
 #pragma endregion
 
 #pragma region control
-//void draw(string object) {
-//	playerPos.prevPosX = 75;
-//	playerPos.prevPosY = 45;
-//	gotoXY(playerPos.prevPosX, playerPos.prevPosY);
-//	setColor(0, 2);
-//	cout << object;
-//}
 void control() {
 	if (activities == Activities::top)
 	{
@@ -360,11 +320,11 @@ void control() {
 		playerPos.nextPosX = playerPos.prevPosX;
 		playerPos.nextPosY = playerPos.prevPosY;
 	}
-	else if (*info_sign == 0) // lan dau chua cham vao garage
+	else if (*info_sign == 0) // first touch to the garbage
 	{
 		if (isPlayerTouchGarage())
 		{
-			*info_sign = 1;// cham mot lan duy nhat
+			*info_sign = 1;//save the first touch signal
 			(*task_point)++;
 			playerPos.nextPosX = playerPos.prevPosX;
 			playerPos.nextPosY = playerPos.prevPosY;
@@ -376,7 +336,7 @@ void control() {
 		playerPos.nextPosX = playerPos.prevPosX;
 		playerPos.nextPosY = playerPos.prevPosY;
 	};
-	move(playerWeak.getObjectP());
+	move(playerWeak->getObjectP());
 }
 void move(string object) {
 	if (!isPlayerTouchTask() && !isPlayerTouchGarage())

@@ -6,7 +6,7 @@
 #include"struct.cpp"
 
 Position cursorPosition;
-bool isCursorTouchLimit(int startPosY, int endPosY, Position cursorPosition) {
+bool isCursorTouchLimit(int &startPosY, int &endPosY, Position cursorPosition) {
 	if (cursorPosition.nextPosY < startPosY || cursorPosition.nextPosY > endPosY)
 	{
 		return true;

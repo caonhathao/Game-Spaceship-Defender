@@ -9,7 +9,7 @@ using namespace std;
 
 void controlCursor(Position &cursorPosition);
 void moveCursor(int startPosY, int endPosY, Position &cursorPosition);
-bool isCursorTouchLimit(int startPosY, int endPosY, Position cursorPosition);
+bool isCursorTouchLimit(int &startPosY, int &endPosY, Position cursorPosition);
 
 #endif // !_FUNCTIONS_CONTROL_CURSOR_GAME_H
 

@@ -1,5 +1,6 @@
 #include<iostream>
 #include<conio.h>
+#include<time.h>
 
 #include"effects_text.h"
 #include"functions_control_console.h"
@@ -30,6 +31,14 @@ void endGame(int score, int destroyed, int printSpeed) {
 	setColor(0, 2);
 	cout << " ke dich.";
 	cout << endl;
+
+	clock_t start, end;
+	start = clock();
+	do
+	{
+		end = clock();
+	} while ((end - start) / CLOCKS_PER_SEC < 3);
+
 	cout << "/* Press 'r' to back the menu */";
 
 	*c = ' ';
@@ -39,6 +48,10 @@ void endGame(int score, int destroyed, int printSpeed) {
 		{
 			*c = _getch();
 			*c = tolower(*c);
+			if (*c == 'r')
+			{
+				break;
+			}
 		}
 	};
-}
+};

@@ -1,0 +1,67 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.35.32216.1",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///d:/develop/devc++ by vs/spaceshipdefend/spaceshipdefend/story_chapter_1.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "50274f1949efa63e20bd864295eaf9ddc99e074297017b6911dc7e9115c986ad"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/develop/devc++ by vs/spaceshipdefend/spaceshipdefend/effects_text.h"
+          },
+          "hashes": {
+            "sha-256": "ddc01c3bc6294f37f3e029f6d886e93aa27148f7eb371056a2153a3b112156f5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/develop/devc++ by vs/spaceshipdefend/spaceshipdefend/functions_control_console.h"
+          },
+          "hashes": {
+            "sha-256": "622238901af5c045635e8db9dabf4b7abc05a996de0d2d2d4226b395ab25ae7f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/develop/devc++ by vs/spaceshipdefend/spaceshipdefend/variable.h"
+          },
+          "hashes": {
+            "sha-256": "261a9259d9ba87c40ea28aa987b24ab8a480a287e7977bfbf2995c61be477aa7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/develop/devc++ by vs/spaceshipdefend/spaceshipdefend/struct.cpp"
+          },
+          "hashes": {
+            "sha-256": "68e9a541e485bee4f8675814a242507e5612cf567fc72b1ad11dabced8ec96d7"
+          }
+        }
+      ]
+    }
+  ]
+}

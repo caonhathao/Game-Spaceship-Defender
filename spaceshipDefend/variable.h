@@ -7,7 +7,6 @@
 #include"Activities.cpp"
 #include"Player.h"
 #include"Enemy.h"
-using namespace std;
 
 extern int *g_printSpeed;
 extern int *g_count_down;
@@ -23,8 +22,8 @@ extern Position playerPos;
 extern Position enemyPos;
 extern Position bulletPos;
 
-extern PLAYER playerWeak;
-extern ENEMY enemyWeak;
+extern  PLAYER *playerWeak;
+extern ENEMY *enemyWeak;
 
 extern Activities activities;
 //extern vector<infoPlayer>Data = {};

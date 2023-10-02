@@ -3,7 +3,7 @@
 #define ENEMY_H
 
 #include<iostream>
-using namespace std;
+using std::string;
 
 class ENEMY {
 private:
@@ -16,10 +16,10 @@ public:
 
 	void setEnemy(int rateAppear, int rewardPoint, int minusPoint, string objectE);
 
-	int getRateAppear() { return m_rateAppear; };
-	int getRewardPoint() { return m_rewardPoint; };
-	int getMinusPoint() { return m_minusPoint; };
-	string getObjectE() { return m_objectE; };
+	int getRateAppear();
+	int getRewardPoint();
+	int getMinusPoint();
+	string getObjectE();
 };
 #endif // !ENEMY_H
 

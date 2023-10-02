@@ -8,7 +8,7 @@
 #include"functions_control_console.h"
 #include"variable.h"
 
-using namespace std;
+using std::cout;
 
 int *g_printSpeed = new int(20);
 int* g_speed = new int(150); //toc do lam moi
@@ -33,8 +33,8 @@ Position bulletPos = { 0,0,0,0 };
 
 Activities activities = Activities::stop;
 
-PLAYER playerWeak(5, 100, "|-[O]-|", ".");
-ENEMY enemyWeak(70, 1, 1, "|-x-|");
+PLAYER* playerWeak = new PLAYER(5, 100, "|-[O]-|", ".");
+ENEMY* enemyWeak = new ENEMY(70, 1, 1, "|-x-|");
 
 #pragma region functions
 std::vector<infoPlayer>inputDataAccount();
@@ -78,9 +78,11 @@ int main() {
 	SetConsoleTitle(L"Spaceship Defender");
 
 	showCursor(false);
+	showScrollbar(false);
+	disableResizeWindow();
 	setWindowSize(209, 55);
-
 	setScreenBufferSize(209, 55);
+
 	loadingScreen();
 	int posUser = -1;
 	string nameUser = "";
@@ -144,7 +146,7 @@ int main() {
 				endGame(*score, *destroyed, *g_printSpeed);
 			}
 			else {
-				loadingPlot();
+				loadingScreen();
 				stage_chapter_game(*g_speed, *score,*destroyed);
 				Player.scoreChapterGame = *score;
 
@@ -183,10 +185,11 @@ int main() {
 		}
 		else if (res == 5)
 		{
-			about_me(*g_printSpeed);//error: second loop will make the program died
+			about_me(*g_printSpeed);
 		}
 		saveDataUsers(data);
 	}
 	return 0;
 }
+
 

@@ -1,5 +1,5 @@
 #include"functions_control_console.h"
-void setWindowSize(SHORT width, SHORT height) { //inactive
+void setWindowSize(SHORT width, SHORT height) {
 	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	SMALL_RECT WindowSize;
 	WindowSize.Top = 0;
@@ -9,7 +9,7 @@ void setWindowSize(SHORT width, SHORT height) { //inactive
 
 	SetConsoleWindowInfo(hStdout, 1, &WindowSize);
 }
-void setScreenBufferSize(SHORT width, SHORT height) { //inactive
+void setScreenBufferSize(SHORT width, SHORT height) {
 	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD newSize;
 	newSize.X = width;
@@ -33,6 +33,10 @@ void showCursor(bool cursorVisibility) {
 	ConCurInf.dwSize = 10;
 	ConCurInf.bVisible = cursorVisibility;
 	SetConsoleCursorInfo(handle, &ConCurInf);
+}
+void showScrollbar(BOOL Show) {
+	HWND hWnd = GetConsoleWindow();
+	ShowScrollBar(hWnd, SB_BOTH, Show);
 }
 void setColor(int background_color, int text_color) {
 	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
