@@ -12,11 +12,11 @@ using namespace std;
 
 #pragma region functions
 void effectText_word(string str, int printSpeed);
-
 void guide();
 void aboutGame(int printSpeed);
 void info_about_game(int printSpeed);
-
+void drawBorder(int posX, int posY, int height, int width, int color_code);
+void printTitle(int posX, int posY, int colorCode);
 #pragma endregion
 void guide() {
 	system("cls");
@@ -82,18 +82,16 @@ void aboutGame(int printSpeed) {
 		}
 	};
 }
-void drawInfo() {
-	system("cls");
-
+void drawInfo(int posX, int posY) {
 	*g_choice = 0;
 
-	gotoXY(15, 5);
+	gotoXY(posX + 5, posY - 3);
 	cout << "Ban muon thong tin nao ?";
-	gotoXY(17, 7);
+	gotoXY(posX, posY);
 	cout << "1. Huong dan choi";
-	gotoXY(17, 9);
+	gotoXY(posX, posY + 2);
 	cout << "2. Ve tro choi";
-	gotoXY(17, 13);
+	gotoXY(posX, posY + 4);
 	cout << "Press 'r' to back the menu";
 
 	cursorPos.prevPosX = 14;
@@ -103,7 +101,11 @@ void drawInfo() {
 	cout << ">>";
 }
 void info_about_game(int printSpeed) {
-	drawInfo();
+	system("cls");
+
+	printTitle(60, 2, 3);
+	drawBorder(58, 35, 15, 100, 2);
+	drawInfo(70, 40);
 
 	while (true)
 	{
@@ -121,15 +123,13 @@ void info_about_game(int printSpeed) {
 					if (cursorPos.prevPosY == 7)
 					{
 						*g_choice = 1;
-						guide();
-						drawInfo();
+						system("cls");
+
 					}
 					else if (cursorPos.prevPosY = 9)
 					{
 						*g_choice = 2;
-						aboutGame(printSpeed);
-						drawInfo();
-					}
+						aboutGame(printSpeed);					}
 				}
 				else if (*c == 'r')
 				{
@@ -140,11 +140,4 @@ void info_about_game(int printSpeed) {
 		};
 	};
 }
-//int main() {
-//	int choice = info_about_game();
-//	if (choice==1)
-//	{
-//		guide();
-//	}
-//	return 0;
-//}
+

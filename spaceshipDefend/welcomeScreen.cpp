@@ -13,7 +13,7 @@ string str = "";
 
 #pragma region functions
 void effectText_char(string str, int printSpeed);
-
+void drawBorder(int posX, int posY, int height, int width, int color_code);
 void drawScreen();
 void drawTitle();
 void screenInfo(int printSpeed, string name);
@@ -61,7 +61,8 @@ void screenInfo(int printSpeed, string name) {
 	str = "[ NOTE: Game nay duoc lam ra chi co muc dich duy nhat la vui ve ma thoi, ngoai ra thi cha co gi khac! ]";
 	effectText_char(str, printSpeed);
 
-	drawScreen();
+	//drawScreen();
+	drawBorder(56, 5, 15, 100, 2);
 
 	gotoXY(90 - name.size(), 6);
 	setColor(0, 8);
@@ -70,7 +71,7 @@ void screenInfo(int printSpeed, string name) {
 	str = "Chuc ban co trai nghiem vui ve :) " + *temp;
 	effectText_char(str, printSpeed);
 
-	gotoXY(94, 8); 
+	gotoXY(94, 8);
 	setColor(0, 11);
 	cout << "< --- > MOI CHON < --- >";
 
@@ -98,7 +99,7 @@ void screenInfo(int printSpeed, string name) {
 #pragma endregion
 
 #pragma region mainFuncs
-int welcomeScreen(int printSpeed,string name) {
+int welcomeScreen(int printSpeed, string name) {
 	screenInfo(printSpeed, name);
 
 	cursorPos.prevPosX = 92;
@@ -108,7 +109,7 @@ int welcomeScreen(int printSpeed,string name) {
 	setColor(0, 6);
 	cout << ">>";
 
-	while (true){		
+	while (true) {
 		if (_kbhit())
 		{
 			*c = _getch();

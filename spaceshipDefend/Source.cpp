@@ -10,10 +10,10 @@
 
 using std::cout;
 
-int *g_printSpeed = new int(20);
+int* g_printSpeed = new int(20);
 int* g_speed = new int(150); //toc do lam moi
 
-char *c = new char(' ');
+char* c = new char(' ');
 int* g_count_down = new int(0);
 int* g_choice = new int(0);
 int* g_playerSize = new int(0);
@@ -42,7 +42,7 @@ std::vector<infoPlayer>inputDataAccount();
 void loadingScreen();
 void loadingPlot();
 void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2);
-
+void printTitle(int posX, int posY, int colorCode);
 int welcomeScreen(int printSpeed, string name);
 int login_register(vector<infoPlayer>dataUsers);
 
@@ -56,7 +56,7 @@ void stage_chapter_1(int speed, int& res);
 void story_chapter_2(int printSpeed);
 void stage_chapter_2(int speed, int& process, int& contact);
 
-void stage_chapter_game(int& speed, int &score, int &destroyed);
+void stage_chapter_game(int& speed, int& score, int& destroyed);
 
 void info_about_game(int printSpeed);
 void about_me(int printSpeed);
@@ -147,7 +147,7 @@ int main() {
 			}
 			else {
 				loadingScreen();
-				stage_chapter_game(*g_speed, *score,*destroyed);
+				stage_chapter_game(*g_speed, *score, *destroyed);
 				Player.scoreChapterGame = *score;
 
 				endGame(*score, *destroyed, *g_printSpeed);

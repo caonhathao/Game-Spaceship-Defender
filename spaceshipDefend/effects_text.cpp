@@ -1,4 +1,5 @@
 #include<conio.h>
+#include<time.h>
 
 #include"effects_text.h"
 #include"functions_control_console.h"
@@ -43,6 +44,12 @@ string uppercaseLetter(string name) {
 }
 void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2) {
 	//set color and change 
+	clock_t start, end;
+	start = clock();
+	do
+	{
+		end = clock();
+	} while ((end - start) / CLOCKS_PER_SEC < 2);
 	gotoXY(posX, posY);
 	setColor(0, colorCode_1);
 	cout << str;
