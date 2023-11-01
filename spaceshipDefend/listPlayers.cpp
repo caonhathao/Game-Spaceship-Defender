@@ -19,19 +19,19 @@ std::vector<infoPlayer> inputDataAccount();
 void drawListPlayers() {
 	system("cls");
 
-	gotoXY(91, 3);
+	go_to_xy(91, 3);
 	cout << "<<< [===] >>> List << [===] >>>" << endl;
 
-	gotoXY(56, 4);
+	go_to_xy(56, 4);
 	for (int i = 0; i < 100; i++)
 	{
-		gotoXY(56 + i, 4); cout << '-';
+		go_to_xy(56 + i, 4); cout << '-';
 		Sleep(10);
 	}
 
 	cout << setfill(' ');
 
-	gotoXY(56, 5);
+	go_to_xy(56, 5);
 	cout << setw(11) << left << "Serial";
 	Sleep(10);
 	cout << setw(10) << left << "Name";
@@ -43,14 +43,14 @@ void drawListPlayers() {
 	cout << setw(13) << left<< "Chapter_game" << endl;
 	Sleep(10);
 
-	//gotoXY(127, 5);
+	//go_to_xy(127, 5);
 	//cout << setw(9) << left << "Total" << endl;
-	//gotoXY(127 + 9, 5);
+	//go_to_xy(127 + 9, 5);
 	//cout << setw(8) << right << "Rank" << endl;
 
 	for (size_t i = 0; i < 100; i++)
 	{
-		gotoXY(56 + i, 6);
+		go_to_xy(56 + i, 6);
 		cout << '.';
 		Sleep(10);
 	}
@@ -65,7 +65,7 @@ void drawListPlayers() {
 		{
 			dataInput = Data[i];
 
-			gotoXY(56, 7 + i);
+			go_to_xy(56, 7 + i);
 
 			if (dataInput.serial <= 9)
 			{
@@ -83,11 +83,11 @@ void drawListPlayers() {
 	}
 		
 	cout << endl;
-	gotoXY(56, 7 + Data.size());
+	go_to_xy(56, 7 + Data.size());
 	cout << setfill('-');
 	cout << setw(100) << "-" << endl;
 
-	gotoXY(55, 7 + Data.size() + 1);
+	go_to_xy(55, 7 + Data.size() + 1);
 	setColor(0, 3);
 
 	cout << "Press 'r' back the menu";

@@ -3,6 +3,9 @@
 
 #define _VARIABLE_H
 #include<iostream>
+#include<thread>
+#include<mutex>
+
 #include"struct.cpp"
 #include"Activities.cpp"
 #include"Player.h"

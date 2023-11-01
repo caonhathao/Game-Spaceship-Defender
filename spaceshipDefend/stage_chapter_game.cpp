@@ -96,31 +96,31 @@ int main();
 #pragma region UI
 void drawPlayArea(int width, int height) { //done
 	setColor(0, 14); //Light Yellow
-	gotoXY(0, 0);
+	go_to_xy(0, 0);
 	for (int i = 0; i < widthPlayArea + 1; i++)
 	{
-		gotoXY(i, 0);
+		go_to_xy(i, 0);
 		cout << '-';
 		Sleep(2);
 	}
-	gotoXY(0, 1);
+	go_to_xy(0, 1);
 	for (int i = 1; i < heightPlayArea + 1; i++)
 	{
-		gotoXY(0, i);
+		go_to_xy(0, i);
 		cout << '|';
 		Sleep(2);
 	}
-	gotoXY(widthPlayArea, 1);
+	go_to_xy(widthPlayArea, 1);
 	for (int i = 1; i < heightPlayArea + 1; i++)
 	{
-		gotoXY(widthPlayArea, i);
+		go_to_xy(widthPlayArea, i);
 		cout << '|';
 		Sleep(2);
 	};
-	gotoXY(0, heightPlayArea);
+	go_to_xy(0, heightPlayArea);
 	for (int i = 1; i < widthPlayArea; i++)
 	{
-		gotoXY(i, heightPlayArea);
+		go_to_xy(i, heightPlayArea);
 		cout << '_';
 		Sleep(2);
 	}
@@ -130,119 +130,119 @@ void drawScoreBoard() {
 	//heightPlayArea = 45 (x)
 
 	setColor(0, 8);//Gray
-	gotoXY(widthPlayArea + 13, 0);
+	go_to_xy(widthPlayArea + 13, 0);
 	cout << "<<--->> R.E.C.O.R.D <<--->>";
 
 	//cao:11,rong:31
 	//13 hang 
 	setColor(0, 14);//Light Yellow
-	gotoXY(widthPlayArea + 10, 1);
+	go_to_xy(widthPlayArea + 10, 1);
 	for (int i = 1; i < 12; i++)
 	{
-		gotoXY(widthPlayArea + 10, i);
+		go_to_xy(widthPlayArea + 10, i);
 		cout << '|';
 		Sleep(2);
 	};
-	gotoXY(widthPlayArea + 11, 11);
+	go_to_xy(widthPlayArea + 11, 11);
 	for (int i = widthPlayArea + 11; i < widthPlayArea + 42; i++)
 	{
-		gotoXY(i, 11);
+		go_to_xy(i, 11);
 		cout << '_';
 		Sleep(2);
 	};
-	gotoXY(widthPlayArea + 42, 15);
+	go_to_xy(widthPlayArea + 42, 15);
 	for (int i = 11; i >= 1; i--)
 	{
-		gotoXY(widthPlayArea + 42, i);
+		go_to_xy(widthPlayArea + 42, i);
 		cout << '|';
 		Sleep(2);
 	};
 
 	//life
-	gotoXY(widthPlayArea + 13, 2);
+	go_to_xy(widthPlayArea + 13, 2);
 	cout << "LIFE: ";
 	//detroy
-	gotoXY(widthPlayArea + 13, 4);
+	go_to_xy(widthPlayArea + 13, 4);
 	cout << "DESTROY: ";
 	//score
-	gotoXY(widthPlayArea + 13, 6);
+	go_to_xy(widthPlayArea + 13, 6);
 	cout << "SCORE: ";
 	//energy
-	gotoXY(widthPlayArea + 13, 8);
+	go_to_xy(widthPlayArea + 13, 8);
 	cout << "ENERGY: ";
 	//speed
-	gotoXY(widthPlayArea + 13, 10);
+	go_to_xy(widthPlayArea + 13, 10);
 	cout << "SPEED: ";
 }
 void showScore() {
 	setColor(0, 11);//Light Aqua
-	gotoXY(widthPlayArea + 13 + 7, 2);
+	go_to_xy(widthPlayArea + 13 + 7, 2);
 	cout << *g_life;
-	gotoXY(widthPlayArea + 13 + 9, 4);
+	go_to_xy(widthPlayArea + 13 + 9, 4);
 	cout << *g_destroyed;
-	gotoXY(widthPlayArea + 13 + 7, 6);
+	go_to_xy(widthPlayArea + 13 + 7, 6);
 	cout << *g_score;
 
-	gotoXY(widthPlayArea + 13 + 8, 10);
+	go_to_xy(widthPlayArea + 13 + 8, 10);
 	cout << *g_speed + (200 - *g_speed);
 }
 void drawTurtorial() {
 	setColor(0, 8);
-	gotoXY(widthPlayArea + 58, 0);
+	go_to_xy(widthPlayArea + 58, 0);
 	cout << "<<--->> T.U.R.T.O.R.I.A.L <<--->>";
 
 	setColor(0, 14);
-	gotoXY(widthPlayArea + 51, 1);
+	go_to_xy(widthPlayArea + 51, 1);
 	for (int i = 1; i < 12; i++)
 	{
-		gotoXY(widthPlayArea + 51, i);
+		go_to_xy(widthPlayArea + 51, i);
 		cout << '|';
 		Sleep(2);
 	}
-	gotoXY(widthPlayArea + 52, 11);
+	go_to_xy(widthPlayArea + 52, 11);
 	for (int i = widthPlayArea + 52; i < widthPlayArea + 96; i++)
 	{
-		gotoXY(i, 11);
+		go_to_xy(i, 11);
 		cout << '_';
 		Sleep(2);
 	};
-	gotoXY(widthPlayArea + 96, 13);
+	go_to_xy(widthPlayArea + 96, 13);
 	for (int i = 11; i >= 1; i--)
 	{
-		gotoXY(widthPlayArea + 96, i);
+		go_to_xy(widthPlayArea + 96, i);
 		cout << '|';
 		Sleep(2);
 	};
 
-	gotoXY(widthPlayArea + 53, 2);
+	go_to_xy(widthPlayArea + 53, 2);
 	cout << "Press ";
 	setColor(0, 12);//Light Red
 	cout << "'WASD'";
 	setColor(0, 14);//Light Yellow
 	cout << " to control your spaceship.";
 
-	gotoXY(widthPlayArea + 53, 4);
+	go_to_xy(widthPlayArea + 53, 4);
 	cout << "Press ";
 	setColor(0, 12);
 	cout << "'j'";
 	setColor(0, 14);
 	cout << " to fire the enemy.";
 
-	gotoXY(widthPlayArea + 53, 6);
+	go_to_xy(widthPlayArea + 53, 6);
 	cout << "Press ";
 	setColor(0, 12);
 	cout << "'space'";
 	setColor(0, 14);
 	cout << " to stop your spaceship.";
 
-	gotoXY(widthPlayArea + 53, 8);
+	go_to_xy(widthPlayArea + 53, 8);
 	cout << "Press ";
 	setColor(0, 12);;
 	cout << "'p'";
 	setColor(0, 14);
 	cout << " to pause game.";
 
-	gotoXY(widthPlayArea + 53, 10);
+	go_to_xy(widthPlayArea + 53, 10);
 	cout << "Press ";
 	setColor(0, 12);
 	cout << "'r'";
@@ -285,24 +285,6 @@ void stage_chapter_game(int& speed, int& score, int& destroyed) {
 			{
 				*c = _getch();
 				*c = tolower(*c);
-				//if (*c == 'w')
-				//{
-				//	activities = Activities::top;
-				//}
-				//else if (*c == 's')
-				//{
-				//	activities = Activities::bottom;
-				//}
-				//else if (*c == 'd') {
-				//	activities = Activities::right;
-				//}
-				//else if (*c == 'a')
-				//{
-				//	activities = Activities::left;
-				//}
-				//else if (*c == ' ') {
-				//	activities = Activities::stop;
-				//}
 				controlSignal(activities, *c, *g_speed, *g_step);
 				if (*c == 'j')
 				{
@@ -400,47 +382,6 @@ void stage_chapter_game(int& speed, int& score, int& destroyed) {
 #pragma endregion
 
 #pragma region player
-//void drawSpaceship(string object) {
-//	playerPos.prevPosX = random(10, 30);
-//	playerPos.prevPosY = random(35, 39);
-//	playerPos.nextPosX = 0;
-//	playerPos.nextPosY = 0;
-//	gotoXY(playerPos.prevPosX, playerPos.prevPosY);
-//	cout << object;
-//}
-//void controlSpaceship() {
-//	if (activities == Activities::top)
-//	{
-//		playerPos.nextPosX = playerPos.prevPosX;
-//		playerPos.nextPosY = playerPos.prevPosY - 1;
-//	}
-//	else if (activities == Activities::bottom)
-//	{
-//		playerPos.nextPosX = playerPos.prevPosX;
-//		playerPos.nextPosY = playerPos.prevPosY + 1;
-//	}
-//	else if (activities == Activities::left)
-//	{
-//		playerPos.nextPosX = playerPos.prevPosX - 1;
-//		playerPos.nextPosY = playerPos.prevPosY;
-//	}
-//	else if (activities == Activities::right)
-//	{
-//		playerPos.nextPosX = playerPos.prevPosX + 1;
-//		playerPos.nextPosY = playerPos.prevPosY;
-//	}
-//	else if (activities == Activities::stop)
-//	{
-//		playerPos.nextPosX = playerPos.prevPosX;
-//		playerPos.nextPosY = playerPos.prevPosY;
-//	}
-//	else if (activities == Activities::fire)
-//	{
-//		playerPos.nextPosX = playerPos.prevPosX;
-//		playerPos.nextPosY = playerPos.prevPosY;
-//	}
-//
-//}
 void moveSpaceship(string object) {
 	//if (*c == 'j')
 	//{
@@ -452,10 +393,10 @@ void moveSpaceship(string object) {
 	//}
 	if (!isPlayerHitWall(playerPos.nextPosX, playerPos.nextPosY, playerWeak->getObjectP()))
 	{
-		gotoXY(playerPos.prevPosX, playerPos.prevPosY);
+		go_to_xy(playerPos.prevPosX, playerPos.prevPosY);
 		cout << setfill(' ');
 		cout << setw(object.size()) << right << ' ';
-		gotoXY(playerPos.nextPosX, playerPos.nextPosY);
+		go_to_xy(playerPos.nextPosX, playerPos.nextPosY);
 		playerPos.prevPosX = playerPos.nextPosX;
 		playerPos.prevPosY = playerPos.nextPosY;
 		setColor(0, 3);
@@ -472,15 +413,6 @@ void moveSpaceship(string object) {
 #pragma endregion
 
 #pragma region enemyControl
-//void drawEnemy(string object) {
-//	enemyPos.nextPosX = 0;
-//	enemyPos.nextPosY = 0;
-//	enemyPos.prevPosX = random(11, 31);
-//	enemyPos.prevPosY = random(1, 5);
-//	gotoXY(enemyPos.prevPosX, enemyPos.prevPosY);
-//	cout << object;
-//}
-
 void controlEnemy() {
 	enemyPos.nextPosX = enemyPos.prevPosX;
 	enemyPos.nextPosY = enemyPos.prevPosY + 1;
@@ -504,10 +436,10 @@ void controlEnemy() {
 void moveEnemy(string object) {
 	if (!isEnemyHitWall(enemyPos.nextPosY))
 	{
-		gotoXY(enemyPos.prevPosX, enemyPos.prevPosY);
+		go_to_xy(enemyPos.prevPosX, enemyPos.prevPosY);
 		cout << setfill(' ');
 		cout << setw(object.size()) << right << ' ';
-		gotoXY(enemyPos.nextPosX, enemyPos.nextPosY);
+		go_to_xy(enemyPos.nextPosX, enemyPos.nextPosY);
 		enemyPos.prevPosX = enemyPos.nextPosX;
 		enemyPos.prevPosY = enemyPos.nextPosY;
 		setColor(0, 4);
@@ -524,7 +456,7 @@ void moveEnemy(string object) {
 	}
 }
 void destroyObject(string object, int prevX, int prevY) { //done
-	gotoXY(prevX, prevY);
+	go_to_xy(prevX, prevY);
 	cout << setfill(' ');
 	cout << setw(object.size()) << right << ' ';
 	//drawEnemy(enemyWeak.getObjectE());
@@ -537,7 +469,7 @@ void destroyObject(string object, int prevX, int prevY) { //done
 //void drawBullet() {
 //	bulletPos.prevPosX = (playerPos.prevPosX + *playerSize / 2); //vi tri trung tam
 //	bulletPos.prevPosY = playerPos.prevPosY - 1;
-//	gotoXY(bulletPos.prevPosX, bulletPos.prevPosY);
+//	go_to_xy(bulletPos.prevPosX, bulletPos.prevPosY);
 //	cout << playerWeak.getBullet();
 //}
 void controlBullet() {
@@ -550,10 +482,10 @@ void moveBullet() {
 	bulletPos = teamB[*B_th];
 	if (!isBulletHitEnemy(enemyWeak->getObjectE()) && !isBulletHitWall(bulletPos.nextPosY))
 	{
-		gotoXY(bulletPos.prevPosX, bulletPos.prevPosY);
+		go_to_xy(bulletPos.prevPosX, bulletPos.prevPosY);
 		cout << ' ';
 
-		gotoXY(bulletPos.nextPosX, bulletPos.nextPosY);
+		go_to_xy(bulletPos.nextPosX, bulletPos.nextPosY);
 		setColor(0, 6);
 		cout << playerWeak->getBullet();
 
@@ -569,7 +501,7 @@ void moveBullet() {
 	}
 	else if (isBulletHitWall(bulletPos.nextPosY))
 	{
-		gotoXY(bulletPos.prevPosX, bulletPos.prevPosY);
+		go_to_xy(bulletPos.prevPosX, bulletPos.prevPosY);
 		cout << ' ';
 		//bulletPos.nextPosX = 0;
 		//bulletPos.prevPosX = 0;
@@ -581,7 +513,7 @@ void moveBullet() {
 		*g_score = *g_score + enemyWeak->getRewardPoint();
 		*g_destroyed = *g_destroyed + enemyWeak->getMinusPoint();
 		destroyObject(enemyWeak->getObjectE(), enemyPos.prevPosX, enemyPos.prevPosY);
-		gotoXY(bulletPos.prevPosX, bulletPos.prevPosY);
+		go_to_xy(bulletPos.prevPosX, bulletPos.prevPosY);
 		cout << ' ';
 		//bullet.nextPosX = 0;
 		//bulletPos.prevPosX = 0;

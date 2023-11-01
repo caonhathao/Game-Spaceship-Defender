@@ -25,14 +25,14 @@ isLogSuccess checkAccountExist(vector<infoPlayer>dataUsers, string name) {
 	return A;
 };
 int isLogin() {
-	gotoXY(90, 5);
+	go_to_xy(90, 5);
 	cout << "1. Dang nhap";
-	gotoXY(90, 7);
+	go_to_xy(90, 7);
 	cout << "2. Dang ky";
 	
 	cursorPos.prevPosX = 85;
 	cursorPos.prevPosY = 5;
-	gotoXY(cursorPos.prevPosX, cursorPos.prevPosY);
+	go_to_xy(cursorPos.prevPosX, cursorPos.prevPosY);
 	cout << ">>";
 
 	while (true)
@@ -62,20 +62,20 @@ int isLogin() {
 };
 void drawLog_ResScreen(string title) {
 	system("cls");
-	gotoXY(105, 1);
+	go_to_xy(105, 1);
 	cout << title;
 	for (int i = 0; i < 50; i++)
 	{
-		gotoXY(83 + i, 3);
+		go_to_xy(83 + i, 3);
 		cout << '-';
-		gotoXY(83 + i, 9);
+		go_to_xy(83 + i, 9);
 		cout << '-';
 	}
 	for (int i = 0; i < 5; i++)
 	{
-		gotoXY(83, 4 + i);
+		go_to_xy(83, 4 + i);
 		cout << '|';
-		gotoXY(83 + 49, 4 + i);
+		go_to_xy(83 + 49, 4 + i);
 		cout << '|';
 	};
 }
@@ -92,10 +92,10 @@ int login_register(vector<infoPlayer>dataUsers) {
 	if (*g_choice == 1) // choice login
 	{
 		drawLog_ResScreen("LOGIN");
-		gotoXY(85, 5);
+		go_to_xy(85, 5);
 		cout << "1. Ten dang nhap: ";
 		cin >> name;
-		gotoXY(85, 7);
+		go_to_xy(85, 7);
 		cout << "Press ENTER again";
 	}
 	else if (*g_choice == 2) //choice resgister
@@ -113,17 +113,17 @@ int login_register(vector<infoPlayer>dataUsers) {
 				A = checkAccountExist(dataUsers, name); //is user's account exist?
 				if (A.isSucess)
 				{
-					gotoXY(85, 7);
+					go_to_xy(85, 7);
 					cout << "Login Success! Turning to the home after 3s";
 					Sleep(3000);
 					return A.posUsers;
 				}
 				else
 				{
-					gotoXY(85, 7);
+					go_to_xy(85, 7);
 					cout << "Login FAIL! Please check name or register";
 					
-					gotoXY(85, 8);
+					go_to_xy(85, 8);
 					cout << "Press 'b' to back the menu";
 					while (*c != ' ')
 					{

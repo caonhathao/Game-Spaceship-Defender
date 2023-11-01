@@ -1,6 +1,7 @@
 #include<iostream>
 #include<conio.h>
 #include<vector>
+#include<thread>
 
 #include"functions_control_console.h"
 #include"functions_control_cursor_game.h"
@@ -8,104 +9,79 @@
 #include"variable.h"
 #include"struct.cpp"
 
-using namespace std;
+using std::thread;
+mutex mtx_1;
 
 #pragma region functions
-void effectText_word(string str, int printSpeed);
 void guide();
 void aboutGame(int printSpeed);
 void info_about_game(int printSpeed);
 void drawBorder(int posX, int posY, int height, int width, int color_code);
 void printTitle(int posX, int posY, int colorCode);
+void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2);
+void show(int printSpeed);
 #pragma endregion
 void guide() {
 	system("cls");
-	gotoXY(25, 0);
+	printTitle(60, 2, 3);
+	go_to_xy(25, 0);
 	cout << "<<--->> T.U.R.T.O.R.I.A.L <<--->>";
 
-	gotoXY(25, 3);
-	for (int i = 1; i <= 11; i++)
+	go_to_xy(25, 3);
+	for (int i = 1; i <= 13; i++)
 	{
-		gotoXY(25, 3 + i); cout << "||";
+		go_to_xy(25, 3 + i); cout << "||";
 	};
 
-	gotoXY(28, 5);
+	go_to_xy(28, 5);
 	cout << "Press WASD to control your spaceship.";
-	gotoXY(28, 7);
+	go_to_xy(28, 7);
 	cout << "Press 'j' to fire the enemy.";
-	gotoXY(28, 9);
+	go_to_xy(28, 9);
 	cout << "Press 'space' to stop your spaceship.";
-	gotoXY(28, 11);
+	go_to_xy(28, 11);
 	cout << "Press 'p' to pause game.";
-	gotoXY(28, 13);
-	cout << "Press 'r' to exit game and return the menu.";
-	*c = ' ';
-	while (true)
-	{
-		if (_kbhit())
-		{
-			*c = _getch();
-			*c = tolower(*c);
-			if (*c == 'r')
-			{
-				break;
-			}
-		}
-	};
+	go_to_xy(28, 13);
+	cout << "Press 'r' to continue.";
+	go_to_xy(28, 15);
+	cout << "Press 'b' to return the previous";
+
+	stringFlicker("Press 'r' to back the previous", 50, 20, 3, 5);
 }
 void aboutGame(int printSpeed) {
-	system("cls");
 	vector<string>para1 = { "[ Ten Game: SPACESHIP_DEFENDER ]",
 	"[ Tac Gia: CAO NHAT HAO ]",
 	"[ Nam Du An: 2022 ]" };
 
 	for (int i = 0; i < para1.size(); i++)
 	{
-		gotoXY(15, 5 + i);
+		go_to_xy(15, 5 + i);
 		effectText_word(para1[i], printSpeed);
 	}
 
 	Sleep(1200);
-	gotoXY(15, 8);
-
-	cout << "Press 'r' to back the menu";
-	*c = ' ';
-	while (true)
-	{
-		if (_kbhit()) {
-			*c = _getch();
-			*c = tolower(*c);
-			if (*c == 'r')
-			{
-				break;
-			}
-		}
-	};
+	stringFlicker("Press 'b' to back the previous", 15, 8, 2, 4);
 }
-void drawInfo(int posX, int posY) {
+void drawInfo(int posX, int posY, int color_code) {
 	*g_choice = 0;
+	setColor(0, color_code);
 
-	gotoXY(posX + 5, posY - 3);
+	go_to_xy(posX, posY);
 	cout << "Ban muon thong tin nao ?";
-	gotoXY(posX, posY);
+	go_to_xy(posX + 5, posY + 4);
 	cout << "1. Huong dan choi";
-	gotoXY(posX, posY + 2);
+	go_to_xy(posX + 5, posY + 6);
 	cout << "2. Ve tro choi";
-	gotoXY(posX, posY + 4);
-	cout << "Press 'r' to back the menu";
 
-	cursorPos.prevPosX = 14;
-	cursorPos.prevPosY = 7;
-	gotoXY(cursorPos.prevPosX, cursorPos.prevPosY);
+	setColor(0, 5);
+	cursorPos.prevPosX = posX + 2;
+	cursorPos.prevPosY = posY + 4;
+	go_to_xy(cursorPos.prevPosX, cursorPos.prevPosY);
 	setColor(0, 6);
 	cout << ">>";
 }
-void info_about_game(int printSpeed) {
-	system("cls");
-
-	printTitle(60, 2, 3);
-	drawBorder(58, 35, 15, 100, 2);
-	drawInfo(70, 40);
+void show(int printSpeed) {
+	lock_guard<mutex>lock(mtx_1);
 
 	while (true)
 	{
@@ -115,21 +91,27 @@ void info_about_game(int printSpeed) {
 			{
 				if (GetAsyncKeyState(VK_UP) || GetAsyncKeyState(VK_DOWN))
 				{
+					setColor(0, 5);
 					controlCursor(cursorPos);
-					moveCursor(7, 9, cursorPos);
+					moveCursor(17, 19, cursorPos);
 				}
 				else if (GetAsyncKeyState(VK_RETURN))
 				{
-					if (cursorPos.prevPosY == 7)
+					if (cursorPos.prevPosY == 17)
 					{
-						*g_choice = 1;
-						system("cls");
 
+						*c = 'r';
+						system("cls");
+						guide();
+						*c = ' ';
 					}
-					else if (cursorPos.prevPosY = 9)
+					else if (cursorPos.prevPosY = 19)
 					{
-						*g_choice = 2;
-						aboutGame(printSpeed);					}
+						*c = 'r';
+						system("cls");
+						aboutGame(printSpeed);
+						*c = ' ';
+					}
 				}
 				else if (*c == 'r')
 				{
@@ -140,4 +122,18 @@ void info_about_game(int printSpeed) {
 		};
 	};
 }
+void info_about_game(int printSpeed) {
+	system("cls");
+
+	printTitle(60, 2, 3);
+	drawBorder(58, 10, 15, 100, 2);
+	drawInfo(58 + 57, 15, 3);
+
+	thread th_show(show, printSpeed);
+	thread th_flicker(stringFlicker, "Press 'r' to bach the previous", 20, 20, 3, 4);
+
+	th_show.join();
+	th_flicker.join();
+}
+
 

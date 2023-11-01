@@ -16,9 +16,9 @@ void effectText_char(string str, int printSpeed);
 void drawBorder(int posX, int posY, int height, int width, int color_code);
 void drawScreen();
 void drawTitle();
+void printTitle(int posX, int posY, int color_code);
 void screenInfo(int printSpeed, string name);
 int welcomeScreen(int printSpeed, string name);
-
 #pragma endregion
 
 #pragma region decorationFuncs
@@ -29,34 +29,34 @@ void drawScreen() {
 	setColor(0, 2);
 	for (SHORT i = 0; i < 100; i++)
 	{
-		gotoXY(56 + i, 5);
+		go_to_xy(56 + i, 5);
 		cout << '-';
 	}
 	for (SHORT i = 1; i <= 15; i++)
 	{
-		gotoXY(56, 5 + i);
+		go_to_xy(56, 5 + i);
 		cout << '|';
 	}
 	for (SHORT i = 0; i < 100; i++)
 	{
-		gotoXY(56 + i, 20);
+		go_to_xy(56 + i, 20);
 		cout << '-';
 	}
 	for (SHORT i = 1; i < 15; i++)
 	{
-		gotoXY(155, 5 + i);
+		go_to_xy(155, 5 + i);
 		cout << '|';
 	}
 };
 void screenInfo(int printSpeed, string name) {
 	setColor(0, 2);
 
-	gotoXY(90, 2);
+	go_to_xy(90, 2);
 	setColor(0, 12);
 	str = "WELCOME TO SPACESHIP_DEFENDER GAME!";
 	effectText_char(str, printSpeed);
 
-	gotoXY(55, 3);
+	go_to_xy(55, 3);
 	setColor(0, 14);
 	str = "[ NOTE: Game nay duoc lam ra chi co muc dich duy nhat la vui ve ma thoi, ngoai ra thi cha co gi khac! ]";
 	effectText_char(str, printSpeed);
@@ -64,35 +64,35 @@ void screenInfo(int printSpeed, string name) {
 	//drawScreen();
 	drawBorder(56, 5, 15, 100, 2);
 
-	gotoXY(90 - name.size(), 6);
+	go_to_xy(90 - name.size(), 6);
 	setColor(0, 8);
 	string* temp = new string("");
 	*temp = uppercaseLetter(name);
 	str = "Chuc ban co trai nghiem vui ve :) " + *temp;
 	effectText_char(str, printSpeed);
 
-	gotoXY(94, 8);
+	go_to_xy(94, 8);
 	setColor(0, 11);
 	cout << "< --- > MOI CHON < --- >";
 
 	Sleep(500);
-	gotoXY(95, 10);
+	go_to_xy(95, 10);
 	cout << "1. Choi ngay va luon.";
 
 	Sleep(500);
-	gotoXY(95, 12);
+	go_to_xy(95, 12);
 	cout << "2. Dang nhap hoac dang ky";
 
 	Sleep(500);
-	gotoXY(95, 14);
+	go_to_xy(95, 14);
 	cout << "3. Danh sach nguoi choi";
 
 	Sleep(500);
-	gotoXY(95, 16);
+	go_to_xy(95, 16);
 	cout << "4. Thong tin ve game.";
 
 	Sleep(500);
-	gotoXY(95, 18);
+	go_to_xy(95, 18);
 	cout << "5. About me?";
 	delete temp;
 }
@@ -101,11 +101,12 @@ void screenInfo(int printSpeed, string name) {
 #pragma region mainFuncs
 int welcomeScreen(int printSpeed, string name) {
 	screenInfo(printSpeed, name);
+	printTitle(58, 25, 2);
 
 	cursorPos.prevPosX = 92;
 	cursorPos.prevPosY = 10;
 
-	gotoXY(cursorPos.prevPosX, cursorPos.prevPosY);
+	go_to_xy(cursorPos.prevPosX, cursorPos.prevPosY);
 	setColor(0, 6);
 	cout << ">>";
 

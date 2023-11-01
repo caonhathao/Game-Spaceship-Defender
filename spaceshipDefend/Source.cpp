@@ -163,7 +163,7 @@ int main() {
 			if (posUser == -2)
 			{
 				drawLog_ResScreen("REGISTER");
-				gotoXY(85, 5);
+				go_to_xy(85, 5);
 
 				cout << "Please tell me your name:";
 				cin >> nameUser;

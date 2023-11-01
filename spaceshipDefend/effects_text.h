@@ -6,8 +6,11 @@
 #include<iostream>
 #include<string>
 #include<Windows.h>
+#include"variable.h"
 #pragma once
-using namespace std;
+
+using std::string;
+
 void effectText_char(string str, int printSpeed);
 void effectText_word(string str, int printSpeed);
 string uppercaseLetter(string name);

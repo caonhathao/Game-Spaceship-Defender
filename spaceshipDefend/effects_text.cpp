@@ -1,10 +1,14 @@
 #include<conio.h>
 #include<time.h>
+#include<thread>
+#include<mutex>
 
 #include"effects_text.h"
 #include"functions_control_console.h"
 #include"variable.h"
-using namespace std;
+
+using std::mutex;
+mutex mtx_2;
 void effectText_char(string str,  int printSpeed) {
 	for (int i = 0; i < str.length(); i++)
 	{
@@ -43,6 +47,8 @@ string uppercaseLetter(string name) {
 	return res;
 }
 void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2) {
+	lock_guard<mutex>lock(mtx_2);
+
 	//set color and change 
 	clock_t start, end;
 	start = clock();
@@ -50,7 +56,7 @@ void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCod
 	{
 		end = clock();
 	} while ((end - start) / CLOCKS_PER_SEC < 2);
-	gotoXY(posX, posY);
+	go_to_xy(posX, posY);
 	setColor(0, colorCode_1);
 	cout << str;
 
@@ -67,11 +73,11 @@ void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCod
 		if (*c == 'r')
 		{
 			break;
-		};
+		}
 
 		if (*g_count_down == 0 || *g_count_down == 8000)
 		{
-			gotoXY(posX, posY);
+			go_to_xy(posX, posY);
 			setColor(0, colorCode_2);
 			cout << str;
 			if (*g_count_down == 0)
@@ -81,7 +87,7 @@ void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCod
 		}
 		else if (*g_count_down == 4000)
 		{
-			gotoXY(posX, posY);
+			go_to_xy(posX, posY);
 			setColor(0, colorCode_1);
 			cout << str;
 		};

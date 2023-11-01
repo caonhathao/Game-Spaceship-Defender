@@ -6,7 +6,6 @@
 #include"functions_control_console.h"
 #include"variable.h"
 
-using namespace std;
 void about_me(int printSpeed) {
 	system("cls");
 	vector<string>para = { "[ Tac Gia: CAO NHAT HAO. ]",
@@ -17,11 +16,11 @@ void about_me(int printSpeed) {
 
 	for (int i = 0; i < para.size(); i++)
 	{
-		gotoXY(15, 5 + i);
+		go_to_xy(15, 5 + i);
 		effectText_word(para[i], printSpeed);
 	}
 
-	gotoXY(15, 12);
+	go_to_xy(15, 12);
 	setColor(0, 2);
 	cout << "[ Press 'r' to back the menu. ]";
 
@@ -40,7 +39,7 @@ void about_me(int printSpeed) {
 		}
 		if (*g_count_down == 0 || *g_count_down == 3000)
 		{
-			gotoXY(15, 12);
+			go_to_xy(15, 12);
 			setColor(0, 12);
 			cout << "[ Press 'r' to back the menu. ]";
 			if (*g_count_down == 0)
@@ -53,7 +52,7 @@ void about_me(int printSpeed) {
 		{
 
 			setColor(0, 2);
-			gotoXY(15, 12);
+			go_to_xy(15, 12);
 			cout << "[ Press 'r' to back the menu. ]";
 		};
 		(*g_count_down)--;

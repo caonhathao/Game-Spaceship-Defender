@@ -7,10 +7,10 @@ using std::string;
 
 class ENEMY {
 private:
-	int m_rateAppear;
-	int m_rewardPoint;
-	int m_minusPoint;
-	string m_objectE;
+	int m_rateAppear{};
+	int m_rewardPoint{};
+	int m_minusPoint{};
+	string m_objectE{};
 public:
 	ENEMY(int rateAppear, int rewardPpoint, int minusPoint, string objectE);
 

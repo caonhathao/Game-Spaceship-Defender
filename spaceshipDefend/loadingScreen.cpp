@@ -7,24 +7,24 @@ void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCod
 void printTitle(int posX, int posY, int colorCode);
 void loadingScreen() {
 	system("cls");
-	gotoXY(91, 13);
+	go_to_xy(91, 13);
 	setColor(0, 4);
 	cout << "<<< --- >>> LOADING <<< --- >>>>";
 
 	setColor(0, 7);
-	gotoXY(54, 16);
+	go_to_xy(54, 16);
 	cout << '|';
 
 	for (int i = 0; i <= 101; i++)
 	{
-		gotoXY(54 + i, 15);
+		go_to_xy(54 + i, 15);
 		cout << '-';
-		gotoXY(54 + i, 17);
+		go_to_xy(54 + i, 17);
 		cout << '-';
 		Sleep(10);
 	}
 
-	gotoXY(155, 16);
+	go_to_xy(155, 16);
 	cout << '|';
 
 	setColor(0, 14);
@@ -33,31 +33,31 @@ void loadingScreen() {
 	{
 		if (i % 2 == 0)
 		{
-			gotoXY(53 + i, 16);
+			go_to_xy(53 + i, 16);
 			cout << "//";
 			Sleep(20);
 		};
 
 		if (tmpCount == 1) {
-			gotoXY(157, 16);
+			go_to_xy(157, 16);
 			cout << ">  ";
 		}
 		else if (tmpCount == 20)
 		{
-			gotoXY(157, 16);
+			go_to_xy(157, 16);
 			cout << " > ";
 		}
 		else if (tmpCount == 40)
 		{
-			gotoXY(157, 16);
+			go_to_xy(157, 16);
 			cout << "  >";
 			tmpCount = 1;
 		}
 		tmpCount++;
-		gotoXY(162, 16);
+		go_to_xy(162, 16);
 		cout << i << '%';
 	}
-	gotoXY(157, 16); cout << ">>>";
+	go_to_xy(157, 16); cout << ">>>";
 
 	printTitle(60, 25, 2);
 
