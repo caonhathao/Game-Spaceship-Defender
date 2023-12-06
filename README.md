@@ -4,5 +4,5 @@
 
 *NOTE:
 - Something go wrong, example: Crash program, die...
-- My code is not clean and i try to do that
+- My code is not clean and i try to do better.
 - My plot is not good:)
