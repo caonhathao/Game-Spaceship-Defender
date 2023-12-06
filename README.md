@@ -1,7 +1,5 @@
-# spaceshipDefend
-You should find Source.cpp because it is the main file.
-And, many features are not write!
-I wrote game play only.
+# Game-Spaceship-Defender
+If you want to start my game, find Source.cpp and build it. Or
 
 
 *NOTE:
