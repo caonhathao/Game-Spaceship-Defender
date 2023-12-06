@@ -16,7 +16,7 @@ int* g_speed = new int(150); //toc do lam moi
 char* c = new char(' ');
 int* g_count_down = new int(0);
 int* g_choice = new int(0);
-int* g_playerSize = new int(0);
+int* g_PlayerSize = new int(0);
 int* g_step = new int(1);
 
 int* score = new int(0);
@@ -27,14 +27,14 @@ int* contact = new int(0);
 struct infoPlayer;
 
 Position cursorPos = { 0,0,0,0 };
-Position playerPos = { 0,0,0,0 };
-Position enemyPos = { 0,0,0,0 };
+Position PlayerPos = { 0,0,0,0 };
+Position EnemyPos = { 0,0,0,0 };
 Position bulletPos = { 0,0,0,0 };
 
 Activities activities = Activities::stop;
 
-PLAYER* playerWeak = new PLAYER(5, 100, "|-[O]-|", ".");
-ENEMY* enemyWeak = new ENEMY(70, 1, 1, "|-x-|");
+Player* PlayerWeak = new Player(5, 100, "|-[O]-|", ".");
+Enemy* EnemyWeak = new Enemy(70, 1, 1, "|-x-|");
 
 #pragma region functions
 std::vector<infoPlayer>inputDataAccount();

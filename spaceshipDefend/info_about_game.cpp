@@ -36,7 +36,7 @@ void guide() {
 	atXY(28, 5);
 	cout << "Press WASD to control your spaceship.";
 	atXY(28, 7);
-	cout << "Press 'j' to fire the enemy.";
+	cout << "Press 'j' to fire the Enemy.";
 	atXY(28, 9);
 	cout << "Press 'space' to stop your spaceship.";
 	atXY(28, 11);

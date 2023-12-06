@@ -29,8 +29,8 @@ struct Postion;
 struct result;
 
 #pragma region gameClass
-//PLAYER playerWeak(5, 100, "|-[O]-|", '.');
-//ENEMY enemyWeak(70, 1, 1, "|-x-|");
+//Player PlayerWeak(5, 100, "|-[O]-|", '.');
+//Enemy EnemyWeak(70, 1, 1, "|-x-|");
 #pragma endregion
 
 //general values;
@@ -39,7 +39,7 @@ int* g_bulletSpeed = new int(30); //toc do dan
 
 int* g_score = new int(0);
 int* g_destroyed = new int(0);
-static int* g_life = new int(playerWeak->getLife());
+static int* g_life = new int(PlayerWeak->getLife());
 
 int* E_th = new int(0);
 int* B_th = new int(0);
@@ -226,7 +226,7 @@ void drawTurtorial() {
 	setColor(0, 12);
 	cout << "'j'";
 	setColor(0, 14);
-	cout << " to fire the enemy.";
+	cout << " to fire the Enemy.";
 
 	atXY(widthPlayArea + 53, 6);
 	cout << "Press ";
@@ -260,24 +260,24 @@ void stage_chapter_game(int& speed, int& score, int& destroyed) {
 	drawPlayArea(widthPlayArea, heightPlayArea);
 	drawScoreBoard();
 	drawTurtorial();
-	//drawSpaceship(playerWeak.getObjectP());
-	drawObject(playerWeak->getObjectP(), playerPos, 10, 30, 35, 39, 3);
+	//drawSpaceship(PlayerWeak.getObjectP());
+	drawObject(PlayerWeak->getObjectP(), PlayerPos, 10, 30, 35, 39, 3);
 
 	for (int i = 0; i < 3; i++)
 	{
-		//drawEnemy(enemyWeak.getObjectE());
-		drawObject(enemyWeak->getObjectE(), enemyPos, 11, 31, 1, 5, 4);
-		teamE.push_back(enemyPos);
+		//drawEnemy(EnemyWeak.getObjectE());
+		drawObject(EnemyWeak->getObjectE(), EnemyPos, 11, 31, 1, 5, 4);
+		teamE.push_back(EnemyPos);
 	};
 
 	*g_count_down = 3000;
-	*g_playerSize = playerWeak->getObjectP().size();
+	*g_PlayerSize = PlayerWeak->getObjectP().size();
 
 	*c = ' ';
 	while (true)
 	{
-		*tempPosBulletX = playerPos.prevPosX + int(*g_playerSize / 2);
-		*tempPosBulletY = playerPos.prevPosY - 1;
+		*tempPosBulletX = PlayerPos.prevPosX + int(*g_PlayerSize / 2);
+		*tempPosBulletY = PlayerPos.prevPosY - 1;
 
 		if (*g_life != 0)
 		{
@@ -308,18 +308,18 @@ void stage_chapter_game(int& speed, int& score, int& destroyed) {
 			}
 			else {
 				//controlSpaceship();
-				controlWithoutEvent(activities, playerPos, *g_step);
-				moveSpaceship(playerWeak->getObjectP());
+				controlWithoutEvent(activities, PlayerPos, *g_step);
+				moveSpaceship(PlayerWeak->getObjectP());
 				for (int i = 0; i < teamE.size(); i++)
 				{
-					enemyPos = teamE[i];
+					EnemyPos = teamE[i];
 					*E_th = i;
 					controlEnemy();
-					teamE[i] = enemyPos;
+					teamE[i] = EnemyPos;
 				}
 				if (*c == 'j')
 				{
-					drawObject(playerWeak->getBullet(), bulletPos, *tempPosBulletX, *tempPosBulletX, *tempPosBulletY, *tempPosBulletY, 6);//Yellow
+					drawObject(PlayerWeak->getBullet(), bulletPos, *tempPosBulletX, *tempPosBulletX, *tempPosBulletY, *tempPosBulletY, 6);//Yellow
 					teamB.push_back(bulletPos);
 					*c = ' ';
 				};
@@ -328,7 +328,7 @@ void stage_chapter_game(int& speed, int& score, int& destroyed) {
 				replay:
 
 					/* DESCRIPTION: attention on this
-					* - doan code nay giup kiem tra xem lieu co bullet[i] nao danh trung enemy[j] khong.
+					* - doan code nay giup kiem tra xem lieu co bullet[i] nao danh trung Enemy[j] khong.
 					* - neu co, tien hanh pha huy bullet[i], luu vi tri bi xoa (xem them o ham controlBullet(), moveBullet()).
 					* - khi dieu kien (kich thuoc bi thay doi) dung, thi tien hanh reset lai length, dong thoi tiep tuc kiem tra
 					* nhung bullet[i] con lai.
@@ -371,7 +371,7 @@ void stage_chapter_game(int& speed, int& score, int& destroyed) {
 			delete B_th;
 			delete E_th;
 
-			delete g_playerSize;
+			delete g_PlayerSize;
 
 			delete tempPosBulletX;
 			delete tempPosBulletY;
@@ -381,7 +381,7 @@ void stage_chapter_game(int& speed, int& score, int& destroyed) {
 };
 #pragma endregion
 
-#pragma region player
+#pragma region Player
 void moveSpaceship(string object) {
 	//if (*c == 'j')
 	//{
@@ -391,86 +391,86 @@ void moveSpaceship(string object) {
 	//	*c = ' ';
 	//	//fileDataEven << c << ' ' << "yes" << endl;
 	//}
-	if (!isPlayerHitWall(playerPos.nextPosX, playerPos.nextPosY, playerWeak->getObjectP()))
+	if (!isPlayerHitWall(PlayerPos.nextPosX, PlayerPos.nextPosY, PlayerWeak->getObjectP()))
 	{
-		atXY(playerPos.prevPosX, playerPos.prevPosY);
+		atXY(PlayerPos.prevPosX, PlayerPos.prevPosY);
 		cout << setfill(' ');
 		cout << setw(object.size()) << right << ' ';
-		atXY(playerPos.nextPosX, playerPos.nextPosY);
-		playerPos.prevPosX = playerPos.nextPosX;
-		playerPos.prevPosY = playerPos.nextPosY;
+		atXY(PlayerPos.nextPosX, PlayerPos.nextPosY);
+		PlayerPos.prevPosX = PlayerPos.nextPosX;
+		PlayerPos.prevPosY = PlayerPos.nextPosY;
 		setColor(0, 3);
 		cout << object;
 
-		//fileDataP << "playerPos.prevPosX: " << playerPos.prevPosX << endl;
-		//fileDataP << "playerPos.prevPosY: " << playerPos.prevPosY << endl;
-		//fileDataP << "playerPos.nextPosX: " << playerPos.nextPosX << endl;
-		//fileDataP << "playerPos.nextPosY: " << playerPos.nextPosY << endl;
+		//fileDataP << "PlayerPos.prevPosX: " << PlayerPos.prevPosX << endl;
+		//fileDataP << "PlayerPos.prevPosY: " << PlayerPos.prevPosY << endl;
+		//fileDataP << "PlayerPos.nextPosX: " << PlayerPos.nextPosX << endl;
+		//fileDataP << "PlayerPos.nextPosY: " << PlayerPos.nextPosY << endl;
 		//fileDataP << " " << endl;
 
 	};
 }
 #pragma endregion
 
-#pragma region enemyControl
+#pragma region EnemyControl
 void controlEnemy() {
-	enemyPos.nextPosX = enemyPos.prevPosX;
-	enemyPos.nextPosY = enemyPos.prevPosY + 1;
-	if (isPlayerHitEnemy(playerWeak->getObjectP(), enemyWeak->getObjectE())) //true
+	EnemyPos.nextPosX = EnemyPos.prevPosX;
+	EnemyPos.nextPosY = EnemyPos.prevPosY + 1;
+	if (isPlayerHitEnemy(PlayerWeak->getObjectP(), EnemyWeak->getObjectE())) //true
 	{
-		*g_score = *g_score + enemyWeak->getRewardPoint();
-		*g_destroyed = *g_destroyed + enemyWeak->getRewardPoint();
-		*g_life = *g_life - enemyWeak->getMinusPoint();
-		destroyObject(enemyWeak->getObjectE(), enemyPos.prevPosX, enemyPos.prevPosY);
+		*g_score = *g_score + EnemyWeak->getRewardPoint();
+		*g_destroyed = *g_destroyed + EnemyWeak->getRewardPoint();
+		*g_life = *g_life - EnemyWeak->getMinusPoint();
+		destroyObject(EnemyWeak->getObjectE(), EnemyPos.prevPosX, EnemyPos.prevPosY);
 	}
-	else if (isEnemyHitWall(enemyPos.nextPosY))
+	else if (isEnemyHitWall(EnemyPos.nextPosY))
 	{
 		*g_life = *g_life - 1;
-		destroyObject(enemyWeak->getObjectE(), enemyPos.prevPosX, enemyPos.prevPosY);
+		destroyObject(EnemyWeak->getObjectE(), EnemyPos.prevPosX, EnemyPos.prevPosY);
 	}
 	else //false
 	{
-		moveEnemy(enemyWeak->getObjectE());
+		moveEnemy(EnemyWeak->getObjectE());
 	};
 }
 void moveEnemy(string object) {
-	if (!isEnemyHitWall(enemyPos.nextPosY))
+	if (!isEnemyHitWall(EnemyPos.nextPosY))
 	{
-		atXY(enemyPos.prevPosX, enemyPos.prevPosY);
+		atXY(EnemyPos.prevPosX, EnemyPos.prevPosY);
 		cout << setfill(' ');
 		cout << setw(object.size()) << right << ' ';
-		atXY(enemyPos.nextPosX, enemyPos.nextPosY);
-		enemyPos.prevPosX = enemyPos.nextPosX;
-		enemyPos.prevPosY = enemyPos.nextPosY;
+		atXY(EnemyPos.nextPosX, EnemyPos.nextPosY);
+		EnemyPos.prevPosX = EnemyPos.nextPosX;
+		EnemyPos.prevPosY = EnemyPos.nextPosY;
 		setColor(0, 4);
 		cout << object;
 
-		//fileDataE << "enemyPos.prevPosX: " << enemyPos.prevPosX << endl;
-		//fileDataE << "enemyPos.prevPosY: " << enemyPos.prevPosY << endl;
-		//fileDataE << "enemyPos.nextPosX: " << enemyPos.nextPosX << endl;
-		//fileDataE << "enemyPos.nextPosY: " << enemy.nextPosY << endl;
+		//fileDataE << "EnemyPos.prevPosX: " << EnemyPos.prevPosX << endl;
+		//fileDataE << "EnemyPos.prevPosY: " << EnemyPos.prevPosY << endl;
+		//fileDataE << "EnemyPos.nextPosX: " << EnemyPos.nextPosX << endl;
+		//fileDataE << "EnemyPos.nextPosY: " << Enemy.nextPosY << endl;
 		//fileDataE << " " << endl;	
 	}
 	else {
-		*g_life = *g_life - enemyWeak->getMinusPoint();
+		*g_life = *g_life - EnemyWeak->getMinusPoint();
 	}
 }
 void destroyObject(string object, int prevX, int prevY) { //done
 	atXY(prevX, prevY);
 	cout << setfill(' ');
 	cout << setw(object.size()) << right << ' ';
-	//drawEnemy(enemyWeak.getObjectE());
-	drawObject(enemyWeak->getObjectE(), enemyPos, 11, 31, 1, 5, 2);
-	teamE[*E_th] = enemyPos;
+	//drawEnemy(EnemyWeak.getObjectE());
+	drawObject(EnemyWeak->getObjectE(), EnemyPos, 11, 31, 1, 5, 2);
+	teamE[*E_th] = EnemyPos;
 }
 #pragma endregion
 
 #pragma region bullet
 //void drawBullet() {
-//	bulletPos.prevPosX = (playerPos.prevPosX + *playerSize / 2); //vi tri trung tam
-//	bulletPos.prevPosY = playerPos.prevPosY - 1;
+//	bulletPos.prevPosX = (PlayerPos.prevPosX + *PlayerSize / 2); //vi tri trung tam
+//	bulletPos.prevPosY = PlayerPos.prevPosY - 1;
 //	atXY(bulletPos.prevPosX, bulletPos.prevPosY);
-//	cout << playerWeak.getBullet();
+//	cout << PlayerWeak.getBullet();
 //}
 void controlBullet() {
 	bulletPos.nextPosX = bulletPos.prevPosX;
@@ -480,14 +480,14 @@ void controlBullet() {
 }
 void moveBullet() {
 	bulletPos = teamB[*B_th];
-	if (!isBulletHitEnemy(enemyWeak->getObjectE()) && !isBulletHitWall(bulletPos.nextPosY))
+	if (!isBulletHitEnemy(EnemyWeak->getObjectE()) && !isBulletHitWall(bulletPos.nextPosY))
 	{
 		atXY(bulletPos.prevPosX, bulletPos.prevPosY);
 		cout << ' ';
 
 		atXY(bulletPos.nextPosX, bulletPos.nextPosY);
 		setColor(0, 6);
-		cout << playerWeak->getBullet();
+		cout << PlayerWeak->getBullet();
 
 		bulletPos.prevPosX = bulletPos.nextPosX;
 		bulletPos.prevPosY = bulletPos.nextPosY;
@@ -510,9 +510,9 @@ void moveBullet() {
 		teamB.erase(teamB.begin() + *B_th);
 	}
 	else {
-		*g_score = *g_score + enemyWeak->getRewardPoint();
-		*g_destroyed = *g_destroyed + enemyWeak->getMinusPoint();
-		destroyObject(enemyWeak->getObjectE(), enemyPos.prevPosX, enemyPos.prevPosY);
+		*g_score = *g_score + EnemyWeak->getRewardPoint();
+		*g_destroyed = *g_destroyed + EnemyWeak->getMinusPoint();
+		destroyObject(EnemyWeak->getObjectE(), EnemyPos.prevPosX, EnemyPos.prevPosY);
 		atXY(bulletPos.prevPosX, bulletPos.prevPosY);
 		cout << ' ';
 		//bullet.nextPosX = 0;
@@ -539,31 +539,31 @@ bool isPlayerHitWall(int nextPosX, int nextPosY, string object) {
 bool isEnemyHitWall(int nextPosY) {
 	if (nextPosY == heightPlayArea)
 	{
-		enemyPos.nextPosX = 0;
-		enemyPos.nextPosY = 0;
+		EnemyPos.nextPosX = 0;
+		EnemyPos.nextPosY = 0;
 		return true;
 	}return false;
 };
 bool isPlayerHitEnemy(string objectP, string objectE) { //done
-	//objectP: playerWeak.getObjectP()
-	//objectE: enemyWeak.getObject()
-	int openLimitX = static_cast<int>(playerPos.prevPosX - objectE.size() + 1);
-	size_t endLimitX = playerPos.prevPosX + objectP.size();
-	bool isEven = calDistanceBetweenPE(playerPos.prevPosY, enemyPos.prevPosY);
+	//objectP: PlayerWeak.getObjectP()
+	//objectE: EnemyWeak.getObject()
+	int openLimitX = static_cast<int>(PlayerPos.prevPosX - objectE.size() + 1);
+	size_t endLimitX = PlayerPos.prevPosX + objectP.size();
+	bool isEven = calDistanceBetweenPE(PlayerPos.prevPosY, EnemyPos.prevPosY);
 	if (isEven == true) //number is even
 	{
 
-		{if (enemyPos.prevPosX >= openLimitX && enemyPos.prevPosX <= endLimitX)
+		{if (EnemyPos.prevPosX >= openLimitX && EnemyPos.prevPosX <= endLimitX)
 
-			if (enemyPos.nextPosY == playerPos.prevPosY || enemyPos.prevPosY == playerPos.nextPosY)
+			if (EnemyPos.nextPosY == PlayerPos.prevPosY || EnemyPos.prevPosY == PlayerPos.nextPosY)
 				return true;
 		}
 	}
 	else if (isEven == false)
 	{
-		if (enemyPos.prevPosX >= openLimitX && enemyPos.prevPosX <= endLimitX)
+		if (EnemyPos.prevPosX >= openLimitX && EnemyPos.prevPosX <= endLimitX)
 		{
-			if (playerPos.nextPosY == enemyPos.nextPosY || playerPos.prevPosY == enemyPos.prevPosY)
+			if (PlayerPos.nextPosY == EnemyPos.nextPosY || PlayerPos.prevPosY == EnemyPos.prevPosY)
 				return true;
 		};
 	};
@@ -574,11 +574,11 @@ bool isBulletHitEnemy(string objectE) {
 	bulletPos = teamB[*B_th];
 	for (int j = 0; j < teamE.size(); j++)
 	{
-		enemyPos = teamE[j];
+		EnemyPos = teamE[j];
 		*E_th = j;
-		if (bulletPos.nextPosY == enemyPos.prevPosY || bulletPos.nextPosY == enemyPos.prevPosY - 1 || bulletPos.prevPosY == enemyPos.prevPosY)
+		if (bulletPos.nextPosY == EnemyPos.prevPosY || bulletPos.nextPosY == EnemyPos.prevPosY - 1 || bulletPos.prevPosY == EnemyPos.prevPosY)
 		{
-			if (bulletPos.nextPosX >= enemyPos.prevPosX && bulletPos.nextPosX <= enemyPos.prevPosX + enemyWeak->getObjectE().size())
+			if (bulletPos.nextPosX >= EnemyPos.prevPosX && bulletPos.nextPosX <= EnemyPos.prevPosX + EnemyWeak->getObjectE().size())
 			{
 				return true;
 			};

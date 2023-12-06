@@ -1,17 +1,17 @@
 #pragma once
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef Player_H
+#define Player_H
 #include<iostream>
 using std::string;
-class PLAYER {
+class Player {
 private:
 	int m_life{};
 	int m_power{};
 	string m_objectP{};
 	string m_bullet{};
 public:
-	PLAYER() {};
-	PLAYER(int life, int power, string objectP, string bullet);
+	Player() {};
+	Player(int life, int power, string objectP, string bullet);
 	void setPlayer(int life, int power, string objectP, string bullet);
 
 	int getLife();
@@ -19,5 +19,5 @@ public:
 	string getObjectP();
 	string getBullet();
 };
-#endif // !PLAYER_H
+#endif // !Player_H
 

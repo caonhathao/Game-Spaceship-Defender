@@ -239,7 +239,7 @@ void stage_chapter_1(int speed, int& res) {
 	noticePlayer(20);
 	drawTaskBoard();
 
-	drawObject(playerWeak->getObjectP(), playerPos, 75, 75, 45, 45, 2);
+	drawObject(PlayerWeak->getObjectP(), PlayerPos, 75, 75, 45, 45, 2);
 	*powerCurrent = random(0, 35);
 
 	while (true)
@@ -264,7 +264,7 @@ void stage_chapter_1(int speed, int& res) {
 		{
 			drawInfoBoard(20);
 		}
-		if (playerPos.prevPosY == 5)
+		if (PlayerPos.prevPosY == 5)
 		{
 			if (*task_completed >= 4)
 			{
@@ -291,34 +291,34 @@ void stage_chapter_1(int speed, int& res) {
 void control() {
 	if (activities == Activities::top)
 	{
-		playerPos.nextPosX = playerPos.prevPosX;
-		playerPos.nextPosY = playerPos.prevPosY - 1;
+		PlayerPos.nextPosX = PlayerPos.prevPosX;
+		PlayerPos.nextPosY = PlayerPos.prevPosY - 1;
 	}
 	else if (activities == Activities::bottom)
 	{
-		playerPos.nextPosX = playerPos.prevPosX;
-		playerPos.nextPosY = playerPos.prevPosY + 1;
+		PlayerPos.nextPosX = PlayerPos.prevPosX;
+		PlayerPos.nextPosY = PlayerPos.prevPosY + 1;
 	}
 	else if (activities == Activities::left)
 	{
-		playerPos.nextPosX = playerPos.prevPosX - 1;
-		playerPos.nextPosY = playerPos.prevPosY;
+		PlayerPos.nextPosX = PlayerPos.prevPosX - 1;
+		PlayerPos.nextPosY = PlayerPos.prevPosY;
 	}
 	else if (activities == Activities::right)
 	{
-		playerPos.nextPosX = playerPos.prevPosX + 1;
-		playerPos.nextPosY = playerPos.prevPosY;
+		PlayerPos.nextPosX = PlayerPos.prevPosX + 1;
+		PlayerPos.nextPosY = PlayerPos.prevPosY;
 	}
 	else if (activities == Activities::stop)
 	{
-		playerPos.nextPosX = playerPos.prevPosX;
-		playerPos.nextPosY = playerPos.prevPosY;
+		PlayerPos.nextPosX = PlayerPos.prevPosX;
+		PlayerPos.nextPosY = PlayerPos.prevPosY;
 	}
 
 	if (isPlayerTouchWall())
 	{
-		playerPos.nextPosX = playerPos.prevPosX;
-		playerPos.nextPosY = playerPos.prevPosY;
+		PlayerPos.nextPosX = PlayerPos.prevPosX;
+		PlayerPos.nextPosY = PlayerPos.prevPosY;
 	}
 	else if (*info_sign == 0) // first touch to the garbage
 	{
@@ -326,39 +326,39 @@ void control() {
 		{
 			*info_sign = 1;//save the first touch signal
 			(*task_point)++;
-			playerPos.nextPosX = playerPos.prevPosX;
-			playerPos.nextPosY = playerPos.prevPosY;
+			PlayerPos.nextPosX = PlayerPos.prevPosX;
+			PlayerPos.nextPosY = PlayerPos.prevPosY;
 		}
 	}
 	else if (isPlayerTouchGarage())
 	{
 		*info_sign = -1;
-		playerPos.nextPosX = playerPos.prevPosX;
-		playerPos.nextPosY = playerPos.prevPosY;
+		PlayerPos.nextPosX = PlayerPos.prevPosX;
+		PlayerPos.nextPosY = PlayerPos.prevPosY;
 	};
-	move(playerWeak->getObjectP());
+	move(PlayerWeak->getObjectP());
 }
 void move(string object) {
 	if (!isPlayerTouchTask() && !isPlayerTouchGarage())
 	{
-		atXY(playerPos.prevPosX, playerPos.prevPosY);
+		atXY(PlayerPos.prevPosX, PlayerPos.prevPosY);
 		cout << setfill(' ');
 		cout << setw(object.size()) << right << ' ';
-		atXY(playerPos.nextPosX, playerPos.nextPosY);
-		playerPos.prevPosX = playerPos.nextPosX;
-		playerPos.prevPosY = playerPos.nextPosY;
+		atXY(PlayerPos.nextPosX, PlayerPos.nextPosY);
+		PlayerPos.prevPosX = PlayerPos.nextPosX;
+		PlayerPos.prevPosY = PlayerPos.nextPosY;
 		setColor(0, 2);
 		cout << object;
 	}
 	else
 	{
 		task();
-		atXY(playerPos.prevPosX, playerPos.prevPosY);
+		atXY(PlayerPos.prevPosX, PlayerPos.prevPosY);
 		cout << setfill(' ');
 		cout << setw(object.size()) << right << ' ';
-		atXY(playerPos.nextPosX, playerPos.nextPosY);
-		playerPos.prevPosX = playerPos.nextPosX;
-		playerPos.prevPosY = playerPos.nextPosY;
+		atXY(PlayerPos.nextPosX, PlayerPos.nextPosY);
+		PlayerPos.prevPosX = PlayerPos.nextPosX;
+		PlayerPos.prevPosY = PlayerPos.nextPosY;
 		cout << object;
 	}
 
@@ -377,7 +377,7 @@ void task() {
 	*	task_completed: will increated with every task (4 task -> task_completed = 4)
 	*/
 	string str;
-	if (playerPos.prevPosY == 35)
+	if (PlayerPos.prevPosY == 35)
 	{
 		atXY(137, 11);
 		cout << "Yeu cau lap phao co nong:";
@@ -397,7 +397,7 @@ void task() {
 			(*task_completed)++;
 		}
 	};
-	if (playerPos.prevPosY == 33)
+	if (PlayerPos.prevPosY == 33)
 	{
 		atXY(137, 14);
 		cout << "Yeu cau dong co:";
@@ -417,7 +417,7 @@ void task() {
 			(*task_completed)++;
 		}
 	};
-	if (playerPos.prevPosY == 31)
+	if (PlayerPos.prevPosY == 31)
 	{
 		atXY(137, 17);
 		cout << "Yeu cau so dong co:";
@@ -437,7 +437,7 @@ void task() {
 			(*task_completed)++;
 		}
 	};
-	if (playerPos.prevPosY == 29)
+	if (PlayerPos.prevPosY == 29)
 	{
 		atXY(137, 20);
 		cout << "Muc nang luong can nap:";
@@ -454,50 +454,50 @@ void task() {
 
 #pragma region checkEvents
 bool isPlayerTouchGarage() {
-	if (playerPos.nextPosX >= 70 && playerPos.nextPosX <= 99)
+	if (PlayerPos.nextPosX >= 70 && PlayerPos.nextPosX <= 99)
 	{
-		if ( playerPos.nextPosY == 35)
+		if ( PlayerPos.nextPosY == 35)
 		{
 			return true;
 		}
 	}return false;
 };
 bool isPlayerTouchWall() {
-	if (playerPos.nextPosX <= 0)
+	if (PlayerPos.nextPosX <= 0)
 	{
 		return true;
 	}
-	else if (playerPos.nextPosY <= 1)
+	else if (PlayerPos.nextPosY <= 1)
 	{
 		return true;
 	};
 	//for line 1
-	if ((playerPos.nextPosX >= 0 && playerPos.nextPosX <= 5) || (playerPos.nextPosX >= 21 && playerPos.nextPosX <= 25))
+	if ((PlayerPos.nextPosX >= 0 && PlayerPos.nextPosX <= 5) || (PlayerPos.nextPosX >= 21 && PlayerPos.nextPosX <= 25))
 	{
-		if (playerPos.nextPosY == 39)
+		if (PlayerPos.nextPosY == 39)
 		{
 			return true;
 		}
 	}
-	if (playerPos.nextPosX == 5 || playerPos.nextPosX == 21 || playerPos.nextPosX == 25)
+	if (PlayerPos.nextPosX == 5 || PlayerPos.nextPosX == 21 || PlayerPos.nextPosX == 25)
 	{
-		if (playerPos.nextPosY <= 39)
+		if (PlayerPos.nextPosY <= 39)
 		{
 			return true;
 		}
 	};
 
 	//for line 2
-	if ((playerPos.nextPosX >= 36 && playerPos.nextPosX <= 40) || (playerPos.nextPosX >= 56 && playerPos.nextPosX <= 60))
+	if ((PlayerPos.nextPosX >= 36 && PlayerPos.nextPosX <= 40) || (PlayerPos.nextPosX >= 56 && PlayerPos.nextPosX <= 60))
 	{
-		if (playerPos.nextPosY == 39)
+		if (PlayerPos.nextPosY == 39)
 		{
 			return true;
 		}
 	};
-	if (playerPos.nextPosX == 36 || playerPos.nextPosX == 40 || playerPos.nextPosX == 56 || playerPos.nextPosX == 60)
+	if (PlayerPos.nextPosX == 36 || PlayerPos.nextPosX == 40 || PlayerPos.nextPosX == 56 || PlayerPos.nextPosX == 60)
 	{
-		if (playerPos.nextPosY <= 39)
+		if (PlayerPos.nextPosY <= 39)
 		{
 			return true;
 		}
@@ -505,25 +505,25 @@ bool isPlayerTouchWall() {
 	return false;
 }
 bool isPlayerTouchTask() {
-	if (playerPos.prevPosX >= 40 && playerPos.prevPosX <= 56)
+	if (PlayerPos.prevPosX >= 40 && PlayerPos.prevPosX <= 56)
 	{
-		if (playerPos.prevPosY == 35)
+		if (PlayerPos.prevPosY == 35)
 		{
 			return true;
 		}
-		else if (playerPos.prevPosY == 33)
+		else if (PlayerPos.prevPosY == 33)
 		{
 			return true;
 		}
-		else if (playerPos.prevPosY == 31)
+		else if (PlayerPos.prevPosY == 31)
 		{
 			return true;
 		}
-		else if (playerPos.prevPosY == 29)
+		else if (PlayerPos.prevPosY == 29)
 		{
 			return true;
 		}
-		else if (playerPos.prevPosY == 27)
+		else if (PlayerPos.prevPosY == 27)
 		{
 			return true;
 		}

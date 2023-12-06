@@ -14,19 +14,19 @@
 extern int *g_printSpeed;
 extern int *g_count_down;
 extern int *g_choice;
-extern int *g_playerSize;
+extern int *g_PlayerSize;
 extern int* g_speed;
 extern int* g_step;
 
 extern char *c;
 
 extern Position cursorPos;
-extern Position playerPos;
-extern Position enemyPos;
+extern Position PlayerPos;
+extern Position EnemyPos;
 extern Position bulletPos;
 
-extern  PLAYER *playerWeak;
-extern ENEMY *enemyWeak;
+extern  Player *PlayerWeak;
+extern Enemy *EnemyWeak;
 
 extern Activities activities;
 //extern vector<infoPlayer>Data = {};

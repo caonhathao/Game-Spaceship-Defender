@@ -147,6 +147,12 @@
     <ClCompile Include="variable.cpp">
       <Filter>Source Files\library_cpp_file</Filter>
     </ClCompile>
+    <ClCompile Include="printTitle.cpp">
+      <Filter>Source Files\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="drawBorder.cpp">
+      <Filter>Source Files\effects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">

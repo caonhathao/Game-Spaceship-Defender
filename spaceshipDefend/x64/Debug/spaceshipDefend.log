@@ -1,10 +1,50 @@
-﻿  Enemy.cpp
+﻿  about_me.cpp
+  Activities.cpp
+  dictionary.cpp
+  effects_text.cpp
   endGame.cpp
+  Enemy.cpp
+  functions_control_console.cpp
+  functions_control_cursor_game.cpp
+  functions_control_object.cpp
+  infoPlayer.cpp
+  info_about_game.cpp
+  listPlayers.cpp
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\listPlayers.cpp(53,11): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\listPlayers.cpp(86,13): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\listPlayers.cpp(90,27): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+  loadingPlot.cpp
+  loadingScreen.cpp
+  login_register.cpp
+  saveDataUsers.cpp
+  stringFlicker.cpp
+  testing_files.cpp
+  welcomeScreen.cpp
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\welcomeScreen.cpp(67,10): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+  Source.cpp
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(108,26): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(176,33): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+  Compiling...
+  Player.cpp
+  stage_chapter_1.cpp
+  stage_chapter_2.cpp
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\stage_chapter_2.cpp(470,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   stage_chapter_game.cpp
-D:\Develop\DevC++ by VS\spaceshipDefend\spaceshipDefend\stage_chapter_game.cpp(256,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\Develop\DevC++ by VS\spaceshipDefend\spaceshipDefend\stage_chapter_game.cpp(274,47): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\Develop\DevC++ by VS\spaceshipDefend\spaceshipDefend\stage_chapter_game.cpp(356,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\stage_chapter_game.cpp(256,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\stage_chapter_game.cpp(274,47): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\stage_chapter_game.cpp(338,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   stickyNote.cpp
+  story_chapter_1.cpp
+  story_chapter_2.cpp
+  struct.cpp
+  variable.cpp
+  variable.h
   Generating Code...
 x64\Debug\variable.obj : warning LNK4042: object specified more than once; extras ignored
-  spaceshipDefend.vcxproj -> D:\Develop\DevC++ by VS\spaceshipDefend\x64\Debug\spaceshipDefend.exe
+info_about_game.obj : error LNK2019: unresolved external symbol "void __cdecl drawBorder(int,int,int,int,int)" (?drawBorder@@YAXHHHHH@Z) referenced in function "void __cdecl info_about_game(int)" (?info_about_game@@YAXH@Z)
+welcomeScreen.obj : error LNK2001: unresolved external symbol "void __cdecl drawBorder(int,int,int,int,int)" (?drawBorder@@YAXHHHHH@Z)
+info_about_game.obj : error LNK2019: unresolved external symbol "void __cdecl printTitle(int,int,int)" (?printTitle@@YAXHHH@Z) referenced in function "void __cdecl guide(void)" (?guide@@YAXXZ)
+loadingScreen.obj : error LNK2001: unresolved external symbol "void __cdecl printTitle(int,int,int)" (?printTitle@@YAXHHH@Z)
+welcomeScreen.obj : error LNK2001: unresolved external symbol "void __cdecl printTitle(int,int,int)" (?printTitle@@YAXHHH@Z)
+C:\Users\admin\Source\Repos\Game-Spaceship-Defender\x64\Debug\spaceshipDefend.exe : fatal error LNK1120: 2 unresolved externals
