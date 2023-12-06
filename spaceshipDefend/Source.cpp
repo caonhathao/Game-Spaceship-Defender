@@ -89,7 +89,7 @@ int main() {
 	setScreenBufferSize(209, 55);
 
 	loadingScreen();
-	infoPlayer user(0,"",0,0,0,0);
+	infoPlayer user(0, "", 0, 0, 0, 0);
 
 	string nameUser = "";
 
@@ -99,14 +99,12 @@ int main() {
 	while (true)
 	{
 		system("cls");
-		if (user.name!="_") //login
+		if (user.name == "") {} //login
+		else if (user.name == "_") {} // new register
+		else
 		{
 			nameUser = user.name;
-			
-		}
-		else if (user.name == "_") // new register
-		{
-			nameUser = data[posUser].name;
+
 		}
 
 		int res = 0;
@@ -123,7 +121,7 @@ int main() {
 			{
 				loadingPlot();
 				story_chapter_1(*g_printSpeed);
-				stage_chapter_1(*g_speed, Player.g_scoreChapter1);//export g_scoreChapter1
+				stage_chapter_1(*g_speed, user.g_scoreChapter1);//export g_scoreChapter1
 
 				system("cls");
 				cout << "Waiting for next chapter...";
@@ -133,8 +131,8 @@ int main() {
 				story_chapter_2(*g_printSpeed);
 				loadingScreen();
 				stage_chapter_2(*g_speed, *g_process, *g_contact);
-				Player.g_process = *g_process;
-				Player.g_contact = *g_contact;
+				user.g_process = *g_process;
+				user.g_contact = *g_contact;
 				cin.ignore();//chay duoc stage_chapter_game
 
 				cout << "[ Dang khoi dong man choi chinh ]";
@@ -144,14 +142,14 @@ int main() {
 				system("cls");
 
 				stage_chapter_game(*g_speed, *g_score, *g_destroyed);
-				Player.g_scoreChapterGame = *g_score;
+				user.g_scoreChapterGame = *g_score;
 
 				endGame(*g_score, *g_destroyed, *g_printSpeed);
 			}
 			else {
 				loadingScreen();
 				stage_chapter_game(*g_speed, *g_score, *g_destroyed);
-				Player.g_scoreChapterGame = *g_score;
+				user.g_scoreChapterGame = *g_score;
 
 				endGame(*g_score, *g_destroyed, *g_printSpeed);
 				main();
@@ -163,7 +161,7 @@ int main() {
 		}
 		else if (res == 2) {
 			user = login_register(data);
-			if (user.name=="_")
+			if (user.name == "_")
 			{
 				drawLog_ResScreen("REGISTER");
 				atXY(85, 5);

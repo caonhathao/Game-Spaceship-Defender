@@ -17,6 +17,9 @@ struct infoPlayer{
 	int serial = 0;
 
 	string name = "_";//default-unknown
+	/*
+	if name=="": new register
+	if name!="" and name!="_": account*/
 
 	int g_scoreChapter1 = 0;
 
