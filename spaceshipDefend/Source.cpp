@@ -19,10 +19,10 @@ int* g_choice = new int(0);
 int* g_PlayerSize = new int(0);
 int* g_step = new int(1);
 
-int* score = new int(0);
-int* destroyed = new int(0);
-int* process = new int(0);
-int* contact = new int(0);
+int* g_score = new int(0);
+int* g_destroyed = new int(0);
+int* g_process = new int(0);
+int* g_contact = new int(0);
 
 struct infoPlayer;
 
@@ -54,13 +54,13 @@ void story_chapter_1(int printSpeed);
 void stage_chapter_1(int speed, int& res);
 
 void story_chapter_2(int printSpeed);
-void stage_chapter_2(int speed, int& process, int& contact);
+void stage_chapter_2(int speed, int& g_process, int& g_contact);
 
-void stage_chapter_game(int& speed, int& score, int& destroyed);
+void stage_chapter_game(int& speed, int& g_score, int& g_destroyed);
 
 void info_about_game(int printSpeed);
 void about_me(int printSpeed);
-void endGame(int score, int destroyed, int printSpeed);
+void endGame(int g_score, int g_destroyed, int printSpeed);
 
 int main();
 #pragma endregion
@@ -112,7 +112,7 @@ int main() {
 		int res = 0;
 		res = welcomeScreen(*g_printSpeed, nameUser);
 
-		if (res == 1) //data need export: serial, name, scoreChapter1, process/contact, scoreChapter2,scoreChapterGame
+		if (res == 1) //data need export: serial, name, g_scoreChapter1, g_process/g_contact, g_scoreChapter2,g_scoreChapterGame
 		{
 			system("cls");
 			cout << "Ban co muon di theo cot truyen khong (Y/N): ";
@@ -123,7 +123,7 @@ int main() {
 			{
 				loadingPlot();
 				story_chapter_1(*g_printSpeed);
-				stage_chapter_1(*g_speed, Player.scoreChapter1);//export scoreChapter1
+				stage_chapter_1(*g_speed, Player.g_scoreChapter1);//export g_scoreChapter1
 
 				system("cls");
 				cout << "Waiting for next chapter...";
@@ -132,9 +132,9 @@ int main() {
 				loadingPlot();
 				story_chapter_2(*g_printSpeed);
 				loadingScreen();
-				stage_chapter_2(*g_speed, *process, *contact);
-				Player.process = *process;
-				Player.contact = *contact;
+				stage_chapter_2(*g_speed, *g_process, *g_contact);
+				Player.g_process = *g_process;
+				Player.g_contact = *g_contact;
 				cin.ignore();//chay duoc stage_chapter_game
 
 				cout << "[ Dang khoi dong man choi chinh ]";
@@ -143,17 +143,17 @@ int main() {
 				loadingPlot();
 				system("cls");
 
-				stage_chapter_game(*g_speed, *score, *destroyed);
-				Player.scoreChapterGame = *score;
+				stage_chapter_game(*g_speed, *g_score, *g_destroyed);
+				Player.g_scoreChapterGame = *g_score;
 
-				endGame(*score, *destroyed, *g_printSpeed);
+				endGame(*g_score, *g_destroyed, *g_printSpeed);
 			}
 			else {
 				loadingScreen();
-				stage_chapter_game(*g_speed, *score, *destroyed);
-				Player.scoreChapterGame = *score;
+				stage_chapter_game(*g_speed, *g_score, *g_destroyed);
+				Player.g_scoreChapterGame = *g_score;
 
-				endGame(*score, *destroyed, *g_printSpeed);
+				endGame(*g_score, *g_destroyed, *g_printSpeed);
 				main();
 			}
 			if (data.size() > 0 && posUser != -1)

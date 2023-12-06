@@ -76,9 +76,9 @@ void drawListPlayers() {
 			};
 
 			cout << setw(10) << left << dataInput.name;
-			cout << setw(14) << left << dataInput.scoreChapter1;
-			cout << setw(14) << left << to_string(dataInput.process) + "/" + to_string(dataInput.contact);
-			cout << setw(13) << left << dataInput.scoreChapterGame << endl;
+			cout << setw(14) << left << dataInput.g_scoreChapter1;
+			cout << setw(14) << left << to_string(dataInput.g_process) + "/" + to_string(dataInput.g_contact);
+			cout << setw(13) << left << dataInput.g_scoreChapterGame << endl;
 		}
 	}
 		

@@ -37,8 +37,8 @@ struct result;
 #pragma region generalVariablesAndSetting
 int* g_bulletSpeed = new int(30); //toc do dan
 
-int* g_score = new int(0);
-int* g_destroyed = new int(0);
+int* g_g_score = new int(0);
+int* g_g_destroyed = new int(0);
 static int* g_life = new int(PlayerWeak->getLife());
 
 int* E_th = new int(0);
@@ -61,10 +61,10 @@ vector<Position>teamB = {};
 
 #pragma region generalFunctions
 void drawPlayArea(int width, int height);
-void drawScoreBoard();
+void drawg_scoreBoard();
 void drawTurtorial();
 
-void stage_chapter_game(int& speed, int& score, int& destroyed);
+void stage_chapter_game(int& speed, int& g_score, int& g_destroyed);
 
 //void drawSpaceship(string object);
 //void drawEnemy(string object);
@@ -78,7 +78,7 @@ void moveSpaceship(string object);
 void moveEnemy(string object);
 void moveBullet();
 
-void destroyObject(string object, int prevX, int prevY);
+void g_destroyObject(string object, int prevX, int prevY);
 
 bool isPlayerHitWall(int nextPosX, int nextPosY, string object);
 bool isEnemyHitWall(int nextPosY);
@@ -125,7 +125,7 @@ void drawPlayArea(int width, int height) { //done
 		Sleep(2);
 	}
 }
-void drawScoreBoard() {
+void drawg_scoreBoard() {
 	//widthPlayArea = 45 (y)
 	//heightPlayArea = 45 (x)
 
@@ -163,10 +163,10 @@ void drawScoreBoard() {
 	cout << "LIFE: ";
 	//detroy
 	atXY(widthPlayArea + 13, 4);
-	cout << "DESTROY: ";
-	//score
+	cout << "g_destroy: ";
+	//g_score
 	atXY(widthPlayArea + 13, 6);
-	cout << "SCORE: ";
+	cout << "g_score: ";
 	//energy
 	atXY(widthPlayArea + 13, 8);
 	cout << "ENERGY: ";
@@ -174,14 +174,14 @@ void drawScoreBoard() {
 	atXY(widthPlayArea + 13, 10);
 	cout << "SPEED: ";
 }
-void showScore() {
+void showg_score() {
 	setColor(0, 11);//Light Aqua
 	atXY(widthPlayArea + 13 + 7, 2);
 	cout << *g_life;
 	atXY(widthPlayArea + 13 + 9, 4);
-	cout << *g_destroyed;
+	cout << *g_g_destroyed;
 	atXY(widthPlayArea + 13 + 7, 6);
-	cout << *g_score;
+	cout << *g_g_score;
 
 	atXY(widthPlayArea + 13 + 8, 10);
 	cout << *g_speed + (200 - *g_speed);
@@ -252,13 +252,13 @@ void drawTurtorial() {
 #pragma endregion
 
 #pragma region main
-void stage_chapter_game(int& speed, int& score, int& destroyed) {
+void stage_chapter_game(int& speed, int& g_score, int& g_destroyed) {
 	srand(time(NULL));
 
 	system("cls");
 
 	drawPlayArea(widthPlayArea, heightPlayArea);
-	drawScoreBoard();
+	drawg_scoreBoard();
 	drawTurtorial();
 	//drawSpaceship(PlayerWeak.getObjectP());
 	drawObject(PlayerWeak->getObjectP(), PlayerPos, 10, 30, 35, 39, 3);
@@ -348,7 +348,7 @@ void stage_chapter_game(int& speed, int& score, int& destroyed) {
 						teamB[j] = bulletPos;
 					};
 				};
-				showScore();
+				showg_score();
 				if (*g_count_down == 0)
 				{
 					(*g_speed)--;
@@ -359,12 +359,12 @@ void stage_chapter_game(int& speed, int& score, int& destroyed) {
 			};
 		}
 		else {
-			destroyed = *g_destroyed;
-			score = *g_score;
+			g_destroyed = *g_g_destroyed;
+			g_score = *g_g_score;
 
 			delete g_life;
-			delete g_score;
-			delete g_destroyed;
+			delete g_g_score;
+			delete g_g_destroyed;
 			delete g_bulletSpeed;
 			delete g_speed;
 
@@ -418,15 +418,15 @@ void controlEnemy() {
 	EnemyPos.nextPosY = EnemyPos.prevPosY + 1;
 	if (isPlayerHitEnemy(PlayerWeak->getObjectP(), EnemyWeak->getObjectE())) //true
 	{
-		*g_score = *g_score + EnemyWeak->getRewardPoint();
-		*g_destroyed = *g_destroyed + EnemyWeak->getRewardPoint();
+		*g_g_score = *g_g_score + EnemyWeak->getRewardPoint();
+		*g_g_destroyed = *g_g_destroyed + EnemyWeak->getRewardPoint();
 		*g_life = *g_life - EnemyWeak->getMinusPoint();
-		destroyObject(EnemyWeak->getObjectE(), EnemyPos.prevPosX, EnemyPos.prevPosY);
+		g_destroyObject(EnemyWeak->getObjectE(), EnemyPos.prevPosX, EnemyPos.prevPosY);
 	}
 	else if (isEnemyHitWall(EnemyPos.nextPosY))
 	{
 		*g_life = *g_life - 1;
-		destroyObject(EnemyWeak->getObjectE(), EnemyPos.prevPosX, EnemyPos.prevPosY);
+		g_destroyObject(EnemyWeak->getObjectE(), EnemyPos.prevPosX, EnemyPos.prevPosY);
 	}
 	else //false
 	{
@@ -455,7 +455,7 @@ void moveEnemy(string object) {
 		*g_life = *g_life - EnemyWeak->getMinusPoint();
 	}
 }
-void destroyObject(string object, int prevX, int prevY) { //done
+void g_destroyObject(string object, int prevX, int prevY) { //done
 	atXY(prevX, prevY);
 	cout << setfill(' ');
 	cout << setw(object.size()) << right << ' ';
@@ -510,9 +510,9 @@ void moveBullet() {
 		teamB.erase(teamB.begin() + *B_th);
 	}
 	else {
-		*g_score = *g_score + EnemyWeak->getRewardPoint();
-		*g_destroyed = *g_destroyed + EnemyWeak->getMinusPoint();
-		destroyObject(EnemyWeak->getObjectE(), EnemyPos.prevPosX, EnemyPos.prevPosY);
+		*g_g_score = *g_g_score + EnemyWeak->getRewardPoint();
+		*g_g_destroyed = *g_g_destroyed + EnemyWeak->getMinusPoint();
+		g_destroyObject(EnemyWeak->getObjectE(), EnemyPos.prevPosX, EnemyPos.prevPosY);
 		atXY(bulletPos.prevPosX, bulletPos.prevPosY);
 		cout << ' ';
 		//bullet.nextPosX = 0;

@@ -8,21 +8,22 @@ struct Position {
 	int nextPosY = 0;
 };
 struct result {
-	int score = 0;
-	int destroyed = 0;
-	int process = 0;
-	int contact = 0;
+	int g_score = 0;
+	int g_destroyed = 0;
+	int g_process = 0;
+	int g_contact = 0;
 };
 struct infoPlayer{
 	int serial = 0;
 
 	string name = "";
 
-	int scoreChapter1 = 0;
+	int g_scoreChapter1 = 0;
 
 	//chapter_2
-	int process = 0;
-	int contact = 0;
+	int g_process = 0;
+	int g_contact = 0;
 
-	int scoreChapterGame = 0;
+	int g_scoreChapterGame = 0;
+	infoPlayer() {};
 };

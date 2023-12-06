@@ -54,10 +54,10 @@ std::vector<infoPlayer> inputDataAccount() {
 
 	int serial = 0;
 	string name = "";
-	int scoreChapter1 = 0;
-	int process = 0;
+	int g_scoreChapter1 = 0;
+	int g_process = 0;
 	int impact = 0;
-	int scoreChapterGame = 0;
+	int g_scoreChapterGame = 0;
 
 	fstream fileDataInput("data_Users.txt", ios::in);
 	fileDataInput.seekg(0, ios::beg);
@@ -93,19 +93,19 @@ std::vector<infoPlayer> inputDataAccount() {
 
 		stringstream str_2(split[2]);
 		str_2 >> num;
-		dataPlayer.scoreChapter1 = num;
+		dataPlayer.g_scoreChapter1 = num;
 
 		stringstream str_3(split[3]);
 		str_3 >> num;
-		dataPlayer.process = num;
+		dataPlayer.g_process = num;
 
 		stringstream str_4(split[4]);
 		str_4 >> num;
-		dataPlayer.contact = num;
+		dataPlayer.g_contact = num;
 
 		stringstream str_5(split[5]);
 		str_5 >> num;
-		dataPlayer.scoreChapterGame = num;
+		dataPlayer.g_scoreChapterGame = num;
 
 		res.push_back(dataPlayer);
 	};

@@ -66,7 +66,7 @@ void drawPlayArea();
 void drawNoticePlayer();
 void drawInfoNotice();;
 
-void stage_chapter_2(int speed, int& process, int& contact);
+void stage_chapter_2(int speed, int& g_process, int& g_contact);
 
 //void drawPlayer(string object);
 //void controlPlayer();
@@ -172,7 +172,7 @@ void drawInfoNotice() {
 #pragma endregion
 
 #pragma region main
-void stage_chapter_2(int speed, int& process, int& contact) {
+void stage_chapter_2(int speed, int& g_process, int& g_contact) {
 	int countDown = 10;
 	PlayerPos = { 0,0,0,0 };
 	noticeStart();
@@ -308,8 +308,8 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 		};
 		Sleep(speed);
 	}
-	process = *amount;
-	contact = *impact;
+	g_process = *amount;
+	g_contact = *impact;
 	delete Ba_th;
 	delete pos;
 	delete amount;

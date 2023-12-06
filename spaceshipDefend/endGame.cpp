@@ -7,7 +7,7 @@
 #include"variable.h"
 
 using namespace std;
-void endGame(int score, int destroyed, int printSpeed) {
+void endGame(int g_score, int g_destroyed, int printSpeed) {
 	system("cls");
 	string para1 = "<<=>> [ TONG KET THANH TICH NGUOI CHOI ] <<==>>";
 	string para2 = "[ Cam on vi ban da danh thoi gian de trai nghiem game ]";
@@ -29,14 +29,14 @@ void endGame(int score, int destroyed, int printSpeed) {
 	setColor(0, 2);
 	cout << "Ban da dat duoc: ";
 	setColor(0, 4);
-	cout << score;
+	cout << g_score;
 	setColor(0, 2);
 	cout << " diem, chuc mung!" << endl;
 
 	atXY(5, 8);
 	cout << "Tieu diet tong cong ";
 	setColor(0, 4);
-	cout << destroyed;
+	cout << g_destroyed;
 	setColor(0, 2);
 	cout << " ke dich.";
 	cout << endl;

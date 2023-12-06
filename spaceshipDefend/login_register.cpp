@@ -9,20 +9,29 @@
 using namespace std;
 struct isLogSuccess {
 	bool isSucess = false;
-	int posUsers = -1;
+	infoPlayer Users;
 };
 isLogSuccess checkAccountExist(vector<infoPlayer>dataUsers, string name) {
-	isLogSuccess A;
-	for (int i = 0; i < dataUsers.size(); i++)
+	isLogSuccess res;
+
+	auto it = find_if(dataUsers.begin(), dataUsers.end(), [&](const infoPlayer& a) {
+		return a.name == name;
+		});
+	if (it!=dataUsers.end())
 	{
-		if (name == dataUsers[i].name)
-		{
-			A.isSucess = true;
-			A.posUsers = i;
-			return A;
-		}
+		res.isSucess = true;
+		res.Users =*it;
 	}
-	return A;
+	//for (int i = 0; i < dataUsers.size(); i++)
+	//{
+	//	if (name == dataUsers[i].name)
+	//	{
+	//		res.isSucess = true;
+	//		res.posUsers = i;
+	//		return res;
+	//	}
+	//}
+	return res;
 };
 int isLogin() {
 	atXY(90, 5);
