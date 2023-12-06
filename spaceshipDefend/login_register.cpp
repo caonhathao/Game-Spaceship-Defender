@@ -9,7 +9,7 @@
 using namespace std;
 struct isLogSuccess {
 	bool isSucess = false;
-	infoPlayer Users;
+	infoPlayer User;
 };
 isLogSuccess checkAccountExist(vector<infoPlayer>dataUsers, string name) {
 	isLogSuccess res;
@@ -20,7 +20,7 @@ isLogSuccess checkAccountExist(vector<infoPlayer>dataUsers, string name) {
 	if (it!=dataUsers.end())
 	{
 		res.isSucess = true;
-		res.Users =*it;
+		res.User =*it;
 	}
 	//for (int i = 0; i < dataUsers.size(); i++)
 	//{
@@ -87,9 +87,9 @@ void drawLog_ResScreen(string title) {
 		atXY(83 + 49, 4 + i);
 		cout << '|';
 	};
-}
-int login_register(vector<infoPlayer>dataUsers) {
-	isLogSuccess A;
+};
+infoPlayer login_register(vector<infoPlayer>dataUsers) {
+	isLogSuccess res; 
 
 	register_again:
 	drawLog_ResScreen("[<<<--->>>]");
@@ -109,7 +109,7 @@ int login_register(vector<infoPlayer>dataUsers) {
 	}
 	else if (*g_choice == 2) //choice resgister
 	{
-		return -2;
+		return res.User;//default-condition
 	};
 
 	while (true)
@@ -119,15 +119,15 @@ int login_register(vector<infoPlayer>dataUsers) {
 
 			if (*c != 'r')
 			{
-				A = checkAccountExist(dataUsers, name); //is user's account exist?
-				if (A.isSucess)
+				res = checkAccountExist(dataUsers, name); //is user's account exist?
+				if (res.isSucess)//yes
 				{
 					atXY(85, 7);
 					cout << "Login Success! Turning to the home after 3s";
 					Sleep(3000);
-					return A.posUsers;
+					return res.User;
 				}
-				else
+				else//no
 				{
 					atXY(85, 7);
 					cout << "Login FAIL! Please check name or register";
@@ -151,7 +151,7 @@ int login_register(vector<infoPlayer>dataUsers) {
 
 			if (*c == 'r')
 			{
-				return -1;
+				return res.User;
 			}
 			*c = ' ';
 		};

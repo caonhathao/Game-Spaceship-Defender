@@ -1,5 +1,31 @@
-﻿  drawBorder.cpp
-  printTitle.cpp
+﻿  Source.cpp
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(108,26): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(174,5): error C2679: binary '=': no operator found which takes a right-hand operand of type 'initializer list' (or there is no acceptable conversion)
+  C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\struct.cpp(29,1):
+  could be 'infoPlayer &infoPlayer::operator =(infoPlayer &&)'
+  C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\struct.cpp(29,1):
+  or       'infoPlayer &infoPlayer::operator =(const infoPlayer &)'
+  C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(174,5):
+  while trying to match the argument list '(infoPlayer, initializer list)'
+  
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(176,33): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  endGame.cpp
+  infoPlayer.cpp
+  listPlayers.cpp
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\listPlayers.cpp(53,11): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\listPlayers.cpp(86,13): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\listPlayers.cpp(90,27): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+  login_register.cpp
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\login_register.cpp(154,5): error C2561: 'login_register': function must return a value
+  C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\login_register.cpp(91,12):
+  see declaration of 'login_register'
+  
+  saveDataUsers.cpp
+  stage_chapter_2.cpp
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\stage_chapter_2.cpp(470,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  stage_chapter_game.cpp
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\stage_chapter_game.cpp(256,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\stage_chapter_game.cpp(274,47): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\stage_chapter_game.cpp(338,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  struct.cpp
   Generating Code...
-x64\Debug\variable.obj : warning LNK4042: object specified more than once; extras ignored
-  spaceshipDefend.vcxproj -> C:\Users\admin\Source\Repos\Game-Spaceship-Defender\x64\Debug\spaceshipDefend.exe

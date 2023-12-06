@@ -90,7 +90,7 @@ int main() {
 	int posUser = -1;
 	string nameUser = "";
 
-	infoPlayer Player;
+	infoPlayer Player();
 
 	vector<infoPlayer>data;
 	data = inputDataAccount();
