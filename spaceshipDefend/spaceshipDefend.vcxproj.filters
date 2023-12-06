@@ -28,26 +28,23 @@
     <Filter Include="Source Files\dictionary_stickyNote">
       <UniqueIdentifier>{dd8c7c29-4cd1-4b0e-8337-d86e5a3f5d45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\STAGE_CHAPTER_2">
+      <UniqueIdentifier>{e31538d5-f959-411e-b9c4-25baa7352e5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\STAGE_CHAPTER_GAME">
+      <UniqueIdentifier>{a1fc8507-f4de-4e10-937a-7e7da41c832b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\STAGE_END_GAME">
+      <UniqueIdentifier>{3334767a-c684-4fde-81d1-5b1a14b078ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Class">
+      <UniqueIdentifier>{00e2070e-dbbf-4b6e-bd17-41dceeb38691}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\login_and_">
       <UniqueIdentifier>{1f4aef7b-f585-4e18-b1b9-e1c61ce15c8f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\stage_chapter_1">
+    <Filter Include="Source Files\stage_chapter_">
       <UniqueIdentifier>{968ccdc8-c52f-4c4d-a8fd-9ba92592c07c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\stage_chapter_2">
-      <UniqueIdentifier>{e31538d5-f959-411e-b9c4-25baa7352e5f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\stage_chapter_game">
-      <UniqueIdentifier>{a1fc8507-f4de-4e10-937a-7e7da41c832b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\stage_chapter_end">
-      <UniqueIdentifier>{3334767a-c684-4fde-81d1-5b1a14b078ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Class h">
-      <UniqueIdentifier>{7ddcaa59-1fea-4a29-a70a-7b126f586282}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Library h">
-      <UniqueIdentifier>{e3c4e73a-5064-4baa-88b4-2de0a4370c3b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,13 +52,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="stage_chapter_1.cpp">
-      <Filter>Source Files\stage_chapter_1</Filter>
+      <Filter>Source Files\stage_chapter_</Filter>
     </ClCompile>
     <ClCompile Include="story_chapter_1.cpp">
-      <Filter>Source Files\stage_chapter_1</Filter>
+      <Filter>Source Files\stage_chapter_</Filter>
     </ClCompile>
     <ClCompile Include="story_chapter_2.cpp">
-      <Filter>Source Files\stage_chapter_2</Filter>
+      <Filter>Source Files\STAGE_CHAPTER_2</Filter>
     </ClCompile>
     <ClCompile Include="welcomeScreen.cpp">
       <Filter>Source Files\login_and_</Filter>
@@ -73,7 +70,10 @@
       <Filter>Source Files\login_and_</Filter>
     </ClCompile>
     <ClCompile Include="stage_chapter_2.cpp">
-      <Filter>Source Files\stage_chapter_2</Filter>
+      <Filter>Source Files\STAGE_CHAPTER_2</Filter>
+    </ClCompile>
+    <ClCompile Include="variable.h">
+      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="loadingScreen.cpp">
       <Filter>Source Files\effects</Filter>
@@ -82,7 +82,7 @@
       <Filter>Source Files\effects</Filter>
     </ClCompile>
     <ClCompile Include="stage_chapter_game.cpp">
-      <Filter>Source Files\stage_chapter_game</Filter>
+      <Filter>Source Files\STAGE_CHAPTER_GAME</Filter>
     </ClCompile>
     <ClCompile Include="listPlayers.cpp">
       <Filter>Source Files\data_users</Filter>
@@ -115,7 +115,7 @@
       <Filter>Source Files\dictionary_stickyNote</Filter>
     </ClCompile>
     <ClCompile Include="endGame.cpp">
-      <Filter>Source Files\stage_chapter_end</Filter>
+      <Filter>Source Files\STAGE_END_GAME</Filter>
     </ClCompile>
     <ClCompile Include="effects_text.cpp">
       <Filter>Source Files</Filter>
@@ -138,28 +138,25 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="variable.h">
-      <Filter>Header Files\Library h</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="functions_control_console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Header Files\Class h</Filter>
+      <Filter>Header Files\Class</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files\Class h</Filter>
+      <Filter>Header Files\Class</Filter>
     </ClInclude>
     <ClInclude Include="effects_text.h">
-      <Filter>Header Files\Library h</Filter>
-    </ClInclude>
-    <ClInclude Include="functions_control_console.h">
-      <Filter>Header Files\Library h</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="functions_control_cursor_game.h">
-      <Filter>Header Files\Library h</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="functions_control_object.h">
-      <Filter>Header Files\Library h</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
