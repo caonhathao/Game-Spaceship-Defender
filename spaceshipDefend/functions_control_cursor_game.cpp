@@ -15,9 +15,9 @@ bool isCursorTouchLimit(int &startPosY, int &endPosY, Position cursorPosition) {
 void moveCursor(int startPosY, int endPosY,Position &cursorPosition) {
 	if (!isCursorTouchLimit(startPosY, endPosY, cursorPosition))
 	{
-		go_to_xy(cursorPosition.prevPosX, cursorPosition.prevPosY);
+		atXY(cursorPosition.prevPosX, cursorPosition.prevPosY);
 		cout << "  ";
-		go_to_xy(cursorPosition.nextPosX, cursorPosition.nextPosY);
+		atXY(cursorPosition.nextPosX, cursorPosition.nextPosY);
 		setColor(0, 6);
 		cout << ">>";
 		

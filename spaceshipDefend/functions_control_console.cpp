@@ -20,7 +20,7 @@ void disableResizeWindow() {
 	HWND hWnd = GetConsoleWindow();
 	SetWindowLong(hWnd, GWL_STYLE, GetWindowLong(hWnd, GWL_STYLE) & ~WS_SIZEBOX);
 }
-void go_to_xy(SHORT posX, SHORT posY) {
+void atXY(SHORT posX, SHORT posY) {
 	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD Position;
 	Position.X = posX;

@@ -54,31 +54,31 @@ void noticePlayer(int widthLine) {
 	setColor(0, 7);
 	for (int i = 1; i <= 5; i++)
 	{
-		go_to_xy(widthLine * 2 + 5 + 15 + 15, 10 + i);
+		atXY(widthLine * 2 + 5 + 15 + 15, 10 + i);
 		cout << '|';
 	};
 	for (int i = 0; i <= 16; i++)
 	{
-		go_to_xy(widthLine * 2 + 5 + 15 + 15 + i, 10);
+		atXY(widthLine * 2 + 5 + 15 + 15 + i, 10);
 		cout << '-';
 	};
 	for (int i = 1; i <= 5; i++)
 	{
-		go_to_xy(widthLine * 2 + 5 + 15 + 31, 10 + i);
+		atXY(widthLine * 2 + 5 + 15 + 31, 10 + i);
 		cout << '|';
 	};
 	for (int i = 0; i <= 16; i++)
 	{
-		go_to_xy(widthLine * 2 + 5 + 15 + 15 + i, 16);
+		atXY(widthLine * 2 + 5 + 15 + 15 + i, 16);
 		cout << '-';
 	};
 
 	setColor(0, 3);
-	go_to_xy(widthLine * 2 + 5 + 15 + 15 + 1, 10 + 1);
+	atXY(widthLine * 2 + 5 + 15 + 15 + 1, 10 + 1);
 	cout << "25/08/2506";
-	go_to_xy(widthLine * 2 + 5 + 15 + 15 + 1, 10 + 3);
+	atXY(widthLine * 2 + 5 + 15 + 15 + 1, 10 + 3);
 	cout << "VN - 34U25 - 8A";
-	go_to_xy(widthLine * 2 + 5 + 15 + 15 + 1, 10 + 5);
+	atXY(widthLine * 2 + 5 + 15 + 15 + 1, 10 + 5);
 	cout << "CRF - 8U";
 }
 void airPort(int lengthLine, int widthLine) {
@@ -86,7 +86,7 @@ void airPort(int lengthLine, int widthLine) {
 	setColor(0, 6);
 	for (int i = 6; i < widthLine + 5; i++)
 	{
-		go_to_xy(i, 0);
+		atXY(i, 0);
 		if (i % 2 == 0)
 		{
 			cout << 1;
@@ -94,12 +94,12 @@ void airPort(int lengthLine, int widthLine) {
 	}
 	for (int i = 0; i < lengthLine - 5; i++)
 	{
-		go_to_xy(5, i); //5,39
+		atXY(5, i); //5,39
 		cout << '|';
 	}
 	for (int i = 0; i < lengthLine - 5; i++)
 	{
-		go_to_xy(widthLine + 5, i); //25,39
+		atXY(widthLine + 5, i); //25,39
 		cout << '|';
 	}
 
@@ -108,7 +108,7 @@ void airPort(int lengthLine, int widthLine) {
 	{
 		if (i % 2 == 0)
 		{
-			go_to_xy(widthLine + 5 + 1, 25 + i); //widthLine=20
+			atXY(widthLine + 5 + 1, 25 + i); //widthLine=20
 			cout << "==============";
 		}
 	};
@@ -117,19 +117,19 @@ void airPort(int lengthLine, int widthLine) {
 	setColor(0, 6);
 	for (int i = widthLine + 5 + 15 + 1; i < widthLine * 2 + 5 + 15; i++)
 	{
-		go_to_xy(i, 0);
+		atXY(i, 0);
 		if (i % 2 == 0) {
 			cout << 2;
 		};
 	}
 	for (int i = 0; i < lengthLine - 5; i++) //lengthLine=40
 	{
-		go_to_xy(widthLine + 5 + 15, i);
+		atXY(widthLine + 5 + 15, i);
 		cout << '|';
 	}
 	for (int i = 0; i < lengthLine - 5; i++)
 	{
-		go_to_xy(widthLine * 2 + 5 + 15, i);
+		atXY(widthLine * 2 + 5 + 15, i);
 		cout << '|';
 	}
 
@@ -139,7 +139,7 @@ void airPort(int lengthLine, int widthLine) {
 	{
 		if (i % 2 == 0)
 		{
-			go_to_xy(widthLine * 2 + 5 + 15 + 15, 25 + i); //75,25+i
+			atXY(widthLine * 2 + 5 + 15 + 15, 25 + i); //75,25+i
 			cout << "[-----=====-----]";
 		};
 	}
@@ -152,45 +152,45 @@ void drawInfoBoard(int widthLine) {
 	setColor(0, 2);
 	for (int i = 0; i <= 35; i++)
 	{
-		go_to_xy(widthLine * 2 + 5 + 15 + 15 + 16 + 5 + i, 10);
+		atXY(widthLine * 2 + 5 + 15 + 15 + 16 + 5 + i, 10);
 		cout << '-';
 	}
 	for (int i = 1; i <= 25; i++)
 	{
-		go_to_xy(widthLine * 2 + 5 + 15 + 31 + 5, 10 + i);
+		atXY(widthLine * 2 + 5 + 15 + 31 + 5, 10 + i);
 		cout << '|';
 	}
 	for (int i = 1; i <= 25; i++)
 	{
-		go_to_xy(widthLine * 2 + 5 + 15 + 31 + 5 + 35, 10 + i);
+		atXY(widthLine * 2 + 5 + 15 + 31 + 5 + 35, 10 + i);
 		cout << '|';
 	}
 	for (int i = 0; i <= 35; i++)
 	{
-		go_to_xy(widthLine * 2 + 5 + 15 + 15 + 16 + 5 + i, 35);
+		atXY(widthLine * 2 + 5 + 15 + 15 + 16 + 5 + i, 35);
 		cout << '-';
 	}
 
 	setColor(0, 1);
-	go_to_xy(97, 11);
+	atXY(97, 11);
 	cout << "Thong so ki thuat VN - 34U25 - 8A:";
-	go_to_xy(97, 13);
+	atXY(97, 13);
 	cout << "> Sai canh: 56,39 m";
-	go_to_xy(97, 15);
+	atXY(97, 15);
 	cout << "> Dai: 40,05 m";
-	go_to_xy(97, 17);
+	atXY(97, 17);
 	cout << "> Rong: 34,05 m ";
-	go_to_xy(97, 19);
+	atXY(97, 19);
 	cout << "> Cao: 13,5 m";
-	go_to_xy(97, 21);
+	atXY(97, 21);
 	cout << "> So kip lai: 4 nguoi";
-	go_to_xy(97, 23);
+	atXY(97, 23);
 	cout << "> So dong co: 8 dong co DK-2";
-	go_to_xy(97, 25);
+	atXY(97, 25);
 	cout << "> Khoi luong bay toi da: 221,35t";
-	go_to_xy(97, 27);
+	atXY(97, 27);
 	cout << "> Tam hoat dong: 4 thang";
-	go_to_xy(97, 27);
+	atXY(97, 27);
 	cout << "> Nang luong hien tai: ";
 
 	int* powerNow = new int(0);
@@ -202,10 +202,10 @@ void drawInfoBoard(int widthLine) {
 	else cout << *powerNow << '%';
 	delete powerNow;
 
-	go_to_xy(97, 29);
+	atXY(97, 29);
 	cout << "> Vu khi: phao Lazer 40 mm";
 	/*
-	go_to_xy(97, 31); //tinh nang chua phat trien
+	atXY(97, 31); //tinh nang chua phat trien
 	cout << "> Vu khi: 4x6 ten lua SDK - 2U";
 	*/
 }
@@ -214,19 +214,19 @@ void drawTaskBoard() {
 	setColor(0, 7);
 	for (int i = 0; i <= 40 ; i++)
 	{
-		go_to_xy(136 + i, 10); cout << '-';
+		atXY(136 + i, 10); cout << '-';
 	}
 	for (int i = 1; i <= 25 ; i++)
 	{
-		go_to_xy(136, 10 + i); cout << '|';
+		atXY(136, 10 + i); cout << '|';
 	}
 	for (int i = 1; i <= 25; i++)
 	{
-		go_to_xy(136 + 40, 10 + i); cout << '|';
+		atXY(136 + 40, 10 + i); cout << '|';
 	}
 	for (int i = 0; i <= 40; i++)
 	{
-		go_to_xy(136 + i, 35);
+		atXY(136 + i, 35);
 		cout << '-';
 	}
 }
@@ -276,7 +276,7 @@ void stage_chapter_1(int speed, int& res) {
 				cout << endl;
 
 				stringFlicker("[ Press 'r' to continue ]", 0, 5, 2, 3);
-				go_to_xy(0, 5);
+				atXY(0, 5);
 				break;
 			};
 		};
@@ -341,10 +341,10 @@ void control() {
 void move(string object) {
 	if (!isPlayerTouchTask() && !isPlayerTouchGarage())
 	{
-		go_to_xy(playerPos.prevPosX, playerPos.prevPosY);
+		atXY(playerPos.prevPosX, playerPos.prevPosY);
 		cout << setfill(' ');
 		cout << setw(object.size()) << right << ' ';
-		go_to_xy(playerPos.nextPosX, playerPos.nextPosY);
+		atXY(playerPos.nextPosX, playerPos.nextPosY);
 		playerPos.prevPosX = playerPos.nextPosX;
 		playerPos.prevPosY = playerPos.nextPosY;
 		setColor(0, 2);
@@ -353,10 +353,10 @@ void move(string object) {
 	else
 	{
 		task();
-		go_to_xy(playerPos.prevPosX, playerPos.prevPosY);
+		atXY(playerPos.prevPosX, playerPos.prevPosY);
 		cout << setfill(' ');
 		cout << setw(object.size()) << right << ' ';
-		go_to_xy(playerPos.nextPosX, playerPos.nextPosY);
+		atXY(playerPos.nextPosX, playerPos.nextPosY);
 		playerPos.prevPosX = playerPos.nextPosX;
 		playerPos.prevPosY = playerPos.nextPosY;
 		cout << object;
@@ -379,72 +379,72 @@ void task() {
 	string str;
 	if (playerPos.prevPosY == 35)
 	{
-		go_to_xy(137, 11);
+		atXY(137, 11);
 		cout << "Yeu cau lap phao co nong:";
-		go_to_xy(137, 12);
+		atXY(137, 12);
 		cin.ignore();
 		getline(cin, str);
 		if (str == "Lazer 40 mm" || str == "40 mm" || str == "lazer 40mm" || str == "40mm")
 		{
-			go_to_xy(148, 12);
+			atXY(148, 12);
 			cout << " - DA LAP!";
 			(*task_point)++;
 			(*task_completed)++; 
 		}
 		else {
-			go_to_xy(148, 12);
+			atXY(148, 12);
 			cout << " - KHONG THE LAP!";
 			(*task_completed)++;
 		}
 	};
 	if (playerPos.prevPosY == 33)
 	{
-		go_to_xy(137, 14);
+		atXY(137, 14);
 		cout << "Yeu cau dong co:";
-		go_to_xy(137, 15);
+		atXY(137, 15);
 		getline(cin, str);
 		if (str == "DK-2" || str == "DK - 2" || str == "dk-2" || str == "dk - 2")
 		{
-			go_to_xy(148, 15);
+			atXY(148, 15);
 			cout << " - XAC NHAN!";
 			(*task_point)++;
 			(*task_completed)++;
 		}
 		else
 		{
-			go_to_xy(148, 15);
+			atXY(148, 15);
 			cout << " - KHONG PHU HOP!";
 			(*task_completed)++;
 		}
 	};
 	if (playerPos.prevPosY == 31)
 	{
-		go_to_xy(137, 17);
+		atXY(137, 17);
 		cout << "Yeu cau so dong co:";
-		go_to_xy(137, 18);
+		atXY(137, 18);
 		getline(cin, str);
 		if (str == "8")
 		{
-			go_to_xy(148, 18);
+			atXY(148, 18);
 			cout << " - DA LAP!";
 			(*task_point)++;
 			(*task_completed)++;
 		}
 		else
 		{
-			go_to_xy(148, 18);
+			atXY(148, 18);
 			cout << " - KHONG THE LAP";
 			(*task_completed)++;
 		}
 	};
 	if (playerPos.prevPosY == 29)
 	{
-		go_to_xy(137, 20);
+		atXY(137, 20);
 		cout << "Muc nang luong can nap:";
-		go_to_xy(137, 21);
+		atXY(137, 21);
 		getline(cin, str);
 		*powerAdd = stoi(str);
-		go_to_xy(148, 21);
+		atXY(148, 21);
 		cout << "HOAN THANH ! CAT CANH !";
 		drawInfoBoard(20);
 		(*task_point)++;

@@ -115,58 +115,58 @@ void drawPlayArea() {
 	setColor(0, 7);
 	for (int i = 0; i <= widthLine; i++)
 	{
-		go_to_xy(45 + i, 5);//(45 -105, 5)
+		atXY(45 + i, 5);//(45 -105, 5)
 		cout << '-';
 	};
 	for (int i = 1; i <= lengthLine; i++)
 	{
-		go_to_xy(45, 5 + i); cout << '|';//(45, 6 - 50)
-		go_to_xy(45 + widthLine, 5 + i); cout << '|';
+		atXY(45, 5 + i); cout << '|';//(45, 6 - 50)
+		atXY(45 + widthLine, 5 + i); cout << '|';
 	};
 	for (int i = 0; i <= widthLine; i++)
 	{
-		go_to_xy(45 + i, 5 + lengthLine); cout << '-';
+		atXY(45 + i, 5 + lengthLine); cout << '-';
 	};
 }
 void drawNoticePlayer() {
-	go_to_xy(125, 5);
+	atXY(125, 5);
 	setColor(0, 12);
 	cout << "--- <<< [---] >>> NOTICE <<< [---] >>> ---";
 	setColor(0, 6);
 	for (int i = 1; i <= 12; i++)
 	{
-		go_to_xy(125, 5 + i);
+		atXY(125, 5 + i);
 		cout << '|';
-		go_to_xy(167, 5 + i);
+		atXY(167, 5 + i);
 		cout << '|';
 	}
 	for (int i = 0; i <= 42; i++)
 	{
-		go_to_xy(125 + i, 17); cout << '-';
+		atXY(125 + i, 17); cout << '-';
 	};
 }
 void drawInfoNotice() {
 	setColor(0, 4);
-	go_to_xy(127, 6);
+	atXY(127, 6);
 	cout << "Nhiem vu:";
-	go_to_xy(127, 7);
+	atXY(127, 7);
 	setColor(0, 3);
 	cout << "[ Tranh hoac ban pha cac vat can. ]";
-	go_to_xy(127, 8);
+	atXY(127, 8);
 	setColor(0, 3);
 	cout << "Luu y:";
-	go_to_xy(127, 9);
+	atXY(127, 9);
 	setColor(0, 3);
 	cout << "(toi thieu can vuot qua 120 / 120)";
 
-	go_to_xy(127, 12);
+	atXY(127, 12);
 	setColor(0, 2);
 	cout << "Tien trinh: 0";
-	go_to_xy(127, 13);
+	atXY(127, 13);
 	setColor(0, 2);
 	cout << "So va cham: ";
 
-	go_to_xy(127, 15);
+	atXY(127, 15);
 	cout << "[ Press 'p' to pause ]";
 }
 #pragma endregion
@@ -240,7 +240,7 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 			//testing event [error here]
 			//fileDataE << "True" << endl;
 
-			go_to_xy(139, 12);
+			atXY(139, 12);
 			cout << *amount;
 		};
 		*pos = *pos + 1;
@@ -255,7 +255,7 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 				BARRIER = barriers[i];
 				controlBarrier();
 				setColor(0, 2);
-				go_to_xy(139, 13);
+				atXY(139, 13);
 				cout << *impact;
 				if (length == barriers.size())
 				{
@@ -326,7 +326,7 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 //void drawPlayer(string object) {
 //	playerPos.prevPosX = random(50, 90);
 //	playerPos.prevPosY = random(40, 49);
-//	go_to_xy(playerPos.prevPosX,playerPos.prevPosY);
+//	atXY(playerPos.prevPosX,playerPos.prevPosY);
 //	setColor(0, 2);
 //	cout << playerWeak.getObjectP();
 //}
@@ -360,10 +360,10 @@ void stage_chapter_2(int speed, int& process, int& contact) {
 void movePlayer(string object) {
 	if (!isPlayerHitWall() && !isPlayerImpactBarrier())
 	{
-		go_to_xy(playerPos.prevPosX, playerPos.prevPosY);
+		atXY(playerPos.prevPosX, playerPos.prevPosY);
 		cout << setfill(' ');
 		cout << setw(object.size()) << right << ' ';
-		go_to_xy(playerPos.nextPosX, playerPos.nextPosY);
+		atXY(playerPos.nextPosX, playerPos.nextPosY);
 		setColor(0, 2);
 		cout << object;
 		playerPos.prevPosX = playerPos.nextPosX;
@@ -394,7 +394,7 @@ void drawBarrier(bool& isProduct) {
 		}
 		BARRIER.prevPosX = random(46, 101);
 		BARRIER.prevPosY = random(6, 10);
-		go_to_xy(BARRIER.prevPosX, BARRIER.prevPosY);
+		atXY(BARRIER.prevPosX, BARRIER.prevPosY);
 		setColor(0, 5);
 		cout << BARRIER.line;
 	}
@@ -408,11 +408,11 @@ void moveBarrier() {
 	bool isP_Impact_B = isPlayerImpactBarrier();
 	if (!isBarrierHitWall() && !isP_Impact_B)
 	{
-		go_to_xy(BARRIER.prevPosX, BARRIER.prevPosY);
+		atXY(BARRIER.prevPosX, BARRIER.prevPosY);
 		cout << setfill(' ');
 		cout << setw(BARRIER.length) << right << ' ';
 
-		go_to_xy(BARRIER.nextPosX, BARRIER.nextPosY);
+		atXY(BARRIER.nextPosX, BARRIER.nextPosY);
 		setColor(0, 5);
 		cout << BARRIER.line;
 		BARRIER.prevPosX = BARRIER.nextPosX;
@@ -424,16 +424,16 @@ void moveBarrier() {
 
 		cout << setfill(' ');
 
-		go_to_xy(BARRIER.prevPosX, BARRIER.prevPosY);
+		atXY(BARRIER.prevPosX, BARRIER.prevPosY);
 		cout << setw(BARRIER.length) << right << ' ';
 
-		go_to_xy(BARRIER.nextPosX, BARRIER.nextPosY);
+		atXY(BARRIER.nextPosX, BARRIER.nextPosY);
 		cout << setw(BARRIER.length) << right << ' ';
 
 		barriers.erase(barriers.begin() + *Ba_th);
 	}
 	else {
-		go_to_xy(BARRIER.prevPosX, BARRIER.prevPosY);
+		atXY(BARRIER.prevPosX, BARRIER.prevPosY);
 		cout << setfill(' ');
 		cout << setw(BARRIER.length) << right << ' ';
 		barriers.erase(barriers.begin() + *Ba_th);

@@ -11,7 +11,7 @@ void drawObject(string object, Position& objectPos, int beginX, int endX, int be
 	objectPos.nextPosX = 0;
 	objectPos.nextPosY = 0;
 	setColor(0, idColor);
-	go_to_xy(objectPos.prevPosX, objectPos.prevPosY);
+	atXY(objectPos.prevPosX, objectPos.prevPosY);
 	cout << object;
 };
 void controlSignal(Activities& activities, char& c, int& speed,int& step) {

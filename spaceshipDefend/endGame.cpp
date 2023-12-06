@@ -13,19 +13,19 @@ void endGame(int score, int destroyed, int printSpeed) {
 	string para2 = "[ Cam on vi ban da danh thoi gian de trai nghiem game ]";
 	string para3 = "[ Tong ket game: ]";
 
-	go_to_xy(10, 0);
+	atXY(10, 0);
 	effectText_word(para1, printSpeed);
 	Sleep(20);
 
-	go_to_xy(5, 2);
+	atXY(5, 2);
 	effectText_word(para2, printSpeed);
 	Sleep(20);
 
-	go_to_xy(5,4);
+	atXY(5,4);
 	effectText_word(para3, printSpeed);
 	Sleep(20);
 
-	go_to_xy(5, 6);
+	atXY(5, 6);
 	setColor(0, 2);
 	cout << "Ban da dat duoc: ";
 	setColor(0, 4);
@@ -33,7 +33,7 @@ void endGame(int score, int destroyed, int printSpeed) {
 	setColor(0, 2);
 	cout << " diem, chuc mung!" << endl;
 
-	go_to_xy(5, 8);
+	atXY(5, 8);
 	cout << "Tieu diet tong cong ";
 	setColor(0, 4);
 	cout << destroyed;
@@ -48,7 +48,7 @@ void endGame(int score, int destroyed, int printSpeed) {
 		end = clock();
 	} while ((end - start) / CLOCKS_PER_SEC < 3);
 
-	go_to_xy(10, 10);
+	atXY(10, 10);
 	setColor(0, 3);
 	cout << "/* Press 'r' to back the menu */";
 

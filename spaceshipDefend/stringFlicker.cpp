@@ -5,7 +5,7 @@
 //using namespace std;
 //void stringFlicker(string str,int posX,int posY, int colorCode_1, int colorCode_2) {
 //	//set color and change 
-//	go_to_xy(posX, posY);
+//	atXY(posX, posY);
 //	setColor(0, colorCode_1);
 //	cout << str;
 //
@@ -26,7 +26,7 @@
 //
 //		if (*g_count_down == 0 || *g_count_down == 8000)
 //		{
-//			go_to_xy(posX, posY);
+//			atXY(posX, posY);
 //			setColor(0, colorCode_2);
 //			cout << str;
 //			if (*g_count_down == 0)
@@ -36,7 +36,7 @@
 //		}
 //		else if (*g_count_down == 4000)
 //		{
-//			go_to_xy(posX, posY);
+//			atXY(posX, posY);
 //			setColor(0, colorCode_1);
 //			cout << str;
 //		};

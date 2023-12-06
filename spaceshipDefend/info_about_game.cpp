@@ -24,26 +24,26 @@ void show(int printSpeed);
 void guide() {
 	system("cls");
 	printTitle(60, 2, 3);
-	go_to_xy(25, 0);
+	atXY(25, 0);
 	cout << "<<--->> T.U.R.T.O.R.I.A.L <<--->>";
 
-	go_to_xy(25, 3);
+	atXY(25, 3);
 	for (int i = 1; i <= 13; i++)
 	{
-		go_to_xy(25, 3 + i); cout << "||";
+		atXY(25, 3 + i); cout << "||";
 	};
 
-	go_to_xy(28, 5);
+	atXY(28, 5);
 	cout << "Press WASD to control your spaceship.";
-	go_to_xy(28, 7);
+	atXY(28, 7);
 	cout << "Press 'j' to fire the enemy.";
-	go_to_xy(28, 9);
+	atXY(28, 9);
 	cout << "Press 'space' to stop your spaceship.";
-	go_to_xy(28, 11);
+	atXY(28, 11);
 	cout << "Press 'p' to pause game.";
-	go_to_xy(28, 13);
+	atXY(28, 13);
 	cout << "Press 'r' to continue.";
-	go_to_xy(28, 15);
+	atXY(28, 15);
 	cout << "Press 'b' to return the previous";
 
 	stringFlicker("Press 'r' to back the previous", 50, 20, 3, 5);
@@ -55,7 +55,7 @@ void aboutGame(int printSpeed) {
 
 	for (int i = 0; i < para1.size(); i++)
 	{
-		go_to_xy(15, 5 + i);
+		atXY(15, 5 + i);
 		effectText_word(para1[i], printSpeed);
 	}
 
@@ -66,17 +66,17 @@ void drawInfo(int posX, int posY, int color_code) {
 	*g_choice = 0;
 	setColor(0, color_code);
 
-	go_to_xy(posX, posY);
+	atXY(posX, posY);
 	cout << "Ban muon thong tin nao ?";
-	go_to_xy(posX + 5, posY + 4);
+	atXY(posX + 5, posY + 4);
 	cout << "1. Huong dan choi";
-	go_to_xy(posX + 5, posY + 6);
+	atXY(posX + 5, posY + 6);
 	cout << "2. Ve tro choi";
 
 	setColor(0, 5);
 	cursorPos.prevPosX = posX + 2;
 	cursorPos.prevPosY = posY + 4;
-	go_to_xy(cursorPos.prevPosX, cursorPos.prevPosY);
+	atXY(cursorPos.prevPosX, cursorPos.prevPosY);
 	setColor(0, 6);
 	cout << ">>";
 }

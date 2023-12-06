@@ -9,26 +9,26 @@ void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCod
 void loadingPlot() {
 	system("cls");
 
-	go_to_xy(90, 13);
+	atXY(90, 13);
 	setColor(0, 4);
 	cout << "<<< --- >>> LOADING PLOT <<< --- >>>>";
 
 	setColor(0, 7);
-	go_to_xy(55, 16);
+	atXY(55, 16);
 	cout << '|';
 
 	for (int i = 0; i <= 101; i++)
 	{
-		go_to_xy(55 + i, 15);
+		atXY(55 + i, 15);
 		cout << '-';
-		go_to_xy(55 + i, 17);
+		atXY(55 + i, 17);
 		cout << '-';
 		Sleep(10);
 	}
 
-	go_to_xy(156, 16);
+	atXY(156, 16);
 	cout << '|';
-	go_to_xy(158, 16);
+	atXY(158, 16);
 	cout << ">>>";
 
 	setColor(0, 14);
@@ -36,11 +36,11 @@ void loadingPlot() {
 	{
 		if (i % 2 == 0)
 		{
-			go_to_xy(54 + i, 16);
+			atXY(54 + i, 16);
 			cout << "//";
 			Sleep(20);
 		};
-		go_to_xy(162, 16);
+		atXY(162, 16);
 		cout << i << '%';
 	}
 	stringFlicker("Press 'r' to continue", 95, 19, 2, 3);

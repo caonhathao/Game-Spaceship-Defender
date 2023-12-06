@@ -16,11 +16,11 @@ void about_me(int printSpeed) {
 
 	for (int i = 0; i < para.size(); i++)
 	{
-		go_to_xy(15, 5 + i);
+		atXY(15, 5 + i);
 		effectText_word(para[i], printSpeed);
 	}
 
-	go_to_xy(15, 12);
+	atXY(15, 12);
 	setColor(0, 2);
 	cout << "[ Press 'r' to back the menu. ]";
 
@@ -39,7 +39,7 @@ void about_me(int printSpeed) {
 		}
 		if (*g_count_down == 0 || *g_count_down == 3000)
 		{
-			go_to_xy(15, 12);
+			atXY(15, 12);
 			setColor(0, 12);
 			cout << "[ Press 'r' to back the menu. ]";
 			if (*g_count_down == 0)
@@ -52,7 +52,7 @@ void about_me(int printSpeed) {
 		{
 
 			setColor(0, 2);
-			go_to_xy(15, 12);
+			atXY(15, 12);
 			cout << "[ Press 'r' to back the menu. ]";
 		};
 		(*g_count_down)--;
