@@ -99,12 +99,9 @@ int main() {
 	while (true)
 	{
 		system("cls");
-		if (user.name == "") {} //login
-		else if (user.name == "_") {} // new register
-		else
+		if (user.name != "" || user.name != "_")
 		{
 			nameUser = user.name;
-
 		}
 
 		int res = 0;
@@ -154,9 +151,15 @@ int main() {
 				endGame(*g_score, *g_destroyed, *g_printSpeed);
 				main();
 			}
-			if (data.size() > 0 && posUser != -1)
+			if (data.size() > 0 && nameUser != "_" || nameUser != "")
 			{
-				data[posUser] = Player;
+				auto it = find(data.begin(), data.end(), [&](const infoPlayer& a) {
+					return a.name = user.name;
+					});
+				if (it!=data.end())
+				{
+					data.at(it)
+				}
 			};
 		}
 		else if (res == 2) {
