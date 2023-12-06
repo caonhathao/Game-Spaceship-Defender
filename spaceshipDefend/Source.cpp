@@ -43,8 +43,10 @@ void loadingScreen();
 void loadingPlot();
 void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2);
 void printTitle(int posX, int posY, int colorCode);
+
 int welcomeScreen(int printSpeed, string name);
-int login_register(vector<infoPlayer>dataUsers);
+
+infoPlayer login_register(vector<infoPlayer>dataUsers);
 
 void saveDataUsers(vector<infoPlayer>Data);
 void drawListPlayers();
@@ -87,10 +89,9 @@ int main() {
 	setScreenBufferSize(209, 55);
 
 	loadingScreen();
-	int posUser = -1;
-	string nameUser = "";
+	infoPlayer user(0,"",0,0,0,0);
 
-	infoPlayer Player();
+	string nameUser = "";
 
 	vector<infoPlayer>data;
 	data = inputDataAccount();
@@ -98,14 +99,13 @@ int main() {
 	while (true)
 	{
 		system("cls");
-		if (posUser >= 0) //login
+		if (user.name!="_") //login
 		{
-			nameUser = data[posUser].name;
-			Player = data[posUser];
+			nameUser = user.name;
+			
 		}
-		else if (posUser == -2) // new register
+		else if (user.name == "_") // new register
 		{
-			posUser = data.size() - 1;
 			nameUser = data[posUser].name;
 		}
 
@@ -162,8 +162,8 @@ int main() {
 			};
 		}
 		else if (res == 2) {
-			posUser = login_register(data);
-			if (posUser == -2)
+			user = login_register(data);
+			if (user.name=="_")
 			{
 				drawLog_ResScreen("REGISTER");
 				atXY(85, 5);
@@ -171,10 +171,9 @@ int main() {
 				cout << "Please tell me your name:";
 				cin >> nameUser;
 
-				Player = { 0,"",0,0,0,0 };
-				Player.name = nameUser;
-				Player.serial = data.size() + 1;
-				data.push_back(Player);
+				user.name = nameUser;
+				user.serial = data.size() + 1;
+				data.push_back(user);
 
 				saveDataUsers(data);
 			};

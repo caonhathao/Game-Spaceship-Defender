@@ -16,7 +16,7 @@ struct result {
 struct infoPlayer{
 	int serial = 0;
 
-	string name = "";
+	string name = "_";//default-unknown
 
 	int g_scoreChapter1 = 0;
 
@@ -33,4 +33,5 @@ struct infoPlayer{
 		g_contact = g_c;
 		g_scoreChapterGame = g_scg;
 	};
+	infoPlayer() {};
 };
