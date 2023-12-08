@@ -76,8 +76,8 @@ void drawListPlayers() {
 			else {
 				cout << setw(11) << left << dataInput.serial;
 			};
-			cout << setw(7) << left << dataInput.hadLogin;
 			cout << setw(10) << left << dataInput.name;
+			cout << setw(7) << left << dataInput.hadLogin;
 			cout << setw(14) << left << dataInput.g_scoreChapter1;
 			cout << setw(14) << left << to_string(dataInput.g_process) + "/" + to_string(dataInput.g_contact);
 			cout << setw(13) << left << dataInput.g_scoreChapterGame << endl;

@@ -102,9 +102,6 @@
     <ClCompile Include="login_register.cpp">
       <Filter>Source Files\login_and_choice</Filter>
     </ClCompile>
-    <ClCompile Include="saveDataUsers.cpp">
-      <Filter>Source Files\login_and_choice</Filter>
-    </ClCompile>
     <ClCompile Include="dictionary.cpp">
       <Filter>Source Files\dictionary_stickyNote</Filter>
     </ClCompile>
@@ -152,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="drawBorder.cpp">
       <Filter>Source Files\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="saveDataUsers.cpp">
+      <Filter>Source Files\data_users</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
