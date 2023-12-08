@@ -147,14 +147,7 @@ int main() {
 			}
 			if (data.size() > 0)
 			{
-				auto it = find_if(data.begin(), data.end(), [&](const infoPlayer& a) {
-					return a.name == user.name;
-					});
-				if (it!=data.end())
-				{
-					it->g_contact = g_contact;
-
-				}
+				//save user's data
 			};
 		}
 		else if (res == 2) {
