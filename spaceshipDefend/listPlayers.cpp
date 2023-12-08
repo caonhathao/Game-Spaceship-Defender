@@ -34,6 +34,8 @@ void drawListPlayers() {
 	atXY(56, 5);
 	cout << setw(11) << left << "Serial";
 	Sleep(10);
+	cout << setw(6) << left << "status";
+	Sleep(10);
 	cout << setw(10) << left << "Name";
 	Sleep(10);
 	cout << setw(14) << left << "Chapter_1";
