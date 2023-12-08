@@ -1,31 +1,85 @@
-﻿  Source.cpp
-C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(108,26): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(174,5): error C2679: binary '=': no operator found which takes a right-hand operand of type 'initializer list' (or there is no acceptable conversion)
-  C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\struct.cpp(29,1):
-  could be 'infoPlayer &infoPlayer::operator =(infoPlayer &&)'
-  C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\struct.cpp(29,1):
-  or       'infoPlayer &infoPlayer::operator =(const infoPlayer &)'
-  C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(174,5):
-  while trying to match the argument list '(infoPlayer, initializer list)'
-  
-C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(176,33): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  endGame.cpp
+﻿  drawBorder.cpp
   infoPlayer.cpp
   listPlayers.cpp
-C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\listPlayers.cpp(53,11): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
-C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\listPlayers.cpp(86,13): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
-C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\listPlayers.cpp(90,27): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\listPlayers.cpp(55,11): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\listPlayers.cpp(88,13): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\listPlayers.cpp(92,27): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
   login_register.cpp
-C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\login_register.cpp(154,5): error C2561: 'login_register': function must return a value
-  C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\login_register.cpp(91,12):
-  see declaration of 'login_register'
-  
+  printTitle.cpp
   saveDataUsers.cpp
-  stage_chapter_2.cpp
-C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\stage_chapter_2.cpp(470,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  stage_chapter_game.cpp
-C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\stage_chapter_game.cpp(256,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\stage_chapter_game.cpp(274,47): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\stage_chapter_game.cpp(338,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Source.cpp
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(157,14): error C2678: binary '=': no operator found which takes a left-hand operand of type 'const std::string' (or there is no acceptable conversion)
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(3208,32):
+  could be 'std::basic_string<char,std::char_traits<char>,std::allocator<char>> &std::basic_string<char,std::char_traits<char>,std::allocator<char>>::operator =(const _Elem)'
+          with
+          [
+              _Elem=char
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(3200,32):
+  or       'std::basic_string<char,std::char_traits<char>,std::allocator<char>> &std::basic_string<char,std::char_traits<char>,std::allocator<char>>::operator =(const _Elem *const )'
+          with
+          [
+              _Elem=char
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(3150,32):
+  or       'std::basic_string<char,std::char_traits<char>,std::allocator<char>> &std::basic_string<char,std::char_traits<char>,std::allocator<char>>::operator =(const std::basic_string<char,std::char_traits<char>,std::allocator<char>> &)'
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(3101,32):
+  or       'std::basic_string<char,std::char_traits<char>,std::allocator<char>> &std::basic_string<char,std::char_traits<char>,std::allocator<char>>::operator =(std::initializer_list<_Elem>)'
+          with
+          [
+              _Elem=char
+          ]
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(2979,32):
+  or       'std::basic_string<char,std::char_traits<char>,std::allocator<char>> &std::basic_string<char,std::char_traits<char>,std::allocator<char>>::operator =(std::basic_string<char,std::char_traits<char>,std::allocator<char>> &&) noexcept(<expr>)'
+  C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(157,14):
+  while trying to match the argument list '(const std::string, std::string)'
+  
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(161,10): error C2665: 'std::vector<infoPlayer,std::allocator<infoPlayer>>::at': no overloaded function could convert all the argument types
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\vector(1919,40):
+  could be 'const _Ty &std::vector<_Ty,std::allocator<_Ty>>::at(const unsigned __int64) const'
+          with
+          [
+              _Ty=infoPlayer
+          ]
+  	C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(161,10):
+  	'const _Ty &std::vector<_Ty,std::allocator<_Ty>>::at(const unsigned __int64) const': cannot convert argument 1 from '_InIt' to 'const unsigned __int64'
+          with
+          [
+              _Ty=infoPlayer
+          ]
+          and
+          [
+              _InIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<infoPlayer>>>
+          ]
+  		C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(161,14):
+  		No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\vector(1910,34):
+  or       '_Ty &std::vector<_Ty,std::allocator<_Ty>>::at(const unsigned __int64)'
+          with
+          [
+              _Ty=infoPlayer
+          ]
+  	C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(161,10):
+  	'_Ty &std::vector<_Ty,std::allocator<_Ty>>::at(const unsigned __int64)': cannot convert argument 1 from '_InIt' to 'const unsigned __int64'
+          with
+          [
+              _Ty=infoPlayer
+          ]
+          and
+          [
+              _InIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<infoPlayer>>>
+          ]
+  		C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(161,14):
+  		No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(161,10):
+  while trying to match the argument list '(_InIt)'
+          with
+          [
+              _InIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<infoPlayer>>>
+          ]
+  
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(162,5): error C2143: syntax error: missing ';' before '}'
+C:\Users\admin\source\repos\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(176,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  stickyNote.cpp
   struct.cpp
   Generating Code...

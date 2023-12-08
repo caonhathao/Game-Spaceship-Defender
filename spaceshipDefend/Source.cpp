@@ -98,12 +98,6 @@ int main() {
 
 	while (true)
 	{
-		system("cls");
-		if (user.name != "" || user.name != "_")
-		{
-			nameUser = user.name;
-		}
-
 		int res = 0;
 		res = welcomeScreen(*g_printSpeed, nameUser);
 
@@ -151,14 +145,15 @@ int main() {
 				endGame(*g_score, *g_destroyed, *g_printSpeed);
 				main();
 			}
-			if (data.size() > 0 && nameUser != "_" || nameUser != "")
+			if (data.size() > 0)
 			{
-				auto it = find(data.begin(), data.end(), [&](const infoPlayer& a) {
-					return a.name = user.name;
+				auto it = find_if(data.begin(), data.end(), [&](const infoPlayer& a) {
+					return a.name == user.name;
 					});
 				if (it!=data.end())
 				{
-					data.at(it)
+					it->g_contact = g_contact;
+
 				}
 			};
 		}
