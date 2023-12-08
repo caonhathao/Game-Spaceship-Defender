@@ -28,6 +28,8 @@ struct infoPlayer{
 	int g_contact = 0;
 
 	int g_scoreChapterGame = 0;
+
+	bool hadLogin = false;
 	infoPlayer(int s, string n, int g_sc1, int g_p,int g_c, int g_scg) {
 		serial = s;
 		name = n;
