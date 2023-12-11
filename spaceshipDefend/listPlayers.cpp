@@ -13,7 +13,7 @@ using namespace std;
 
 infoPlayer dataInput;
 
-std::vector<infoPlayer> inputDataAccount();
+std::vector<infoPlayer> inputDataAccount(string& st_login);
 //void startPlot();
 
 void drawListPlayers() {
@@ -42,7 +42,7 @@ void drawListPlayers() {
 	Sleep(10);
 	cout << setw(14) << left << "Chapter_2";
 	Sleep(10);
-	cout << setw(13) << left<< "Chapter_game" << endl;
+	cout << setw(13) << left << "Chapter_game" << endl;
 	Sleep(10);
 
 	//atXY(127, 5);
@@ -58,8 +58,8 @@ void drawListPlayers() {
 	}
 
 	cout << setfill(' ');
-
-	vector<infoPlayer>Data = inputDataAccount();
+	string st = "";
+	vector<infoPlayer>Data = inputDataAccount(st);
 
 	if (Data.size() != 0)
 	{
@@ -76,14 +76,21 @@ void drawListPlayers() {
 			else {
 				cout << setw(11) << left << dataInput.serial;
 			};
+
 			cout << setw(10) << left << dataInput.name;
-			cout << setw(7) << left << dataInput.hadLogin;
+
+			if (dataInput.hadLogin == true)
+			{
+				cout << setw(7) << left << st;
+			}
+			else cout << setw(7) << left << "last";
+
 			cout << setw(14) << left << dataInput.g_scoreChapter1;
 			cout << setw(14) << left << to_string(dataInput.g_process) + "/" + to_string(dataInput.g_contact);
 			cout << setw(13) << left << dataInput.g_scoreChapterGame << endl;
 		}
 	}
-		
+
 	cout << endl;
 	atXY(56, 7 + Data.size());
 	cout << setfill('-');
