@@ -137,7 +137,10 @@
     <ClCompile Include="functions_control_console.cpp" />
     <ClCompile Include="functions_control_cursor_game.cpp" />
     <ClCompile Include="functions_control_object.cpp" />
-    <ClCompile Include="infoPlayer.cpp" />
+    <ClCompile Include="infoPlayer.cpp">
+      <BuildStlModules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</BuildStlModules>
+      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdcpp20</LanguageStandard>
+    </ClCompile>
     <ClCompile Include="info_about_game.cpp" />
     <ClCompile Include="listPlayers.cpp" />
     <ClCompile Include="loadingPlot.cpp" />

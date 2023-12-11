@@ -18,7 +18,7 @@ int status;
 
 infoPlayer dataPlayer;
 
-std::vector<string>splitString(string str) {
+std::vector<string>splitString(string &str) {
 	vector<string>res = {};
 	string a = "";
 	for (int i = 0; i < str.length(); i++)
@@ -36,7 +36,7 @@ std::vector<string>splitString(string str) {
 	res.push_back(a);
 	return res;
 }
-std::vector<infoPlayer> inputDataAccount() {
+std::vector<infoPlayer> inputDataAccount(string &st_login) {
 	vector<infoPlayer>res = {};
 
 	status = _chdir(".\\Data-Account");
@@ -83,29 +83,32 @@ std::vector<infoPlayer> inputDataAccount() {
 		}
 
 		vector<string>split = splitString(line);
+		
+		stringstream ss;
+		ss << split[0];
+		ss >> dataPlayer.serial;
 
-		int num = 0;
-		stringstream str_0(split[0]);
-		str_0 >> num;
-		dataPlayer.serial = num;
+		ss << split[1];
+		ss >> dataPlayer.name;
 
-		dataPlayer.name = split[1];
+		ss << split[2];
+		ss >> dataPlayer.hadLogin;
+		if (dataPlayer.hadLogin == true)
+		{
+			st_login = "current";
+		};
 
-		stringstream str_2(split[2]);
-		str_2 >> num;
-		dataPlayer.g_scoreChapter1 = num;
+		ss << split[3];
+		ss >> dataPlayer.g_scoreChapter1;
 
-		stringstream str_3(split[3]);
-		str_3 >> num;
-		dataPlayer.g_process = num;
+		ss << split[4];
+		ss >> dataPlayer.g_process;
 
-		stringstream str_4(split[4]);
-		str_4 >> num;
-		dataPlayer.g_contact = num;
+		ss << split[5];
+		ss >> dataPlayer.g_contact;
 
-		stringstream str_5(split[5]);
-		str_5 >> num;
-		dataPlayer.g_scoreChapterGame = num;
+		ss << split[6];
+		ss >> dataPlayer.g_scoreChapterGame;
 
 		res.push_back(dataPlayer);
 	};

@@ -18,7 +18,6 @@ int* g_count_down = new int(0);
 int* g_choice = new int(0);
 int* g_PlayerSize = new int(0);
 int* g_step = new int(1);
-
 int* g_score = new int(0);
 int* g_destroyed = new int(0);
 int* g_process = new int(0);
@@ -37,7 +36,7 @@ Player* PlayerWeak = new Player(5, 100, "|-[O]-|", ".");
 Enemy* EnemyWeak = new Enemy(70, 1, 1, "|-x-|");
 
 #pragma region functions
-std::vector<infoPlayer>inputDataAccount();
+std::vector<infoPlayer>inputDataAccount(string& st_login);
 
 void loadingScreen();
 void loadingPlot();
@@ -89,19 +88,33 @@ int main() {
 	setScreenBufferSize(209, 55);
 
 	loadingScreen();
-	infoPlayer user(0, "", 0, 0, 0, 0);
-
+	infoPlayer user;
 	string nameUser = "";
+	string st_login = "";
 
-	vector<infoPlayer>data;
-	data = inputDataAccount();
+	//add data saved (if it exists)
+	vector<infoPlayer>data = inputDataAccount(st_login);
+
+	if (st_login == "current")
+	{
+		auto index = find_if(data.begin(), data.end(), [&](const infoPlayer& a) {
+			return a.hadLogin == true;
+			});
+
+		if (index != data.end())
+		{
+			user = *index;
+		}
+		nameUser = user.name;
+	};
 
 	while (true)
 	{
 		int res = 0;
 		res = welcomeScreen(*g_printSpeed, nameUser);
 
-		if (res == 1) //data need export: serial, name, g_scoreChapter1, g_process/g_contact, g_scoreChapter2,g_scoreChapterGame
+		//data need export: serial, name, g_scoreChapter1, g_process/g_contact, g_scoreChapter2,g_scoreChapterGame
+		if (res == 1)
 		{
 			system("cls");
 			cout << "Ban co muon di theo cot truyen khong (Y/N): ";
@@ -124,7 +137,7 @@ int main() {
 				stage_chapter_2(*g_speed, *g_process, *g_contact);
 				user.g_process = *g_process;
 				user.g_contact = *g_contact;
-				cin.ignore();//chay duoc stage_chapter_game
+				cin.ignore();
 
 				cout << "[ Dang khoi dong man choi chinh ]";
 				Sleep(2000);
@@ -145,9 +158,16 @@ int main() {
 				endGame(*g_score, *g_destroyed, *g_printSpeed);
 				main();
 			}
-			if (data.size() > 0)
+			if (data.size() > 0 && nameUser != "")
 			{
-				//save user's data
+				auto index = find_if(data.begin(), data.end(), [&](const infoPlayer& a) {
+					return a.hadLogin == true;
+					});
+				if (index != data.end())
+				{
+					*index = user;
+				}
+				saveDataUsers(data);
 			};
 		}
 		else if (res == 2) {
