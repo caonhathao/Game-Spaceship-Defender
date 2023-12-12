@@ -52,13 +52,6 @@ std::vector<infoPlayer> inputDataAccount(string &st_login) {
 		fileDataInput.close();
 	}
 
-	int serial = 0;
-	string name = "";
-	int g_scoreChapter1 = 0;
-	int g_process = 0;
-	int impact = 0;
-	int g_scoreChapterGame = 0;
-
 	fstream fileDataInput("data_Users.txt", ios::in);
 	fileDataInput.seekg(0, ios::beg);
 
