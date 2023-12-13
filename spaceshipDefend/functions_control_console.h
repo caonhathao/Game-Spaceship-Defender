@@ -7,7 +7,8 @@
 using namespace std;
 void setWindowSize(SHORT width, SHORT height);
 void setScreenBufferSize(SHORT width, SHORT height);
-void disableResizeWindow();
+void moveWindow(SHORT x, SHORT y, SHORT width, SHORT height);
+void disableResizeWindow(SHORT width, SHORT height);
 void atXY(SHORT posX, SHORT posY);
 void showCursor(bool cursorVisibility);
 void showScrollbar(BOOL Show);

@@ -67,15 +67,14 @@ std::vector<infoPlayer> inputDataAccount(string &st_login) {
 
 	while (!fileDataInput.eof())
 	{
-		char temp[255];
-		fileDataInput.getline(temp, 255);
-		string line = temp;
-		if (line.length() == 0)
+		string temp;
+		getline(fileDataInput, temp);
+		if (temp.length() == 0)
 		{
 			break;
 		}
 
-		vector<string>split = splitString(line);
+		vector<string>split = splitString(temp);
 		
 		stringstream ss;
 		ss << split[0];

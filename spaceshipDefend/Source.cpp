@@ -48,7 +48,7 @@ int welcomeScreen(int printSpeed, string name);
 infoPlayer login_register(vector<infoPlayer>dataUsers);
 
 void saveDataUsers(vector<infoPlayer>Data);
-void drawListPlayers();
+void drawListPlayers(vector<infoPlayer>&data);
 void drawLog_ResScreen(string title);
 
 void story_chapter_1(int printSpeed);
@@ -83,13 +83,13 @@ int main() {
 
 	showCursor(false);
 	showScrollbar(false);
-	disableResizeWindow();
-	setWindowSize(209, 55);
-	setScreenBufferSize(209, 55);
+	//disableResizeWindow(200,50);
+	moveWindow(0, 0, 200, 50);
+	setWindowSize(200, 50);
+	setScreenBufferSize(200, 50);
 
 	loadingScreen();
 	infoPlayer user;
-	string nameUser = "";
 	string st_login = "";
 
 	//add data saved (if it exists)
@@ -105,13 +105,13 @@ int main() {
 		{
 			user = *index;
 		}
-		nameUser = user.name;
 	};
 
 	while (true)
 	{
+		system("cls");
 		int res = 0;
-		res = welcomeScreen(*g_printSpeed, nameUser);
+		res = welcomeScreen(*g_printSpeed, user.name);
 
 		//data need export: serial, name, g_scoreChapter1, g_process/g_contact, g_scoreChapter2,g_scoreChapterGame
 		if (res == 1)
@@ -158,7 +158,7 @@ int main() {
 				endGame(*g_score, *g_destroyed, *g_printSpeed);
 				main();
 			}
-			if (data.size() > 0 && nameUser != "")
+			if (data.size() > 0)
 			{
 				auto index = find_if(data.begin(), data.end(), [&](const infoPlayer& a) {
 					return a.hadLogin == true;
@@ -166,21 +166,19 @@ int main() {
 				if (index != data.end())
 				{
 					*index = user;
+					saveDataUsers(data);
 				}
-				saveDataUsers(data);
 			};
 		}
 		else if (res == 2) {
 			user = login_register(data);
-			if (user.name == "_")
+			if (user.name == "")
 			{
 				drawLog_ResScreen("REGISTER");
 				atXY(85, 5);
 
-				cout << "Please tell me your name:";
-				cin >> nameUser;
-
-				user.name = nameUser;
+				cout << "Please tell me your name [FIRST CHARACTER IS A NUMBER OR ALPHA]:";
+				cin >> user.name;
 				user.serial = data.size() + 1;
 				data.push_back(user);
 
@@ -188,7 +186,7 @@ int main() {
 			};
 		}
 		else if (res == 3) {
-			drawListPlayers();
+			drawListPlayers(data);
 		}
 		else if (res == 4) {
 

@@ -53,7 +53,7 @@ void screenInfo(int printSpeed, string name) {
 
 	atXY(90, 2);
 	setColor(0, 12);
-	str = "WELCOME TO SPACESHIP_DEFENDER GAME!";
+	str = "WELCOME TO SPACESHIP DEFENDER GAME!";
 	effectText_char(str, printSpeed);
 
 	atXY(55, 3);

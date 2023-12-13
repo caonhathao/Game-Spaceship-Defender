@@ -7,7 +7,7 @@
 using namespace std;
 
 void saveDataUsers(vector<infoPlayer>Data) {
-	ofstream outputFile(".\\Data_Users.txt", ios::trunc);
+	ofstream outputFile(".\\data_Users.txt", ios::trunc);
 
 	outputFile << Data[0].serial << ' ' << Data[0].name << ' ' << Data[0].hadLogin << ' ' << Data[0].g_scoreChapter1 << ' ' << Data[0].g_process << ' ' << Data[0].g_contact << ' ' << Data[0].g_scoreChapterGame;
 

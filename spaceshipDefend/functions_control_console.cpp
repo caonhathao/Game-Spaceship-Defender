@@ -1,24 +1,31 @@
 #include"functions_control_console.h"
 void setWindowSize(SHORT width, SHORT height) {
 	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
-	SMALL_RECT WindowSize;
+	SMALL_RECT WindowSize{};
 	WindowSize.Top = 0;
 	WindowSize.Left = 0;
 	WindowSize.Right = width;
 	WindowSize.Bottom = height;
-
-	SetConsoleWindowInfo(hStdout, 1, &WindowSize);
+	SetConsoleWindowInfo(hStdout, true, &WindowSize);
 }
 void setScreenBufferSize(SHORT width, SHORT height) {
 	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
-	COORD newSize;
-	newSize.X = width;
-	newSize.Y = height;
+	COORD newSize{};
+	newSize.X = width + 1;
+	newSize.Y = height + 1; 
 	SetConsoleScreenBufferSize(hStdout, newSize);
 }
-void disableResizeWindow() {
-	HWND hWnd = GetConsoleWindow();
-	SetWindowLong(hWnd, GWL_STYLE, GetWindowLong(hWnd, GWL_STYLE) & ~WS_SIZEBOX);
+void moveWindow(SHORT x, SHORT y, SHORT width, SHORT height)
+{
+	HWND console = GetConsoleWindow();
+	MoveWindow(console, x, y, width, height, false);
+
+}
+void disableResizeWindow(SHORT width, SHORT height) {
+	HWND console = GetConsoleWindow();
+	RECT rect;
+	GetWindowRect(console, &rect);
+	MoveWindow(console, rect.left, rect.top, width, height, true);
 }
 void atXY(SHORT posX, SHORT posY) {
 	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);

@@ -1,3 +1,5 @@
-﻿  functions_control_console.cpp
-x64\Debug\variable.obj : warning LNK4042: object specified more than once; extras ignored
+﻿  Source.cpp
+D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(182,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  login_register.cpp
+  Generating Code...
   spaceshipDefend.vcxproj -> D:\Develop\GitHub\Game-Spaceship-Defender\x64\Debug\spaceshipDefend.exe

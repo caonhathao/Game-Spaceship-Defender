@@ -36,15 +36,19 @@ void effectText_word(string str, int printSpeed) {
 	cout << endl;
 }
 string uppercaseLetter(string name) {
-	char temp[32] = {};
-	string res = "";
-	for (int i = 0; i < name.size(); i++)
+	if (name == "" || name == "_")
 	{
-		temp [i]= name[i];
-		res.push_back(temp[i] - 32);
+		return "";
 	}
-	
-	return res;
+	else
+	{
+		string res = "";
+		for (int i = 0; i < name.size(); i++)
+		{
+			res += name[i] - 32;
+		}
+		return res;
+	}
 }
 void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2) {
 	lock_guard<mutex>lock(mtx_2);

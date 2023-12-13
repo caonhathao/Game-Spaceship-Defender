@@ -17,10 +17,10 @@ isLogSuccess checkAccountExist(vector<infoPlayer>dataUsers, string name) {
 	auto it = find_if(dataUsers.begin(), dataUsers.end(), [&](const infoPlayer& a) {
 		return a.name == name;
 		});
-	if (it!=dataUsers.end())
+	if (it != dataUsers.end())
 	{
 		res.isSucess = true;
-		res.User =*it;
+		res.User = *it;
 	}
 	//for (int i = 0; i < dataUsers.size(); i++)
 	//{
@@ -38,7 +38,7 @@ int isLogin() {
 	cout << "1. Dang nhap";
 	atXY(90, 7);
 	cout << "2. Dang ky";
-	
+
 	cursorPos.prevPosX = 85;
 	cursorPos.prevPosY = 5;
 	atXY(cursorPos.prevPosX, cursorPos.prevPosY);
@@ -89,9 +89,9 @@ void drawLog_ResScreen(string title) {
 	};
 };
 infoPlayer login_register(vector<infoPlayer>dataUsers) {
-	isLogSuccess res; 
+	isLogSuccess res;
 
-	register_again:
+register_again:
 	drawLog_ResScreen("[<<<--->>>]");
 
 	*g_choice = isLogin();
@@ -109,47 +109,48 @@ infoPlayer login_register(vector<infoPlayer>dataUsers) {
 	}
 	else if (*g_choice == 2) //choice resgister
 	{
+		res.User.name = "";
 		return res.User;//default-condition
 	};
 
-	while (true)
+	while (true)//check account
 	{
 		if (_kbhit()) {
 			*c = _getch();
 
-			if (*c != 'r')
-			{
-				res = checkAccountExist(dataUsers, name); //is user's account exist?
-				if (res.isSucess)//yes
+				if (*c != 'b')
 				{
-					atXY(85, 7);
-					cout << "Login Success! Turning to the home after 3s";
-					Sleep(3000);
-					return res.User;
-				}
-				else//no
-				{
-					atXY(85, 7);
-					cout << "Login FAIL! Please check name or register";
-					
-					atXY(85, 8);
-					cout << "Press 'b' to back the menu";
-					while (*c != ' ')
+					res = checkAccountExist(dataUsers, name); //is user's account exist?
+					if (res.isSucess)//yes
 					{
-						if (_kbhit())
-						{
-							*c = _getch();
-							if (*c == 'r')
-							{
-								*c = ' ';
-								goto register_again;
-							}
-						}
-					};
-				}
-			}
+						atXY(85, 7);
+						cout << "Login Success! Turning to the home after 3s";
+						Sleep(3000);
+						return res.User;
+					}
+					else//no
+					{
+						atXY(85, 7);
+						cout << "Login FAIL! Please check name or register";
 
-			if (*c == 'r')
+						atXY(85, 8);
+						cout << "Press 'b' to back the menu";
+						while (*c != ' ')
+						{
+							if (_kbhit())
+							{
+								*c = _getch();
+								if (*c == 'b')
+								{
+									*c = ' ';
+									goto register_again;
+								}
+							}
+						};
+					}
+				}
+
+			if (*c == 'b')
 			{
 				return res.User;
 			}
