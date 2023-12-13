@@ -14,96 +14,68 @@ string str = "";
 #pragma region functions
 void effectText_char(string str, int printSpeed);
 void drawBorder(int posX, int posY, int height, int width, int color_code);
-void drawScreen();
-void drawTitle();
 void printTitle(int posX, int posY, int color_code);
 void screenInfo(int printSpeed, string name);
 int welcomeScreen(int printSpeed, string name);
 #pragma endregion
 
 #pragma region decorationFuncs
-void drawTitle() {
-	//Y>=25;
-};
-void drawScreen() {
-	setColor(0, 2);
-	for (SHORT i = 0; i < 100; i++)
-	{
-		atXY(56 + i, 5);
-		cout << '-';
-	}
-	for (SHORT i = 1; i <= 15; i++)
-	{
-		atXY(56, 5 + i);
-		cout << '|';
-	}
-	for (SHORT i = 0; i < 100; i++)
-	{
-		atXY(56 + i, 20);
-		cout << '-';
-	}
-	for (SHORT i = 1; i < 15; i++)
-	{
-		atXY(155, 5 + i);
-		cout << '|';
-	}
-};
 void screenInfo(int printSpeed, string name) {
 	setColor(0, 2);
 
-	atXY(90, 2);
+	atXY(84, 2);
 	setColor(0, 12);
 	str = "WELCOME TO SPACESHIP DEFENDER GAME!";
 	effectText_char(str, printSpeed);
 
-	atXY(55, 3);
+	atXY(68, 3);
 	setColor(0, 14);
-	str = "[ NOTE: Game nay duoc lam ra chi co muc dich duy nhat la vui ve ma thoi, ngoai ra thi cha co gi khac! ]";
+	str = "[ The loai: Ban sung || Do hoa: Console || Moi Truong: Window]";
 	effectText_char(str, printSpeed);
 
-	//drawScreen();
-	drawBorder(56, 5, 15, 100, 2);
+	drawBorder(50, 5, 15, 100, 2);
 
-	atXY(90 - name.size(), 6);
+	atXY(85 - name.size(), 6);
 	setColor(0, 8);
 	string* temp = new string("");
 	*temp = uppercaseLetter(name);
 	str = "Chuc ban co trai nghiem vui ve :) " + *temp;
 	effectText_char(str, printSpeed);
 
-	atXY(94, 8);
+	atXY(85, 8);
 	setColor(0, 11);
-	cout << "< --- > MOI CHON < --- >";
+	cout << "<< -==- >> MOI CHON << -==- >>";
 
 	Sleep(500);
-	atXY(95, 10);
+	atXY(88, 10);
 	cout << "1. Choi ngay va luon.";
 
 	Sleep(500);
-	atXY(95, 12);
+	atXY(88, 12);
 	cout << "2. Dang nhap hoac dang ky";
 
 	Sleep(500);
-	atXY(95, 14);
+	atXY(88, 14);
 	cout << "3. Danh sach nguoi choi";
 
 	Sleep(500);
-	atXY(95, 16);
+	atXY(88, 16);
 	cout << "4. Thong tin ve game.";
 
 	Sleep(500);
-	atXY(95, 18);
-	cout << "5. About me?";
+	atXY(88, 18);
+	cout << "5. Ve tac gia.";
 	delete temp;
+	cin.ignore();
 }
 #pragma endregion
 
 #pragma region mainFuncs
 int welcomeScreen(int printSpeed, string name) {
 	screenInfo(printSpeed, name);
-	printTitle(58, 25, 2);
+	printTitle(52, 25, 2);
 
-	cursorPos.prevPosX = 92;
+	cursorPos.prevPosX = 84;
 	cursorPos.prevPosY = 10;
 
 	atXY(cursorPos.prevPosX, cursorPos.prevPosY);

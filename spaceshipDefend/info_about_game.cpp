@@ -18,7 +18,7 @@ void aboutGame(int printSpeed);
 void info_about_game(int printSpeed);
 void drawBorder(int posX, int posY, int height, int width, int color_code);
 void printTitle(int posX, int posY, int colorCode);
-void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2);
+void stringFlicker(string str, char k, int posX, int posY, int colorCode_1, int colorCode_2);
 void show(int printSpeed);
 #pragma endregion
 void guide() {
@@ -46,7 +46,7 @@ void guide() {
 	atXY(28, 15);
 	cout << "Press 'b' to return the previous";
 
-	stringFlicker("Press 'r' to back the previous", 50, 20, 3, 5);
+	stringFlicker("Press 'r' to back the previous", 'r', 50, 20, 3, 5);
 }
 void aboutGame(int printSpeed) {
 	vector<string>para1 = { "[ Ten Game: SPACESHIP_DEFENDER ]",
@@ -60,7 +60,7 @@ void aboutGame(int printSpeed) {
 	}
 
 	Sleep(1200);
-	stringFlicker("Press 'b' to back the previous", 15, 8, 2, 4);
+	stringFlicker("Press 'b' to back the previous",'b', 15, 8, 2, 4);
 }
 void drawInfo(int posX, int posY, int color_code) {
 	*g_choice = 0;
@@ -130,7 +130,7 @@ void info_about_game(int printSpeed) {
 	drawInfo(58 + 57, 15, 3);
 
 	thread th_show(show, printSpeed);
-	thread th_flicker(stringFlicker, "Press 'r' to bach the previous", 20, 20, 3, 4);
+	thread th_flicker(stringFlicker, "Press 'r' to bach the previous",'r', 20, 20, 3, 4);
 
 	th_show.join();
 	th_flicker.join();

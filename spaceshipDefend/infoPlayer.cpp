@@ -67,7 +67,7 @@ std::vector<infoPlayer> inputDataAccount(string &st_login) {
 
 	while (!fileDataInput.eof())
 	{
-		string temp;
+		string temp="";
 		getline(fileDataInput, temp);
 		if (temp.length() == 0)
 		{
@@ -102,6 +102,7 @@ std::vector<infoPlayer> inputDataAccount(string &st_login) {
 		ss << split[6];
 		ss >> dataPlayer.g_scoreChapterGame;
 
+		ss.clear();
 		res.push_back(dataPlayer);
 	};
 

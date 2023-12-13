@@ -90,7 +90,7 @@ void noticeStart() {
 	effectText_char(para, 20);
 	cout << endl;
 
-	stringFlicker("/* Press 'r' to continue ! */", 0, 3, 2, 3);
+	stringFlicker("/* Press 'r' to continue ! */",'r', 0, 3, 2, 3);
 
 	//setColor(0, 2);
 	//cout << ;
@@ -318,7 +318,7 @@ void stage_chapter_2(int speed, int& g_process, int& g_contact) {
 	delete isProduct;
 
 	noticeFinish();
-	stringFlicker("/* Press 'r' to continue */", 0, 3, 2, 4);
+	stringFlicker("/* Press 'r' to continue */",'r', 0, 3, 2, 4);
 };
 #pragma endregion
 

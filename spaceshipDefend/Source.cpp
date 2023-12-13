@@ -23,8 +23,6 @@ int* g_destroyed = new int(0);
 int* g_process = new int(0);
 int* g_contact = new int(0);
 
-struct infoPlayer;
-
 Position cursorPos = { 0,0,0,0 };
 Position PlayerPos = { 0,0,0,0 };
 Position EnemyPos = { 0,0,0,0 };
@@ -40,7 +38,7 @@ std::vector<infoPlayer>inputDataAccount(string& st_login);
 
 void loadingScreen();
 void loadingPlot();
-void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2);
+void stringFlicker(string str,char k, int posX, int posY, int colorCode_1, int colorCode_2);
 void printTitle(int posX, int posY, int colorCode);
 
 int welcomeScreen(int printSpeed, string name);
@@ -175,11 +173,15 @@ int main() {
 			if (user.name == "")
 			{
 				drawLog_ResScreen("REGISTER");
-				atXY(85, 5);
 
-				cout << "Please tell me your name [FIRST CHARACTER IS A NUMBER OR ALPHA]:";
+				atXY(85, 5);
+				cout<<"[FIRST CHARACTER IS A NUMBER OR ALPHA]";
+				atXY(85, 6);
+				cout << "Please tell me your name: ";
 				cin >> user.name;
+				cin.ignore();
 				user.serial = data.size() + 1;
+				user.hadLogin = true;
 				data.push_back(user);
 
 				saveDataUsers(data);

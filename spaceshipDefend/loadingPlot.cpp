@@ -2,10 +2,10 @@
 #include<conio.h>
 
 #include"functions_control_console.h"
+#include"effects_text.h"
 #include"variable.h"
 
 using namespace std;
-void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2);
 void loadingPlot() {
 	system("cls");
 
@@ -43,5 +43,5 @@ void loadingPlot() {
 		atXY(162, 16);
 		cout << i << '%';
 	}
-	stringFlicker("Press 'r' to continue", 95, 19, 2, 3);
+	stringFlicker("Press 'r' to continue",'r', 95, 19, 2, 3);
 }

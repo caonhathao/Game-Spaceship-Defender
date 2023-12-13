@@ -1,5 +1,2 @@
-﻿  Source.cpp
-D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(182,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  login_register.cpp
-  Generating Code...
+﻿  infoPlayer.cpp
   spaceshipDefend.vcxproj -> D:\Develop\GitHub\Game-Spaceship-Defender\x64\Debug\spaceshipDefend.exe

@@ -275,7 +275,7 @@ void stage_chapter_1(int speed, int& res) {
 				cout << "You completed " << *task_point << " task(s)." << endl;
 				cout << endl;
 
-				stringFlicker("[ Press 'r' to continue ]", 0, 5, 2, 3);
+				stringFlicker("[ Press 'r' to continue ]",'r', 0, 5, 2, 3);
 				atXY(0, 5);
 				break;
 			};

@@ -22,15 +22,6 @@ isLogSuccess checkAccountExist(vector<infoPlayer>dataUsers, string name) {
 		res.isSucess = true;
 		res.User = *it;
 	}
-	//for (int i = 0; i < dataUsers.size(); i++)
-	//{
-	//	if (name == dataUsers[i].name)
-	//	{
-	//		res.isSucess = true;
-	//		res.posUsers = i;
-	//		return res;
-	//	}
-	//}
 	return res;
 };
 int isLogin() {

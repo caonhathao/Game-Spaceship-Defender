@@ -8,7 +8,6 @@
 #include"variable.h"
 using namespace std;
 
-void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2);
 void story_chapter_1(int printSpeed) {
 	system("cls");
 	setColor(0, 14);
@@ -44,5 +43,5 @@ void story_chapter_1(int printSpeed) {
 	cout << endl;
 	Sleep(1000);
 
-	stringFlicker("[ Press 'r' to continue ]", 0, 20, 2, 3);
+	stringFlicker("[ Press 'r' to continue ]",'r', 0, 20, 2, 3);
 }

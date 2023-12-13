@@ -14,5 +14,5 @@ using std::string;
 void effectText_char(string str, int printSpeed);
 void effectText_word(string str, int printSpeed);
 string uppercaseLetter(string name);
-void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2);
+void stringFlicker(string str,char k, int posX, int posY, int colorCode_1, int colorCode_2);
 #endif

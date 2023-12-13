@@ -2,29 +2,28 @@
 #include<conio.h>
 
 #include"functions_control_console.h"
-using std::cout;
-void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2);
+#include"effects_text.h"
 void printTitle(int posX, int posY, int colorCode);
 void loadingScreen() {
 	system("cls");
-	atXY(91, 13);
+	atXY(89, 13);
 	setColor(0, 4);
 	cout << "<<< --- >>> LOADING <<< --- >>>>";
 
 	setColor(0, 7);
-	atXY(54, 16);
+	atXY(52, 16);
 	cout << '|';
 
 	for (int i = 0; i <= 101; i++)
 	{
-		atXY(54 + i, 15);
+		atXY(52 + i, 15);
 		cout << '-';
-		atXY(54 + i, 17);
+		atXY(52 + i, 17);
 		cout << '-';
 		Sleep(10);
 	}
 
-	atXY(155, 16);
+	atXY(153, 16);
 	cout << '|';
 
 	setColor(0, 14);
@@ -33,33 +32,33 @@ void loadingScreen() {
 	{
 		if (i % 2 == 0)
 		{
-			atXY(53 + i, 16);
+			atXY(51 + i, 16);
 			cout << "//";
 			Sleep(20);
 		};
 
 		if (tmpCount == 1) {
-			atXY(157, 16);
+			atXY(100, 19);
 			cout << ">  ";
 		}
 		else if (tmpCount == 20)
 		{
-			atXY(157, 16);
+			atXY(100, 19);
 			cout << " > ";
 		}
 		else if (tmpCount == 40)
 		{
-			atXY(157, 16);
+			atXY(100, 19);
 			cout << "  >";
 			tmpCount = 1;
 		}
 		tmpCount++;
-		atXY(162, 16);
+		atXY(105, 19);
 		cout << i << '%';
 	}
-	atXY(157, 16); cout << ">>>";
+	atXY(100, 19); cout << ">>>";
 
-	printTitle(60, 25, 2);
+	printTitle(55, 25, 2);
 
-	stringFlicker("Press 'r' to continue", 96, 19, 2, 3);
+	stringFlicker("Press 'r' to continue",'r', 94, 21, 2, 3);
 }

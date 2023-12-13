@@ -50,7 +50,7 @@ string uppercaseLetter(string name) {
 		return res;
 	}
 }
-void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCode_2) {
+void stringFlicker(string str,char k, int posX, int posY, int colorCode_1, int colorCode_2) {
 	lock_guard<mutex>lock(mtx_2);
 
 	//set color and change 
@@ -67,14 +67,14 @@ void stringFlicker(string str, int posX, int posY, int colorCode_1, int colorCod
 	*c = ' ';
 	*g_count_down = 8000;
 
-	while (*c != 'r')
+	while (*c != k)
 	{
 		if (_kbhit())
 		{
 			*c = _getch();
 			*c = tolower(*c);
 		}
-		if (*c == 'r')
+		if (*c == k)
 		{
 			break;
 		}

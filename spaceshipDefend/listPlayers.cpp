@@ -6,6 +6,7 @@
 #include<cstring>
 
 #include"functions_control_console.h"
+#include"effects_text.h"
 #include"variable.h"
 #include"struct.cpp"
 
@@ -15,13 +16,12 @@ using namespace std;
 void drawListPlayers(vector<infoPlayer>& data) {
 	system("cls");
 
-	infoPlayer dataInput;
 
-	atXY(91, 3);
+	atXY(92, 3);
 	cout << "<<< [===] >>> List <<< [===] >>>" << endl;
 
-	atXY(56, 4);
-	for (int i = 0; i < 100; i++)
+	atXY(55, 4);
+	for (int i = 0; i < 103; i++)
 	{
 		atXY(56 + i, 4); cout << '-';
 		Sleep(10);
@@ -46,7 +46,7 @@ void drawListPlayers(vector<infoPlayer>& data) {
 	Sleep(10);
 	cout << setw(9) << right << "Rank" << endl;
 
-	for (size_t i = 0; i < 100; i++)
+	for (size_t i = 0; i < 103; i++)
 	{
 		atXY(56 + i, 6);
 		cout << '.';
@@ -59,6 +59,7 @@ void drawListPlayers(vector<infoPlayer>& data) {
 	{
 		for (int i = 0; i < data.size(); i++)
 		{
+			infoPlayer dataInput{};
 			dataInput = data[i];
 
 			atXY(56, 7 + i);
@@ -88,24 +89,9 @@ void drawListPlayers(vector<infoPlayer>& data) {
 	cout << endl;
 	atXY(56, 7 + data.size());
 	cout << setfill('-');
-	cout << setw(100) << "-" << endl;
+	cout << setw(103) << "-" << endl;
 
-	atXY(55, 7 + data.size() + 1);
-	setColor(0, 3);
-
-	cout << "Press 'r' back the menu";
-	*c = ' ';
-	while (true)
-	{
-		if (_kbhit()) {
-			*c = _getch();
-			*c = tolower(*c);
-			if (*c == 'r')
-			{
-				break;
-			}
-		}
-	}
+	stringFlicker("Press 'b' to return the menu", 'b', 92, 7 + data.size() + 1, 3, 5);
 }
 //int main() {
 //	vector<infoPlayer>Data = inputDataAccount();
