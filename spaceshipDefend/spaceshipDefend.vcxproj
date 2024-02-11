@@ -130,14 +130,14 @@
     <ClCompile Include="about_me.cpp" />
     <ClCompile Include="Activities.cpp" />
     <ClCompile Include="dictionary.cpp" />
-    <ClCompile Include="drawBorder.cpp" />
-    <ClCompile Include="effects_text.cpp" />
+    <ClCompile Include="unknown.cpp" />
+    <ClCompile Include="effects.cpp" />
     <ClCompile Include="endGame.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="functions_control_console.cpp" />
     <ClCompile Include="functions_control_cursor_game.cpp" />
     <ClCompile Include="functions_control_object.cpp" />
-    <ClCompile Include="infoPlayer.cpp">
+    <ClCompile Include="scanDataPlayer.cpp">
       <BuildStlModules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</BuildStlModules>
       <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdcpp20</LanguageStandard>
     </ClCompile>
@@ -164,7 +164,7 @@
     <ClCompile Include="variable.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="effects_text.h" />
+    <ClInclude Include="effects.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="functions_control_console.h" />
     <ClInclude Include="functions_control_cursor_game.h" />

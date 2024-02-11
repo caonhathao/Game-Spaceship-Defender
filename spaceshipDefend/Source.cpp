@@ -65,12 +65,13 @@ int main();
 #pragma endregion
 
 /*
-	- speed: toc do di chuyen hay toc do lam moi khung hinh
-	- voi di chuyen len xuong thi toc do nhanh hon rat nhieu
-	- Tuy nhien, lai kha cham neu di chyen theo chieu ngang
-	- Test toc do moi:
-		+ Neu di chuyen len, xuong thi tang (giam) 1 don vi truc Y
-		+ Nguoc lai, tang (giam) 2 don vi truc X
+	- speed variable: Speed of movement and speed of renew fame
+	- We have a problem with this speed:
+		+ If the object move vertically, we feel normally.
+		+ But, if the object move horizontally, we fell slowly.
+		+ Because, with commandline console, the vertical and horizontal are different per cell
+	- Offering some solutions to fix this feeling:
+		+ Change speed of movement when move horizontal, from +1 to +2
 */
 
 int main() {
@@ -81,21 +82,33 @@ int main() {
 
 	showCursor(false);
 	showScrollbar(false);
-	//disableResizeWindow(200,50);
 	moveWindow(0, 0, 200, 50);
 	setWindowSize(200, 50);
 	setScreenBufferSize(200, 50);
+	disableResizeWindow();
 
-	loadingScreen();
+	//loadingScreen();
 	infoPlayer user;
 	string st_login = "";
 
-	//add data saved (if it exists)
+/*
+	- When the first time program is opened:
+		+ We have two method:
+			> One, if user plays game without login: don't save.
+			> Two, if the user registers a new account and plays game, be sure this account will auto-login for the next start.
+	- When the user opens the program more than once time:
+		+ We have two method:
+			> Follow 'Two' from above.
+			> If the user sign out and login another, save all data of accounts
+	- The problem is here: How can i mark the account that signed in?
+*/
+
+	//scan all data, and found the account which signed in
 	vector<infoPlayer>data = inputDataAccount(st_login);
 
 	if (st_login == "current")
 	{
-		auto index = find_if(data.begin(), data.end(), [&](const infoPlayer& a) {
+		auto index = find_if(data.begin(), data.end(), [&]( const infoPlayer& a) {
 			return a.hadLogin == true;
 			});
 
@@ -116,7 +129,7 @@ int main() {
 		{
 			system("cls");
 			cout << "Ban co muon di theo cot truyen khong (Y/N): ";
-			char c;
+			char c = ' ';
 			cin >> c;
 			c = tolower(c);
 			if (c == 'y')

@@ -5,6 +5,7 @@
 #include"functions_control_console.h"
 #include"functions_control_cursor_game.h"
 #include"variable.h"
+#include"effects.h"
 
 using namespace std;
 struct isLogSuccess {
@@ -14,11 +15,11 @@ struct isLogSuccess {
 isLogSuccess checkAccountExist(vector<infoPlayer>dataUsers, string name) {
 	isLogSuccess res;
 
-	auto it = find_if(dataUsers.begin(), dataUsers.end(), [&](const infoPlayer& a) {
-		return a.name == name;
+	auto it = find_if(dataUsers.begin(), dataUsers.end(), [&](const infoPlayer& a)
+		{
+			return a.name == name;
 		});
-	if (it != dataUsers.end())
-	{
+	if (it != dataUsers.end()) {
 		res.isSucess = true;
 		res.User = *it;
 	}
@@ -35,24 +36,18 @@ int isLogin() {
 	atXY(cursorPos.prevPosX, cursorPos.prevPosY);
 	cout << ">>";
 
-	while (true)
-	{
-		if (_kbhit())
-		{
+	while (true) {
+		if (_kbhit()) {
 			*c = _getch();
-			if (GetAsyncKeyState(VK_UP) || GetAsyncKeyState(VK_DOWN))
-			{
+			if (GetAsyncKeyState(VK_UP) || GetAsyncKeyState(VK_DOWN)) {
 				controlCursor(cursorPos);
 				moveCursor(5, 7, cursorPos);
 			}
-			else if (GetAsyncKeyState(VK_RETURN))
-			{
-				if (cursorPos.prevPosY == 5)
-				{
+			else if (GetAsyncKeyState(VK_RETURN)) {
+				if (cursorPos.prevPosY == 5) {
 					*g_choice = 1; break;
 				}
-				else if (cursorPos.prevPosY == 7)
-				{
+				else if (cursorPos.prevPosY == 7) {
 					*g_choice = 2; break;
 				}
 			}
@@ -62,22 +57,9 @@ int isLogin() {
 };
 void drawLog_ResScreen(string title) {
 	system("cls");
+	drawBorder(83, 4, 5, 50, 6);
 	atXY(105, 1);
 	cout << title;
-	for (int i = 0; i < 50; i++)
-	{
-		atXY(83 + i, 3);
-		cout << '-';
-		atXY(83 + i, 9);
-		cout << '-';
-	}
-	for (int i = 0; i < 5; i++)
-	{
-		atXY(83, 4 + i);
-		cout << '|';
-		atXY(83 + 49, 4 + i);
-		cout << '|';
-	};
 };
 infoPlayer login_register(vector<infoPlayer>dataUsers) {
 	isLogSuccess res;
@@ -92,9 +74,19 @@ register_again:
 	if (*g_choice == 1) // choice login
 	{
 		drawLog_ResScreen("LOGIN");
-		atXY(85, 5);
-		cout << "1. Ten dang nhap: ";
+		atXY(85 + 25 - 20, 5);
+		cout << "<*> Ten dang nhap [type 'ESC' for exit]: " << endl;
+
+		//if user wants to back
+		atXY(85 + 25, 7);
 		cin >> name;
+		string* temp = &name;
+		lowercaseString(*temp);
+		if (*temp == "esc") {
+			goto register_again;
+		}
+		delete temp;
+
 		atXY(85, 7);
 		cout << "Press ENTER again";
 	}
@@ -109,40 +101,35 @@ register_again:
 		if (_kbhit()) {
 			*c = _getch();
 
-				if (*c != 'b')
+			if (*c != 'b') {
+				res = checkAccountExist(dataUsers, name); //is user's account exist?
+				if (res.isSucess)//yes
 				{
-					res = checkAccountExist(dataUsers, name); //is user's account exist?
-					if (res.isSucess)//yes
-					{
-						atXY(85, 7);
-						cout << "Login Success! Turning to the home after 3s";
-						Sleep(3000);
-						return res.User;
-					}
-					else//no
-					{
-						atXY(85, 7);
-						cout << "Login FAIL! Please check name or register";
-
-						atXY(85, 8);
-						cout << "Press 'b' to back the menu";
-						while (*c != ' ')
-						{
-							if (_kbhit())
-							{
-								*c = _getch();
-								if (*c == 'b')
-								{
-									*c = ' ';
-									goto register_again;
-								}
-							}
-						};
-					}
+					atXY(85, 7);
+					cout << "Login Success! Turning to the home after 3s";
+					Sleep(3000);
+					return res.User;
 				}
+				else//no
+				{
+					atXY(85, 7);
+					cout << "Login FAIL! Please check name or register";
 
-			if (*c == 'b')
-			{
+					atXY(85, 8);
+					cout << "Press 'b' to back the menu";
+					while (*c != ' ') {
+						if (_kbhit()) {
+							*c = _getch();
+							if (*c == 'b') {
+								*c = ' ';
+								goto register_again;
+							}
+						}
+					};
+				}
+			}
+
+			if (*c == 'b') {
 				return res.User;
 			}
 			*c = ' ';

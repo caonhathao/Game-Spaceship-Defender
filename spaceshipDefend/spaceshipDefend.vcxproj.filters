@@ -93,7 +93,7 @@
     <ClCompile Include="listPlayers.cpp">
       <Filter>Source Files\data_users</Filter>
     </ClCompile>
-    <ClCompile Include="infoPlayer.cpp">
+    <ClCompile Include="scanDataPlayer.cpp">
       <Filter>Source Files\data_users</Filter>
     </ClCompile>
     <ClCompile Include="testing_files.cpp">
@@ -129,7 +129,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\class_cpp_file</Filter>
     </ClCompile>
-    <ClCompile Include="effects_text.cpp">
+    <ClCompile Include="effects.cpp">
       <Filter>Source Files\library_cpp_file</Filter>
     </ClCompile>
     <ClCompile Include="functions_control_console.cpp">
@@ -147,7 +147,7 @@
     <ClCompile Include="printTitle.cpp">
       <Filter>Source Files\effects</Filter>
     </ClCompile>
-    <ClCompile Include="drawBorder.cpp">
+    <ClCompile Include="unknown.cpp">
       <Filter>Source Files\effects</Filter>
     </ClCompile>
     <ClCompile Include="saveDataUsers.cpp">
@@ -161,7 +161,7 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files\class_h_file</Filter>
     </ClInclude>
-    <ClInclude Include="effects_text.h">
+    <ClInclude Include="effects.h">
       <Filter>Header Files\library_h_file</Filter>
     </ClInclude>
     <ClInclude Include="functions_control_console.h">

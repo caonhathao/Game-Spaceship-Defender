@@ -10,7 +10,7 @@
 
 #include"functions_control_console.h"
 #include"functions_control_object.h"
-#include"effects_text.h"
+#include"effects.h"
 #include"Player.h"
 #include"variable.h"
 

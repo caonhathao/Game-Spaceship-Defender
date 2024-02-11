@@ -2,7 +2,7 @@
 #include<conio.h>
 
 #include"functions_control_console.h"
-#include"effects_text.h"
+#include"effects.h"
 #include"variable.h"
 
 using namespace std;

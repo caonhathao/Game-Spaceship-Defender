@@ -3,7 +3,7 @@
 #include<Windows.h>
 #include<WinUser.h>
 
-#include"effects_text.h"
+#include"effects.h"
 #include"functions_control_console.h"
 #include"functions_control_cursor_game.h"
 #include"struct.cpp"
@@ -23,31 +23,34 @@ int welcomeScreen(int printSpeed, string name);
 void screenInfo(int printSpeed, string name) {
 	setColor(0, 2);
 
-	atXY(84, 2);
+	//the variable below will add some units for posY
+	int addPos = 5;
+
+	atXY(84, 2+addPos);
 	setColor(0, 12);
 	str = "WELCOME TO SPACESHIP DEFENDER GAME!";
 	effectText_char(str, printSpeed);
 
-	atXY(68, 3);
+	atXY(68, 3+addPos);
 	setColor(0, 14);
 	str = "[ The loai: Ban sung || Do hoa: Console || Moi Truong: Window]";
 	effectText_char(str, printSpeed);
 
-	drawBorder(50, 5, 15, 100, 2);
+	drawBorder(50, 5+addPos, 15, 100, 2);
 
-	atXY(85 - name.size(), 6);
+	atXY(85 - name.size(), 6+addPos);
 	setColor(0, 8);
 	string* temp = new string("");
-	*temp = uppercaseLetter(name);
+	uppercaseString(*temp);
 	str = "Chuc ban co trai nghiem vui ve :) " + *temp;
 	effectText_char(str, printSpeed);
 
-	atXY(85, 8);
+	atXY(85, 8+addPos);
 	setColor(0, 11);
 	cout << "<< -==- >> MOI CHON << -==- >>";
 
 	Sleep(500);
-	atXY(88, 10);
+	atXY(88, 10+addPos);
 	cout << "1. Choi ngay va luon.";
 
 	Sleep(500);
@@ -66,7 +69,6 @@ void screenInfo(int printSpeed, string name) {
 	atXY(88, 18);
 	cout << "5. Ve tac gia.";
 	delete temp;
-	cin.ignore();
 }
 #pragma endregion
 
@@ -81,42 +83,34 @@ int welcomeScreen(int printSpeed, string name) {
 	atXY(cursorPos.prevPosX, cursorPos.prevPosY);
 	setColor(0, 6);
 	cout << ">>";
+	cin.clear();
 
 	while (true) {
-		if (_kbhit())
-		{
+		if (_kbhit()) {
 			*c = _getch();
-			if (*c != ' ')
-			{
-				if (GetAsyncKeyState(VK_UP) || GetAsyncKeyState(VK_DOWN))
-				{
+			if (*c != ' ') {
+				if (GetAsyncKeyState(VK_UP) || GetAsyncKeyState(VK_DOWN)) {
 					controlCursor(cursorPos);
 					moveCursor(10, 18, cursorPos);
 				}
-				else if (GetAsyncKeyState(VK_RETURN))
-				{
-					if (cursorPos.prevPosY == 10)
-					{
+				else if (GetAsyncKeyState(VK_RETURN)) {
+					if (cursorPos.prevPosY == 10) {
 						*g_choice = 1;
 						break;
 					}
-					else if (cursorPos.prevPosY == 12)
-					{
+					else if (cursorPos.prevPosY == 12) {
 						*g_choice = 2;
 						break;
 					}
-					else if (cursorPos.prevPosY == 14)
-					{
+					else if (cursorPos.prevPosY == 14) {
 						*g_choice = 3;
 						break;
 					}
-					else if (cursorPos.prevPosY == 16)
-					{
+					else if (cursorPos.prevPosY == 16) {
 						*g_choice = 4;
 						break;
 					}
-					else if (cursorPos.prevPosY == 18)
-					{
+					else if (cursorPos.prevPosY == 18) {
 						*g_choice = 5;
 						break;
 					};

@@ -21,11 +21,11 @@ void moveWindow(SHORT x, SHORT y, SHORT width, SHORT height)
 	MoveWindow(console, x, y, width, height, false);
 
 }
-void disableResizeWindow(SHORT width, SHORT height) {
+void disableResizeWindow() {
 	HWND console = GetConsoleWindow();
-	RECT rect;
-	GetWindowRect(console, &rect);
-	MoveWindow(console, rect.left, rect.top, width, height, true);
+	LONG style = GetWindowLong(console, GWL_STYLE);
+	style &= ~(WS_THICKFRAME | WS_MAXIMIZEBOX);
+	SetWindowLong(console, GWL_STYLE, style);
 }
 void atXY(SHORT posX, SHORT posY) {
 	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);

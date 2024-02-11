@@ -2,7 +2,7 @@
 #include<conio.h>
 #include<time.h>
 
-#include"effects_text.h"
+#include"effects.h"
 #include"functions_control_console.h"
 #include"variable.h"
 

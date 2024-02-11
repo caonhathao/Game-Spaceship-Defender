@@ -14,7 +14,7 @@
 #include"functions_control_object.h"
 #include"Player.h"
 #include"variable.h"
-#include"effects_text.h"
+#include"effects.h"
 
 using namespace std;
 

@@ -3,7 +3,7 @@
 #include<vector>
 #include<conio.h>
 
-#include"effects_text.h"
+#include"effects.h"
 #include"functions_control_console.h"
 #include"variable.h"
 using namespace std;

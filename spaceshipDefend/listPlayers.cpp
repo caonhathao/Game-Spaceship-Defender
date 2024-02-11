@@ -6,7 +6,7 @@
 #include<cstring>
 
 #include"functions_control_console.h"
-#include"effects_text.h"
+#include"effects.h"
 #include"variable.h"
 #include"struct.cpp"
 
@@ -61,7 +61,7 @@ void drawListPlayers(vector<infoPlayer>& data) {
 		{
 			infoPlayer dataInput{};
 			dataInput = data[i];
-
+			//serial, name, status, chaper_1, chapter_2, chapter_end, total, rank
 			atXY(56, 7 + i);
 
 			if (dataInput.serial <= 9)

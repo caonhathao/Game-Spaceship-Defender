@@ -41,10 +41,10 @@ std::vector<infoPlayer> inputDataAccount(string &st_login) {
 
 	status = _chdir(".\\Data-Account");
 
-	if (status != 0) //if status = -1
+	if (status != 0) // the program found the folder, if not then return -1
 	{
 		fstream fileDataInput("data_Users.txt", ios::in);
-		if (fileDataInput.fail())
+		if (fileDataInput.fail())// this file is not exist
 		{
 			status = _mkdir(".\\Data-Account");
 			status = _chdir(".\\Data-Account");

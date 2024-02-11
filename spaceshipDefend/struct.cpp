@@ -16,7 +16,7 @@ struct result {
 struct infoPlayer{
 	int serial = 0;
 
-	string name = "_";//default-unknown
+	string name = "";
 
 	int g_scoreChapter1 = 0;
 

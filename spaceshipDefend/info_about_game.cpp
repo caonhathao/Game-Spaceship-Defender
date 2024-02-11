@@ -5,12 +5,9 @@
 
 #include"functions_control_console.h"
 #include"functions_control_cursor_game.h"
-#include"effects_text.h"
+#include"effects.h"
 #include"variable.h"
 #include"struct.cpp"
-
-using std::thread;
-mutex mtx_1;
 
 #pragma region functions
 void guide();
@@ -28,8 +25,7 @@ void guide() {
 	cout << "<<--->> T.U.R.T.O.R.I.A.L <<--->>";
 
 	atXY(25, 3);
-	for (int i = 1; i <= 13; i++)
-	{
+	for (int i = 1; i <= 13; i++) {
 		atXY(25, 3 + i); cout << "||";
 	};
 
@@ -53,14 +49,13 @@ void aboutGame(int printSpeed) {
 	"[ Tac Gia: CAO NHAT HAO ]",
 	"[ Nam Du An: 2022 ]" };
 
-	for (int i = 0; i < para1.size(); i++)
-	{
+	for (int i = 0; i < para1.size(); i++) {
 		atXY(15, 5 + i);
 		effectText_word(para1[i], printSpeed);
 	}
 
 	Sleep(1200);
-	stringFlicker("Press 'b' to back the previous",'b', 15, 8, 2, 4);
+	stringFlicker("Press 'b' to back the previous", 'b', 15, 8, 2, 4);
 }
 void drawInfo(int posX, int posY, int color_code) {
 	*g_choice = 0;
@@ -68,54 +63,55 @@ void drawInfo(int posX, int posY, int color_code) {
 
 	atXY(posX, posY);
 	cout << "Ban muon thong tin nao ?";
-	atXY(posX + 5, posY + 4);
-	cout << "1. Huong dan choi";
-	atXY(posX + 5, posY + 6);
-	cout << "2. Ve tro choi";
+	atXY(posX + 3, posY + 2);
+	cout << "1. Huong dan choi.";
+	atXY(posX + 3, posY + 4);
+	cout << "2. Ve cac doi tuong.";
+	atXY(posX + 3, posY + 6);
+	cout << "3. Ve tro choi.";
+	atXY(posX + 3, posY + 8);
+	cout << "4. Thoat";
 
 	setColor(0, 5);
-	cursorPos.prevPosX = posX + 2;
-	cursorPos.prevPosY = posY + 4;
+	cursorPos.prevPosX = posX;
+	cursorPos.prevPosY = posY + 2;
 	atXY(cursorPos.prevPosX, cursorPos.prevPosY);
 	setColor(0, 6);
 	cout << ">>";
 }
 void show(int printSpeed) {
-	lock_guard<mutex>lock(mtx_1);
-
-	while (true)
-	{
+	int startPosY = 17;
+	int endPosY = 23;
+	while (true) {
 		if (_kbhit()) {
 			*c = _getch();
-			if (*c != ' ')
-			{
-				if (GetAsyncKeyState(VK_UP) || GetAsyncKeyState(VK_DOWN))
-				{
+			if (*c != ' ') {
+				if (GetAsyncKeyState(VK_UP) || GetAsyncKeyState(VK_DOWN)) {
 					setColor(0, 5);
 					controlCursor(cursorPos);
-					moveCursor(17, 19, cursorPos);
+					moveCursor(startPosY, endPosY, cursorPos);
 				}
-				else if (GetAsyncKeyState(VK_RETURN))
-				{
-					if (cursorPos.prevPosY == 17)
-					{
+				else if (GetAsyncKeyState(VK_RETURN)) {
+					if (cursorPos.prevPosY == startPosY) {
 
 						*c = 'r';
 						system("cls");
 						guide();
 						*c = ' ';
 					}
-					else if (cursorPos.prevPosY = 19)
-					{
+					else if (cursorPos.prevPosY == startPosY + 2) {
 						*c = 'r';
 						system("cls");
 						aboutGame(printSpeed);
 						*c = ' ';
 					}
-				}
-				else if (*c == 'r')
-				{
-					break;
+					else if (cursorPos.prevPosY == startPosY + 4) {
+						*c = ' ';
+						break;
+					}
+					else if (cursorPos.prevPosX == startPosY + 6) {
+						break;
+					}
 				}
 			}
 			*c = ' ';
@@ -125,15 +121,13 @@ void show(int printSpeed) {
 void info_about_game(int printSpeed) {
 	system("cls");
 
-	printTitle(60, 2, 3);
-	drawBorder(58, 10, 15, 100, 2);
-	drawInfo(58 + 57, 15, 3);
+	//added 5 units for Y position
+	printTitle(60, 7, 3);
+	drawBorder(58, 15, 15, 100, 2);
+	drawInfo(58 + 30, 20, 3);
 
-	thread th_show(show, printSpeed);
-	thread th_flicker(stringFlicker, "Press 'r' to bach the previous",'r', 20, 20, 3, 4);
-
-	th_show.join();
-	th_flicker.join();
+	show(printSpeed);
+	//stringFlicker("Press 'r' to bach the previous", 'r', 50, 30, 3, 4);
 }
 
 
