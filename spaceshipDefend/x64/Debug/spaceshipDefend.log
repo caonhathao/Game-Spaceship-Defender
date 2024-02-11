@@ -1,4 +1,6 @@
-﻿  about_me.cpp
-  info_about_game.cpp
+﻿  Source.cpp
+D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\Source.cpp(196,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  welcomeScreen.cpp
+D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\welcomeScreen.cpp(40,10): warning C4267: 'argument': conversion from 'size_t' to 'SHORT', possible loss of data
   Generating Code...
   spaceshipDefend.vcxproj -> D:\Develop\GitHub\Game-Spaceship-Defender\x64\Debug\spaceshipDefend.exe
