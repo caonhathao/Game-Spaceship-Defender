@@ -18,7 +18,7 @@ void about_me(int printSpeed) {
 	"[ Chiu Trach Nhiem San Xuat: CAO NHAT HAO. ]",
 	"[ Giam Sat Du An: CAO NHAT HAO ]",
 	"[ Nam Khoi Dong Du An: 2022. ]" ,
-	"[ Phien Ban Hien Tai: 0.0.0.1"
+	"[ Phien Ban Hien Tai: 0.0.0E ]"
 	};
 
 	for (int i = 0; i < para.size(); i++)

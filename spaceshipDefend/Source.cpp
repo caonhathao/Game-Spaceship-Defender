@@ -23,6 +23,9 @@ int* g_destroyed = new int(0);
 int* g_process = new int(0);
 int* g_contact = new int(0);
 
+//the variable below will add some units for posY (scale this frame)
+int* addPosY = new int(0);
+
 Position cursorPos = { 0,0,0,0 };
 Position PlayerPos = { 0,0,0,0 };
 Position EnemyPos = { 0,0,0,0 };

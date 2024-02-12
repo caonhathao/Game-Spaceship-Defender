@@ -18,6 +18,9 @@ extern int *g_PlayerSize;
 extern int* g_speed;
 extern int* g_step;
 
+//the variable below will add some units for posY (scale this frame)
+extern int* addPosY;
+
 extern char *c;
 
 extern Position cursorPos;
@@ -29,5 +32,4 @@ extern  Player *PlayerWeak;
 extern Enemy *EnemyWeak;
 
 extern Activities activities;
-//extern vector<infoPlayer>Data = {};
 #endif // !_VARIABLE_H

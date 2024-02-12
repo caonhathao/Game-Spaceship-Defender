@@ -11,38 +11,39 @@
 
 #pragma region functions
 void guide();
-void aboutGame(int printSpeed);
 void info_about_game(int printSpeed);
 void drawBorder(int posX, int posY, int height, int width, int color_code);
 void printTitle(int posX, int posY, int colorCode);
 void stringFlicker(string str, char k, int posX, int posY, int colorCode_1, int colorCode_2);
-void show(int printSpeed);
 #pragma endregion
+
 void guide() {
+	*addPosY = 5;
 	system("cls");
-	printTitle(60, 2, 3);
-	atXY(25, 0);
+	printTitle(60, 2 + *addPosY, 3);
+
+	int temp = 7 + *addPosY + 2;
+	drawBorder(60, temp, 15, 100, 4);
+
+	setColor(0, 5);
+	atXY(92, temp + 2);
 	cout << "<<--->> T.U.R.T.O.R.I.A.L <<--->>";
 
-	atXY(25, 3);
-	for (int i = 1; i <= 13; i++) {
-		atXY(25, 3 + i); cout << "||";
-	};
+	setColor(0, 2);
+	atXY(92, temp + 4);
+	cout << ">> Press WASD to control your spaceship.";
+	atXY(92, temp + 6);
+	cout << ">> Press 'j' to fire the Enemy.";
+	atXY(92, temp + 8);
+	cout << ">> Press 'space' to stop your spaceship.";
+	atXY(92, temp + 10);
+	cout << ">> Press 'p' to pause game.";
+	atXY(92, temp + 12);
+	cout << ">> Press 'r' to continue.";
+	atXY(92, temp + 14);
+	cout << ">> Press 'b' to return the previous";
 
-	atXY(28, 5);
-	cout << "Press WASD to control your spaceship.";
-	atXY(28, 7);
-	cout << "Press 'j' to fire the Enemy.";
-	atXY(28, 9);
-	cout << "Press 'space' to stop your spaceship.";
-	atXY(28, 11);
-	cout << "Press 'p' to pause game.";
-	atXY(28, 13);
-	cout << "Press 'r' to continue.";
-	atXY(28, 15);
-	cout << "Press 'b' to return the previous";
-
-	stringFlicker("Press 'r' to back the previous", 'r', 50, 20, 3, 5);
+	stringFlicker("Press 'r' to back the previous", 'r', 92, 18 + temp, 3, 5);
 }
 void aboutGame(int printSpeed) {
 	vector<string>para1 = { "[ Ten Game: SPACESHIP_DEFENDER ]",
@@ -58,6 +59,7 @@ void aboutGame(int printSpeed) {
 	stringFlicker("Press 'b' to back the previous", 'b', 15, 8, 2, 4);
 }
 void drawInfo(int posX, int posY, int color_code) {
+	*addPosY = 5;
 	*g_choice = 0;
 	setColor(0, color_code);
 
@@ -79,9 +81,19 @@ void drawInfo(int posX, int posY, int color_code) {
 	setColor(0, 6);
 	cout << ">>";
 }
-void show(int printSpeed) {
-	int startPosY = 17;
-	int endPosY = 23;
+void info_about_game(int printSpeed) {
+
+again:
+	system("cls");
+	*addPosY = 10;
+	printTitle(60, 2 + *addPosY, 3);
+	*addPosY = 5;
+	drawBorder(58, 15 + *addPosY, 10, 100, 2);
+	drawInfo(58 + 30, 16 + *addPosY, 3);
+
+	int startPosY = cursorPos.prevPosY;
+	int endPosY = cursorPos.prevPosY + 6;
+
 	while (true) {
 		if (_kbhit()) {
 			*c = _getch();
@@ -93,41 +105,28 @@ void show(int printSpeed) {
 				}
 				else if (GetAsyncKeyState(VK_RETURN)) {
 					if (cursorPos.prevPosY == startPosY) {
-
 						*c = 'r';
 						system("cls");
 						guide();
-						*c = ' ';
+						goto again;
 					}
 					else if (cursorPos.prevPosY == startPosY + 2) {
 						*c = 'r';
 						system("cls");
-						aboutGame(printSpeed);
-						*c = ' ';
 					}
 					else if (cursorPos.prevPosY == startPosY + 4) {
-						*c = ' ';
-						break;
+						*c = 'r';
+						system("cls");
+						aboutGame(printSpeed);
 					}
-					else if (cursorPos.prevPosX == startPosY + 6) {
-						break;
+					else if (cursorPos.prevPosY == startPosY + 6) {
+
+						return;
 					}
 				}
 			}
-			*c = ' ';
 		};
 	};
-}
-void info_about_game(int printSpeed) {
-	system("cls");
-
-	//added 5 units for Y position
-	printTitle(60, 7, 3);
-	drawBorder(58, 15, 15, 100, 2);
-	drawInfo(58 + 30, 20, 3);
-
-	show(printSpeed);
-	//stringFlicker("Press 'r' to bach the previous", 'r', 50, 30, 3, 4);
 }
 
 
