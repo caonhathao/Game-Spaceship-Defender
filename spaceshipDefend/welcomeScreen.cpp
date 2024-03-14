@@ -1,7 +1,7 @@
 #include<iostream>
 #include<conio.h>
 #include<Windows.h>
-#include<WinUser.h>
+#include<fstream>
 
 #include"effects.h"
 #include"functions_control_console.h"
@@ -10,7 +10,7 @@
 #include"variable.h"
 
 string str = "";
-
+//ofstream fileData(".\\logEven.txt");
 
 #pragma region functions
 void effectText_char(string str, int printSpeed);
@@ -75,6 +75,12 @@ int welcomeScreen(int printSpeed, string name) {
 	screenInfo(printSpeed, name);
 	printTitle(52, 25 + *addPosY, 2);
 
+	//test
+	//for (int i = 0; i <= 10; i++) {
+	//	atXY(0, i);
+	//	cout << i << endl;
+	//}
+
 	cursorPos.prevPosX = 84;
 	cursorPos.prevPosY = 10 + *addPosY;
 
@@ -87,8 +93,19 @@ int welcomeScreen(int printSpeed, string name) {
 		if (_kbhit()) {
 			*c = _getch();
 			if (*c != ' ') {
-				if (GetAsyncKeyState(VK_UP) || GetAsyncKeyState(VK_DOWN)) {
-					controlCursor(cursorPos);
+				if (GetAsyncKeyState(VK_UP)) {
+					controlCursor(cursorPos, 1,"UP");
+					moveCursor(10 + *addPosY, 18 + *addPosY, cursorPos);
+					//if (cursorPos.prevPosY == 16) {
+					//	fileData << "cursorPoint.prevPosX: " << cursorPos.prevPosX << endl;
+					//	fileData << "cursorPoint.prevPosY: " << cursorPos.prevPosY << endl;
+					//	fileData << "cursorPoint.nextPosX: " << cursorPos.nextPosX << endl;
+					//	fileData << "cursorPoint.nextPosY: " << cursorPos.nextPosY << endl;
+					//	fileData << endl;
+					//}
+				}
+				else if (GetAsyncKeyState(VK_DOWN)) {
+					controlCursor(cursorPos, 1, "DOWN");
 					moveCursor(10 + *addPosY, 18 + *addPosY, cursorPos);
 				}
 				else if (GetAsyncKeyState(VK_RETURN)) {

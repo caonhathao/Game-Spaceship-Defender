@@ -126,7 +126,7 @@ int main() {
 		system("cls");
 		int res = 0;
 		res = welcomeScreen(*g_printSpeed, user.name);
-
+		
 		//data need export: serial, name, g_scoreChapter1, g_process/g_contact, g_scoreChapter2,g_scoreChapterGame
 		if (res == 1)
 		{

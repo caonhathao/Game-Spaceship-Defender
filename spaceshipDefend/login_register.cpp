@@ -39,8 +39,12 @@ int isLogin() {
 	while (true) {
 		if (_kbhit()) {
 			*c = _getch();
-			if (GetAsyncKeyState(VK_UP) || GetAsyncKeyState(VK_DOWN)) {
-				controlCursor(cursorPos);
+			if (GetAsyncKeyState(VK_UP)) {
+				controlCursor(cursorPos, 2,"UP");
+				moveCursor(5, 7, cursorPos);
+			}
+			else if (GetAsyncKeyState(VK_DOWN)) {
+				controlCursor(cursorPos, 2, "DOWN");
 				moveCursor(5, 7, cursorPos);
 			}
 			else if (GetAsyncKeyState(VK_RETURN)) {

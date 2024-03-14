@@ -174,4 +174,9 @@
       <Filter>Header Files\library_h_file</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="report.txt">
+      <Filter>Source Files\dictionary_stickyNote</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

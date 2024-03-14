@@ -36,7 +36,7 @@ void atXY(SHORT posX, SHORT posY) {
 }
 void showCursor(bool cursorVisibility) {
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_CURSOR_INFO	 ConCurInf;
+	CONSOLE_CURSOR_INFO	 ConCurInf{};
 	ConCurInf.dwSize = 10;
 	ConCurInf.bVisible = cursorVisibility;
 	SetConsoleCursorInfo(handle, &ConCurInf);

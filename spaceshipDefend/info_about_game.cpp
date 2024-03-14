@@ -1,7 +1,7 @@
 #include<iostream>
 #include<conio.h>
 #include<vector>
-#include<thread>
+#include<fstream>
 
 #include"functions_control_console.h"
 #include"functions_control_cursor_game.h"
@@ -17,10 +17,38 @@ void printTitle(int posX, int posY, int colorCode);
 void stringFlicker(string str, char k, int posX, int posY, int colorCode_1, int colorCode_2);
 #pragma endregion
 
-void guide() {
+vector<string>menuText{
+	"[ Ban muon thong tin nao ? ]",
+	"[> Huong dan choi <]",
+	"[> Ve cac doi tuong <]",
+	"[> Ve tro choi <]",
+	"[> Thoat <]"
+};
+vector<pair<int, int>>posText{};
+
+static void drawInfo(int posX, int posY, int color_code) {
+	*addPosY = 5;
+	*g_choice = 0;
+	setColor(0, color_code);
+
+	for (int i = 0; i < menuText.size(); i++) {
+		pair<int, int>tmp = make_pair(posX + 50 - menuText[i].size() / 2, posY + i * 2);
+		atXY(tmp.first, tmp.second);
+		cout << menuText[i] << endl;
+		posText.push_back(tmp);
+	}
+
+	setColor(0, 5);
+	cursorPos.prevPosX = posX + 30;
+	cursorPos.prevPosY = posY + 2;
+	atXY(cursorPos.prevPosX, cursorPos.prevPosY);
+	setColor(0, 6);
+	cout << ">>";
+}
+static void guide() {
 	*addPosY = 5;
 	system("cls");
-	printTitle(60, 2 + *addPosY, 3);
+	printTitle(62, 2 + *addPosY, 3);
 
 	int temp = 7 + *addPosY + 2;
 	drawBorder(60, temp, 15, 100, 4);
@@ -45,7 +73,26 @@ void guide() {
 
 	stringFlicker("Press 'r' to back the previous", 'r', 92, 18 + temp, 3, 5);
 }
-void aboutGame(int printSpeed) {
+static void aboutObject() {
+	*addPosY = 5;
+	system("cls");
+	printTitle(62, 2 + *addPosY, 4);
+
+	int temp = 7 + *addPosY + 2;
+	drawBorder(60, temp, 15, 100, 4);
+	vector<string>tmp{
+		">> |-[O]-|: Light's spaceship (control by player) <<",
+		">> |-x-|: Dark;s spaceship (control by enemy) <<",
+		">> [ooo]: barrier <<"
+	};
+	for (int i = 0; i < tmp.size(); i++) {
+		setColor(0, 7);
+		atXY(60 + 50 - tmp[i].size() / 2, 20 + i * 2);
+		cout << tmp[i];
+	};
+	stringFlicker("Press 'r' to back the previous", 'r', 95, 18 + temp, 4, 6);
+}
+static void aboutGame(int printSpeed) {
 	vector<string>para1 = { "[ Ten Game: SPACESHIP_DEFENDER ]",
 	"[ Tac Gia: CAO NHAT HAO ]",
 	"[ Nam Du An: 2022 ]" };
@@ -58,50 +105,59 @@ void aboutGame(int printSpeed) {
 	Sleep(1200);
 	stringFlicker("Press 'b' to back the previous", 'b', 15, 8, 2, 4);
 }
-void drawInfo(int posX, int posY, int color_code) {
-	*addPosY = 5;
-	*g_choice = 0;
-	setColor(0, color_code);
-
-	atXY(posX, posY);
-	cout << "Ban muon thong tin nao ?";
-	atXY(posX + 3, posY + 2);
-	cout << "1. Huong dan choi.";
-	atXY(posX + 3, posY + 4);
-	cout << "2. Ve cac doi tuong.";
-	atXY(posX + 3, posY + 6);
-	cout << "3. Ve tro choi.";
-	atXY(posX + 3, posY + 8);
-	cout << "4. Thoat";
-
-	setColor(0, 5);
-	cursorPos.prevPosX = posX;
-	cursorPos.prevPosY = posY + 2;
-	atXY(cursorPos.prevPosX, cursorPos.prevPosY);
-	setColor(0, 6);
-	cout << ">>";
-}
 void info_about_game(int printSpeed) {
-
 again:
 	system("cls");
 	*addPosY = 10;
 	printTitle(60, 2 + *addPosY, 3);
 	*addPosY = 5;
 	drawBorder(58, 15 + *addPosY, 10, 100, 2);
-	drawInfo(58 + 30, 16 + *addPosY, 3);
+	drawInfo(58, 16 + *addPosY, 3);
 
 	int startPosY = cursorPos.prevPosY;
 	int endPosY = cursorPos.prevPosY + 6;
+
+	int index = 1;
+	atXY(posText[index].first, posText[index].second);
+	setColor(0, 5);
+	cout << menuText[index];
 
 	while (true) {
 		if (_kbhit()) {
 			*c = _getch();
 			if (*c != ' ') {
-				if (GetAsyncKeyState(VK_UP) || GetAsyncKeyState(VK_DOWN)) {
-					setColor(0, 5);
-					controlCursor(cursorPos);
+				if (GetAsyncKeyState(VK_DOWN)) {
+					//recolor visited
+					setColor(0, 3);
+					atXY(posText[index].first, posText[index].second);
+					cout << menuText[index];
+
+					//go to the next place
+					if (index < 4) {
+						index = index + 1;
+					}
+					controlCursor(cursorPos, 2, "DOWN");
 					moveCursor(startPosY, endPosY, cursorPos);
+					//recolor new visit
+					setColor(0, 5);
+					atXY(posText[index].first, posText[index].second);
+					cout << menuText[index];
+					Sleep(100);
+				}
+				else if (GetAsyncKeyState(VK_UP)) {
+					setColor(0, 3);
+					atXY(posText[index].first, posText[index].second);
+					cout << menuText[index];
+					if (index > 1) {
+						index = index - 1;
+					}
+					controlCursor(cursorPos, 2, "UP");
+					moveCursor(startPosY, endPosY, cursorPos);
+
+					setColor(0, 5);
+					atXY(posText[index].first, posText[index].second);
+					cout << menuText[index];
+					Sleep(100);
 				}
 				else if (GetAsyncKeyState(VK_RETURN)) {
 					if (cursorPos.prevPosY == startPosY) {
@@ -112,12 +168,15 @@ again:
 					}
 					else if (cursorPos.prevPosY == startPosY + 2) {
 						*c = 'r';
+						aboutObject();
 						system("cls");
+						goto again;
 					}
 					else if (cursorPos.prevPosY == startPosY + 4) {
 						*c = 'r';
 						system("cls");
 						aboutGame(printSpeed);
+						goto again;
 					}
 					else if (cursorPos.prevPosY == startPosY + 6) {
 
@@ -125,8 +184,10 @@ again:
 					}
 				}
 			}
-		};
+			*c = ' ';
+		}
 	};
-}
+};
+
 
 

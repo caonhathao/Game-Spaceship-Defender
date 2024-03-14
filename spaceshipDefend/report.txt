@@ -1,0 +1,20 @@
+.LOG
+
+>>>03/13/2024
+version 0.0.0.0E
+- Cap nhat moi: thay doi giao dien phan "Ve tac gia".
+- Them cac ham tao hieu ung.
+-----------------------------------------------------------------------------------
+version 0.0.0.1E
+- Thay doi cau truc ham "controlCursor()": them bien direc nham xac dinh huong di chuyen:
+	+ Co tac dung sua duoc loi xuat hien trong ham welcomeScreen.
+	+ Tuy nhien, van chua chung minh duoc tinh hieu qua.
+- Thay doi cau truc ham "controlCursor()": them bien step de chi dinh buoc nhay:
+	+ De dang quan li
+
+- Them ham moi, giao dien gioi thieu cac doi tuong trong file info_about_game.cpp.
+
+- Trong file info_about_game.cpp, xuat hien cac loi chua tim ra huong giai quyet tam thoi:
+	+ Con tro game tu dong nhay va dung khong theo ly thuyet.
+	+ Dong thoi, phan to mau cho menu chon cung gap tinh trang tuong tu
+	=> Cach giai quyet tam thoi la chi co the cho tam ngung vong lap voi thoi gian 100ms moi lan thao tac de ngan tinh trang tu nhay
