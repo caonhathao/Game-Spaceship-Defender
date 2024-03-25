@@ -26,16 +26,13 @@ void story_chapter_1(int printSpeed) {
 		"[ VN-34U25-8A san sang cat canh ] ",
 		"[ VN-34U25-8A, CAT CANH!!! ] " };
 
-	for (int i = 0; i < para.size(); i++)
-	{
-		if (i == 0)
-		{
+	for (int i = 0; i < para.size(); i++) {
+		if (i == 0) {
 			setColor(0, 4);
 		}
 		else setColor(0, 2);
-		effectText_char(para[i], printSpeed);
-		if (i == 0 || i == 4 || i == 9 || i == 10)
-		{
+		effectText_char(para[i], printSpeed, 0, i);
+		if (i == 0 || i == 4 || i == 9 || i == 10) {
 			cout << endl;
 			Sleep(500);
 		};
@@ -43,5 +40,5 @@ void story_chapter_1(int printSpeed) {
 	cout << endl;
 	Sleep(1000);
 
-	stringFlicker("[ Press 'r' to continue ]",'r', 0, 20, 2, 3);
+	stringFlicker("[ Press 'r' to continue ]", 'r', 0, 20, 2, 3);
 }

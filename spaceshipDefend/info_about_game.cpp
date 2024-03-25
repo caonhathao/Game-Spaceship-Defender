@@ -12,7 +12,6 @@
 #pragma region functions
 void guide();
 void info_about_game(int printSpeed);
-void drawBorder(int posX, int posY, int height, int width, int color_code);
 void printTitle(int posX, int posY, int colorCode);
 void stringFlicker(string str, char k, int posX, int posY, int colorCode_1, int colorCode_2);
 #pragma endregion
@@ -27,7 +26,7 @@ vector<string>menuText{
 vector<pair<int, int>>posText{};
 
 static void drawInfo(int posX, int posY, int color_code) {
-	*addPosY = 5;
+	//*addPosY = 5;
 	*g_choice = 0;
 	setColor(0, color_code);
 
@@ -42,77 +41,70 @@ static void drawInfo(int posX, int posY, int color_code) {
 	cursorPos.prevPosX = posX + 30;
 	cursorPos.prevPosY = posY + 2;
 	atXY(cursorPos.prevPosX, cursorPos.prevPosY);
-	setColor(0, 6);
 	cout << ">>";
 }
 static void guide() {
-	*addPosY = 5;
 	system("cls");
-	printTitle(62, 2 + *addPosY, 3);
+	printTitle(62, 7, 3);
 
-	int temp = 7 + *addPosY + 2;
-	drawBorder(60, temp, 15, 100, 4);
+	drawBorder(60, 14, 15, 100, 4);
 
 	setColor(0, 5);
-	atXY(92, temp + 2);
+	atXY(92, 14 + 2);
 	cout << "<<--->> T.U.R.T.O.R.I.A.L <<--->>";
 
 	setColor(0, 2);
-	atXY(92, temp + 4);
+	atXY(92, 14 + 4);
 	cout << ">> Press WASD to control your spaceship.";
-	atXY(92, temp + 6);
+	atXY(92, 14 + 6);
 	cout << ">> Press 'j' to fire the Enemy.";
-	atXY(92, temp + 8);
+	atXY(92, 14 + 8);
 	cout << ">> Press 'space' to stop your spaceship.";
-	atXY(92, temp + 10);
+	atXY(92, 14 + 10);
 	cout << ">> Press 'p' to pause game.";
-	atXY(92, temp + 12);
+	atXY(92, 14 + 12);
 	cout << ">> Press 'r' to continue.";
-	atXY(92, temp + 14);
+	atXY(92, 14 + 14);
 	cout << ">> Press 'b' to return the previous";
 
-	stringFlicker("Press 'r' to back the previous", 'r', 92, 18 + temp, 3, 5);
+	stringFlicker("Press 'r' to back the previous", 'r', 92, 32, 3, 5);
 }
 static void aboutObject() {
-	*addPosY = 5;
 	system("cls");
-	printTitle(62, 2 + *addPosY, 4);
+	printTitle(62, 7, 4);
 
-	int temp = 7 + *addPosY + 2;
-	drawBorder(60, temp, 15, 100, 4);
-	vector<string>tmp{
+	drawBorder(60, 14, 15, 100, 4);
+	vector<string>para{
 		">> |-[O]-|: Light's spaceship (control by player) <<",
-		">> |-x-|: Dark;s spaceship (control by enemy) <<",
+		">> |-x-|: Dark's spaceship (control by enemy) <<",
 		">> [ooo]: barrier <<"
 	};
-	for (int i = 0; i < tmp.size(); i++) {
+	for (int i = 0; i < para.size(); i++) {
 		setColor(0, 7);
-		atXY(60 + 50 - tmp[i].size() / 2, 20 + i * 2);
-		cout << tmp[i];
+		atXY(60 + 50 - para[i].size() / 2, 20 + i * 2);
+		cout << para[i];
 	};
-	stringFlicker("Press 'r' to back the previous", 'r', 95, 18 + temp, 4, 6);
+	stringFlicker("Press 'r' to back the previous", 'r', 95, 32 ,4, 6);
 }
 static void aboutGame(int printSpeed) {
-	vector<string>para1 = { "[ Ten Game: SPACESHIP_DEFENDER ]",
+	vector<string>para = { "[ Ten Game: SPACESHIP_DEFENDER ]",
 	"[ Tac Gia: CAO NHAT HAO ]",
 	"[ Nam Du An: 2022 ]" };
 
-	for (int i = 0; i < para1.size(); i++) {
-		atXY(15, 5 + i);
-		effectText_word(para1[i], printSpeed);
-	}
+	printTitle(60, 5, 5);
+	drawBorder(59, 12, 10, 100, 14);
 
-	Sleep(1200);
-	stringFlicker("Press 'b' to back the previous", 'b', 15, 8, 2, 4);
+	for (int i = 0; i < para.size(); i++) {
+		effectText_char(para[i], 20, 59 + 50 - para[i].size() / 2, 16 + i * 2);
+	};
+	stringFlicker("Press 'b' to return", 'b', 105, 26, 13, 14);
 }
 void info_about_game(int printSpeed) {
 again:
 	system("cls");
-	*addPosY = 10;
-	printTitle(60, 2 + *addPosY, 3);
-	*addPosY = 5;
-	drawBorder(58, 15 + *addPosY, 10, 100, 2);
-	drawInfo(58, 16 + *addPosY, 3);
+	printTitle(60, 12, 3);
+	drawBorder(58, 22, 11, 100, 2);
+	drawInfo(58, 24, 3);
 
 	int startPosY = cursorPos.prevPosY;
 	int endPosY = cursorPos.prevPosY + 6;
@@ -134,7 +126,7 @@ again:
 
 					//go to the next place
 					if (index < 4) {
-						index = index + 1;
+						index++;
 					}
 					controlCursor(cursorPos, 2, "DOWN");
 					moveCursor(startPosY, endPosY, cursorPos);
@@ -149,7 +141,7 @@ again:
 					atXY(posText[index].first, posText[index].second);
 					cout << menuText[index];
 					if (index > 1) {
-						index = index - 1;
+						index--;
 					}
 					controlCursor(cursorPos, 2, "UP");
 					moveCursor(startPosY, endPosY, cursorPos);

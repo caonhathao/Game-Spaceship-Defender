@@ -163,10 +163,10 @@ void drawg_scoreBoard() {
 	cout << "LIFE: ";
 	//detroy
 	atXY(widthPlayArea + 13, 4);
-	cout << "g_destroy: ";
+	cout << "DESTROY: ";
 	//g_score
 	atXY(widthPlayArea + 13, 6);
-	cout << "g_score: ";
+	cout << "SCORE: ";
 	//energy
 	atXY(widthPlayArea + 13, 8);
 	cout << "ENERGY: ";

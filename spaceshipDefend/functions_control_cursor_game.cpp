@@ -16,7 +16,7 @@ void moveCursor(int startPosY, int endPosY, Position& cursorPosition) {
 		atXY(cursorPosition.prevPosX, cursorPosition.prevPosY);
 		cout << "  ";
 		atXY(cursorPosition.nextPosX, cursorPosition.nextPosY);
-		setColor(0, 6);
+		setColor(0, 13);
 		cout << ">>";
 
 		cursorPosition.prevPosX = cursorPosition.nextPosX;

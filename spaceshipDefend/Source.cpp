@@ -39,18 +39,17 @@ Enemy* EnemyWeak = new Enemy(70, 1, 1, "|-x-|");
 #pragma region functions
 std::vector<infoPlayer>inputDataAccount(string& st_login);
 
+infoPlayer login_register(vector<infoPlayer>dataUsers);
+
 void loadingScreen();
 void loadingPlot();
-void stringFlicker(string str,char k, int posX, int posY, int colorCode_1, int colorCode_2);
-void printTitle(int posX, int posY, int colorCode);
 
 int welcomeScreen(int printSpeed, string name);
 
-infoPlayer login_register(vector<infoPlayer>dataUsers);
-
 void saveDataUsers(vector<infoPlayer>Data);
 void drawListPlayers(vector<infoPlayer>&data);
-void drawLog_ResScreen(string title);
+
+bool isSkipPlotGame();
 
 void story_chapter_1(int printSpeed);
 void stage_chapter_1(int speed, int& res);
@@ -131,11 +130,7 @@ int main() {
 		if (res == 1)
 		{
 			system("cls");
-			cout << "Ban co muon di theo cot truyen khong (Y/N): ";
-			char c = ' ';
-			cin >> c;
-			c = tolower(c);
-			if (c == 'y')
+			if (isSkipPlotGame())
 			{
 				loadingPlot();
 				story_chapter_1(*g_printSpeed);
@@ -170,7 +165,6 @@ int main() {
 				user.g_scoreChapterGame = *g_score;
 
 				endGame(*g_score, *g_destroyed, *g_printSpeed);
-				main();
 			}
 			if (data.size() > 0)
 			{
@@ -188,7 +182,7 @@ int main() {
 			user = login_register(data);
 			if (user.name == "")
 			{
-				drawLog_ResScreen("REGISTER");
+				//drawLog_ResScreen("REGISTER");
 
 				atXY(85, 5);
 				cout<<"[FIRST CHARACTER IS A NUMBER OR ALPHA]";

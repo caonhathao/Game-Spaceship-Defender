@@ -34,13 +34,13 @@ void loadingScreen() {
 			if (i <= 30) {
 				Sleep(20);
 			}
-			else if (i <= 65) {
-				Sleep(500);
+			else if (i <= 55) {
+				Sleep(400);
 			}
-			else if (i <= 85) {
-				Sleep(500);
+			else if (i <= 75) {
+				Sleep(350);
 			}
-			else Sleep(200);
+			else Sleep(100);
 		};
 
 		if (tmpCount == 1) {

@@ -9,7 +9,7 @@
 void about_me(int printSpeed) {
 	system("cls");
 
-	drawBorder(50, 10, 15, 100, 2);
+	drawBorder(52, 10, 15, 100, 2);
 
 	vector<string>para = { 
 	"[ Tac Gia: CAO NHAT HAO. ]",
@@ -23,9 +23,11 @@ void about_me(int printSpeed) {
 
 	for (int i = 0; i < para.size(); i++)
 	{
-		atXY(50 + 50 - int(para[i].size()/2), 15 + i);
-		effectText_word(para[i], printSpeed);
+		setColor(0, 12);
+		effectText_word(para[i], printSpeed,102 - int(para[i].size() / 2), 15 + i);
 	}
 
-	stringFlicker("Press 'r' to back the menu", 'r', 50 + 50 - 13, 27, 3, 6);
+	printTitle(53, 33, 5);
+
+	stringFlicker("Press 'r' to back the menu", 'r', 89, 28, 3, 6);
 }

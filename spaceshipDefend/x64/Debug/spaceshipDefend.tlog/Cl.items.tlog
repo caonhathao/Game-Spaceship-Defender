@@ -1,7 +1,7 @@
 D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\about_me.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\about_me.obj
 D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\Activities.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\Activities.obj
 D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\dictionary.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\dictionary.obj
-D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\unknown.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\unknown.obj
+D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\isSkipPlot.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\isSkipPlot.obj
 D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\effects.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\effects.obj
 D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\endGame.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\endGame.obj
 D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\Enemy.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\Enemy.obj
@@ -14,9 +14,7 @@ D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\listPlayers.cpp;D:\Dev
 D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\loadingPlot.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\loadingPlot.obj
 D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\loadingScreen.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\loadingScreen.obj
 D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\login_register.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\login_register.obj
-D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\printTitle.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\printTitle.obj
 D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\saveDataUsers.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\saveDataUsers.obj
-D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\stringFlicker.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\stringFlicker.obj
 D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\testing_files.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\testing_files.obj
 D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\welcomeScreen.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\welcomeScreen.obj
 D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\Source.cpp;D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\x64\Debug\Source.obj

@@ -130,7 +130,7 @@
     <ClCompile Include="about_me.cpp" />
     <ClCompile Include="Activities.cpp" />
     <ClCompile Include="dictionary.cpp" />
-    <ClCompile Include="unknown.cpp" />
+    <ClCompile Include="isSkipPlot.cpp" />
     <ClCompile Include="effects.cpp" />
     <ClCompile Include="endGame.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -146,9 +146,7 @@
     <ClCompile Include="loadingPlot.cpp" />
     <ClCompile Include="loadingScreen.cpp" />
     <ClCompile Include="login_register.cpp" />
-    <ClCompile Include="printTitle.cpp" />
     <ClCompile Include="saveDataUsers.cpp" />
-    <ClCompile Include="stringFlicker.cpp" />
     <ClCompile Include="testing_files.cpp" />
     <ClCompile Include="welcomeScreen.cpp" />
     <ClCompile Include="Source.cpp" />

@@ -270,7 +270,7 @@ void stage_chapter_1(int speed, int& res) {
 			{
 				system("cls");
 				string para = "[ The Spaceship took off successful. ]";
-				effectText_char(para, 20);
+				effectText_char(para, 20,0,0);
 				cout << endl;
 				cout << "You completed " << *task_point << " task(s)." << endl;
 				cout << endl;

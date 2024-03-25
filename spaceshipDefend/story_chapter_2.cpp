@@ -11,7 +11,7 @@ using namespace std;
 void story_chapter_2(int printSpeed) {
 	system("cls");
 	string p = "[ Dang khoi dong chuong 2 ]";
-	effectText_char(p, 20);
+	effectText_char(p, 20, 0, 0);
 	Sleep(1500);
 	system("cls");
 
@@ -24,11 +24,9 @@ void story_chapter_2(int printSpeed) {
 	"[ Nhiem vu lan nay se dien ra trong khoan thoi gian kha dai... ]",
 	"[ A quen, chung toi se tien hanh don duong, boi chung toi dang di ngang qua vanh dai cua MK-26f gom rat nhieu tieu hanh tinh. ]" };
 
-	for (int i = 0; i < para.size(); i++)
-	{
-		effectText_char(para[i], printSpeed);
-		if (i == 0 || i == 2 || i == 3)
-		{
+	for (int i = 0; i < para.size(); i++) {
+		effectText_char(para[i], printSpeed, 0, i + 1);
+		if (i == 0 || i == 2 || i == 3) {
 			cout << endl;
 			Sleep(500);
 		}

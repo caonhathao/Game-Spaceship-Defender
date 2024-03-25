@@ -18,3 +18,18 @@ version 0.0.0.1E
 	+ Con tro game tu dong nhay va dung khong theo ly thuyet.
 	+ Dong thoi, phan to mau cho menu chon cung gap tinh trang tuong tu
 	=> Cach giai quyet tam thoi la chi co the cho tam ngung vong lap voi thoi gian 100ms moi lan thao tac de ngan tinh trang tu nhay
+------------------------------------------------------------------------------------
+>>>03/21/2024
+version 0.0.2E
+- Thay doi man hinh chon bo qua cot truyen.
+- Len ke hoach thay doi, toi uu code cua cac man choi, dac biet la phan DI CHUYEN cua nhan vat
+------------------------------------------------------------------------------------
+>>>03/22/2024
+version 0.0.3E
+- Tinh gon code
+- Cap nhat, lam moi giao dien
+------------------------------------------------------------------------------------
+>>>03/25/2025
+version 0.0.4E
+- Chinh sua, cap nhap giao dien.
+- Chinh sua giao dien dang nhap-dang ki.

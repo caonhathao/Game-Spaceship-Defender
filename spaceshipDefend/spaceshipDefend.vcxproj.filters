@@ -43,17 +43,23 @@
     <Filter Include="Source Files\login_and_choice">
       <UniqueIdentifier>{1f4aef7b-f585-4e18-b1b9-e1c61ce15c8f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\class_cpp_file">
-      <UniqueIdentifier>{27d49afe-3790-4f7a-b2c4-89478f02c9e8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\class_h_file">
       <UniqueIdentifier>{7ddcaa59-1fea-4a29-a70a-7b126f586282}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\library_h_file">
       <UniqueIdentifier>{e3c4e73a-5064-4baa-88b4-2de0a4370c3b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\library_cpp_file">
+    <Filter Include="Source Files\class_file_cpp">
+      <UniqueIdentifier>{27d49afe-3790-4f7a-b2c4-89478f02c9e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\stage_chapter_0">
+      <UniqueIdentifier>{e29189b4-e993-464b-b9d6-842032596931}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\library_file_cpp">
       <UniqueIdentifier>{c19133c4-d90c-492d-acfd-18de67dbdde1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\infomation_game">
+      <UniqueIdentifier>{6b9a87af-bbeb-485f-a331-82ccd413b4ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -70,12 +76,6 @@
       <Filter>Source Files\stage_chapter_2</Filter>
     </ClCompile>
     <ClCompile Include="welcomeScreen.cpp">
-      <Filter>Source Files\login_and_choice</Filter>
-    </ClCompile>
-    <ClCompile Include="info_about_game.cpp">
-      <Filter>Source Files\login_and_choice</Filter>
-    </ClCompile>
-    <ClCompile Include="about_me.cpp">
       <Filter>Source Files\login_and_choice</Filter>
     </ClCompile>
     <ClCompile Include="stage_chapter_2.cpp">
@@ -105,9 +105,6 @@
     <ClCompile Include="dictionary.cpp">
       <Filter>Source Files\dictionary_stickyNote</Filter>
     </ClCompile>
-    <ClCompile Include="stringFlicker.cpp">
-      <Filter>Source Files\effects</Filter>
-    </ClCompile>
     <ClCompile Include="Activities.cpp">
       <Filter>Source Files\struct_and_enum _class</Filter>
     </ClCompile>
@@ -124,34 +121,37 @@
       <Filter>Header Files\library_h_file</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files\class_cpp_file</Filter>
+      <Filter>Source Files\class_file_cpp</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files\class_cpp_file</Filter>
+      <Filter>Source Files\class_file_cpp</Filter>
     </ClCompile>
     <ClCompile Include="effects.cpp">
-      <Filter>Source Files\library_cpp_file</Filter>
+      <Filter>Source Files\library_file_cpp</Filter>
     </ClCompile>
     <ClCompile Include="functions_control_console.cpp">
-      <Filter>Source Files\library_cpp_file</Filter>
+      <Filter>Source Files\library_file_cpp</Filter>
     </ClCompile>
     <ClCompile Include="functions_control_cursor_game.cpp">
-      <Filter>Source Files\library_cpp_file</Filter>
+      <Filter>Source Files\library_file_cpp</Filter>
     </ClCompile>
     <ClCompile Include="functions_control_object.cpp">
-      <Filter>Source Files\library_cpp_file</Filter>
+      <Filter>Source Files\library_file_cpp</Filter>
     </ClCompile>
     <ClCompile Include="variable.cpp">
-      <Filter>Source Files\library_cpp_file</Filter>
-    </ClCompile>
-    <ClCompile Include="printTitle.cpp">
-      <Filter>Source Files\effects</Filter>
-    </ClCompile>
-    <ClCompile Include="unknown.cpp">
-      <Filter>Source Files\effects</Filter>
+      <Filter>Source Files\library_file_cpp</Filter>
     </ClCompile>
     <ClCompile Include="saveDataUsers.cpp">
       <Filter>Source Files\data_users</Filter>
+    </ClCompile>
+    <ClCompile Include="isSkipPlot.cpp">
+      <Filter>Source Files\stage_chapter_0</Filter>
+    </ClCompile>
+    <ClCompile Include="about_me.cpp">
+      <Filter>Source Files\infomation_game</Filter>
+    </ClCompile>
+    <ClCompile Include="info_about_game.cpp">
+      <Filter>Source Files\infomation_game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
