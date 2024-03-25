@@ -5,7 +5,7 @@
 #include"functions_control_console.h"
 #include"variable.h"
 
-void effectText_char(string str, int printSpeed,int X,int Y) {
+void effectText_char(string str, int printSpeed, int X, int Y) {
 	atXY(X, Y);
 	for (int i = 0; i < str.length(); i++) {
 		cout << str[i];
@@ -13,7 +13,7 @@ void effectText_char(string str, int printSpeed,int X,int Y) {
 	}
 	cout << endl;
 }
-void effectText_word(string str, int printSpeed,int X,int Y) {
+void effectText_word(string str, int printSpeed, int X, int Y) {
 	string* word = new string("");
 	str = str + ' ';
 	atXY(X, Y);
@@ -30,6 +30,7 @@ void effectText_word(string str, int printSpeed,int X,int Y) {
 	delete word;
 	cout << endl;
 }
+
 void uppercaseString(string& str) {
 	if (str == "" || str == "_") {
 		str = "";
@@ -56,6 +57,7 @@ void lowercaseString(string& str) {
 		}
 	}
 }
+
 void stringFlicker(string str, char k, int posX, int posY, int colorCode_1, int colorCode_2) {
 	//set color and change 
 	clock_t start, end;
@@ -95,6 +97,17 @@ void stringFlicker(string str, char k, int posX, int posY, int colorCode_1, int 
 		(*g_count_down)--;
 	};
 };
+
+void maskPoint() {
+	for (int i = 0; i < 50; i++) {
+		for (int j = 0; j < 200; j++) {
+			if (j % 9 == 0 && i % 2 == 0) {
+				atXY(j, i); setColor(0, 3);
+				cout << 'x';
+			}
+		}
+	}
+}
 
 void drawBorder(int posX, int posY, int height, int width, int colorCode) {
 	setColor(0, colorCode);

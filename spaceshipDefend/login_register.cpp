@@ -114,13 +114,17 @@ static void isLogin() {
 };
 static void loginInterface(string& name) {
 	system("cls");
-	effectText_char("[<>] * LOGIN * [<>]",20, 0, 0);
-	drawBorder(58, 15, 5, 100, 13);
-	printTitle(58, 23, 12);
 
-	atXY(62, 16);
+	maskPoint();
+
+	setColor(0, 14);
+	effectText_char("[<>] * LOGIN * [<>]",20, 100, 20);
+	drawBorder(78, 15, 5, 50, 13);
+	printTitle(58, 30, 12);
+
+	atXY(82, 17);
 	cout << ">> Ten dang nhap [type 'esc' for exit] <<";
-	atXY(64, 18);
+	atXY(105, 19);
 	cout << "[>>] "; cin >> name;
 }
 infoPlayer login_register(vector<infoPlayer>dataUsers) {
