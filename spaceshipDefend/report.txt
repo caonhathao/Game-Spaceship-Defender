@@ -20,16 +20,29 @@ version 0.0.0.1E
 	=> Cach giai quyet tam thoi la chi co the cho tam ngung vong lap voi thoi gian 100ms moi lan thao tac de ngan tinh trang tu nhay
 ------------------------------------------------------------------------------------
 >>>03/21/2024
-version 0.0.2E
+version 0.0.0.2E
 - Thay doi man hinh chon bo qua cot truyen.
 - Len ke hoach thay doi, toi uu code cua cac man choi, dac biet la phan DI CHUYEN cua nhan vat
 ------------------------------------------------------------------------------------
 >>>03/22/2024
-version 0.0.3E
+version 0.0.0.3E
 - Tinh gon code
 - Cap nhat, lam moi giao dien
 ------------------------------------------------------------------------------------
 >>>03/25/2025
-version 0.0.4E
+version 0.0.0.4E
 - Chinh sua, cap nhap giao dien.
 - Chinh sua giao dien dang nhap-dang ki.
+- Them ham danh dau toa do
+------------------------------------------------------------------------------------
+>>>04/11/2024
+version 0.0.0.5E
+- Sua lai mau cua con tro.
+- Trong phan thong tin ve game, con tro nhay nhanh hoac bo qua 1 muc:
+	+ De xuat tang thoi gian ngat quang (Sleep). [Tam chap nhan].
+- Sua lai giao dien aboutGame trong info_about_game. [Hoan thanh]
+------------------------------------------------------------------------------------
+>>>04/12/2024
+version 0.0.0.6E
+- Sua lai giao dien dang nhap. [Hoan thanh]
+- Can sua lai thong bao dang nhap sai.

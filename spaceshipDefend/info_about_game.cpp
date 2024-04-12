@@ -97,7 +97,7 @@ static void aboutGame(int printSpeed) {
 	for (int i = 0; i < para.size(); i++) {
 		effectText_char(para[i], 20, 59 + 50 - para[i].size() / 2, 16 + i * 2);
 	};
-	stringFlicker("Press 'b' to return", 'b', 105, 26, 13, 14);
+	stringFlicker("Press 'b' to return", 'b', 100, 26, 13, 14);
 }
 void info_about_game(int printSpeed) {
 again:
@@ -134,7 +134,7 @@ again:
 					setColor(0, 5);
 					atXY(posText[index].first, posText[index].second);
 					cout << menuText[index];
-					Sleep(100);
+					Sleep(500);
 				}
 				else if (GetAsyncKeyState(VK_UP)) {
 					setColor(0, 3);
@@ -149,7 +149,7 @@ again:
 					setColor(0, 5);
 					atXY(posText[index].first, posText[index].second);
 					cout << menuText[index];
-					Sleep(100);
+					Sleep(500);
 				}
 				else if (GetAsyncKeyState(VK_RETURN)) {
 					if (cursorPos.prevPosY == startPosY) {

@@ -116,7 +116,7 @@ int main() {
 
 		if (index != data.end())
 		{
-			user = *index;
+			user = *index; 
 		}
 	};
 
@@ -180,22 +180,22 @@ int main() {
 		}
 		else if (res == 2) {
 			user = login_register(data);
-			if (user.name == "")
-			{
-				//drawLog_ResScreen("REGISTER");
+			//if (user.name == "")
+			//{
+			//	//drawLog_ResScreen("REGISTER");
 
-				atXY(85, 5);
-				cout<<"[FIRST CHARACTER IS A NUMBER OR ALPHA]";
-				atXY(85, 6);
-				cout << "Please tell me your name: ";
-				cin >> user.name;
-				cin.ignore();
-				user.serial = data.size() + 1;
-				user.hadLogin = true;
-				data.push_back(user);
+			//	atXY(85, 5);
+			//	cout<<"[FIRST CHARACTER IS A NUMBER OR ALPHA]";
+			//	atXY(85, 6);
+			//	cout << "Please tell me your name: ";
+			//	cin >> user.name;
+			//	cin.ignore();
+			//	user.serial = data.size() + 1;
+			//	user.hadLogin = true;
+			//	data.push_back(user);
 
-				saveDataUsers(data);
-			};
+			//	saveDataUsers(data);
+			//};
 		}
 		else if (res == 3) {
 			drawListPlayers(data);

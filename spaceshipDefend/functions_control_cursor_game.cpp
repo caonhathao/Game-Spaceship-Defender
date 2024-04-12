@@ -23,7 +23,7 @@ void moveCursor(int startPosY, int endPosY, Position& cursorPosition) {
 		cursorPosition.prevPosY = cursorPosition.nextPosY;
 	}
 	else {
-		setColor(0, 6);
+		setColor(0, 13);
 		cursorPosition.nextPosX = cursorPosition.prevPosX;
 		cursorPosition.nextPosY = cursorPosition.prevPosY;
 	}

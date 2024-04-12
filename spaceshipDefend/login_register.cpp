@@ -100,32 +100,61 @@ static void isLogin() {
 				}
 				else if (GetAsyncKeyState(VK_RETURN)) {
 					if (cursorPos.prevPosY == startPosY) {
+						*c = ' ';
 						*g_choice = 1; break;
 					}
 					else if (cursorPos.prevPosY == startPosY + 2) {
+						*c = ' ';
 						*g_choice = 2; break;
 					}
-					else *g_choice = 3; break;
+					else {
+						*c = ' ';
+						*g_choice = 3; break;
+					}
 				}
 			}
 			*c = ' ';
 		}
 	};
 };
-static void loginInterface(string& name) {
+static void loginUI(string& name) {
 	system("cls");
 
 	maskPoint();
 
 	setColor(0, 14);
-	effectText_char("[<>] * LOGIN * [<>]",20, 100, 20);
+	effectText_char("[<>] * LOGIN * [<>]", 20, 95, 13);
 	drawBorder(78, 15, 5, 50, 13);
-	printTitle(58, 30, 12);
+	printTitle(57, 29, 12);
 
 	atXY(82, 17);
 	cout << ">> Ten dang nhap [type 'esc' for exit] <<";
-	atXY(105, 19);
-	cout << "[>>] "; cin >> name;
+	atXY(94, 19);
+	cout << "[>>] ";
+	cin >> name;
+};
+static  void registerUI(vector<infoPlayer>&dataUsers) {
+	system("cls");
+	maskPoint();
+
+	setColor(0, 14);
+	effectText_char("[<>] * REGISTER * [<>]", 20, 95, 13);
+	drawBorder(78, 15, 5, 50, 13);
+	printTitle(57, 29, 12);
+
+	string name = "";
+	atXY(82, 17);
+	cout << ">> Ten dang nhap [type 'esc' for exit] <<";
+	atXY(94, 19);
+	cout << "[>>] ";
+	atXY(94, 26);
+	cin >> name;
+
+	infoPlayer tmp;
+	tmp.name = name;
+	tmp.hadLogin = true;
+	tmp.serial = dataUsers.size() + 1;
+	dataUsers.push_back(tmp);
 }
 infoPlayer login_register(vector<infoPlayer>dataUsers) {
 	isLogSuccess res;
@@ -137,19 +166,21 @@ register_again:
 
 	if (*g_choice == 1) // choice login
 	{
-		loginInterface(name);
+		loginUI(name);
 		lowercaseString(name);
 		if (name == "esc") {
+			*g_choice = 0;
 			goto register_again;
 		}
 	}
 	else if (*g_choice == 2) //choice resgister
 	{
-		res.User.name = "";
-		return res.User;//default-condition
+		registerUI(dataUsers);
+		*g_choice = 0;
+		goto register_again;
 	}
 	else {
-		res.User.name = "_";
+		res.User.name = "";
 		return res.User;
 	}
 
@@ -169,10 +200,11 @@ register_again:
 				}
 				else//no
 				{
-					atXY(85, 7);
+					atXY(82, 22);
 					cout << "Login FAIL! Please check name or register";
 
-					atXY(85, 8);
+					atXY(90, 24);
+					setColor(0, 14);
 					cout << "Press 'b' to back the menu";
 					while (*c != ' ') {
 						if (_kbhit()) {

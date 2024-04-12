@@ -74,7 +74,7 @@ int welcomeScreen(int printSpeed, string name) {
 	cursorPos.prevPosY = 15;
 
 	atXY(cursorPos.prevPosX, cursorPos.prevPosY);
-	setColor(0, 6);
+	setColor(0, 13);
 	cout << ">>";
 	cin.clear();
 

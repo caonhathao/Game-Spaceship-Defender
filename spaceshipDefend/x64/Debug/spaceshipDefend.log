@@ -1,2 +1,16 @@
-﻿  effects.cpp
+﻿  login_register.cpp
+D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\login_register.cpp(156,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(278,16): warning C4267: 'initializing': conversion from 'size_t' to '_Ty1', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(278,16): warning C4267:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(278,16): warning C4267:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(278,16): warning C4267:             _Ty1=int
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(278,16): warning C4267:         ]
+  (compiling source file 'login_register.cpp')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.39.33519\include\utility(278,16):
+  the template instantiation context (the oldest one first) is
+  	D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\login_register.cpp(43,21):
+  	see reference to function template instantiation 'std::pair<int,int>::pair<unsigned __int64,int,0>(std::pair<unsigned __int64,int> &&) noexcept' being compiled
+  		D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\login_register.cpp(43,21):
+  		see the first reference to 'std::pair<int,int>::pair' in 'isLogin'
+  
   spaceshipDefend.vcxproj -> D:\Develop\GitHub\Game-Spaceship-Defender\x64\Debug\spaceshipDefend.exe
