@@ -30,7 +30,7 @@ int *powerCurrent = new int(0);
 #pragma region functions
 void noticePlayer(int widthLine);
 void airPort(int lengthLine, int widthLine);
-void stage_chapter_1(int speed, int& res);
+void stage_chapter_1(int speed, int& choice);
 
 void control();
 void move(string object);
@@ -233,7 +233,7 @@ void drawTaskBoard() {
 #pragma endregion
 
 #pragma region main
-void stage_chapter_1(int speed, int& res) {
+void stage_chapter_1(int speed, int& choice) {
 	system("cls");
 	airPort(45, 20);
 	noticePlayer(20);
@@ -283,7 +283,7 @@ void stage_chapter_1(int speed, int& res) {
 		control();
 		Sleep(speed);
 	}
-	res = *task_point;
+	choice = *task_point;
 }
 #pragma endregion
 

@@ -39,7 +39,7 @@ Enemy* EnemyWeak = new Enemy(70, 1, 1, "|-x-|");
 #pragma region functions
 std::vector<infoPlayer>inputDataAccount(string& st_login);
 
-infoPlayer login_register(vector<infoPlayer>dataUsers);
+infoPlayer login_register(vector<infoPlayer>&dataUsers);
 
 void loadingScreen();
 void loadingPlot();
@@ -52,7 +52,7 @@ void drawListPlayers(vector<infoPlayer>&data);
 bool isSkipPlotGame();
 
 void story_chapter_1(int printSpeed);
-void stage_chapter_1(int speed, int& res);
+void stage_chapter_1(int speed, int& choice);
 
 void story_chapter_2(int printSpeed);
 void stage_chapter_2(int speed, int& g_process, int& g_contact);
@@ -123,11 +123,11 @@ int main() {
 	while (true)
 	{
 		system("cls");
-		int res = 0;
-		res = welcomeScreen(*g_printSpeed, user.name);
+		int choice = 0;
+		choice = welcomeScreen(*g_printSpeed, user.name);
 		
 		//data need export: serial, name, g_scoreChapter1, g_process/g_contact, g_scoreChapter2,g_scoreChapterGame
-		if (res == 1)
+		if (choice == 1)
 		{
 			system("cls");
 			if (isSkipPlotGame())
@@ -178,7 +178,7 @@ int main() {
 				}
 			};
 		}
-		else if (res == 2) {
+		else if (choice == 2) {
 			user = login_register(data);
 			//if (user.name == "")
 			//{
@@ -197,14 +197,14 @@ int main() {
 			//	saveDataUsers(data);
 			//};
 		}
-		else if (res == 3) {
+		else if (choice == 3) {
 			drawListPlayers(data);
 		}
-		else if (res == 4) {
+		else if (choice == 4) {
 
 			info_about_game(*g_printSpeed);
 		}
-		else if (res == 5)
+		else if (choice == 5)
 		{
 			about_me(*g_printSpeed);
 		}

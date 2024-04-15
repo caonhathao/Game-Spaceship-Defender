@@ -186,7 +186,7 @@ static  void registerUI(vector<infoPlayer>& dataUsers) {
 		else {
 			atXY(94, 20);
 			cout << setw(25) << ' ';
-			atXY(104, 20);
+			atXY(94, 20);
 			cout << "REGISTER SUCCESSFUL";
 			Sleep(3000);
 		}
@@ -198,17 +198,15 @@ static  void registerUI(vector<infoPlayer>& dataUsers) {
 	tmp.serial = dataUsers.size() + 1;
 	dataUsers.push_back(tmp);
 }
-infoPlayer login_register(vector<infoPlayer>dataUsers) {
+infoPlayer login_register(vector<infoPlayer>&dataUsers) {
 	res.User.name = "";
 register_again:
 	*g_choice = 0;
 	isLogin();
 
-	string name;
-
 	if (*g_choice == 1) // choice login
 	{
-		loginUI(dataUsers, name);
+		loginUI(dataUsers, res.User.name);
 		goto register_again;
 	}
 	else if (*g_choice == 2) //choice resgister

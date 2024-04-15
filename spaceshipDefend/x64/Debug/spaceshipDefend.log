@@ -1,3 +1,3 @@
-﻿  welcomeScreen.cpp
-D:\Develop\GitHub\Game-Spaceship-Defender\spaceshipDefend\welcomeScreen.cpp(39,38): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+﻿  stage_chapter_1.cpp
+x64\Debug\variable.obj : warning LNK4042: object specified more than once; extras ignored
   spaceshipDefend.vcxproj -> D:\Develop\GitHub\Game-Spaceship-Defender\x64\Debug\spaceshipDefend.exe
