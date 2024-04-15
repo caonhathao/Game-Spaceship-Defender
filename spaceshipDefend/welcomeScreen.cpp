@@ -12,12 +12,12 @@
 string str = "";
 
 #pragma region functions
-void screenInfo(int printSpeed, string name);
+void screenInfo(int printSpeed, string& name);
 int welcomeScreen(int printSpeed, string name);
 #pragma endregion
 
 #pragma region decorationFuncs
-void screenInfo(int printSpeed, string name) {
+void screenInfo(int printSpeed, string& name) {
 	setColor(0, 2);
 
 	atXY(84, 6);
@@ -33,9 +33,9 @@ void screenInfo(int printSpeed, string name) {
 	drawBorder(50, 10, 15, 100, 2);
 
 	setColor(0, 8);
-	string* temp = new string("");
-	uppercaseString(*temp);
-	str = "Chuc ban co trai nghiem vui ve :) " + *temp;
+	string tmp = name;
+	uppercaseString(tmp);
+	str = "Chuc ban co trai nghiem vui ve :) " + tmp;
 	effectText_char(str, printSpeed, 85 - name.size(), 11);
 
 	atXY(85, 13);
@@ -61,7 +61,6 @@ void screenInfo(int printSpeed, string name) {
 	Sleep(500);
 	atXY(88, 23);
 	cout << "5. Ve tac gia.";
-	delete temp;
 }
 #pragma endregion
 

@@ -53,3 +53,10 @@ version 0.0.0.6E(con.)
 - Sua lai thong bao dang nhap (cho ca dung va sai).
 - Sua lai van de di chuyen con tro [hoan thanh].
 - Sua lai thong bao dang ki.
+------------------------------------------------------------------------------------
+>>>04/16/2024
+version 0.0.0.6E(con.)
+- Sua lai thong bao dang nhap (cho ca dung va sai).
+- Sua lai van de di chuyen con tro [hoan thanh].
+- Sua lai thong bao dang ki.
+- Phat hien loi doc data sai (da sua xong).

@@ -1,3 +1,2 @@
-﻿  stage_chapter_1.cpp
-x64\Debug\variable.obj : warning LNK4042: object specified more than once; extras ignored
+﻿  scanDataPlayer.cpp
   spaceshipDefend.vcxproj -> D:\Develop\GitHub\Game-Spaceship-Defender\x64\Debug\spaceshipDefend.exe

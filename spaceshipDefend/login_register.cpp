@@ -136,6 +136,7 @@ static void loginUI(vector<infoPlayer>& dataUsers, string& name) {
 	do {
 		atXY(94, 19);
 		cout << "[>>] ";
+		atXY(99, 19);
 		cout << setw(name.size()) << ' ';
 		atXY(99, 19);
 		cin >> name;
@@ -146,7 +147,7 @@ static void loginUI(vector<infoPlayer>& dataUsers, string& name) {
 		else {
 			res = checkAccountExist(dataUsers, name);
 			if (res.isSucess == false) {
-				atXY(80, 22);
+				atXY(82, 22);
 				cout << "LOGIN FAILD: Please check account name again.";
 			}
 			else {
@@ -188,7 +189,7 @@ static  void registerUI(vector<infoPlayer>& dataUsers) {
 			cout << setw(25) << ' ';
 			atXY(94, 20);
 			cout << "REGISTER SUCCESSFUL";
-			Sleep(3000);
+			stringFlicker("Press 'b' to return", 'b', 94, 22, 12, 14);
 		}
 	} while (name.size() > 10);
 

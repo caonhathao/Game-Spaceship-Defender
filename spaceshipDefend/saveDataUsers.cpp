@@ -6,7 +6,7 @@
 #include"struct.cpp"
 using namespace std;
 
-void saveDataUsers(vector<infoPlayer>Data) {
+void saveDataUsers(vector<infoPlayer>&Data) {
 	ofstream outputFile(".\\data_Users.txt", ios::trunc);
 	if (Data.size() != 0) {
 		outputFile << Data[0].serial << ' ' << Data[0].name << ' ' << Data[0].hadLogin << ' ' << Data[0].g_scoreChapter1 << ' ' << Data[0].g_process << ' ' << Data[0].g_contact << ' ' << Data[0].g_scoreChapterGame;

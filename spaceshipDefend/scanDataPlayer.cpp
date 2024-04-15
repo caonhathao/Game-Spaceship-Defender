@@ -18,7 +18,7 @@ int status;
 
 infoPlayer dataPlayer;
 
-std::vector<string>splitString(string &str) {
+static std::vector<string>splitString(string &str) {
 	vector<string>res = {};
 	string a = "";
 	for (int i = 0; i < str.length(); i++)
@@ -79,9 +79,11 @@ std::vector<infoPlayer> inputDataAccount(string &st_login) {
 		stringstream ss;
 		ss << split[0];
 		ss >> dataPlayer.serial;
+		ss.clear();
 
 		ss << split[1];
 		ss >> dataPlayer.name;
+		ss.clear();
 
 		ss << split[2];
 		ss >> dataPlayer.hadLogin;
@@ -89,20 +91,24 @@ std::vector<infoPlayer> inputDataAccount(string &st_login) {
 		{
 			st_login = "current";
 		};
+		ss.clear();
 
 		ss << split[3];
 		ss >> dataPlayer.g_scoreChapter1;
+		ss.clear();
 
 		ss << split[4];
 		ss >> dataPlayer.g_process;
+		ss.clear();
 
 		ss << split[5];
 		ss >> dataPlayer.g_contact;
+		ss.clear();
 
 		ss << split[6];
 		ss >> dataPlayer.g_scoreChapterGame;
-
 		ss.clear();
+
 		res.push_back(dataPlayer);
 	};
 

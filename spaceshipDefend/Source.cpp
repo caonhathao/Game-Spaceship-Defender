@@ -46,7 +46,7 @@ void loadingPlot();
 
 int welcomeScreen(int printSpeed, string name);
 
-void saveDataUsers(vector<infoPlayer>Data);
+void saveDataUsers(vector<infoPlayer>&Data);
 void drawListPlayers(vector<infoPlayer>&data);
 
 bool isSkipPlotGame();
@@ -104,7 +104,6 @@ int main() {
 			> If the user sign out and login another, save all data of accounts
 	- The problem is here: How can i mark the account that signed in?
 */
-
 	//scan all data, and found the account which signed in
 	vector<infoPlayer>data = inputDataAccount(st_login);
 
@@ -180,22 +179,6 @@ int main() {
 		}
 		else if (choice == 2) {
 			user = login_register(data);
-			//if (user.name == "")
-			//{
-			//	//drawLog_ResScreen("REGISTER");
-
-			//	atXY(85, 5);
-			//	cout<<"[FIRST CHARACTER IS A NUMBER OR ALPHA]";
-			//	atXY(85, 6);
-			//	cout << "Please tell me your name: ";
-			//	cin >> user.name;
-			//	cin.ignore();
-			//	user.serial = data.size() + 1;
-			//	user.hadLogin = true;
-			//	data.push_back(user);
-
-			//	saveDataUsers(data);
-			//};
 		}
 		else if (choice == 3) {
 			drawListPlayers(data);
