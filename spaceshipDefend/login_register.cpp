@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<conio.h>
+#include<iomanip>
 
 #include"functions_control_console.h"
 #include"functions_control_cursor_game.h"
@@ -13,6 +14,8 @@ struct isLogSuccess {
 	bool isSucess = false;
 	infoPlayer User;
 };
+isLogSuccess res;
+
 static isLogSuccess checkAccountExist(vector<infoPlayer>dataUsers, string name) {
 	isLogSuccess res;
 
@@ -62,11 +65,13 @@ static void isLogin() {
 	setColor(0, 15);
 	cout << text[index];
 
+	cin.clear();
+
 	while (true) {
 		if (_kbhit()) {
 			*c = _getch();
 			if (*c != ' ') {
-				if (GetAsyncKeyState(VK_UP)) {
+				if (GetKeyState(VK_UP) & 0x8000) {
 					setColor(0, 12);
 					atXY(posText[index].first, posText[index].second);
 					cout << text[index];
@@ -79,10 +84,9 @@ static void isLogin() {
 					setColor(0, 15);
 					atXY(posText[index].first, posText[index].second);
 					cout << text[index];
-					cin.clear();
 					Sleep(200);
 				}
-				else if (GetAsyncKeyState(VK_DOWN)) {
+				else if (GetKeyState(VK_DOWN)&0x8000) {
 					setColor(0, 12);
 					atXY(posText[index].first, posText[index].second);
 					cout << text[index];
@@ -95,21 +99,21 @@ static void isLogin() {
 					setColor(0, 15);
 					atXY(posText[index].first, posText[index].second);
 					cout << text[index];
-					cin.clear();
 					Sleep(200);
 				}
-				else if (GetAsyncKeyState(VK_RETURN)) {
+				else if (GetKeyState(VK_RETURN) & 0x8000) {
+					//system("pause");
 					if (cursorPos.prevPosY == startPosY) {
-						*c = ' ';
-						*g_choice = 1; break;
+						*g_choice = 1;
+						break;
 					}
 					else if (cursorPos.prevPosY == startPosY + 2) {
-						*c = ' ';
-						*g_choice = 2; break;
+						*g_choice = 2;
+						break;
 					}
 					else {
-						*c = ' ';
-						*g_choice = 3; break;
+						*g_choice = 3;
+						break;
 					}
 				}
 			}
@@ -117,38 +121,76 @@ static void isLogin() {
 		}
 	};
 };
-static void loginUI(string& name) {
+static void loginUI(vector<infoPlayer>& dataUsers, string& name) {
 	system("cls");
 
 	maskPoint();
 
 	setColor(0, 14);
 	effectText_char("[<>] * LOGIN * [<>]", 20, 95, 13);
-	drawBorder(78, 15, 5, 50, 13);
+	drawBorder(78, 15, 5, 52, 13);
 	printTitle(57, 29, 12);
 
-	atXY(82, 17);
+	atXY(84, 17);
 	cout << ">> Ten dang nhap [type 'esc' for exit] <<";
-	atXY(94, 19);
-	cout << "[>>] ";
-	cin >> name;
+	do {
+		atXY(94, 19);
+		cout << "[>>] ";
+		cout << setw(name.size()) << ' ';
+		atXY(99, 19);
+		cin >> name;
+		if (name == "esc") {
+			cin.clear();
+			return;
+		}
+		else {
+			res = checkAccountExist(dataUsers, name);
+			if (res.isSucess == false) {
+				atXY(80, 22);
+				cout << "LOGIN FAILD: Please check account name again.";
+			}
+			else {
+				atXY(80, 22);
+				cout << setw(46) << ' ';
+				atXY(90, 22);
+				cout << "LOGIN SUCCESS: Returning.";
+				Sleep(3000);
+			}
+		}
+	} while (res.isSucess == false);
+
 };
-static  void registerUI(vector<infoPlayer>&dataUsers) {
+static  void registerUI(vector<infoPlayer>& dataUsers) {
 	system("cls");
 	maskPoint();
 
 	setColor(0, 14);
 	effectText_char("[<>] * REGISTER * [<>]", 20, 95, 13);
-	drawBorder(78, 15, 5, 50, 13);
+	drawBorder(73, 15, 5, 62, 13);
 	printTitle(57, 29, 12);
 
 	string name = "";
-	atXY(82, 17);
-	cout << ">> Ten dang nhap [type 'esc' for exit] <<";
+	atXY(75, 17);
+	cout << ">> Ten dang nhap toi da 10 ki tu [type 'esc' for exit] <<";
 	atXY(94, 19);
 	cout << "[>>] ";
-	atXY(94, 26);
-	cin >> name;
+	do {
+		atXY(99, 19);
+		cout << setw(name.size()) << ' ';
+		atXY(99, 19);
+		cin >> name;
+		if (name.size() > 10) {
+			atXY(94, 20);
+			cout << "ERROR: Name is too long.";
+		}
+		else {
+			atXY(94, 20);
+			cout << setw(25) << ' ';
+			atXY(104, 20);
+			cout << "REGISTER SUCCESSFUL";
+			Sleep(3000);
+		}
+	} while (name.size() > 10);
 
 	infoPlayer tmp;
 	tmp.name = name;
@@ -157,71 +199,24 @@ static  void registerUI(vector<infoPlayer>&dataUsers) {
 	dataUsers.push_back(tmp);
 }
 infoPlayer login_register(vector<infoPlayer>dataUsers) {
-	isLogSuccess res;
-
+	res.User.name = "";
 register_again:
+	*g_choice = 0;
 	isLogin();
 
 	string name;
 
 	if (*g_choice == 1) // choice login
 	{
-		loginUI(name);
-		lowercaseString(name);
-		if (name == "esc") {
-			*g_choice = 0;
-			goto register_again;
-		}
+		loginUI(dataUsers, name);
+		goto register_again;
 	}
 	else if (*g_choice == 2) //choice resgister
 	{
 		registerUI(dataUsers);
-		*g_choice = 0;
 		goto register_again;
 	}
 	else {
-		res.User.name = "";
 		return res.User;
-	}
-
-	while (true)//check account
-	{
-		if (_kbhit()) {
-			*c = _getch();
-
-			if (*c != 'b') {
-				res = checkAccountExist(dataUsers, name); //is user's account exist?
-				if (res.isSucess)//yes
-				{
-					atXY(85, 7);
-					cout << "Login Success! Turning to the home after 3s";
-					Sleep(3000);
-					return res.User;
-				}
-				else//no
-				{
-					atXY(82, 22);
-					cout << "Login FAIL! Please check name or register";
-
-					atXY(90, 24);
-					setColor(0, 14);
-					cout << "Press 'b' to back the menu";
-					while (*c != ' ') {
-						if (_kbhit()) {
-							*c = _getch();
-							if (*c == 'b') {
-								*c = ' ';
-								goto register_again;
-							}
-						}
-					};
-				}
-			}
-
-			if (*c == 'b') {
-				return res.User;
-			}
-			*c = ' ';
-		};
 	};
 };

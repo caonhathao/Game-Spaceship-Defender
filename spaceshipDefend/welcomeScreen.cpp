@@ -82,15 +82,17 @@ int welcomeScreen(int printSpeed, string name) {
 		if (_kbhit()) {
 			*c = _getch();
 			if (*c != ' ') {
-				if (GetAsyncKeyState(VK_UP)) {
-					controlCursor(cursorPos, 1, "UP");
+				if (GetKeyState(VK_UP) & 0x8000) {
+					controlCursor(cursorPos, 2, "UP");
 					moveCursor(15, 23, cursorPos);
+					Sleep(200);
 				}
-				else if (GetAsyncKeyState(VK_DOWN)) {
-					controlCursor(cursorPos, 1, "DOWN");
+				else if (GetKeyState(VK_DOWN) & 0x8000) {
+					controlCursor(cursorPos, 2, "DOWN");
 					moveCursor(15, 23, cursorPos);
+					Sleep(200);
 				}
-				else if (GetAsyncKeyState(VK_RETURN)) {
+				else if (GetKeyState(VK_RETURN) & 0x8000) {
 					if (cursorPos.prevPosY == 15) {
 						*g_choice = 1;
 						break;

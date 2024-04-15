@@ -57,7 +57,7 @@ bool isSkipPlotGame() {
 		if (_kbhit()) {
 			*c = _getch();
 			if (*c != ' ') {
-				if (GetAsyncKeyState(VK_DOWN)) {
+				if (GetKeyState(VK_DOWN)&0x8000) {
 					setColor(0, 6);
 					atXY(pos[index].first, pos[index].second);
 					cout << infoText[index];
@@ -76,7 +76,7 @@ bool isSkipPlotGame() {
 					cout << infoText[index];
 					Sleep(100);
 				}
-				else if (GetAsyncKeyState(VK_UP)) {
+				else if (GetKeyState(VK_UP) & 0x8000) {
 					setColor(0, 6);
 					atXY(pos[index].first, pos[index].second);
 					cout << infoText[index];
@@ -95,7 +95,7 @@ bool isSkipPlotGame() {
 					cout << infoText[index];
 					Sleep(100);
 				}
-				else if (GetAsyncKeyState(VK_RETURN)) {
+				else if (GetKeyState(VK_RETURN) &0x8000) {
 					if (cursorPos.prevPosY == startPosY) {
 						return true;
 					}

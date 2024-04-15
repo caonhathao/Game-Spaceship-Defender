@@ -46,3 +46,10 @@ version 0.0.0.5E
 version 0.0.0.6E
 - Sua lai giao dien dang nhap. [Hoan thanh]
 - Can sua lai thong bao dang nhap sai.
+- Sua lai giao dien cua dang nhap - dang ki.
+------------------------------------------------------------------------------------
+>>>04/15/2024
+version 0.0.0.6E(con.)
+- Sua lai thong bao dang nhap (cho ca dung va sai).
+- Sua lai van de di chuyen con tro [hoan thanh].
+- Sua lai thong bao dang ki.

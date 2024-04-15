@@ -84,7 +84,7 @@ static void aboutObject() {
 		atXY(60 + 50 - para[i].size() / 2, 20 + i * 2);
 		cout << para[i];
 	};
-	stringFlicker("Press 'r' to back the previous", 'r', 95, 32 ,4, 6);
+	stringFlicker("Press 'r' to back the previous", 'r', 95, 32, 4, 6);
 }
 static void aboutGame(int printSpeed) {
 	vector<string>para = { "[ Ten Game: SPACESHIP_DEFENDER ]",
@@ -118,7 +118,7 @@ again:
 		if (_kbhit()) {
 			*c = _getch();
 			if (*c != ' ') {
-				if (GetAsyncKeyState(VK_DOWN)) {
+				if (GetKeyState(VK_DOWN) & 0x8000) {
 					//recolor visited
 					setColor(0, 3);
 					atXY(posText[index].first, posText[index].second);
@@ -134,9 +134,9 @@ again:
 					setColor(0, 5);
 					atXY(posText[index].first, posText[index].second);
 					cout << menuText[index];
-					Sleep(500);
+					Sleep(200);
 				}
-				else if (GetAsyncKeyState(VK_UP)) {
+				else if (GetKeyState(VK_UP) & 0x8000) {
 					setColor(0, 3);
 					atXY(posText[index].first, posText[index].second);
 					cout << menuText[index];
@@ -149,9 +149,9 @@ again:
 					setColor(0, 5);
 					atXY(posText[index].first, posText[index].second);
 					cout << menuText[index];
-					Sleep(500);
+					Sleep(200);
 				}
-				else if (GetAsyncKeyState(VK_RETURN)) {
+				else if (GetKeyState(VK_RETURN) & 0x8000) {
 					if (cursorPos.prevPosY == startPosY) {
 						*c = 'r';
 						system("cls");
